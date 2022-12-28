@@ -4,6 +4,7 @@
         <div class="card-body">
             <div class="d-flex justify-content-between pb-2 mb-2">
                 <h5 class="card-title">Add New Post Data</h5>
+                <h5 class="card-title">{{ userID}}</h5>
                 <div>
                     <router-link :to="{name: 'posts'}" class="btn btn-success">Go Back</router-link>
                 </div>
@@ -62,23 +63,15 @@ export default{
             value: '',
             strSuccess: '',
             strError: '',
-            imgPreview: null
+            userID: '',
+        }
+    },
+    created() {
+        if (window.Laravel.user) {
+            this.userID = window.Laravel.user.id;
         }
     },
     methods: {
-        // onChange(e) {
-        //     this.img = e.target.files[0];
-        //     let reader = new FileReader();
-        //     reader.addEventListener("load", function () {
-        //         this.imgPreview = reader.result;
-        //     }.bind(this), false);
-        //
-        //     if (this.img) {
-        //         if ( /\.(jpe?g|png|gif)$/i.test( this.img.name ) ) {
-        //             reader.readAsDataURL( this.img );
-        //         }
-        //     }
-        // },
         addPost(e) {
             this.$axios.get('/sanctum/csrf-cookie').then(response => {
                 let existingObj = this;
@@ -89,10 +82,12 @@ export default{
                 }
 
                 const formData = new FormData();
+
                 formData.append('name', this.name);
                 formData.append('description', this.description);
                 formData.append('value', this.value);
-                // formData.append('file', this.img);
+                formData.append('userID', this.userID);
+
 
                 this.$axios.post('/api/posts/add', formData, config)
                 .then(response => {

@@ -19,18 +19,11 @@ class PostsController extends Controller
         $request->validate([
             'name' => 'required',
             'description' => 'required',
-            'value' => 'required'
-//            'file' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'value' => 'required',
+            'userID',
         ]);
 
         $input = $request->all();
-//        $imageName = NULL;
-//        if ($image = $request->file('file')) {
-//            $destinationPath = 'img/';
-//            $imageName = date('YmdHis') . "." . $image->getClientOriginalExtension();
-//            $image->move($destinationPath, $imageName);
-//            $input['image'] = $imageName;
-//        }
 
         Posts::create($input);
 
@@ -49,19 +42,12 @@ class PostsController extends Controller
         $post = Posts::find($id);
         $request->validate([
             'name' => 'required',
-            'description' => 'required'
+            'description' => 'required',
+            'value' => 'required',
+            'userID'
         ]);
 
         $input = $request->all();
-        $imageName = NULL;
-        if ($image = $request->file('file')) {
-            $destinationPath = 'img/';
-            $imageName = date('YmdHis') . "." . $image->getClientOriginalExtension();
-            $image->move($destinationPath, $imageName);
-            $input['image'] = $imageName;
-            unlink('img/'.$post->image);
-        }
-
         $post->update($input);
 
         return response()->json(['success'=> 'Post update successfully']);
@@ -71,7 +57,6 @@ class PostsController extends Controller
     {
         $post = Posts::find($id);
         $post->delete();
-        unlink('img/'.$post->image);
         return response()->json(['success'=> 'Post deleted successfully']);
 
     }

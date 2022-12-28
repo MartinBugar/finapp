@@ -16,6 +16,7 @@
                     <th>Name</th>
                     <th>Description</th>
                     <th>Value</th>
+                    <th>User ID</th>
                     <th class="text-center" width="200">Actions</th>
                 </tr>
             </thead>
@@ -25,6 +26,7 @@
                     <td>{{post.name}}</td>
                     <td>{{post.description}}</td>
                     <td>{{post.value}}</td>
+                    <td>{{post.userID}}</td>
 <!--                    <td class="text-center">-->
 <!--                        <div v-if="post.image">-->
 <!--                            <img alt="post-img" width="100" v-bind:src="'/img/' +post.image">-->
