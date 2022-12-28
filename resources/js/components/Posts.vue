@@ -8,14 +8,14 @@
                 <button class="btn btn-success" type="button" @click="this.$router.push('/posts/add')">New Post</button>
             </div>
         </div>
-        
+
         <table class="table table-hover table-sm">
             <thead class="bg-dark text-light">
                 <tr>
                     <th width="50" class="text-center">#</th>
                     <th>Name</th>
                     <th>Description</th>
-                    <th class="text-center" width="120">Image</th>
+                    <th>Value</th>
                     <th class="text-center" width="200">Actions</th>
                 </tr>
             </thead>
@@ -24,11 +24,12 @@
                     <td class="text-center">{{index+1}}.</td>
                     <td>{{post.name}}</td>
                     <td>{{post.description}}</td>
-                    <td class="text-center">
-                        <div v-if="post.image">
-                            <img alt="post-img" width="100" v-bind:src="'/img/' +post.image">
-                        </div>
-                    </td>
+                    <td>{{post.value}}</td>
+<!--                    <td class="text-center">-->
+<!--                        <div v-if="post.image">-->
+<!--                            <img alt="post-img" width="100" v-bind:src="'/img/' +post.image">-->
+<!--                        </div>-->
+<!--                    </td>-->
                     <td class="text-center">
                         <router-link :to="{name:'editpost', params: {id:post.id}}" class="btn btn-warning">Edit</router-link>
                         <button class="btn btn-danger" @click="deletePost(post.id)">Delete</button>

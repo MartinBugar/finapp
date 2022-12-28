@@ -19,17 +19,18 @@ class PostsController extends Controller
         $request->validate([
             'name' => 'required',
             'description' => 'required',
-            'file' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'value' => 'required'
+//            'file' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
         $input = $request->all();
-        $imageName = NULL;
-        if ($image = $request->file('file')) {
-            $destinationPath = 'img/';
-            $imageName = date('YmdHis') . "." . $image->getClientOriginalExtension();
-            $image->move($destinationPath, $imageName);
-            $input['image'] = $imageName;
-        }
+//        $imageName = NULL;
+//        if ($image = $request->file('file')) {
+//            $destinationPath = 'img/';
+//            $imageName = date('YmdHis') . "." . $image->getClientOriginalExtension();
+//            $image->move($destinationPath, $imageName);
+//            $input['image'] = $imageName;
+//        }
 
         Posts::create($input);
 
@@ -60,7 +61,7 @@ class PostsController extends Controller
             $input['image'] = $imageName;
             unlink('img/'.$post->image);
         }
-        
+
         $post->update($input);
 
         return response()->json(['success'=> 'Post update successfully']);

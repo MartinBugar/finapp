@@ -31,19 +31,24 @@
                    <textarea class="form-control" rows="3" v-model="description" placeholder="Enter post description"></textarea>
                 </div>
 
-                <div class="form-gorup mb-2">
-                    <label>Image</label><span class="text-danger"> *</span>
-                    <input type="file" class="form-control mb-2" v-on:change="onChange">
-
-                    <div v-if="img">
-                        <img v-bind:src="imgPreview" width="100" height="100"/>
-                    </div>
+                <div class="form-group mb-2">
+                    <label>Value</label><span class="text-danger"> *</span>
+                    <textarea class="form-control" rows="1" v-model="value" placeholder="Enter value"></textarea>
                 </div>
+
+<!--                <div class="form-gorup mb-2">-->
+<!--                    <label>Image</label><span class="text-danger"> *</span>-->
+<!--                    <input type="file" class="form-control mb-2" v-on:change="onChange">-->
+
+<!--                    <div v-if="img">-->
+<!--                        <img v-bind:src="imgPreview" width="100" height="100"/>-->
+<!--                    </div>-->
+<!--                </div>-->
 
                 <button type="submit" class="btn btn-primary mt-4 mb-4"> Update Post</button>
 
             </form>
-            
+
         </div>
     </div>
 </template>
@@ -55,7 +60,7 @@ export default{
             id:'',
             name: '',
             description: '',
-            img: '',
+            value: '',
             strSuccess: '',
             strError: '',
             imgPreview: null
@@ -68,8 +73,8 @@ export default{
             .then(response => {
                 this.name = response.data['name'];
                 this.description = response.data['description'];
-                this.img = "/img/"+response.data['image'];
-                this.imgPreview = this.img;
+                this.value = response.data['value'];
+                // this.imgPreview = this.img;
             })
             .catch(function(error) {
                 console.log(error);
@@ -77,19 +82,19 @@ export default{
         })
     },
     methods: {
-        onChange(e) {
-            this.img = e.target.files[0];
-            let reader = new FileReader();
-            reader.addEventListener("load", function () {
-                this.imgPreview = reader.result;
-            }.bind(this), false);
-
-            if (this.img) {
-                if ( /\.(jpe?g|png|gif)$/i.test( this.img.name ) ) {
-                    reader.readAsDataURL( this.img );
-                }
-            }
-        },
+        // onChange(e) {
+        //     this.img = e.target.files[0];
+        //     let reader = new FileReader();
+        //     reader.addEventListener("load", function () {
+        //         this.imgPreview = reader.result;
+        //     }.bind(this), false);
+        //
+        //     if (this.img) {
+        //         if ( /\.(jpe?g|png|gif)$/i.test( this.img.name ) ) {
+        //             reader.readAsDataURL( this.img );
+        //         }
+        //     }
+        // },
         updatePost(e) {
             this.$axios.get('/sanctum/csrf-cookie').then(response => {
                 let existingObj = this;
@@ -102,7 +107,7 @@ export default{
                 const formData = new FormData();
                 formData.append('name', this.name);
                 formData.append('description', this.description);
-                formData.append('file', this.img);
+                formData.append('value', this.value);
 
                 this.$axios.post(`/api/posts/update/${this.$route.params.id}`, formData, config)
                 .then(response => {
