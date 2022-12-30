@@ -11,12 +11,12 @@
 
             <div v-if="strSuccess" class="alert alert-success alert-dismissible fade show" role="alert">
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                <strong>{{strSuccess}}</strong>
+                <strong>{{ strSuccess }}</strong>
             </div>
 
             <div v-if="strError" class="alert alert-danger alert-dismissible fade show" role="alert">
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                <strong>{{strError}}</strong>
+                <strong>{{ strError }}</strong>
             </div>
 
 
@@ -28,12 +28,22 @@
 
                 <div class="form-group mb-2">
                     <label>Description</label><span class="text-danger"> *</span>
-                   <textarea class="form-control" rows="3" v-model="description" placeholder="Enter post description"></textarea>
+                    <textarea class="form-control" rows="3" v-model="description"
+                              placeholder="Enter post description"></textarea>
                 </div>
 
                 <div class="form-group mb-2">
                     <label>Value</label><span class="text-danger"> *</span>
                     <textarea class="form-control" rows="1" v-model="value" placeholder="Enter value"></textarea>
+                </div>
+
+                <div class="form-group mb-2 selection">
+                    <label>Type</label><span class="text-danger"> *</span>
+                    <select class="form-select" v-model="type" placeholder="Select the type">
+                        <option>Jedlo</option>
+                        <option>Sprostosti</option>
+                        <option>Nevyhnutne</option>
+                    </select>
                 </div>
 
                 <div class="form-group mb-2">
@@ -50,13 +60,14 @@
 </template>
 
 <script>
-export default{
+export default {
     data() {
         return {
-            id:'',
+            id: '',
             name: '',
             description: '',
             value: '',
+            type: '',
             date: '',
             strSuccess: '',
             strError: '',
@@ -64,18 +75,19 @@ export default{
         }
     },
 
-    created() {
+    beforeCreate() {
         this.$axios.get('/sanctum/csrf-cookie').then(response => {
-            this.$axios.get(`/api/posts/edit/${this.$route.params.id}`)
-            .then(response => {
-                this.name = response.data['name'];
-                this.description = response.data['description'];
-                this.value = response.data['value'];
-                this.date = response.data['date'];
-            })
-            .catch(function(error) {
-                console.log(error);
-            });
+            this.$axios.get(`/api/expenses/edit/${this.$route.params.id}`)
+                .then(response => {
+                    this.name = response.data['name'];
+                    this.description = response.data['description'];
+                    this.value = response.data['value'];
+                    this.type = response.data['type'];
+                    this.date = response.data['date'];
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
         })
     },
     methods: {
@@ -92,17 +104,18 @@ export default{
                 formData.append('name', this.name);
                 formData.append('description', this.description);
                 formData.append('value', this.value);
+                formData.append('type', this.type);
                 formData.append('date', this.date);
 
-                this.$axios.post(`/api/posts/update/${this.$route.params.id}`, formData, config)
-                .then(response => {
-                    existingObj.strError = "";
-                    existingObj.strSuccess = response.data.success;
-                })
-                .catch(function(error) {
-                    existingObj.strSuccess ="";
-                    existingObj.strError = error.response.data.message;
-                });
+                this.$axios.post(`/api/expenses/update/${this.$route.params.id}`, formData, config)
+                    .then(response => {
+                        existingObj.strError = "";
+                        existingObj.strSuccess = response.data.success;
+                    })
+                    .catch(function (error) {
+                        existingObj.strSuccess = "";
+                        existingObj.strError = error.response.data.message;
+                    });
             });
         }
 
