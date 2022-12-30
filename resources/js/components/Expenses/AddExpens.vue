@@ -37,9 +37,14 @@
                     <textarea class="form-control" rows="3" v-model="value" placeholder="Enter the value"></textarea>
                 </div>
 
-                <div class="form-group mb-2">
+                <div class="form-group mb-2 selection">
                     <label>Type</label><span class="text-danger"> *</span>
-                    <textarea class="form-control" rows="3" v-model="type" placeholder="Enter the type"></textarea>
+                    <select  class="form-select" v-model="type" placeholder="Select the type">
+                        <option>Jedlo</option>
+                        <option>Sprostosti</option>
+                        <option>Nevyhnutne</option>
+                    </select>
+
                 </div>
 
                 <div class="form-group mb-2">
@@ -116,3 +121,9 @@ export default{
 }
 
 </script>
+
+<style>
+.selection {
+    max-width: 200px;
+}
+</style>
