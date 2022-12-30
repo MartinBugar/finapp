@@ -15,10 +15,10 @@
                 <tr>
                     <th width="50" class="text-center">#</th>
                     <th width="100" class="text-center">User Id</th>
-                    <th>Mesiac</th>
-                    <th>Dátum</th>
                     <th>Názov</th>
-                    <th>Spolu</th>
+                    <th>Dátum</th>
+                    <th>Popis</th>
+                    <th>Suma</th>
                     <th class="text-center" width="200">Actions</th>
                 </tr>
                 </thead>

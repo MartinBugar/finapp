@@ -57,7 +57,6 @@ export default{
             description: '',
             value: '',
             date: '',
-            type: '',
             strSuccess: '',
             strError: '',
             userID: '',
@@ -83,12 +82,11 @@ export default{
                 formData.append('name', this.name);
                 formData.append('description', this.description);
                 formData.append('value', this.value);
-                formData.append('type', this.type);
                 formData.append('date', this.date);
                 formData.append('userID', this.userID);
 
 
-                this.$axios.post('/api/expenses/add', formData, config)
+                this.$axios.post('/api/posts/add', formData, config)
                 .then(response => {
                     existingObj.strError = "";
                     existingObj.strSuccess = response.data.success;
