@@ -4,7 +4,6 @@
         <div class="card-body">
             <div class="d-flex justify-content-between pb-2 mb-2">
                 <h5 class="card-title">Add New Post Data</h5>
-                <h5 class="card-title">{{ userID}}</h5>
                 <div>
                     <router-link :to="{name: 'posts'}" class="btn btn-success">Go Back</router-link>
                 </div>

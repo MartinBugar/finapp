@@ -15,10 +15,33 @@
         <ul class="list-group">
             <li class="list-group-item">Spolu za rok 2022 : <strong> {{ sumOfValuesFrom2022() }} € </strong></li>
             <li class="list-group-item">Spolu celkom: <strong> {{ sumOfValues() }} € </strong></li>
-            <li class="list-group-item">Spolu vydaje za rok 2022 : <strong> {{ sumOfExpensesFrom2022() }} € </strong></li>
+            <li class="list-group-item">Spolu vydaje za rok 2022 : <strong> {{ sumOfExpensesFrom2022() }} € </strong>
+            </li>
             <li class="list-group-item">Spolu vydaje celkom: <strong> {{ sumOfExpenses() }} € </strong></li>
         </ul>
+
+        <table class="table table-hover table-sm table-bordered table-dark mt-4">
+            <thead class="bg-dark text-light">
+            <tr>
+                <th>Spolu</th>
+                <th>Spolu za rok 2022</th>
+                <th>Výdaje spolu</th>
+                <th>Výdaje spolu za rok 2022</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>{{ sumOfValues() }} €</td>
+                <td>{{ sumOfValuesFrom2022() }} €</td>
+                <td>{{ sumOfExpenses() }} €</td>
+                <td>{{ sumOfExpensesFrom2022() }} €</td>
+            </tr>
+            </tbody>
+        </table>
+
     </div>
+
+
 </template>
 
 <script>
@@ -105,7 +128,12 @@ export default {
                 }
             });
             return sum;
-        }
+        },
+        filteredAndSorted(posts) {
+            return this.posts.filter(post => {
+                return post.userID === this.userID;
+            })
+        },
     },
     beforeRouteEnter(to, from, next) {
         if (!window.Laravel.isLoggedin) {
