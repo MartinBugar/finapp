@@ -45,6 +45,7 @@ class PostsController extends Controller
             'name' => 'required',
             'description' => 'required',
             'value' => 'required',
+            'date',
             'userID'
         ]);
 

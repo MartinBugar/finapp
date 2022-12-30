@@ -13,14 +13,14 @@
 
     <div class="container mt-4">
         <ul class="list-group">
-            <li class="list-group-item">Spolu : {{ sumOfValues() }} €</li>
-            <li class="list-group-item">Spolu za rok 2022 : {{ sumOfValuesFrom2022() }}</li>
+            <li class="list-group-item">Spolu za rok 2022 : <strong> {{ sumOfValuesFrom2022() }} € </strong></li>
+            <li class="list-group-item">Spolu celkom: <strong> {{ sumOfValues() }} € </strong></li>
         </ul>
     </div>
 </template>
 
 <script>
-import posts from "../components/Posts.vue";
+import posts from "../components/Income/Posts.vue";
 
 export default {
     name: "Dashboard",
@@ -35,7 +35,6 @@ export default {
             name: null,
             email: null,
             posts: [],
-            sumValues: null,
         }
     },
     created() {

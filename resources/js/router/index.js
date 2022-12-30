@@ -5,9 +5,12 @@ import Home from '../pages/Home';
 import Register from '../pages/Register';
 import Login from '../pages/Login';
 import Dashboard from '../pages/Dashboard';
-import Posts from '../components/Posts';
-import EditPost from '../components/EditPost';
-import AddPost from '../components/AddPost';
+import Posts from '../components/Income/Posts.vue';
+import EditPost from '../components/Income/EditPost.vue';
+import AddPost from '../components/Income/AddPost.vue';
+import Expenses from "../components/Expenses/Expenses.vue";
+import AddExpens from "../components/Expenses/AddExpens.vue";
+import EditExpens from "../components/Expenses/EditExpens.vue";
 
 export const routes = [
     {
@@ -44,6 +47,21 @@ export const routes = [
         name: 'editpost',
         path: '/posts/edit/:id',
         component: EditPost
+    },
+    {
+        name: 'expenses',
+        path: '/expenses',
+        component: Expenses
+    },
+    {
+        name: 'addexpens',
+        path: '/expenses/add',
+        component: AddExpens
+    },
+    {
+        name: 'editexpens',
+        path: '/expenses/edit/:id',
+        component: EditExpens
     }
 ];
 
