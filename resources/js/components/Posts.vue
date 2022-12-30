@@ -13,11 +13,11 @@
             <table class="table table-hover table-sm table-bordered table-dark">
                 <thead class="bg-dark text-light">
                 <tr>
-                    <th width="100" class="text-center">#</th>
+                    <th width="50" class="text-center">#</th>
                     <th width="100" class="text-center">User Id</th>
                     <th>Mesiac</th>
+                    <th>Dátum</th>
                     <th>Názov</th>
-
                     <th>Spolu</th>
                     <th class="text-center" width="200">Actions</th>
                 </tr>
@@ -27,6 +27,7 @@
                     <td class="text-center">{{ index + 1 }}.</td>
                     <td class="text-center">{{ post.userID }}.</td>
                     <td>{{ post.name }}</td>
+                    <td>{{ post.date }}</td>
                     <td>{{ post.description }}</td>
                     <td>{{ post.value }} €</td>
 
@@ -75,7 +76,6 @@ export default {
     },
     methods: {
         filteredAndSorted(posts) {
-            // function to compare names
             return this.posts.filter(post => {
                 return post.userID === this.userID;
             })
