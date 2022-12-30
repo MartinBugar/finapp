@@ -9,10 +9,13 @@
         <div>
             Email : {{ email }}
         </div>
+    </div>
 
-        <div>
-            Sucet hodnot : {{ sumOfValues() }} €
-        </div>
+    <div class="container mt-4">
+        <ul class="list-group">
+            <li class="list-group-item">Spolu : {{ sumOfValues() }} €</li>
+            <li class="list-group-item">Spolu za rok 2022 : {{ sumOfValuesFrom2022() }}</li>
+        </ul>
     </div>
 </template>
 
@@ -22,9 +25,9 @@ import posts from "../components/Posts.vue";
 export default {
     name: "Dashboard",
     computed: {
-        posts() {
-            return posts
-        }
+        // posts() {
+        //     return posts
+        // }
     },
     data() {
         return {
@@ -55,8 +58,18 @@ export default {
     methods: {
         sumOfValues() {
             let sum = 0;
-            this.posts.forEach((value, index) => {
+            this.posts.forEach((value) => {
                 if (value.userID === this.userId) {
+                    sum = sum + value.value;
+                }
+            });
+            return sum;
+        },
+        sumOfValuesFrom2022() {
+            let sum = 0;
+            this.posts.forEach((value) => {
+                let date = new Date(value.date);
+                if (value.userID === this.userId && date.getFullYear() === 2022) {
                     sum = sum + value.value;
                 }
             });
