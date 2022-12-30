@@ -23,21 +23,19 @@
         <table class="table table-hover table-sm table-bordered table-dark mt-4">
             <thead class="bg-dark text-light">
             <tr>
-                <th width="50" class="text-center">#</th>
-                <th>Mesiac</th>
-                <th>Prijem</th>
-                <th>Vydaje</th>
-                <th>Zostatok</th>
+                <th width="70" class="text-center">Mesiac</th>
+                <th class="text-center">Prijem</th>
+                <th class="text-center">Vydaje</th>
+                <th class="text-center">Zostatok</th>
 
             </tr>
             </thead>
             <tbody>
-            <tr class="" v-for="(date, index) in dates" >
-                <td class="text-center">{{ index + 1 }}.</td>
-                <td class="text-center">{{ date}}.</td>
-                <td>{{ sumOfPostsFromMonth(date) }} €</td>
-                <td>{{ sumOfExpensesFromMonth(date)}} €</td>
-                <td>{{sumOfPostsFromMonth(date) - sumOfExpensesFromMonth(date)}} €</td>
+            <tr class="" v-for="(date, index) in dates">
+                <td class="text-center">{{ date }}.</td>
+                <td class="text-center">{{ sumOfPostsFromMonth(date) }} €</td>
+                <td class="text-center">{{ sumOfExpensesFromMonth(date) }} €</td>
+                <td class="text-center">{{ sumOfPostsFromMonth(date) - sumOfExpensesFromMonth(date) }} €</td>
 
             </tr>
             </tbody>
@@ -66,7 +64,7 @@ export default {
             email: null,
             posts: [],
             expenses: [],
-            dates : [1,2,3,4,5,6,7,8,9,10,11,12],
+            dates: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
         }
     },
     created() {
