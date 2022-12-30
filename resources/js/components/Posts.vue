@@ -10,29 +10,32 @@
                 </div>
             </div>
 
-            <table class="table table-hover table-sm">
+            <table class="table table-hover table-sm table-bordered table-dark">
                 <thead class="bg-dark text-light">
                 <tr>
-                    <th width="50" class="text-center">#</th>
-                    <th>Name</th>
-                    <th>Description</th>
-                    <th>Value</th>
-                    <th>User ID</th>
+                    <th width="100" class="text-center">#</th>
+                    <th width="100" class="text-center">User Id</th>
+                    <th>Mesiac</th>
+                    <th>Názov</th>
+
+                    <th>Spolu</th>
                     <th class="text-center" width="200">Actions</th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr class="" v-for="(post, index) in posts" :key="post.id">
-                    <td class="text-center" v-if="userID === post.userID">{{ index + 1 }}.</td>
-                    <td v-if="userID === post.userID">{{ post.name }}</td>
-                    <td v-if="userID === post.userID">{{ post.description }}</td>
-                    <td v-if="userID === post.userID">{{ post.value }} €</td>
-                    <td v-if="userID === post.userID">{{ post.userID }}</td>
+                <tr class="" v-for="(post, index) in filteredAndSorted(posts)" :key="post.id">
+                    <td class="text-center">{{ index + 1 }}.</td>
+                    <td class="text-center">{{ post.userID }}.</td>
+                    <td>{{ post.name }}</td>
+                    <td>{{ post.description }}</td>
+                    <td>{{ post.value }} €</td>
 
-                    <td class="text-center" v-if="userID === post.userID">
-                        <router-link :to="{name:'editpost', params: {id:post.id}}" class="btn btn-warning">Edit
+                    <td class="text-center buttons" v-if="userID === post.userID">
+
+                        <router-link :to="{name:'editpost', params: {id:post.id}}" class="btn btn-sm btn-warning">Edit
                         </router-link>
-                        <button class="btn btn-danger m-1" @click="deletePost(post.id)">Delete</button>
+                        <button class="btn btn-danger btn-sm m-1" @click="deletePost(post.id)">Delete</button>
+
                     </td>
                 </tr>
                 </tbody>
@@ -71,6 +74,12 @@ export default {
         }
     },
     methods: {
+        filteredAndSorted(posts) {
+            // function to compare names
+            return this.posts.filter(post => {
+                return post.userID === this.userID;
+            })
+        },
         deletePost(id) {
             this.$axios.get('/sanctum/csrf-cookie').then(response => {
                 let existingObj = this;
@@ -102,3 +111,9 @@ export default {
 }
 
 </script>
+
+<style>
+.buttons {
+    max-height: 10px;
+}
+</style>
