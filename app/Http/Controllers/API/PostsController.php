@@ -21,6 +21,7 @@ class PostsController extends Controller
             'description' => 'required',
             'value' => 'required',
             'userID',
+            'date',
         ]);
 
         $input = $request->all();

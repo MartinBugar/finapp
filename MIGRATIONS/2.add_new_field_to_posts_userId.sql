@@ -1,0 +1,2 @@
+ALTER TABLE posts
+    ADD COLUMN date DATE NOT NULL ;

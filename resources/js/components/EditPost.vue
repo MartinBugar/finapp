@@ -36,14 +36,10 @@
                     <textarea class="form-control" rows="1" v-model="value" placeholder="Enter value"></textarea>
                 </div>
 
-<!--                <div class="form-gorup mb-2">-->
-<!--                    <label>Image</label><span class="text-danger"> *</span>-->
-<!--                    <input type="file" class="form-control mb-2" v-on:change="onChange">-->
-
-<!--                    <div v-if="img">-->
-<!--                        <img v-bind:src="imgPreview" width="100" height="100"/>-->
-<!--                    </div>-->
-<!--                </div>-->
+                <div class="form-group mb-2">
+                    <label>Dátum</label><span class="text-danger"> *</span>
+                    <input type="date" class="form-control" rows="3" v-model="date" placeholder="Enter the date"/>
+                </div>
 
                 <button type="submit" class="btn btn-primary mt-4 mb-4"> Update Post</button>
 
@@ -61,6 +57,7 @@ export default{
             name: '',
             description: '',
             value: '',
+            date: '',
             strSuccess: '',
             strError: '',
             imgPreview: null
@@ -74,7 +71,7 @@ export default{
                 this.name = response.data['name'];
                 this.description = response.data['description'];
                 this.value = response.data['value'];
-                // this.imgPreview = this.img;
+                this.date = response.data['date'];
             })
             .catch(function(error) {
                 console.log(error);
@@ -82,19 +79,6 @@ export default{
         })
     },
     methods: {
-        // onChange(e) {
-        //     this.img = e.target.files[0];
-        //     let reader = new FileReader();
-        //     reader.addEventListener("load", function () {
-        //         this.imgPreview = reader.result;
-        //     }.bind(this), false);
-        //
-        //     if (this.img) {
-        //         if ( /\.(jpe?g|png|gif)$/i.test( this.img.name ) ) {
-        //             reader.readAsDataURL( this.img );
-        //         }
-        //     }
-        // },
         updatePost(e) {
             this.$axios.get('/sanctum/csrf-cookie').then(response => {
                 let existingObj = this;
@@ -108,6 +92,7 @@ export default{
                 formData.append('name', this.name);
                 formData.append('description', this.description);
                 formData.append('value', this.value);
+                formData.append('date', this.date);
 
                 this.$axios.post(`/api/posts/update/${this.$route.params.id}`, formData, config)
                 .then(response => {

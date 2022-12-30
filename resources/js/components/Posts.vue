@@ -3,7 +3,7 @@
     <div class="card">
         <div class="card-body">
             <div class="d-flex justify-content-between pb-2 mb-2">
-                <h5 class="card-title">All Posts Data from the user : {{ userID }}</h5>
+                <h5 class="card-title">All income Data from the user : {{ userName }} , with user id: {{ userID }}</h5>
                 <div>
                     <button class="btn btn-success" type="button" @click="this.$router.push('/posts/add')">New Post
                     </button>
@@ -27,7 +27,7 @@
                     <td class="text-center">{{ index + 1 }}.</td>
                     <td class="text-center">{{ post.userID }}.</td>
                     <td>{{ post.name }}</td>
-                    <td>{{ post.date }}</td>
+                    <td >{{ post.date }}</td>
                     <td>{{ post.description }}</td>
                     <td>{{ post.value }} €</td>
 
@@ -57,6 +57,7 @@ export default {
             strSuccess: '',
             strError: '',
             userID: '',
+            userName: '',
         }
     },
     created() {
@@ -72,6 +73,7 @@ export default {
 
         if (window.Laravel.user) {
             this.userID = window.Laravel.user.id;
+            this.userName = window.Laravel.user.name;
         }
     },
     methods: {
