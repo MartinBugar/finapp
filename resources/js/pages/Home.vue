@@ -2,7 +2,7 @@
     <div class="bg">
         <div class="container">
             <div class="row">
-                Wellcome, this page will show to all user
+               <h1> Wellcome, this page will show to all user</h1>
             </div>
         </div>
     </div>
