@@ -75,6 +75,7 @@ export default{
             strSuccess: '',
             strError: '',
             userID: '',
+            
         }
     },
     created() {

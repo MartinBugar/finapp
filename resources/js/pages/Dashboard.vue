@@ -20,10 +20,20 @@
             <li class="list-group-item">Spolu vydaje celkom: <strong> {{ sumOfExpenses() }} € </strong></li>
         </ul>
 
-        <table class="table table-hover table-sm table-bordered table-dark mt-4">
+        <div class="form-group mb-2 selection">
+            <label>Rok</label><span class="text-danger"> *</span>
+            <select class="form-select" @change="onChange($event)" v-model="year">
+                <option>2021</option>
+                <option>2022</option>
+                <option>2023</option>
+            </select>
+        </div>
+
+
+        <table class="table table-hover table-sm table-bordered table-dark">
             <thead class="bg-dark text-light">
             <tr>
-                <th width="70" class="text-center">Mesiac</th>
+                <th width="100" class="text-center">Mesiac</th>
                 <th class="text-center">Prijem</th>
                 <th class="text-center">Vydaje</th>
                 <th class="text-center">Zostatok</th>
@@ -31,11 +41,12 @@
             </tr>
             </thead>
             <tbody>
-            <tr class="" v-for="(date, index) in dates">
-                <td class="text-center">{{ date }}.</td>
-                <td class="text-center">{{ sumOfPostsFromMonth(date) }} €</td>
-                <td class="text-center">{{ sumOfExpensesFromMonth(date) }} €</td>
-                <td class="text-center">{{ sumOfPostsFromMonth(date) - sumOfExpensesFromMonth(date) }} €</td>
+
+            <tr class="" v-for="(date) in dates" :key="date.id">
+                <td>{{ date.name }}</td>
+                <td class="text-center">{{ sumOfPostsFromMonth(date.id) }} €</td>
+                <td class="text-center">{{ sumOfExpensesFromMonth(date.id) }} €</td>
+                <td class="text-center">{{ sumOfPostsFromMonth(date.id) - sumOfExpensesFromMonth(date.id) }} €</td>
 
             </tr>
             </tbody>
@@ -49,14 +60,11 @@
 <script>
 import posts from "../components/Income/Posts.vue";
 import expenses from "../components/Expenses/Expenses.vue";
+import Dates from "../components/Dates";
 
 export default {
     name: "Dashboard",
-    computed: {
-        // posts() {
-        //     return posts
-        // }
-    },
+    computed: {},
     data() {
         return {
             userId: null,
@@ -64,7 +72,9 @@ export default {
             email: null,
             posts: [],
             expenses: [],
-            dates: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
+            months: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
+            dates: Dates,
+            year: new Date().getFullYear(),
         }
     },
     created() {
@@ -95,6 +105,7 @@ export default {
         }
     },
     methods: {
+
         getMonthFromDate(date) {
             let newDate = new Date(date);
             return newDate.getMonth();
@@ -145,10 +156,10 @@ export default {
             let sum = 0;
             this.expenses.forEach((value) => {
                 let date = new Date(value.date);
-                console.log(date.getMonth() + 1)
-                console.log(date1)
-                if (value.userID === this.userId && (date.getMonth() + 1) === date1) {
-                    sum = sum + value.value;
+                if (date.getFullYear().toString() === this.year.toString()) {
+                    if (value.userID === this.userId && (date.getMonth() + 1) === date1) {
+                        sum = sum + value.value;
+                    }
                 }
             });
             return sum;
@@ -157,10 +168,11 @@ export default {
             let sum = 0;
             this.posts.forEach((value) => {
                 let date = new Date(value.date);
-                console.log(date.getMonth() + 1)
-                console.log(date1)
-                if (value.userID === this.userId && (date.getMonth() + 1) === date1) {
-                    sum = sum + value.value;
+                console.log(date.getFullYear(), this.year)
+                if (date.getFullYear().toString() === this.year.toString()) {
+                    if (value.userID === this.userId && (date.getMonth() + 1) === date1) {
+                        sum = sum + value.value;
+                    }
                 }
             });
             return sum;
@@ -174,6 +186,10 @@ export default {
             return this.expenses.filter(expense => {
                 return expense.userID === this.userId;
             })
+        },
+        onChange(event) {
+            console.log(event.target.value)
+            this.year = event.target.value;
         },
     },
     beforeRouteEnter(to, from, next) {
