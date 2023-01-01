@@ -3,7 +3,7 @@
     <div class="card">
         <div class="card-body">
             <div class="d-flex justify-content-between pb-2 mb-2">
-                <h3 class="card-title"><strong>Vsetky výdaje uzivatela : {{ userName }} za mesiac {{ dates().at(month).name }}</strong></h3>
+                <h3 class="card-title"><strong>Vsetky výdaje uzivatela : {{ userName }} za mesiac {{ dates().at(month).name }} {{ year }}</strong></h3>
                 <div>
                     <button class="btn btn-success" type="button" @click="this.$router.push('/expenses/add')">New Post
                     </button>
@@ -25,7 +25,12 @@
                     <option value="9">Oktober</option>
                     <option value="10">November</option>
                     <option value="11">December</option>
-
+                </select>
+                <label>Rok</label><span class="text-danger"> *</span>
+                <select class="form-select" v-model="year">
+                    <option>2021</option>
+                    <option>2022</option>
+                    <option>2023</option>
                 </select>
             </div>
 
@@ -81,6 +86,7 @@ export default {
             userID: '',
             userName: '',
             month: new Date(Date.now()).getMonth(),
+            year: new Date(Date.now()).getFullYear(),
         }
     },
     created() {
@@ -105,10 +111,12 @@ export default {
         },
         filteredAndSorted(expenses, month) {
             return this.expenses.filter(expens => {
-                let postMonth = new Date(expens.date);
-                if (postMonth.getMonth().toString() === month.toString()) {
-                    return expens.userID === this.userID;
-                }
+                let expenses = new Date(expens.date);
+                    if (expenses.getFullYear().toString() === this.year.toString()) {
+                        if (expenses.getMonth().toString() === month.toString()) {
+                            return expens.userID === this.userID;
+                        }
+                    }
             })
         },
         deletePost(id) {
