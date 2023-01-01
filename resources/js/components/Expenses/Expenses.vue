@@ -3,7 +3,9 @@
     <div class="card">
         <div class="card-body">
             <div class="d-flex justify-content-between pb-2 mb-2">
-                <h3 class="card-title"><strong>Vsetky výdaje uzivatela : {{ userName }} , with user id: {{ userID }}</strong></h3>
+                <h3 class="card-title"><strong>Vsetky výdaje uzivatela : {{ userName }} , with user id: {{
+                        userID
+                    }}</strong></h3>
                 <div>
                     <button class="btn btn-success" type="button" @click="this.$router.push('/expenses/add')">New Post
                     </button>
@@ -47,14 +49,15 @@
                     <td class="text-center">{{ index + 1 }}.</td>
                     <td class="text-center">{{ expens.userID }}.</td>
                     <td>{{ expens.name }}</td>
-                    <td >{{ expens.date }}</td>
+                    <td>{{ expens.date }}</td>
                     <td>{{ expens.description }}</td>
                     <td>{{ expens.type }}</td>
                     <td>{{ expens.value }} €</td>
 
                     <td class="text-center buttons" v-if="userID === expens.userID">
 
-                        <router-link :to="{name:'editexpens', params: {id:expens.id}}" class="btn btn-sm btn-warning">Edit
+                        <router-link :to="{name:'editexpens', params: {id:expens.id}}" class="btn btn-sm btn-warning">
+                            Edit
                         </router-link>
                         <button class="btn btn-danger btn-sm m-1" @click="deletePost(expens.id)">Delete</button>
 
@@ -101,10 +104,10 @@ export default {
     methods: {
         filteredAndSorted(expenses, month) {
             return this.expenses.filter(expens => {
-                    let postMonth = new Date(expens.date);
-                    if (postMonth.getMonth().toString() === month.toString()) {
-                        return expens.userID === this.userID;
-                    }
+                let postMonth = new Date(expens.date);
+                if (postMonth.getMonth().toString() === month.toString()) {
+                    return expens.userID === this.userID;
+                }
             })
         },
         deletePost(id) {
