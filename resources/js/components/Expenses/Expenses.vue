@@ -10,6 +10,25 @@
                 </div>
             </div>
 
+            <div class="form-group mb-2 selection">
+                <label>Mesiac</label><span class="text-danger"> </span>
+                <select class="form-select" v-model="month">
+                    <option value="0">Januar</option>
+                    <option value="1">Febrar</option>
+                    <option value="2">Marec</option>
+                    <option value="3">April</option>
+                    <option value="4">Maj</option>
+                    <option value="5">Jun</option>
+                    <option value="6">Jul</option>
+                    <option value="7">August</option>
+                    <option value="8">September</option>
+                    <option value="9">Oktober</option>
+                    <option value="10">November</option>
+                    <option value="11">December</option>
+
+                </select>
+            </div>
+
             <table class="table table-hover table-sm table-bordered table-dark">
                 <thead class="bg-dark text-light">
                 <tr>
@@ -24,7 +43,7 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr class="" v-for="(expens, index) in filteredAndSorted(expenses)" :key="expens.id">
+                <tr class="" v-for="(expens, index) in filteredAndSorted(expenses, month)" :key="expens.id">
                     <td class="text-center">{{ index + 1 }}.</td>
                     <td class="text-center">{{ expens.userID }}.</td>
                     <td>{{ expens.name }}</td>
@@ -60,6 +79,7 @@ export default {
             strError: '',
             userID: '',
             userName: '',
+            month: new Date(Date.now()).getMonth(),
         }
     },
     created() {
@@ -79,9 +99,12 @@ export default {
         }
     },
     methods: {
-        filteredAndSorted(expenses) {
+        filteredAndSorted(expenses, month) {
             return this.expenses.filter(expens => {
-                return expens.userID === this.userID;
+                    let postMonth = new Date(expens.date);
+                    if (postMonth.getMonth().toString() === month.toString()) {
+                        return expens.userID === this.userID;
+                    }
             })
         },
         deletePost(id) {
