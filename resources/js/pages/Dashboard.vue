@@ -12,14 +12,6 @@
     </div>
 
     <div class="container mt-4">
-        <ul class="list-group">
-            <li class="list-group-item">Spolu za rok 2022 : <strong> {{ sumOfValuesFrom2022() }} € </strong></li>
-            <li class="list-group-item">Spolu celkom: <strong> {{ sumOfValues() }} € </strong></li>
-            <li class="list-group-item">Spolu vydaje za rok 2022 : <strong> {{ sumOfExpensesFrom2022() }} € </strong>
-            </li>
-            <li class="list-group-item">Spolu vydaje celkom: <strong> {{ sumOfExpenses() }} € </strong></li>
-        </ul>
-
         <div class="form-group mb-2 selection">
             <label>Rok</label><span class="text-danger"> *</span>
             <select class="form-select" @change="onChange($event)" v-model="year">
@@ -51,6 +43,13 @@
             </tr>
             </tbody>
         </table>
+
+        <ul class="list-group">
+            <li class="list-group-item">Prijem za rok {{ year }} : <strong> {{ sumOfIncomPerYear(year) }} € </strong></li>
+            <li class="list-group-item">Vydaje za rok {{ year }} : <strong> {{ sumOfExpensesPerYear(year) }} € </strong></li>
+<!--            <li class="list-group-item">Spolu celkom: <strong> {{ sumOfValues() }} € </strong></li>-->
+<!--            <li class="list-group-item">Spolu vydaje celkom: <strong> {{ sumOfExpenses() }} € </strong></li>-->
+        </ul>
 
     </div>
 
@@ -123,11 +122,11 @@ export default {
             });
             return sum;
         },
-        sumOfValuesFrom2022() {
+        sumOfIncomPerYear(year) {
             let sum = 0;
             this.posts.forEach((value) => {
                 let date = new Date(value.date);
-                if (value.userID === this.userId && date.getFullYear() === 2022) {
+                if (value.userID === this.userId && date.getFullYear().toString() === year.toString()) {
                     sum = sum + value.value;
                 }
             });
@@ -142,11 +141,11 @@ export default {
             });
             return sum;
         },
-        sumOfExpensesFrom2022() {
+        sumOfExpensesPerYear(year) {
             let sum = 0;
             this.expenses.forEach((value) => {
                 let date = new Date(value.date);
-                if (value.userID === this.userId && date.getFullYear() === 2022) {
+                if (value.userID === this.userId && date.getFullYear().toString() === year.toString()) {
                     sum = sum + value.value;
                 }
             });
