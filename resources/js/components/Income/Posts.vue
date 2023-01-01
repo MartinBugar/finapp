@@ -52,7 +52,7 @@
                     <td class="text-center">{{ index + 1 }}.</td>
                     <td class="text-center">{{ post.userID }}.</td>
                     <td>{{ post.name }}</td>
-                    <td>{{ post.date }}</td>
+                    <td>{{ formatDate(post.date) }}</td>
                     <td>{{ post.description }}</td>
                     <td>{{ post.value }} €</td>
 
@@ -77,6 +77,7 @@
 <script>
 import Dates from "../Dates";
 import dates from "../Dates";
+import moment from 'moment'
 
 export default {
     data() {
@@ -109,6 +110,9 @@ export default {
         }
     },
     methods: {
+        formatDate(value) {
+          return moment(value).format('DD.MM.YYYY');
+        },
         dates() {
             return dates
         },
