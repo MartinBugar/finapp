@@ -3,7 +3,7 @@
     <div class="card">
         <div class="card-body">
             <div class="d-flex justify-content-between pb-2 mb-2">
-                <h5 class="card-title">All income Data from the user : {{ userName }} , with user id: {{ userID }}</h5>
+                <h3 class="card-title"><strong>Prijem uzivatela : {{ userName }} za mesiac {{ dates().at(month).name }}</strong></h3>
                 <div>
                     <button class="btn btn-success" type="button" @click="this.$router.push('/posts/add')">New Post
                     </button>
@@ -71,6 +71,7 @@
 
 <script>
 import Dates from "../Dates";
+import dates from "../Dates";
 
 export default {
     data() {
@@ -80,7 +81,6 @@ export default {
             strError: '',
             userID: '',
             userName: '',
-            dates: Dates,
             month: new Date(Date.now()).getMonth(),
         }
     },
@@ -103,6 +103,9 @@ export default {
         }
     },
     methods: {
+        dates() {
+            return dates
+        },
         filteredAndSorted(posts, month) {
             return this.posts.filter(post => {
                 let postMonth = new Date(post.date);

@@ -3,9 +3,7 @@
     <div class="card">
         <div class="card-body">
             <div class="d-flex justify-content-between pb-2 mb-2">
-                <h3 class="card-title"><strong>Vsetky výdaje uzivatela : {{ userName }} , with user id: {{
-                        userID
-                    }}</strong></h3>
+                <h3 class="card-title"><strong>Vsetky výdaje uzivatela : {{ userName }} za mesiac {{ dates().at(month).name }}</strong></h3>
                 <div>
                     <button class="btn btn-success" type="button" @click="this.$router.push('/expenses/add')">New Post
                     </button>
@@ -72,6 +70,8 @@
 </template>
 
 <script>
+import dates from "../Dates";
+
 export default {
     data() {
         return {
@@ -100,6 +100,9 @@ export default {
         }
     },
     methods: {
+        dates() {
+            return dates
+        },
         filteredAndSorted(expenses, month) {
             return this.expenses.filter(expens => {
                 let postMonth = new Date(expens.date);
