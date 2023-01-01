@@ -10,6 +10,26 @@
                 </div>
             </div>
 
+            <div class="form-group mb-2 selection">
+                <label>Mesiac</label><span class="text-danger"> </span>
+                <select class="form-select" v-model="month">
+                    <option value="0">Januar</option>
+                    <option value="1">Febrar</option>
+                    <option value="2">Marec</option>
+                    <option value="3">April</option>
+                    <option value="4">Maj</option>
+                    <option value="5">Jun</option>
+                    <option value="6">Jul</option>
+                    <option value="7">August</option>
+                    <option value="8">September</option>
+                    <option value="9">Oktober</option>
+                    <option value="10">November</option>
+                    <option value="11">December</option>
+
+                </select>
+            </div>
+
+
             <table class="table table-hover table-sm table-bordered table-dark">
                 <thead class="bg-dark text-light">
                 <tr>
@@ -23,11 +43,11 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr class="" v-for="(post, index) in filteredAndSorted(posts)" :key="post.id">
+                <tr class="" v-for="(post, index) in filteredAndSorted(posts, month)" :key="post.id">
                     <td class="text-center">{{ index + 1 }}.</td>
                     <td class="text-center">{{ post.userID }}.</td>
                     <td>{{ post.name }}</td>
-                    <td >{{ post.date }}</td>
+                    <td>{{ post.date }}</td>
                     <td>{{ post.description }}</td>
                     <td>{{ post.value }} €</td>
 
@@ -50,6 +70,8 @@
 </template>
 
 <script>
+import Dates from "../Dates";
+
 export default {
     data() {
         return {
@@ -58,6 +80,8 @@ export default {
             strError: '',
             userID: '',
             userName: '',
+            dates: Dates,
+            month: new Date(Date.now()).getMonth(),
         }
     },
     created() {
@@ -71,15 +95,20 @@ export default {
                 });
         });
 
+        console.log(this.today);
+
         if (window.Laravel.user) {
             this.userID = window.Laravel.user.id;
             this.userName = window.Laravel.user.name;
         }
     },
     methods: {
-        filteredAndSorted(posts) {
+        filteredAndSorted(posts, month) {
             return this.posts.filter(post => {
-                return post.userID === this.userID;
+                let postMonth = new Date(post.date);
+                if (postMonth.getMonth().toString() === month.toString()) {
+                    return post.userID === this.userID;
+                }
             })
         },
         deletePost(id) {
