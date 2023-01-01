@@ -1,17 +1,9 @@
 <template>
     <div class="container">
-        <div>
-            User Id : {{ userId }}
-        </div>
-        <div>
-            Username : {{ name }}
-        </div>
-        <div>
-            Email : {{ email }}
-        </div>
+        <h2>Dashboard panel uzivatela {{ name }} </h2>
     </div>
 
-    <div class="container mt-4">
+    <div class="container mt-1">
         <div class="form-group mb-2 selection">
             <label>Rok</label><span class="text-danger"> *</span>
             <select class="form-select" @change="onChange($event)" v-model="year">
