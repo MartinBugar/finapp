@@ -3,7 +3,9 @@
     <div class="card">
         <div class="card-body">
             <div class="d-flex justify-content-between pb-2 mb-2">
-                <h3 class="card-title"><strong>Prijem uzivatela : {{ userName }} za mesiac {{ dates().at(month).name }}</strong></h3>
+                <h3 class="card-title"><strong>Prijem uzivatela : {{ userName }} za mesiac {{
+                        dates().at(month).name
+                    }}</strong></h3>
                 <div>
                     <button class="btn btn-success" type="button" @click="this.$router.push('/posts/add')">New Post
                     </button>
@@ -25,7 +27,12 @@
                     <option value="9">Oktober</option>
                     <option value="10">November</option>
                     <option value="11">December</option>
-
+                </select>
+                <label>Rok</label><span class="text-danger"> *</span>
+                <select class="form-select" v-model="year">
+                    <option>2021</option>
+                    <option>2022</option>
+                    <option>2023</option>
                 </select>
             </div>
 
@@ -82,6 +89,7 @@ export default {
             userID: '',
             userName: '',
             month: new Date(Date.now()).getMonth(),
+            year: new Date(Date.now()).getFullYear(),
         }
     },
     created() {
@@ -109,8 +117,10 @@ export default {
         filteredAndSorted(posts, month) {
             return this.posts.filter(post => {
                 let postMonth = new Date(post.date);
-                if (postMonth.getMonth().toString() === month.toString()) {
-                    return post.userID === this.userID;
+                if (postMonth.getFullYear().toString() === this.year.toString()) {
+                    if (postMonth.getMonth().toString() === month.toString()) {
+                        return post.userID === this.userID;
+                    }
                 }
             })
         },
