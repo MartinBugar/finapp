@@ -40,9 +40,12 @@
                 <div class="form-group mb-2 selection">
                     <label>Type</label><span class="text-danger"> *</span>
                     <select class="form-select" v-model="type" placeholder="Select the type">
-                        <option>Jedlo</option>
-                        <option>Sprostosti</option>
-                        <option>Nevyhnutne</option>
+                        <option>Jedlo a potraviny</option>
+                        <option>Povinne platby</option>
+                        <option>Zvieratka</option>
+                        <option>Domacnost</option>
+                        <option>Martin</option>
+                        <option>Simonka</option>
                     </select>
                 </div>
 
