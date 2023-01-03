@@ -22,9 +22,18 @@ class PostsController extends Controller
             'value' => 'required',
             'userID',
             'date',
+            'file',
         ]);
 
         $input = $request->all();
+
+        $pdfName = NULL;
+        if ($pdf = $request->file('file')) {
+            $destinationPath = 'pdf/';
+            $pdfName = date('YmdHis') . "." . $pdf->getClientOriginalExtension();
+            $pdf->move($destinationPath, $pdfName);
+            $input['pdf'] = $pdfName;
+        }
 
         Posts::create($input);
 
@@ -50,6 +59,16 @@ class PostsController extends Controller
         ]);
 
         $input = $request->all();
+
+        $pdfName = NULL;
+        if ($pdf = $request->file('file')) {
+            $destinationPath = 'pdf/';
+            $pdfName = date('YmdHis') . "." . $pdf->getClientOriginalExtension();
+            $pdf->move($destinationPath, $pdfName);
+            $input['pdf'] = $pdfName;
+            unlink('img/'.$post->image);
+        }
+
         $post->update($input);
 
         return response()->json(['success'=> 'Post update successfully']);
@@ -59,6 +78,7 @@ class PostsController extends Controller
     {
         $post = Posts::find($id);
         $post->delete();
+        unlink('pdf/'.$post->pdf);
         return response()->json(['success'=> 'Post deleted successfully']);
 
     }

@@ -41,6 +41,15 @@
                     <input type="date" class="form-control" rows="3" v-model="date" placeholder="Enter the date"/>
                 </div>
 
+                <div class="form-gorup mb-2">
+                    <label>Image</label><span class="text-danger"> *</span>
+                    <input type="file" class="form-control mb-2" v-on:change="onChange">
+
+                    <div v-if="img">
+                        <img v-bind:src="imgPreview" width="100" height="100"/>
+                    </div>
+                </div>
+
                 <button type="submit" class="btn btn-primary mt-4 mb-4"> Update Post</button>
 
             </form>

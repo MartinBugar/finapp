@@ -14,6 +14,8 @@ class Posts extends Model
         'description',
         'value',
         'date',
-        'userID'
+        'userID',
+        'pdf',
+
     ];
 }

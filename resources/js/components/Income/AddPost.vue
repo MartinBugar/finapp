@@ -41,6 +41,14 @@
                     <input type="date" class="form-control" rows="3" v-model="date" placeholder="Enter the date"/>
                 </div>
 
+                <div class="form-gorup mb-2">
+                    <label>Pdf dokument</label><span class="text-danger"> *</span>
+                    <input type="file" class="form-control mb-2" v-on:change="onChange">
+                    <div v-if="pdf">
+                        <label v-bind:src="pdfPreview" width="100" height="100"/>
+                    </div>
+                </div>
+
                 <button type="submit" class="btn btn-primary mt-4 mb-4"> Add Post</button>
 
             </form>
@@ -57,9 +65,11 @@ export default{
             description: '',
             value: '',
             date: '',
+            pdf: '',
             strSuccess: '',
             strError: '',
             userID: '',
+            pdfPreview: null,
         }
     },
     created() {
@@ -68,6 +78,19 @@ export default{
         }
     },
     methods: {
+        onChange(e) {
+            this.pdf = e.target.files[0];
+            let reader = new FileReader();
+            reader.addEventListener("load", function () {
+                this.pdfPreview = reader.result;
+            }.bind(this), false);
+
+            if (this.pdf) {
+                if ( /\.(pdf)$/i.test( this.pdf.name ) ) {
+                    reader.readAsDataURL( this.pdf );
+                }
+            }
+        },
         addPost(e) {
             this.$axios.get('/sanctum/csrf-cookie').then(response => {
                 let existingObj = this;
@@ -84,6 +107,7 @@ export default{
                 formData.append('value', this.value);
                 formData.append('date', this.date);
                 formData.append('userID', this.userID);
+                formData.append('file', this.pdf);
 
 
                 this.$axios.post('/api/posts/add', formData, config)

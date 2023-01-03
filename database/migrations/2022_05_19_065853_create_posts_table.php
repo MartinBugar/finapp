@@ -20,6 +20,7 @@ return new class extends Migration
             $table->longText('description');
             $table->date('date');
             $table->timestamps();
+            $table->string('pdf')->nullable();
             $table->foreign('userID')->references('id')->on('users');
         });
     }

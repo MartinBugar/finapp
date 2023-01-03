@@ -45,6 +45,7 @@
                         <th>Dátum</th>
                         <th>Popis</th>
                         <th>Suma</th>
+                        <th>Pdf</th>
                         <th class="text-center" width="200">Actions</th>
                     </tr>
                     </thead>
@@ -56,6 +57,9 @@
                         <td>{{ formatDate(post.date) }}</td>
                         <td>{{ post.description }}</td>
                         <td>{{ post.value }} €</td>
+                        <td class="text-center">
+                            <div v-if="post.pdf" @click="downloadWithAxios(post.pdf)">dokument</div>
+                        </td>
 
                         <td class="text-center buttons" v-if="userID === post.userID">
 
@@ -63,7 +67,6 @@
                                 Edit
                             </router-link>
                             <button class="btn btn-danger btn-sm m-1" @click="deletePost(post.id)">Delete</button>
-
                         </td>
                     </tr>
                     </tbody>
@@ -91,6 +94,7 @@ export default {
             userName: '',
             month: new Date(Date.now()).getMonth(),
             year: new Date(Date.now()).getFullYear(),
+            url:'pdf/',
         }
     },
     created() {
@@ -112,6 +116,29 @@ export default {
         }
     },
     methods: {
+        downloadWithAxios(pdf){
+            axios({
+                method: 'get',
+                url: this.url + pdf,
+                responseType: 'arraybuffer'
+            })
+                .then(response => {
+
+                    this.forceFileDownload(response)
+
+                })
+                .catch(() => console.log('error occured'))
+        },
+
+        forceFileDownload(response){
+            const url = window.URL.createObjectURL(new Blob([response.data]))
+            const link = document.createElement('a')
+            link.href = url
+            link.setAttribute('download', 'file.pdf') //or any other extension
+            document.body.appendChild(link)
+            link.click()
+        },
+
         formatDate(value) {
             return moment(value).format('DD.MM.YYYY');
         },
