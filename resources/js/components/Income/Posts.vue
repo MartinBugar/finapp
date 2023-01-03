@@ -72,7 +72,6 @@
                     </tbody>
                 </table>
 
-
             </div>
         </div>
 
@@ -121,12 +120,11 @@ export default {
                 responseType: 'arraybuffer'
             })
                 .then(response => {
-                    console.log(this.url + post.pdf)
                     this.forceFileDownload(response, post)
-
                 })
                 .catch(() => console.log('error occured'))
         },
+
         forceFileDownload(response, post) {
             const url = window.URL.createObjectURL(new Blob([response.data]))
             const link = document.createElement('a')
@@ -142,6 +140,7 @@ export default {
         dates() {
             return dates
         },
+
         filteredAndSorted(posts, month) {
             return this.posts.filter(post => {
                 let postMonth = new Date(post.date);

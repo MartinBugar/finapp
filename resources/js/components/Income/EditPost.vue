@@ -43,7 +43,7 @@
 
                 <div class="form-gorup mb-2">
                     <label>PDF Dokument</label><span class="text-danger"> *</span>
-                    <input type="file" class="form-control mb-2" v-model="pdf">
+                    <input type="file" class="form-control mb-2">
                 </div>
 
                 <div class="form-group mb-2">
