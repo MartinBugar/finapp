@@ -45,7 +45,7 @@
                         <th>Dátum</th>
                         <th>Popis</th>
                         <th>Suma</th>
-                        <th>Pdf</th>
+                        <th class="text-center">Pdf</th>
                         <th class="text-center" width="200">Actions</th>
                     </tr>
                     </thead>
@@ -58,7 +58,7 @@
                         <td>{{ post.description }}</td>
                         <td>{{ post.value }} €</td>
                         <td class="text-center">
-                            <a href="#" v-if="post.pdf" @click="downloadWithAxios(post.pdf)">{{ post.pdf }}</a>
+                            <a href="#" v-if="post.pdf" @click="downloadWithAxios(post)">{{ post.pdfName }}</a>
                         </td>
 
                         <td class="text-center buttons" v-if="userID === post.userID">
@@ -94,7 +94,8 @@ export default {
             userName: '',
             month: new Date(Date.now()).getMonth(),
             year: new Date(Date.now()).getFullYear(),
-            url:'pdf/',
+            url: 'pdf/',
+            pdfName: '',
         }
     },
     created() {
@@ -107,38 +108,34 @@ export default {
                     console.log(error);
                 });
         });
-
-        console.log(this.today);
-
         if (window.Laravel.user) {
             this.userID = window.Laravel.user.id;
             this.userName = window.Laravel.user.name;
         }
     },
     methods: {
-        downloadWithAxios(pdf){
+        downloadWithAxios(post) {
             axios({
                 method: 'get',
-                url: this.url + pdf,
+                url: this.url + post.pdf,
                 responseType: 'arraybuffer'
             })
                 .then(response => {
-
-                    this.forceFileDownload(response, pdf)
+                    console.log(this.url + post.pdf)
+                    this.forceFileDownload(response, post)
 
                 })
                 .catch(() => console.log('error occured'))
         },
-
-        forceFileDownload(response, pdf){
+        forceFileDownload(response, post) {
             const url = window.URL.createObjectURL(new Blob([response.data]))
             const link = document.createElement('a')
             link.href = url
-            link.setAttribute('download', pdf ) //or any other extension
+            link.setAttribute('download', post.pdfName)
             document.body.appendChild(link)
+            console.log(link)
             link.click()
         },
-
         formatDate(value) {
             return moment(value).format('DD.MM.YYYY');
         },

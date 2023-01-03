@@ -42,12 +42,13 @@
                 </div>
 
                 <div class="form-gorup mb-2">
-                    <label>Image</label><span class="text-danger"> *</span>
-                    <input type="file" class="form-control mb-2" v-on:change="onChange">
+                    <label>PDF Dokument</label><span class="text-danger"> *</span>
+                    <input type="file" class="form-control mb-2" v-model="pdf">
+                </div>
 
-                    <div v-if="img">
-                        <img v-bind:src="imgPreview" width="100" height="100"/>
-                    </div>
+                <div class="form-group mb-2">
+                    <label>Dokument PDF: </label>
+                    <a href="#" v-if="pdf" @click="downloadWithAxios(this.pdf, this.pdfName)">{{ pdfName }}</a>
                 </div>
 
                 <button type="submit" class="btn btn-primary mt-4 mb-4"> Update Post</button>
@@ -70,6 +71,9 @@ export default{
             date: '',
             strSuccess: '',
             strError: '',
+            pdf: '',
+            pdfName: '',
+            url: '/pdf/',
         }
     },
 
@@ -77,10 +81,13 @@ export default{
         this.$axios.get('/sanctum/csrf-cookie').then(response => {
             this.$axios.get(`/api/posts/edit/${this.$route.params.id}`)
             .then(response => {
+                console.log(response)
                 this.name = response.data['name'];
                 this.description = response.data['description'];
                 this.value = response.data['value'];
                 this.date = response.data['date'];
+                this.pdf = response.data['pdf'];
+                this.pdfName = response.data['pdfName'];
             })
             .catch(function(error) {
                 console.log(error);
@@ -88,6 +95,27 @@ export default{
         })
     },
     methods: {
+        downloadWithAxios(pdf, pdfName) {
+            axios({
+                method: 'get',
+                url: this.url + pdf,
+                responseType: 'arraybuffer'
+            })
+                .then(response => {
+                    console.log(this.url + pdf)
+                    this.forceFileDownload(response, pdfName)
+                })
+                .catch(() => console.log('error occured'))
+        },
+
+        forceFileDownload(response, pdfName) {
+            const url = window.URL.createObjectURL(new Blob([response.data]))
+            const link = document.createElement('a')
+            link.href = url
+            link.setAttribute('download', pdfName)
+            document.body.appendChild(link)
+            link.click()
+        },
         updatePost(e) {
             this.$axios.get('/sanctum/csrf-cookie').then(response => {
                 let existingObj = this;
@@ -103,6 +131,8 @@ export default{
                 formData.append('value', this.value);
                 formData.append('type', this.type);
                 formData.append('date', this.date);
+                formData.append('pdf', this.pdf);
+                formData.append('pdfName', this.pdfName);
 
                 this.$axios.post(`/api/posts/update/${this.$route.params.id}`, formData, config)
                 .then(response => {

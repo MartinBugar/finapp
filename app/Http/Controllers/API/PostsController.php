@@ -23,6 +23,7 @@ class PostsController extends Controller
             'userID',
             'date',
             'file',
+            'padName',
         ]);
 
         $input = $request->all();
@@ -55,7 +56,8 @@ class PostsController extends Controller
             'description' => 'required',
             'value' => 'required',
             'date',
-            'userID'
+            'userID',
+            'pdfName',
         ]);
 
         $input = $request->all();

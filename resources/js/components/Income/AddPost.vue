@@ -69,6 +69,7 @@ export default{
             strSuccess: '',
             strError: '',
             userID: '',
+            pdfName: '',
             pdfPreview: null,
         }
     },
@@ -80,6 +81,8 @@ export default{
     methods: {
         onChange(e) {
             this.pdf = e.target.files[0];
+            this.pdfName = e.target.files[0].name;
+            console.log(this.pdfName);
             let reader = new FileReader();
             reader.addEventListener("load", function () {
                 this.pdfPreview = reader.result;
@@ -108,6 +111,7 @@ export default{
                 formData.append('date', this.date);
                 formData.append('userID', this.userID);
                 formData.append('file', this.pdf);
+                formData.append('pdfName', this.pdfName);
 
 
                 this.$axios.post('/api/posts/add', formData, config)
