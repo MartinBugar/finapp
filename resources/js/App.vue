@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="bg">
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
             <div class="container">
                 <a class="navbar-brand" href="/">FinApp</a>
@@ -63,5 +63,11 @@ export default {
 <style>
 .logout {
     padding-left: 50px;
+}
+
+.bg {
+    width: 100%;
+    height: 100vh;
+    background-color: #b6b6b6;
 }
 </style>
