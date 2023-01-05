@@ -69,7 +69,9 @@ class PostsController extends Controller
             $pdfNameOfTheSource = date('YmdHis') . "." . $pdf->getClientOriginalExtension();
             $pdf->move($destinationPath, $pdfNameOfTheSource);
             $input['pdf'] = $pdfNameOfTheSource;
-            unlink('pdf/'.$post->pdf);
+            if ($post->pdf) {
+                unlink('pdf/' . $post->pdf);
+            }
         }
 
         $post->update($input);
