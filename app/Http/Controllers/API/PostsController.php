@@ -23,7 +23,7 @@ class PostsController extends Controller
             'userID',
             'date',
             'file',
-            'padName',
+            'pdfName',
         ]);
 
         $input = $request->all();
@@ -68,7 +68,7 @@ class PostsController extends Controller
             $pdfName = date('YmdHis') . "." . $pdf->getClientOriginalExtension();
             $pdf->move($destinationPath, $pdfName);
             $input['pdf'] = $pdfName;
-            unlink('img/'.$post->image);
+            unlink('pdf/'.$post->image);
         }
 
         $post->update($input);
@@ -79,8 +79,8 @@ class PostsController extends Controller
     public function delete($id)
     {
         $post = Posts::find($id);
-        $post->delete();
         unlink('pdf/'.$post->pdf);
+        $post->delete();
         return response()->json(['success'=> 'Post deleted successfully']);
 
     }
