@@ -1,5 +1,4 @@
 <template>
-    <div class="bg">
         <div class="container">
             <div class="card">
                 <div class="card-body ">
@@ -85,7 +84,6 @@
             </div>
 
         </div>
-    </div>
 </template>
 
 <script>
@@ -198,11 +196,6 @@ export default {
     max-height: 10px;
 }
 
-.bg {
-    width: 100%;
-    height: 100vh;
-    background-color: #b6b6b6;
-}
 
 .card {
     margin-top: 30px;

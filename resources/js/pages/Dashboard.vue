@@ -1,5 +1,4 @@
 <template>
-    <div class="bg">
         <div class="container">
             <h2>Dashboard panel uzivatela {{ name }} </h2>
         </div>
@@ -47,8 +46,6 @@
             </ul>
 
         </div>
-    </div>
-
 </template>
 
 <script>
