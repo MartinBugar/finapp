@@ -42,8 +42,8 @@
                 </div>
 
                 <div class="form-gorup mb-2">
-                    <label>PDF Dokument</label><span class="text-danger"> *</span>
-                    <input type="file" class="form-control mb-2">
+                    <label>PDF Dokument</label><span class="text-danger" > *</span>
+                    <input type="file" class="form-control mb-2" v-on:change="onChange">
                 </div>
 
                 <div class="form-group mb-2">
@@ -95,6 +95,21 @@ export default{
         })
     },
     methods: {
+        onChange(e) {
+            this.pdf = e.target.files[0];
+            this.pdfName = e.target.files[0].name;
+            console.log(this.pdfName);
+            let reader = new FileReader();
+            reader.addEventListener("load", function () {
+                this.pdfPreview = reader.result;
+            }.bind(this), false);
+
+            if (this.pdf) {
+                if ( /\.(pdf)$/i.test( this.pdf.name ) ) {
+                    reader.readAsDataURL( this.pdf );
+                }
+            }
+        },
         downloadWithAxios(pdf, pdfName) {
             axios({
                 method: 'get',

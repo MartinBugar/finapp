@@ -57,18 +57,19 @@ class PostsController extends Controller
             'value' => 'required',
             'date',
             'userID',
+            'pdf',
             'pdfName',
         ]);
 
         $input = $request->all();
 
-        $pdfName = NULL;
-        if ($pdf = $request->file('file')) {
+        $pdfNameOfTheSource = NULL;
+        if ($pdf = $request->file('pdf')) {
             $destinationPath = 'pdf/';
-            $pdfName = date('YmdHis') . "." . $pdf->getClientOriginalExtension();
-            $pdf->move($destinationPath, $pdfName);
-            $input['pdf'] = $pdfName;
-            unlink('pdf/'.$post->image);
+            $pdfNameOfTheSource = date('YmdHis') . "." . $pdf->getClientOriginalExtension();
+            $pdf->move($destinationPath, $pdfNameOfTheSource);
+            $input['pdf'] = $pdfNameOfTheSource;
+            unlink('pdf/'.$post->pdf);
         }
 
         $post->update($input);
