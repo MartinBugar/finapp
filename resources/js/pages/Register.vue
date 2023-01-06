@@ -8,7 +8,7 @@
                     <strong>{{error}}</strong>
                 </div>
 
-                <div class="card card-default">
+                <div class="card card-default cardRegister">
                     <div class="card-header"><h5>Register New User</h5></div>
                     <div class="card-body">
                         <form>
@@ -109,3 +109,10 @@
         }
     }
 </script>
+
+<style>
+.cardRegister {
+    margin-top: 30px;
+    border-radius: 18px;
+}
+</style>
