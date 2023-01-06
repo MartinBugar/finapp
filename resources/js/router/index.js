@@ -11,6 +11,9 @@ import AddPost from '../components/Income/AddPost.vue';
 import Expenses from "../components/Expenses/Expenses.vue";
 import AddExpens from "../components/Expenses/AddExpens.vue";
 import EditExpens from "../components/Expenses/EditExpens.vue";
+import ExpensesTypes from "../components/ExpensesTypes/ExpensesTypes.vue";
+import AddExpensType from "../components/ExpensesTypes/AddExpensType.vue";
+import EditExpensType from "../components/ExpensesTypes/EditExpensType.vue";
 
 export const routes = [
     {
@@ -62,6 +65,21 @@ export const routes = [
         name: 'editexpens',
         path: '/expenses/edit/:id',
         component: EditExpens
+    },
+    {
+        name: 'expensestypes',
+        path: '/expensestypes',
+        component: ExpensesTypes
+    },
+    {
+        name: 'addexpensestypes',
+        path: '/expensestypes/add',
+        component: AddExpensType
+    },
+    {
+        name: 'editexpensestypes',
+        path: '/editexpensestypes/edit/:id',
+        component: EditExpensType
     }
 ];
 

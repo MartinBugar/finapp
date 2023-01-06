@@ -1,6 +1,7 @@
 <?php
 
-use App\Http\Controllers\API\ExpensesConstroller;
+use App\Http\Controllers\API\ExpensesController;
+use App\Http\Controllers\API\ExpensesTypesController;
 use App\Http\Controllers\API\PostsController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -36,9 +37,17 @@ Route::group(['prefix' => 'posts','middleware' => 'auth:sanctum'], function() {
 });
 
 Route::group(['prefix' => 'expenses','middleware' => 'auth:sanctum'], function() {
-    Route::get('/', [ExpensesConstroller::class,'index']);
-    Route::post('add', [ExpensesConstroller::class,'add']);
-    Route::post('update/{id}', [ExpensesConstroller::class,'update']);
-    Route::get('edit/{id}', [ExpensesConstroller::class,'edit']);
-    Route::delete('delete/{id}', [ExpensesConstroller::class,'delete']);
+    Route::get('/', [ExpensesController::class,'index']);
+    Route::post('add', [ExpensesController::class,'add']);
+    Route::post('update/{id}', [ExpensesController::class,'update']);
+    Route::get('edit/{id}', [ExpensesController::class,'edit']);
+    Route::delete('delete/{id}', [ExpensesController::class,'delete']);
+});
+
+Route::group(['prefix' => 'expensestypes','middleware' => 'auth:sanctum'], function() {
+    Route::get('/', [ExpensesTypesController::class,'index']);
+    Route::post('add', [ExpensesTypesController::class,'add']);
+    Route::post('update/{id}', [ExpensesTypesController::class,'update']);
+    Route::get('edit/{id}', [ExpensesTypesController::class,'edit']);
+    Route::delete('delete/{id}', [ExpensesTypesController::class,'delete']);
 });

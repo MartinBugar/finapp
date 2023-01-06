@@ -17,6 +17,5 @@ class Posts extends Model
         'userID',
         'pdf',
         'pdfName',
-
     ];
 }

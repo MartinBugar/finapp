@@ -19,8 +19,8 @@ return new class extends Migration
             $table->unsignedBigInteger('value');
             $table->string('name');
             $table->longText('description');
-            $table->unsignedBigInteger('typeID');
-            $table->string('type');
+            $table->unsignedBigInteger('typeID')->nullable();
+            $table->string('type')->nullable();
             $table->date('date');
             $table->timestamps();
             $table->foreign('userID')->references('id')->on('users');

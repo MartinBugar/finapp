@@ -10,6 +10,7 @@
                     <router-link to="/dashboard" class="nav-item nav-link">Dashboard</router-link>
                     <router-link to="/posts" class="nav-item nav-link">Príjem</router-link>
                     <router-link to="/expenses" class="nav-item nav-link">Výdaje</router-link>
+                    <router-link to="/expensestypes" class="nav-item nav-link">typy</router-link>
 
                     <div class="logout">
                         <a class="nav-item nav-link" style="cursor: pointer;" @click="logout">Logout</a>

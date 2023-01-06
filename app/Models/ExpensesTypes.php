@@ -8,4 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class ExpensesTypes extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'type',
+        'userID'
+    ];
 }
