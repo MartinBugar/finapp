@@ -6,8 +6,7 @@
                         <h3 class="card-title"><strong>Prijem uzivatela {{ userName }} za mesiac
                             {{ dates().at(month).name }} {{ year }}</strong></h3>
                         <div>
-                            <button class="btn btn-success buttonNewPost" type="button" @click="this.$router.push('/posts/add')">New
-                                Post
+                            <button class="btn btn-success buttonNewPost" type="button" @click="this.$router.push('/posts/add')">Nový záznam
                             </button>
                         </div>
                     </div>

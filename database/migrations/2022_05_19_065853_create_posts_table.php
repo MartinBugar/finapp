@@ -21,6 +21,7 @@ return new class extends Migration
             $table->date('date');
             $table->timestamps();
             $table->string('pdf')->nullable();
+            $table->string('pdfName')->nullable();
             $table->foreign('userID')->references('id')->on('users');
         });
     }

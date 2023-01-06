@@ -31,7 +31,6 @@
                     <td class="text-center">{{ sumOfPostsFromMonth(date.id) }} €</td>
                     <td class="text-center">{{ sumOfExpensesFromMonth(date.id) }} €</td>
                     <td class="text-center">{{ sumOfPostsFromMonth(date.id) - sumOfExpensesFromMonth(date.id) }} €</td>
-
                 </tr>
                 </tbody>
             </table>
@@ -41,8 +40,6 @@
                     € </strong></li>
                 <li class="list-group-item">Vydaje za rok {{ year }} : <strong> {{ sumOfExpensesPerYear(year) }}
                     € </strong></li>
-                <!--            <li class="list-group-item">Spolu celkom: <strong> {{ sumOfValues() }} € </strong></li>-->
-                <!--            <li class="list-group-item">Spolu vydaje celkom: <strong> {{ sumOfExpenses() }} € </strong></li>-->
             </ul>
 
         </div>
@@ -96,7 +93,6 @@ export default {
         }
     },
     methods: {
-
         getMonthFromDate(date) {
             let newDate = new Date(date);
             return newDate.getMonth();

@@ -66,20 +66,26 @@
                         <td>{{ expens.type }}</td>
                         <td>{{ expens.value }} €</td>
 
-                        <td class="text-center buttons" v-if="userID === expens.userID">
-
+                        <td class="text-center buttons" v-if="userId === expens.userID">
                             <router-link :to="{name:'editexpens', params: {id:expens.id}}"
                                          class="btn btn-sm btn-warning">
                                 Edit
                             </router-link>
                             <button class="btn btn-danger btn-sm m-1" @click="deletePost(expens.id)">Delete</button>
-
                         </td>
                     </tr>
                     </tbody>
                 </table>
             </div>
         </div>
+
+        <ul class="list-group mt-4 summary">
+            <li class="list-group-item">Povinne platby : <strong>
+                {{ sumOfExpensesPerMonthPerType(this.month, 'Povinne platby') }} € </strong></li>
+            <li class="list-group-item">Výdavky spolu : <strong> {{ sumOfExpensesPerMonth(this.month) }} € </strong>
+            </li>
+        </ul>
+
     </div>
 </template>
 
@@ -93,10 +99,11 @@ export default {
             expenses: [],
             strSuccess: '',
             strError: '',
-            userID: '',
+            userId: '',
             userName: '',
             month: new Date(Date.now()).getMonth(),
             year: new Date(Date.now()).getFullYear(),
+            expensType: '',
         }
     },
     created() {
@@ -111,11 +118,37 @@ export default {
         });
 
         if (window.Laravel.user) {
-            this.userID = window.Laravel.user.id;
+            this.userId = window.Laravel.user.id;
             this.userName = window.Laravel.user.name;
         }
     },
     methods: {
+        sumOfExpensesPerMonthPerType(month, type) {
+            let sum = 0;
+            this.expenses.forEach((expens) => {
+                let date = new Date(expens.date);
+                if (expens.userID === this.userId) {
+                    if (month.toString() === date.getMonth().toString()) {
+                        if (expens.type === type) {
+                            sum = sum + expens.value;
+                        }
+                    }
+                }
+            });
+            return sum;
+        },
+        sumOfExpensesPerMonth(month) {
+            let sum = 0;
+            this.expenses.forEach((expens) => {
+                let date = new Date(expens.date);
+                if (expens.userID === this.userId) {
+                    if (month.toString() === date.getMonth().toString()) {
+                        sum = sum + expens.value;
+                    }
+                }
+            });
+            return sum;
+        },
         formatDate(value) {
             return moment(value).format('DD.MM.YYYY');
         },
@@ -128,7 +161,7 @@ export default {
                 let expensDate = new Date(expens.date);
                 if (expensDate.getFullYear().toString() === this.year.toString()) {
                     if (expensDate.getMonth().toString() === month.toString()) {
-                        return expens.userID === this.userID;
+                        return expens.userID === this.userId;
                     }
                 }
             })
@@ -181,5 +214,9 @@ export default {
 
 .rowEdit {
     width: 600px;
+}
+
+.summary {
+    width: 300px;
 }
 </style>

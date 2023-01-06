@@ -1,0 +1,5 @@
+ALTER TABLE posts
+    ADD COLUMN pdf VARCHAR(5000);
+
+ALTER TABLE posts
+    ADD COLUMN pdfName VARCHAR(5000);
