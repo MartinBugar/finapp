@@ -116,7 +116,7 @@ export default {
                 })
 
                 if (this.filteredExpenses.length > 0) {
-                    console.log("NOOOOOO")
+                    alert("Cannot delete this type, because it is used by at least one Expens")
                 } else if (confirm("Do you really want to delete this data?")) {
                     this.$axios.delete(`/api/expensestypes/delete/${expensType.id}`)
                         .then(response => {
