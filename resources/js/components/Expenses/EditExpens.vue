@@ -5,7 +5,8 @@
                 <div class="d-flex justify-content-between pb-2 mb-2">
                     <h5 class="card-title">Update Expenses data</h5>
                     <div>
-                        <router-link :to="{name: 'expenses'}" class="btn btn-success buttonEditExpens">Go Back</router-link>
+                        <router-link :to="{name: 'expenses'}" class="btn btn-success buttonEditExpens">Go Back
+                        </router-link>
                     </div>
                 </div>
 
@@ -39,15 +40,16 @@
 
                     <div class="form-group mb-2 selection">
                         <label>Type</label><span class="text-danger"> *</span>
-                        <select class="form-select" v-model="type" placeholder="Select the type">
-                            <option>Jedlo a potraviny</option>
-                            <option>Povinne platby</option>
-                            <option>Zvieratka</option>
-                            <option>Domacnost</option>
-                            <option>Martin</option>
-                            <option>Simonka</option>
+                        <select class="form-select" v-model="type"  placeholder="Select the type">
+                            <option v-for="(expensesType, key) in filteredAndSortedExpensesTypes(this.expensesTypes)" :value="expensesType.type" > {{ expensesType.type}}</option>
                         </select>
                     </div>
+
+<!--                    <Form.Control as="select" value="" >-->
+<!--                        {expensesTypes.map(opt => (-->
+<!--                        <option value={opt.type}>{opt.type}</option>-->
+<!--                        ))}-->
+<!--                    </Form.Control>-->
 
                     <div class="form-group mb-2">
                         <label>Dátum</label><span class="text-danger"> *</span>
@@ -69,14 +71,15 @@ export default {
             name: '',
             description: '',
             value: '',
+            userId: '',
             type: '',
             date: '',
             strSuccess: '',
             strError: '',
-            imgPreview: null
+            imgPreview: null,
+            expensesTypes:[],
         }
     },
-
     beforeCreate() {
         this.$axios.get('/sanctum/csrf-cookie').then(response => {
             this.$axios.get(`/api/expenses/edit/${this.$route.params.id}`)
@@ -92,7 +95,27 @@ export default {
                 });
         })
     },
+    created() {
+        if (window.Laravel.user) {
+            this.userId = window.Laravel.user.id;
+        }
+
+        this.$axios.get('/sanctum/csrf-cookie').then(response => {
+            this.$axios.get('/api/expensestypes')
+                .then(response => {
+                    this.expensesTypes = response.data;
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+        });
+    },
     methods: {
+        filteredAndSortedExpensesTypes(expensestypes) {
+            return expensestypes.filter(expens => {
+                return expens.userID === this.userId;
+            })
+        },
         updatePost(e) {
             this.$axios.get('/sanctum/csrf-cookie').then(response => {
                 let existingObj = this;

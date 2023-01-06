@@ -80,8 +80,9 @@
         </div>
 
         <ul class="list-group mt-4 summary">
-            <li class="list-group-item">Povinne platby : <strong>
-                {{ sumOfExpensesPerMonthPerType(this.month, 'Povinne platby') }} € </strong></li>
+            <li class="list-group-item" v-for="(exptype, key) in expensesTypes" :value="exptype.type">
+                {{ exptype.type }}: <strong> {{ sumOfExpensesPerMonthPerType(this.month, exptype.type) }} € </strong> </li>
+
             <li class="list-group-item">Výdavky spolu : <strong> {{ sumOfExpensesPerMonth(this.month) }} € </strong>
             </li>
         </ul>
@@ -104,6 +105,7 @@ export default {
             month: new Date(Date.now()).getMonth(),
             year: new Date(Date.now()).getFullYear(),
             expensType: '',
+            expensesTypes: '',
         }
     },
     created() {
@@ -111,6 +113,16 @@ export default {
             this.$axios.get('/api/expenses')
                 .then(response => {
                     this.expenses = response.data;
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+        });
+
+        this.$axios.get('/sanctum/csrf-cookie').then(response => {
+            this.$axios.get('/api/expensestypes')
+                .then(response => {
+                    this.expensesTypes = response.data;
                 })
                 .catch(function (error) {
                     console.log(error);
@@ -173,9 +185,8 @@ export default {
                 if (confirm("Do you really want to delete this data?")) {
                     this.$axios.delete(`/api/expenses/delete/${id}`)
                         .then(response => {
-
-                            let i = this.posts.map(item => item.id).indexOf(id); // find index of your object
-                            this.posts.splice(i, 1);
+                            let i = this.expenses.map(item => item.id).indexOf(id); // find index of your object
+                            this.expenses.splice(i, 1);
                             existingObj.strError = "";
                             existingObj.strSuccess = response.data.success;
 

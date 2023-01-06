@@ -40,15 +40,9 @@
 
                     <div class="form-group mb-2 selection">
                         <label>Type</label><span class="text-danger"> *</span>
-                        <select class="form-select" v-model="type" placeholder="Select the type">
-                            <option>Jedlo a potraviny</option>
-                            <option>Povinne platby</option>
-                            <option>Zvieratka</option>
-                            <option>Domacnost</option>
-                            <option>Martin</option>
-                            <option>Simonka</option>
+                        <select class="form-select" v-model="type"  placeholder="Select the type">
+                            <option v-for="(expensesType, key) in filteredAndSortedExpensesTypes(this.expensesTypes)" :value="expensesType.type" > {{ expensesType.type}}</option>
                         </select>
-
                     </div>
 
                     <div class="form-group mb-2">
@@ -75,16 +69,31 @@ export default {
             date: '',
             strSuccess: '',
             strError: '',
-            userID: '',
-
+            userId: '',
+            expensesTypes: [],
         }
     },
     created() {
         if (window.Laravel.user) {
-            this.userID = window.Laravel.user.id;
+            this.userId = window.Laravel.user.id;
         }
+
+        this.$axios.get('/sanctum/csrf-cookie').then(response => {
+            this.$axios.get('/api/expensestypes')
+                .then(response => {
+                    this.expensesTypes = response.data;
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+        });
     },
     methods: {
+        filteredAndSortedExpensesTypes(expensestype) {
+            return expensestype.filter(expens => {
+                return expens.userID === this.userId;
+            })
+        },
         addPost(e) {
             this.$axios.get('/sanctum/csrf-cookie').then(response => {
                 let existingObj = this;
@@ -101,7 +110,7 @@ export default {
                 formData.append('value', this.value);
                 formData.append('type', this.type);
                 formData.append('date', this.date);
-                formData.append('userID', this.userID);
+                formData.append('userID', this.userId);
 
 
                 this.$axios.post('/api/expenses/add', formData, config)

@@ -23,18 +23,18 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr class="" v-for="(expensTypes, index) in expensesTypes" :key="expensTypes.id">
+                    <tr class="" v-for="(expensType, index) in filteredAndSortedExpensesTypes(expensesTypes)" :key="expensType.id">
                         <td class="text-center">{{ index + 1 }}.</td>
-                        <td>{{ expensTypes.id }}</td>
-                        <td class="text-center">{{ expensTypes.userID }}.</td>
-                        <td>{{ expensTypes.type }}</td>
+                        <td>{{ expensType.id }}</td>
+                        <td class="text-center">{{ expensType.userID }}.</td>
+                        <td>{{ expensType.type }}</td>
 
-                        <td class="text-center buttons" v-if="userId === expensTypes.userID">
-                            <router-link :to="{name:'editexpensestypes', params: {id:expensTypes.id}}"
+                        <td class="text-center buttons" v-if="userId === expensType.userID">
+                            <router-link :to="{name:'editexpensestypes', params: {id:expensType.id}}"
                                          class="btn btn-sm btn-warning">
                                 Edit
                             </router-link>
-                            <button class="btn btn-danger btn-sm m-1" @click="deletePost(expensTypes.id)">Delete</button>
+                            <button class="btn btn-danger btn-sm m-1" @click="deleteExpensType(expensType)">Delete</button>
                         </td>
                     </tr>
                     </tbody>
@@ -47,6 +47,7 @@
 <script>
 import dates from "../Dates";
 import moment from "moment/moment";
+import expenses from "../Expenses/Expenses.vue";
 
 export default {
     data() {
@@ -59,14 +60,25 @@ export default {
             month: new Date(Date.now()).getMonth(),
             year: new Date(Date.now()).getFullYear(),
             expensType: '',
+            expenses: [],
+            filteredExpenses: [],
         }
     },
     created() {
         this.$axios.get('/sanctum/csrf-cookie').then(response => {
+            this.$axios.get('/api/expenses')
+                .then(response => {
+                    this.expenses = response.data;
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+        });
+
+        this.$axios.get('/sanctum/csrf-cookie').then(response => {
             this.$axios.get('/api/expensestypes')
                 .then(response => {
                     this.expensesTypes = response.data;
-                    console.log(response.data)
                 })
                 .catch(function (error) {
                     console.log(error);
@@ -85,21 +97,31 @@ export default {
         dates() {
             return dates
         },
-        // filteredAndSorted(expenses) {
-        //     return expenses.filter(expens => {
-        //                 return expens.userID === this.userId;
-        //     })
-        // },
-        deletePost(id) {
+        filteredAndSortedExpensesTypes(expensestype) {
+            return expensestype.filter(expens => {
+                        return expens.userID === this.userId;
+            })
+        },
+        filteredAndSortedExpenses() {
+            return this.expenses.filter(expens => {
+                return expens.userID === this.userId;
+            })
+        },
+        deleteExpensType(expensType) {
             this.$axios.get('/sanctum/csrf-cookie').then(response => {
                 let existingObj = this;
 
-                if (confirm("Do you really want to delete this data?")) {
-                    this.$axios.delete(`/api/expensestypes/delete/${id}`)
-                        .then(response => {
+                this.filteredExpenses = this.expenses.filter(expens => {
+                    return  expens.userID === this.userId && expens.type === expensType.type;
+                })
 
-                            let i = this.expensesTypes.map(item => item.id).indexOf(id); // find index of your object
-                            this.posts.splice(i, 1);
+                if (this.filteredExpenses.length > 0) {
+                    console.log("NOOOOOO")
+                } else if (confirm("Do you really want to delete this data?")) {
+                    this.$axios.delete(`/api/expensestypes/delete/${expensType.id}`)
+                        .then(response => {
+                            let i = this.expensesTypes.map(item => item.id).indexOf(expensType.id); // find index of your object
+                            this.expensesTypes.splice(i, 1);
                             existingObj.strError = "";
                             existingObj.strSuccess = response.data.success;
 
