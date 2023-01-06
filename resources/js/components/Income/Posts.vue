@@ -1,6 +1,6 @@
 <template>
         <div class="container">
-            <div class="card">
+            <div class="card cardPost">
                 <div class="card-body ">
                     <div class="d-flex justify-content-between pb-2 mb-2">
                         <h3 class="card-title"><strong>Prijem uzivatela {{ userName }} za mesiac
@@ -13,7 +13,7 @@
                     </div>
 
                     <div class="form-group mb-2 selection">
-                        <div class="row">
+                        <div class="row rowPost">
                             <div class="col-sm-12 col-md-6 col-lg-6">
                                 <label>Mesiac</label><span class="text-danger"> </span>
                                 <select class="form-select" v-model="month">
@@ -197,11 +197,11 @@ export default {
 }
 
 
-.card {
+.cardPost {
     margin-top: 30px;
 }
 
-.row {
+.rowPost {
     width: 600px;
 }
 
