@@ -1,64 +1,67 @@
 <template>
-
-    <div class="card">
-        <div class="card-body">
-            <div class="d-flex justify-content-between pb-2 mb-2">
-                <h5 class="card-title">Vlozit nový záznam</h5>
-                <div>
-                    <router-link :to="{name: 'posts'}" class="btn btn-success">Go Back</router-link>
-                </div>
-            </div>
-
-            <div v-if="strSuccess" class="alert alert-success alert-dismissible fade show" role="alert">
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                <strong>{{strSuccess}}</strong>
-            </div>
-
-            <div v-if="strError" class="alert alert-danger alert-dismissible fade show" role="alert">
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                <strong>{{strError}}</strong>
-            </div>
-
-
-            <form @submit.prevent="addPost" enctype="multipart/form-data">
-                <div class="form-group mb-2">
-                    <label>Name</label><span class="text-danger"> *</span>
-                    <input type="text" class="form-control" v-model="name" placeholder="Enter post name">
-                </div>
-
-                <div class="form-group mb-2">
-                    <label>Description</label><span class="text-danger"> *</span>
-                   <textarea class="form-control" rows="3" v-model="description" placeholder="Enter post description"></textarea>
-                </div>
-
-                <div class="form-group mb-2">
-                    <label>Value</label><span class="text-danger"> *</span>
-                    <textarea class="form-control" rows="3" v-model="value" placeholder="Enter the value"></textarea>
-                </div>
-
-                <div class="form-group mb-2">
-                    <label>Dátum</label><span class="text-danger"> *</span>
-                    <input type="date" class="form-control" rows="3" v-model="date" placeholder="Enter the date"/>
-                </div>
-
-                <div class="form-gorup mb-2">
-                    <label>Pdf dokument</label><span class="text-danger"> *</span>
-                    <input type="file" class="form-control mb-2" v-on:change="onChange">
-                    <div v-if="pdf">
-                        <label v-bind:src="pdfPreview" width="100" height="100"/>
+    <div class="container">
+        <div class="card cardAddPost">
+            <div class="card-body">
+                <div class="d-flex justify-content-between pb-2 mb-2">
+                    <h5 class="card-title">Vlozit nový záznam</h5>
+                    <div>
+                        <router-link :to="{name: 'posts'}" class="btn btn-success buttonAddPost">Go Back</router-link>
                     </div>
                 </div>
 
-                <button type="submit" class="btn btn-primary mt-4 mb-4"> Add Post</button>
+                <div v-if="strSuccess" class="alert alert-success alert-dismissible fade show" role="alert">
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    <strong>{{ strSuccess }}</strong>
+                </div>
 
-            </form>
+                <div v-if="strError" class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    <strong>{{ strError }}</strong>
+                </div>
 
+
+                <form @submit.prevent="addPost" enctype="multipart/form-data">
+                    <div class="form-group mb-2">
+                        <label>Name</label><span class="text-danger"> *</span>
+                        <input type="text" class="form-control" v-model="name" placeholder="Enter post name">
+                    </div>
+
+                    <div class="form-group mb-2">
+                        <label>Description</label><span class="text-danger"> *</span>
+                        <textarea class="form-control" rows="3" v-model="description"
+                                  placeholder="Enter post description"></textarea>
+                    </div>
+
+                    <div class="form-group mb-2">
+                        <label>Value</label><span class="text-danger"> *</span>
+                        <textarea class="form-control" rows="3" v-model="value"
+                                  placeholder="Enter the value"></textarea>
+                    </div>
+
+                    <div class="form-group mb-2">
+                        <label>Dátum</label><span class="text-danger"> *</span>
+                        <input type="date" class="form-control" rows="3" v-model="date" placeholder="Enter the date"/>
+                    </div>
+
+                    <div class="form-gorup mb-2">
+                        <label>Pdf dokument</label><span class="text-danger"> *</span>
+                        <input type="file" class="form-control mb-2" v-on:change="onChange">
+                        <div v-if="pdf">
+                            <label v-bind:src="pdfPreview" width="100" height="100"/>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary mt-4 mb-4"> Add Post</button>
+
+                </form>
+
+            </div>
         </div>
     </div>
 </template>
 
 <script>
-export default{
+export default {
     data() {
         return {
             name: '',
@@ -89,8 +92,8 @@ export default{
             }.bind(this), false);
 
             if (this.pdf) {
-                if ( /\.(pdf)$/i.test( this.pdf.name ) ) {
-                    reader.readAsDataURL( this.pdf );
+                if (/\.(pdf)$/i.test(this.pdf.name)) {
+                    reader.readAsDataURL(this.pdf);
                 }
             }
         },
@@ -115,14 +118,14 @@ export default{
 
 
                 this.$axios.post('/api/posts/add', formData, config)
-                .then(response => {
-                    existingObj.strError = "";
-                    existingObj.strSuccess = response.data.success;
-                })
-                .catch(function(error) {
-                    existingObj.strSuccess ="";
-                    existingObj.strError = error.response.data.message;
-                });
+                    .then(response => {
+                        existingObj.strError = "";
+                        existingObj.strSuccess = response.data.success;
+                    })
+                    .catch(function (error) {
+                        existingObj.strSuccess = "";
+                        existingObj.strError = error.response.data.message;
+                    });
             });
         }
 
@@ -136,3 +139,14 @@ export default{
 }
 
 </script>
+
+<style>
+.cardAddPost {
+    margin-top: 30px;
+    border-radius: 18px;
+}
+
+.buttonAddPost {
+    border-radius: 18px;
+}
+</style>

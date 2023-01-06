@@ -1,39 +1,46 @@
 <template>
-    <div class="bg">
-        <div class="card">
+    <div class="container">
+        <div class="card cardExpenses">
             <div class="card-body">
                 <div class="d-flex justify-content-between pb-2 mb-2">
                     <h3 class="card-title"><strong>Vsetky výdaje uzivatela : {{ userName }} za mesiac
                         {{ dates().at(month).name }} {{ year }}</strong></h3>
                     <div>
-                        <button class="btn btn-success" type="button" @click="this.$router.push('/expenses/add')">New
-                            Post
+                        <button class="btn btn-success buttonNewExpense" type="button"
+                                @click="this.$router.push('/expenses/add')">
+                            Nový záznam
                         </button>
                     </div>
                 </div>
 
                 <div class="form-group mb-2 selection">
-                    <label>Mesiac</label><span class="text-danger"> </span>
-                    <select class="form-select" v-model="month">
-                        <option value="0">Januar</option>
-                        <option value="1">Febrar</option>
-                        <option value="2">Marec</option>
-                        <option value="3">April</option>
-                        <option value="4">Maj</option>
-                        <option value="5">Jun</option>
-                        <option value="6">Jul</option>
-                        <option value="7">August</option>
-                        <option value="8">September</option>
-                        <option value="9">Oktober</option>
-                        <option value="10">November</option>
-                        <option value="11">December</option>
-                    </select>
-                    <label>Rok</label><span class="text-danger"> *</span>
-                    <select class="form-select" v-model="year">
-                        <option>2021</option>
-                        <option>2022</option>
-                        <option>2023</option>
-                    </select>
+                    <div class="row rowEdit">
+                        <div class="col-sm-12 col-md-6 col-lg-6">
+                            <label>Mesiac</label><span class="text-danger"> </span>
+                            <select class="form-select" v-model="month">
+                                <option value="0">Januar</option>
+                                <option value="1">Febrar</option>
+                                <option value="2">Marec</option>
+                                <option value="3">April</option>
+                                <option value="4">Maj</option>
+                                <option value="5">Jun</option>
+                                <option value="6">Jul</option>
+                                <option value="7">August</option>
+                                <option value="8">September</option>
+                                <option value="9">Oktober</option>
+                                <option value="10">November</option>
+                                <option value="11">December</option>
+                            </select>
+                        </div>
+                        <div class="col-sm-12 col-md-6 col-lg-6">
+                            <label>Rok</label><span class="text-danger"> *</span>
+                            <select class="form-select" v-model="year">
+                                <option>2021</option>
+                                <option>2022</option>
+                                <option>2023</option>
+                            </select>
+                        </div>
+                    </div>
                 </div>
 
                 <table class="table table-hover table-sm table-bordered table-dark">
@@ -161,9 +168,17 @@ export default {
 .buttons {
     max-height: 10px;
 }
-.bg {
-    width: 100%;
-    height: 100vh;
-    background-color: #b6b6b6;
+
+.cardExpenses {
+    margin-top: 30px;
+    border-radius: 18px;
+}
+
+.buttonNewExpense {
+    border-radius: 18px;
+}
+
+.rowEdit {
+    width: 600px;
 }
 </style>

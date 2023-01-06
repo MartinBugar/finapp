@@ -1,69 +1,71 @@
 <template>
-
-    <div class="card">
-        <div class="card-body">
-            <div class="d-flex justify-content-between pb-2 mb-2">
-                <h5 class="card-title">Update Post Data</h5>
-                <div>
-                    <router-link :to="{name: 'expenses'}" class="btn btn-success">Go Back</router-link>
+    <div class="container">
+        <div class="card cardEditPost">
+            <div class="card-body">
+                <div class="d-flex justify-content-between pb-2 mb-2">
+                    <h5 class="card-title">Upravit data</h5>
+                    <div>
+                        <router-link :to="{name: 'expenses'}" class="btn btn-success buttonEditPost">Go Back</router-link>
+                    </div>
                 </div>
+
+                <div v-if="strSuccess" class="alert alert-success alert-dismissible fade show" role="alert">
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    <strong>{{ strSuccess }}</strong>
+                </div>
+
+                <div v-if="strError" class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    <strong>{{ strError }}</strong>
+                </div>
+
+
+                <form @submit.prevent="updatePost" enctype="multipart/form-data">
+                    <div class="form-group mb-2">
+                        <label>Name</label><span class="text-danger"> *</span>
+                        <input type="text" class="form-control" v-model="name" placeholder="Enter post name">
+                    </div>
+
+                    <div class="form-group mb-2">
+                        <label>Description</label><span class="text-danger"> *</span>
+                        <textarea class="form-control" rows="3" v-model="description"
+                                  placeholder="Enter post description"></textarea>
+                    </div>
+
+                    <div class="form-group mb-2">
+                        <label>Value</label><span class="text-danger"> *</span>
+                        <textarea class="form-control" rows="1" v-model="value" placeholder="Enter value"></textarea>
+                    </div>
+
+                    <div class="form-group mb-2">
+                        <label>Dátum</label><span class="text-danger"> *</span>
+                        <input type="date" class="form-control" rows="3" v-model="date" placeholder="Enter the date"/>
+                    </div>
+
+                    <div class="form-gorup mb-2">
+                        <label>PDF Dokument</label><span class="text-danger"> *</span>
+                        <input type="file" class="form-control mb-2" v-on:change="onChange">
+                    </div>
+
+                    <div class="form-group mb-2">
+                        <label>Dokument PDF: </label>
+                        <a href="#" v-if="pdf" @click="downloadWithAxios(this.pdf, this.pdfName)">{{ pdfName }}</a>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary mt-4 mb-4"> Update Post</button>
+
+                </form>
+
             </div>
-
-            <div v-if="strSuccess" class="alert alert-success alert-dismissible fade show" role="alert">
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                <strong>{{strSuccess}}</strong>
-            </div>
-
-            <div v-if="strError" class="alert alert-danger alert-dismissible fade show" role="alert">
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                <strong>{{strError}}</strong>
-            </div>
-
-
-            <form @submit.prevent="updatePost" enctype="multipart/form-data">
-                <div class="form-group mb-2">
-                    <label>Name</label><span class="text-danger"> *</span>
-                    <input type="text" class="form-control" v-model="name" placeholder="Enter post name">
-                </div>
-
-                <div class="form-group mb-2">
-                    <label>Description</label><span class="text-danger"> *</span>
-                   <textarea class="form-control" rows="3" v-model="description" placeholder="Enter post description"></textarea>
-                </div>
-
-                <div class="form-group mb-2">
-                    <label>Value</label><span class="text-danger"> *</span>
-                    <textarea class="form-control" rows="1" v-model="value" placeholder="Enter value"></textarea>
-                </div>
-
-                <div class="form-group mb-2">
-                    <label>Dátum</label><span class="text-danger"> *</span>
-                    <input type="date" class="form-control" rows="3" v-model="date" placeholder="Enter the date"/>
-                </div>
-
-                <div class="form-gorup mb-2">
-                    <label>PDF Dokument</label><span class="text-danger" > *</span>
-                    <input type="file" class="form-control mb-2" v-on:change="onChange">
-                </div>
-
-                <div class="form-group mb-2">
-                    <label>Dokument PDF: </label>
-                    <a href="#" v-if="pdf" @click="downloadWithAxios(this.pdf, this.pdfName)">{{ pdfName }}</a>
-                </div>
-
-                <button type="submit" class="btn btn-primary mt-4 mb-4"> Update Post</button>
-
-            </form>
-
         </div>
     </div>
 </template>
 
 <script>
-export default{
+export default {
     data() {
         return {
-            id:'',
+            id: '',
             name: '',
             description: '',
             value: '',
@@ -80,18 +82,18 @@ export default{
     beforeCreate() {
         this.$axios.get('/sanctum/csrf-cookie').then(response => {
             this.$axios.get(`/api/posts/edit/${this.$route.params.id}`)
-            .then(response => {
-                console.log(response)
-                this.name = response.data['name'];
-                this.description = response.data['description'];
-                this.value = response.data['value'];
-                this.date = response.data['date'];
-                this.pdf = response.data['pdf'];
-                this.pdfName = response.data['pdfName'];
-            })
-            .catch(function(error) {
-                console.log(error);
-            });
+                .then(response => {
+                    console.log(response)
+                    this.name = response.data['name'];
+                    this.description = response.data['description'];
+                    this.value = response.data['value'];
+                    this.date = response.data['date'];
+                    this.pdf = response.data['pdf'];
+                    this.pdfName = response.data['pdfName'];
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
         })
     },
     methods: {
@@ -105,8 +107,8 @@ export default{
             }.bind(this), false);
 
             if (this.pdf) {
-                if ( /\.(pdf)$/i.test( this.pdf.name ) ) {
-                    reader.readAsDataURL( this.pdf );
+                if (/\.(pdf)$/i.test(this.pdf.name)) {
+                    reader.readAsDataURL(this.pdf);
                 }
             }
         },
@@ -150,14 +152,14 @@ export default{
                 formData.append('pdfName', this.pdfName);
 
                 this.$axios.post(`/api/posts/update/${this.$route.params.id}`, formData, config)
-                .then(response => {
-                    existingObj.strError = "";
-                    existingObj.strSuccess = response.data.success;
-                })
-                .catch(function(error) {
-                    existingObj.strSuccess ="";
-                    existingObj.strError = error.response.data.message;
-                });
+                    .then(response => {
+                        existingObj.strError = "";
+                        existingObj.strSuccess = response.data.success;
+                    })
+                    .catch(function (error) {
+                        existingObj.strSuccess = "";
+                        existingObj.strError = error.response.data.message;
+                    });
             });
         }
 
@@ -171,3 +173,14 @@ export default{
 }
 
 </script>
+
+<style>
+.cardEditPost {
+    margin-top: 30px;
+    border-radius: 18px;
+}
+
+.buttonEditPost {
+    border-radius: 18px;
+}
+</style>

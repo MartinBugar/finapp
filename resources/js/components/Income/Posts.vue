@@ -1,12 +1,12 @@
 <template>
         <div class="container">
             <div class="card cardPost">
-                <div class="card-body ">
+                <div class="card-body">
                     <div class="d-flex justify-content-between pb-2 mb-2">
                         <h3 class="card-title"><strong>Prijem uzivatela {{ userName }} za mesiac
                             {{ dates().at(month).name }} {{ year }}</strong></h3>
                         <div>
-                            <button class="btn btn-success" type="button" @click="this.$router.push('/posts/add')">New
+                            <button class="btn btn-success buttonNewPost" type="button" @click="this.$router.push('/posts/add')">New
                                 Post
                             </button>
                         </div>
@@ -199,10 +199,15 @@ export default {
 
 .cardPost {
     margin-top: 30px;
+    border-radius: 18px;
 }
 
 .rowPost {
     width: 600px;
+}
+
+.buttonNewPost {
+    border-radius: 18px;
 }
 
 
