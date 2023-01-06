@@ -123,10 +123,11 @@ export default {
             return dates
         },
         filteredAndSorted(expenses, month) {
-            return this.expenses.filter(expens => {
-                let expenses = new Date(expens.date);
-                if (expenses.getFullYear().toString() === this.year.toString()) {
-                    if (expenses.getMonth().toString() === month.toString()) {
+            let sortedByDateExpenses = expenses.sort((a, b) => new Date(a.date) - new Date(b.date));
+            return sortedByDateExpenses.filter(expens => {
+                let expensDate = new Date(expens.date);
+                if (expensDate.getFullYear().toString() === this.year.toString()) {
+                    if (expensDate.getMonth().toString() === month.toString()) {
                         return expens.userID === this.userID;
                     }
                 }

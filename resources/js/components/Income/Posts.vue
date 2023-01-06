@@ -150,7 +150,8 @@ export default {
         },
 
         filteredAndSorted(posts, month) {
-            return this.posts.filter(post => {
+            let sortedByDatePosts = posts.sort((a, b) => new Date(a.date) - new Date(b.date));
+            return sortedByDatePosts.filter(post => {
                 let postMonth = new Date(post.date);
                 if (postMonth.getFullYear().toString() === this.year.toString()) {
                     if (postMonth.getMonth().toString() === month.toString()) {
