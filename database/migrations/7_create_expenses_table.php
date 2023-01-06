@@ -13,16 +13,18 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('posts', function (Blueprint $table) {
+        Schema::create('expenses', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('userID');
+            $table->unsignedBigInteger('value');
             $table->string('name');
             $table->longText('description');
+            $table->unsignedBigInteger('typeID');
+            $table->string('type');
             $table->date('date');
             $table->timestamps();
-            $table->string('pdf')->nullable();
-            $table->string('pdfName')->nullable();
             $table->foreign('userID')->references('id')->on('users');
+            $table->foreign('typeID')->references('id')->on('expenses_types');
         });
     }
 
@@ -33,6 +35,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('posts');
+        Schema::dropIfExists('expenses');
     }
 };
