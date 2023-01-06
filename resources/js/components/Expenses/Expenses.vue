@@ -80,7 +80,7 @@
         </div>
 
         <ul class="list-group mt-4 summary">
-            <li class="list-group-item" v-for="(exptype, key) in expensesTypes" :value="exptype.type">
+            <li class="list-group-item" v-for="(exptype, key) in filteredAndSortedExpensesTypes(expensesTypes)" :value="exptype.type">
                 {{ exptype.type }}: <strong> {{ sumOfExpensesPerMonthPerType(this.month, exptype.type) }} € </strong> </li>
 
             <li class="list-group-item">Výdavky spolu : <strong> {{ sumOfExpensesPerMonth(this.month) }} € </strong>
@@ -135,6 +135,11 @@ export default {
         }
     },
     methods: {
+        filteredAndSortedExpensesTypes(expensestypes) {
+            return expensestypes.filter(expens => {
+                return expens.userID === this.userId;
+            })
+        },
         sumOfExpensesPerMonthPerType(month, type) {
             let sum = 0;
             this.expenses.forEach((expens) => {
