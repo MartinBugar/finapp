@@ -79,16 +79,32 @@
             </div>
         </div>
 
-        <ul class="list-group mt-4 summary">
-            <li class="list-group-item"
-                v-for="(exptype, key) in filteredAndSortedExpensesTypes(this.expensesTypes)" :value="exptype.type"
-                v-if="true">
-                {{ exptype.type }}: <strong> {{ sumOfExpensesPerMonthPerType(this.month, exptype.type) }} € </strong>
-            </li>
+        <div>
 
-            <li class="list-group-item">Výdavky spolu : <strong> {{ sumOfExpensesPerMonth(this.month) }} € </strong>
-            </li>
-        </ul>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-3">
+                <ul class="list-group mt-4 summary">
+                    <li class="list-group-item"
+                        v-for="(exptype, key) in filteredAndSortedExpensesTypes(this.expensesTypes)"
+                        :value="exptype.type"
+                        v-if="true">
+                        {{ exptype.type }}: <strong> {{ sumOfExpensesPerMonthPerType(this.month, exptype.type) }}
+                        € </strong>
+                    </li>
+
+                    <li class="list-group-item">Výdavky spolu : <strong> {{ sumOfExpensesPerMonth(this.month) }}
+                        € </strong>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="col-lg-9 mt-4 chart">
+                <GoogleChart/>
+            </div>
+
+        </div>
 
     </div>
 </template>
@@ -96,8 +112,12 @@
 <script>
 import dates from "../Dates";
 import moment from "moment/moment";
+import GoogleChart from '../charts/GoogleChart.vue'
 
 export default {
+    components: {
+        GoogleChart
+    },
     data() {
         return {
             expenses: [],
@@ -144,9 +164,9 @@ export default {
             let both = [];
             this.expensesTypes.forEach(expensType => {
                 this.expenses.forEach(expens => {
-                     if(expens.type === expensType.type) {
-                         both.push(expensType.type)
-                     }
+                    if (expens.type === expensType.type) {
+                        both.push(expensType.type)
+                    }
                 })
             })
 
@@ -251,4 +271,5 @@ export default {
 .summary {
     width: 300px;
 }
+
 </style>
