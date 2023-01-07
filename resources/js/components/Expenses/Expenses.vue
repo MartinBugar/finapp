@@ -83,7 +83,8 @@
             <li class="list-group-item"
                 v-for="(exptype, key) in filteredAndSortedExpensesTypes(this.expensesTypes)" :value="exptype.type"
                 v-if="true">
-                {{ exptype.type }}: <strong> {{ sumOfExpensesPerMonthPerType(this.month, exptype.type) }} € </strong> </li>
+                {{ exptype.type }}: <strong> {{ sumOfExpensesPerMonthPerType(this.month, exptype.type) }} € </strong>
+            </li>
 
             <li class="list-group-item">Výdavky spolu : <strong> {{ sumOfExpensesPerMonth(this.month) }} € </strong>
             </li>
@@ -108,6 +109,7 @@ export default {
             year: new Date(Date.now()).getFullYear(),
             expensType: '',
             expensesTypes: [],
+            both: [],
         }
     },
     created() {
@@ -135,11 +137,23 @@ export default {
             this.userId = window.Laravel.user.id;
             this.userName = window.Laravel.user.name;
         }
+
     },
     methods: {
         filteredAndSortedExpensesTypes(expensestypes) {
+            let both = [];
+            this.expensesTypes.forEach(expensType => {
+                this.expenses.forEach(expens => {
+                     if(expens.type === expensType.type) {
+                         both.push(expensType.type)
+                     }
+                })
+            })
+
             return expensestypes.filter(expensType => {
-                return expensType.userID === this.userId;
+                if (both.includes(expensType.type)) {
+                    return expensType.userID === this.userId
+                }
             })
         },
         sumOfExpensesPerMonthPerType(month, type) {
