@@ -101,7 +101,7 @@
             </div>
 
             <div class="col-lg-9 mt-4 chart">
-                <Pie :data="this.chartData" :options="this.chartOptions"/>
+                <Pie :data="populatechartData()" :options="this.chartOptions"/>
             </div>
 
         </div>
@@ -142,7 +142,9 @@ export default {
             both: [],
         }
     },
-    beforeCreate() {
+
+    created() {
+
         this.$axios.get('/sanctum/csrf-cookie').then(response => {
             this.$axios.get('/api/expenses')
                 .then(response => {
@@ -163,44 +165,36 @@ export default {
                 });
         });
 
-
-
-    },
-    created() {
-        this.expensesChartLables = this.getLabels();
-        this.expensesChartValues = this.getChartValues();
+        if (window.Laravel.user) {
+            this.userId = window.Laravel.user.id;
+            this.userName = window.Laravel.user.name;
+        }
 
         this.chartOptions = {
             responsive: true,
             maintainAspectRatio: false
         }
 
-        if (window.Laravel.user) {
-            this.userId = window.Laravel.user.id;
-            this.userName = window.Laravel.user.name;
-        }
-
-        this.chartData = {
-            labels: this.expensesChartLables,
-                datasets: [
-                {
-                    backgroundColor: ['#41B883', '#E46651', '#00D8FF', '#DD1B16'],
-                    data : this.expensesChartValues,
-                }
-            ]
-        }
-
     },
+
     methods: {
-        getLabels() {
+
+        populatechartData() {
+
             let labels = ["cicik", "cicik", "cicik", "cicik"]
-            return labels
+            let values = [10,10,10,10]
+
+           return this.chartData = {
+                labels: labels,
+                datasets: [
+                    {
+                        backgroundColor: ['#41B883', '#E46651', '#00D8FF', '#DD1B16'],
+                        data : values,
+                    }
+                ]
+            }
         },
 
-        getChartValues() {
-            let values = [10,10,10,10]
-            return values
-        },
 
         filteredAndSortedExpensesTypes(expensestypes) {
             let both = [];
