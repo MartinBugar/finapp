@@ -181,8 +181,14 @@ export default {
 
         populatechartData() {
 
-            let labels = ["cicik", "cicik", "cicik", "cicik"]
-            let values = [10,10,10,10]
+            let labels = []
+            let values = []
+            let filteredExpenses = this.filteredAndSorted(this.expenses, this.month);
+
+            filteredExpenses.forEach(item => {
+                labels.push(item.type)
+                values.push(item.value)
+            })
 
            return this.chartData = {
                 labels: labels,
