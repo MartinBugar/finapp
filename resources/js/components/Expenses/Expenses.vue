@@ -101,10 +101,11 @@
             </div>
 
             <div class="col-lg-9 mt-4 chart">
-                <GoogleChart/>
+                <Pie :data="data" :options="this.options"/>
             </div>
 
         </div>
+
 
     </div>
 </template>
@@ -112,14 +113,21 @@
 <script>
 import dates from "../Dates";
 import moment from "moment/moment";
-import GoogleChart from '../charts/GoogleChart.vue'
+
+import {Chart as ChartJS, ArcElement, Tooltip, Legend} from 'chart.js'
+import {Pie} from 'vue-chartjs'
+
+ChartJS.register(ArcElement, Tooltip, Legend)
 
 export default {
+    name: 'App',
     components: {
-        GoogleChart
+        Pie
     },
     data() {
         return {
+            data: '',
+            options: '',
             expenses: [],
             strSuccess: '',
             strError: '',
@@ -133,6 +141,21 @@ export default {
         }
     },
     created() {
+        this.data = {
+            labels: ['VueJs', 'EmberJs', 'ReactJs', 'AngularJs'],
+            datasets: [
+                {
+                    backgroundColor: ['#41B883', '#E46651', '#00D8FF', '#DD1B16'],
+                    data: [40, 20, 80, 10],
+                }
+            ]
+        }
+
+         this.options = {
+             responsive: true,
+             maintainAspectRatio: false
+         }
+
         this.$axios.get('/sanctum/csrf-cookie').then(response => {
             this.$axios.get('/api/expenses')
                 .then(response => {
@@ -270,6 +293,10 @@ export default {
 
 .summary {
     width: 300px;
+}
+
+.chart {
+    width: 400px;
 }
 
 </style>
