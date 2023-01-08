@@ -93,15 +93,15 @@
                         € </strong>
                     </li>
 
-                    <li class="list-group-item">Výdavky spolu : <strong> {{ sumOfExpensesPerMonth(this.month, this.year) }}
+                    <li class="list-group-item expensesSum">Výdavky spolu : <strong> {{ sumOfExpensesPerMonth(this.month, this.year) }}
                         € </strong>
                     </li>
                 </ul>
             </div>
 
-            <div class="col-lg-9 mt-4 chart">
-                <Pie :data="populateChartData()" :options="this.chartOptions"/>
-            </div>
+                <div class="col-lg-9 mt-4 chart card">
+                    <Pie :data="populateChartData()" :options="this.chartOptions"/>
+                </div>
 
         </div>
 
@@ -320,10 +320,17 @@ export default {
 
 .summary {
     width: 300px;
+    border-radius: 18px;
 }
 
 .chart {
     width: 400px;
+    border-radius: 18px;
+}
+
+.expensesSum {
+    color: #b40000;
+    /*background-color: #0b5ed7;*/
 }
 
 </style>
