@@ -179,10 +179,12 @@ export default {
     methods: {
         populateChartData() {
             let labels = []
+            let colors = []
             let values = []
             let filteredExpenses = this.filteredAndSortedExpensesTypes(this.expensesTypes);
 
             filteredExpenses.forEach(item => {
+                colors.push('#'+(Math.random()*0xFFFFFF<<0).toString(16))
                 labels.push(item.type)
                 values.push(this.sumOfExpensesPerMonthPerType(this.month, item.type))
             })
@@ -191,7 +193,7 @@ export default {
                 labels: labels,
                 datasets: [
                     {
-                        backgroundColor: ['#41B883', '#E46651', '#00D8FF', '#DD1B16'],
+                        backgroundColor: colors,
                         data : values,
                     }
                 ]
