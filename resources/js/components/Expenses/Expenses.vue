@@ -101,7 +101,7 @@
             </div>
 
             <div class="col-lg-9 mt-4 chart">
-                <Pie :data="data" :options="this.options"/>
+                <Pie :data="this.chartData" :options="this.chartOptions"/>
             </div>
 
         </div>
@@ -126,9 +126,11 @@ export default {
     },
     data() {
         return {
-            data: '',
-            options: '',
+            chartData: [],
+            expensesChartLables: ["cicik", "cicik", "cicik", "cicik"],
+            chartOptions: '',
             expenses: [],
+            expensesChartValues: [10,10,10,10],
             strSuccess: '',
             strError: '',
             userId: '',
@@ -140,22 +142,7 @@ export default {
             both: [],
         }
     },
-    created() {
-        this.data = {
-            labels: ['VueJs', 'EmberJs', 'ReactJs', 'AngularJs'],
-            datasets: [
-                {
-                    backgroundColor: ['#41B883', '#E46651', '#00D8FF', '#DD1B16'],
-                    data: [40, 20, 80, 10],
-                }
-            ]
-        }
-
-         this.options = {
-             responsive: true,
-             maintainAspectRatio: false
-         }
-
+    beforeCreate() {
         this.$axios.get('/sanctum/csrf-cookie').then(response => {
             this.$axios.get('/api/expenses')
                 .then(response => {
@@ -176,9 +163,27 @@ export default {
                 });
         });
 
+    },
+    created() {
+
+        this.chartOptions = {
+            responsive: true,
+            maintainAspectRatio: false
+        }
+
         if (window.Laravel.user) {
             this.userId = window.Laravel.user.id;
             this.userName = window.Laravel.user.name;
+        }
+
+        this.chartData = {
+            labels: this.expensesChartLables,
+                datasets: [
+                {
+                    backgroundColor: ['#41B883', '#E46651', '#00D8FF', '#DD1B16'],
+                    data : this.expensesChartValues,
+                }
+            ]
         }
 
     },
@@ -198,6 +203,7 @@ export default {
                     return expensType.userID === this.userId
                 }
             })
+
         },
         sumOfExpensesPerMonthPerType(month, type) {
             let sum = 0;
@@ -211,6 +217,7 @@ export default {
                     }
                 }
             });
+
             return sum;
         },
         sumOfExpensesPerMonth(month) {
@@ -237,7 +244,10 @@ export default {
                 let expensDate = new Date(expens.date);
                 if (expensDate.getFullYear().toString() === this.year.toString()) {
                     if (expensDate.getMonth().toString() === month.toString()) {
-                        return expens.userID === this.userId;
+                        if (expens.userID === this.userId) {
+                            return true;
+                        }
+
                     }
                 }
             })

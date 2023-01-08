@@ -56,7 +56,7 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr class="" v-for="(post, index) in filteredAndSorted(posts, month)" :key="post.id">
+                        <tr class="" v-for="(post, index) in filteredAndSortedForPost(posts, month)" :key="post.id">
                             <td class="text-center">{{ index + 1 }}.</td>
                             <td class="text-center">{{ post.userID }}.</td>
                             <td>{{ post.name }}</td>
@@ -148,7 +148,7 @@ export default {
             return dates
         },
 
-        filteredAndSorted(posts, month) {
+        filteredAndSortedForPost(posts, month) {
             let sortedByDatePosts = posts.sort((a, b) => new Date(a.date) - new Date(b.date));
             return sortedByDatePosts.filter(post => {
                 let postMonth = new Date(post.date);
