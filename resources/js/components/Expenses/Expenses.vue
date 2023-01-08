@@ -101,7 +101,7 @@
             </div>
 
             <div class="col-lg-9 mt-4 chart">
-                <Pie :data="populatechartData()" :options="this.chartOptions"/>
+                <Pie :data="populateChartData()" :options="this.chartOptions"/>
             </div>
 
         </div>
@@ -112,7 +112,7 @@
 
 <script>
 import dates from "../Dates";
-import moment from "moment/moment";
+import moment, {months} from "moment/moment";
 
 import {Chart as ChartJS, ArcElement, Tooltip, Legend} from 'chart.js'
 import {Pie} from 'vue-chartjs'
@@ -144,7 +144,6 @@ export default {
     },
 
     created() {
-
         this.$axios.get('/sanctum/csrf-cookie').then(response => {
             this.$axios.get('/api/expenses')
                 .then(response => {
@@ -178,16 +177,14 @@ export default {
     },
 
     methods: {
-
-        populatechartData() {
-
+        populateChartData() {
             let labels = []
             let values = []
-            let filteredExpenses = this.filteredAndSorted(this.expenses, this.month);
+            let filteredExpenses = this.filteredAndSortedExpensesTypes(this.expensesTypes);
 
             filteredExpenses.forEach(item => {
                 labels.push(item.type)
-                values.push(item.value)
+                values.push(this.sumOfExpensesPerMonthPerType(this.month, item.type))
             })
 
            return this.chartData = {
@@ -200,7 +197,6 @@ export default {
                 ]
             }
         },
-
 
         filteredAndSortedExpensesTypes(expensestypes) {
             let both = [];
