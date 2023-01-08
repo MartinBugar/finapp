@@ -93,13 +93,13 @@
                         € </strong>
                     </li>
 
-                    <li class="list-group-item expensesSum">Výdavky spolu : <strong> {{ sumOfExpensesPerMonth(this.month, this.year) }}
+                    <li v-if="this.filteredAndSortedExpensesTypes(this.expensesTypes).length > 0" class="list-group-item expensesSum">Výdavky spolu : <strong> {{ sumOfExpensesPerMonth(this.month, this.year) }}
                         € </strong>
                     </li>
                 </ul>
             </div>
 
-                <div class="col-lg-9 mt-4 chart card">
+                <div  v-if="this.filteredAndSortedExpensesTypes(this.expensesTypes).length > 0" class="col-lg-9 mt-4 chart card">
                     <Pie :data="populateChartData()" :options="this.chartOptions"/>
                 </div>
 
