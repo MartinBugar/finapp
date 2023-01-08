@@ -88,13 +88,12 @@
                 <ul class="list-group mt-4 summary">
                     <li class="list-group-item"
                         v-for="(exptype, key) in filteredAndSortedExpensesTypes(this.expensesTypes)"
-                        :value="exptype.type"
-                        v-if="true">
+                        :value="exptype.type">
                         {{ exptype.type }}: <strong> {{ sumOfExpensesPerMonthPerType(this.month, exptype.type) }}
                         € </strong>
                     </li>
 
-                    <li class="list-group-item">Výdavky spolu : <strong> {{ sumOfExpensesPerMonth(this.month) }}
+                    <li class="list-group-item">Výdavky spolu : <strong> {{ sumOfExpensesPerMonth(this.month, this.year) }}
                         € </strong>
                     </li>
                 </ul>
@@ -184,17 +183,17 @@ export default {
             let filteredExpenses = this.filteredAndSortedExpensesTypes(this.expensesTypes);
 
             filteredExpenses.forEach(item => {
-                colors.push('#'+(Math.random()*0xFFFFFF<<0).toString(16))
+                colors.push('#' + (Math.random() * 0xFFFFFF << 0).toString(16))
                 labels.push(item.type)
                 values.push(this.sumOfExpensesPerMonthPerType(this.month, item.type))
             })
 
-           return this.chartData = {
+            return this.chartData = {
                 labels: labels,
                 datasets: [
                     {
                         backgroundColor: colors,
-                        data : values,
+                        data: values,
                     }
                 ]
             }
@@ -205,14 +204,20 @@ export default {
             this.expensesTypes.forEach(expensType => {
                 this.expenses.forEach(expens => {
                     if (expens.type === expensType.type) {
-                        both.push(expensType.type)
+                        let date = new Date(expens.date);
+                        if (date.getMonth().toString() === this.month.toString() && date.getFullYear().toString() === this.year.toString()) {
+                            both.push(expensType.type)
+                        }
                     }
                 })
             })
 
             return expensestypes.filter(expensType => {
                 if (both.includes(expensType.type)) {
-                    return expensType.userID === this.userId
+                    if (expensType.userID === this.userId) {
+                        return true
+                    }
+
                 }
             })
 
@@ -232,12 +237,12 @@ export default {
 
             return sum;
         },
-        sumOfExpensesPerMonth(month) {
+        sumOfExpensesPerMonth(month, year) {
             let sum = 0;
             this.expenses.forEach((expens) => {
                 let date = new Date(expens.date);
                 if (expens.userID === this.userId) {
-                    if (month.toString() === date.getMonth().toString()) {
+                    if (month.toString() === date.getMonth().toString() && year.toString() === date.getFullYear().toString()) {
                         sum = sum + expens.value;
                     }
                 }
