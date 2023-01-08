@@ -127,10 +127,10 @@ export default {
     data() {
         return {
             chartData: [],
-            expensesChartLables: ["cicik", "cicik", "cicik", "cicik"],
+            expensesChartLables: [],
             chartOptions: '',
             expenses: [],
-            expensesChartValues: [10,10,10,10],
+            expensesChartValues: [],
             strSuccess: '',
             strError: '',
             userId: '',
@@ -163,8 +163,12 @@ export default {
                 });
         });
 
+
+
     },
     created() {
+        this.expensesChartLables = this.getLabels();
+        this.expensesChartValues = this.getChartValues();
 
         this.chartOptions = {
             responsive: true,
@@ -188,6 +192,16 @@ export default {
 
     },
     methods: {
+        getLabels() {
+            let labels = ["cicik", "cicik", "cicik", "cicik"]
+            return labels
+        },
+
+        getChartValues() {
+            let values = [10,10,10,10]
+            return values
+        },
+
         filteredAndSortedExpensesTypes(expensestypes) {
             let both = [];
             this.expensesTypes.forEach(expensType => {
