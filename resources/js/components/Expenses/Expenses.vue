@@ -337,6 +337,7 @@ export default {
 .mainCardExpenses {
     margin-top: 10px;
     background-color: #343434;
+    border-radius: 18px;
 }
 
 </style>

@@ -68,7 +68,7 @@ export default {
 
 .bg {
     width: 100%;
-    height: 100%;
+    height: 100vh;
     background-color: #b6b6b6;
 }
 </style>
