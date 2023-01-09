@@ -1,5 +1,5 @@
 <template>
-    <div class="container">
+    <div class="container card mainCardExpenses">
         <div class="card cardExpenses">
             <div class="card-body">
                 <div class="d-flex justify-content-between pb-2 mb-2">
@@ -306,7 +306,7 @@ export default {
 }
 
 .cardExpenses {
-    margin-top: 30px;
+    margin-top: 10px;
     border-radius: 18px;
 }
 
@@ -326,11 +326,17 @@ export default {
 .chart {
     width: 400px;
     border-radius: 18px;
+    margin-bottom: 30px;
 }
 
 .expensesSum {
     color: #b40000;
     /*background-color: #0b5ed7;*/
+}
+
+.mainCardExpenses {
+    margin-top: 10px;
+    background-color: #343434;
 }
 
 </style>
