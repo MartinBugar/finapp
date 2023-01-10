@@ -43,6 +43,16 @@
                         <input type="date" class="form-control" rows="3" v-model="date" placeholder="Enter the date"/>
                     </div>
 
+                    <div class="form-group mb-2 selection">
+                        <label>Type</label><span class="text-danger"> *</span>
+                        <select class="form-select" v-model="this.expensesType" placeholder="Select the type">
+                            <option v-for="(expensesType, key) in filteredAndSortedExpensesTypes(this.expensesTypes)"
+                                    :value="expensesType"> {{ expensesType.type }}
+                            </option>
+
+                        </select>
+                    </div>
+
                     <div class="form-gorup mb-2">
                         <label>Pdf dokument</label><span class="text-danger"> *</span>
                         <input type="file" class="form-control mb-2" v-on:change="onChange">
@@ -68,20 +78,49 @@ export default {
             description: '',
             value: '',
             date: '',
+            type: '',
+            expensesType: [],
             pdf: '',
             strSuccess: '',
             strError: '',
-            userID: '',
+            userId: '',
             pdfName: '',
             pdfPreview: null,
+            expensesTypes: [],
+
         }
     },
     created() {
         if (window.Laravel.user) {
-            this.userID = window.Laravel.user.id;
+            this.userId = window.Laravel.user.id;
         }
+
+        this.$axios.get('/sanctum/csrf-cookie').then(response => {
+            this.$axios.get('/api/expensestypes')
+                .then(response => {
+                    this.expensesTypes = response.data;
+                    console.log(this.expensesTypes)
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+        });
     },
     methods: {
+        getType(typeId) {
+            return this.expensesTypes.forEach(expensType => {
+                if (expensType.id === typeId) {
+                    this.type = expensType.type;
+                    console.log(this.type)
+                    return this.type;
+                }
+            })
+        },
+        filteredAndSortedExpensesTypes(expensestypes) {
+            return expensestypes.filter(expens => {
+                return expens.userID === this.userId;
+            })
+        },
         onChange(e) {
             this.pdf = e.target.files[0];
             this.pdfName = e.target.files[0].name;
@@ -111,8 +150,10 @@ export default {
                 formData.append('name', this.name);
                 formData.append('description', this.description);
                 formData.append('value', this.value);
+                formData.append('typeID', this.expensesType.id);
+                formData.append('type', this.expensesType.type);
                 formData.append('date', this.date);
-                formData.append('userID', this.userID);
+                formData.append('userID', this.userId);
                 formData.append('file', this.pdf);
                 formData.append('pdfName', this.pdfName);
 
