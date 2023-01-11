@@ -45,12 +45,6 @@
                         </select>
                     </div>
 
-<!--                    <Form.Control as="select" value="" >-->
-<!--                        {expensesTypes.map(opt => (-->
-<!--                        <option value={opt.type}>{opt.type}</option>-->
-<!--                        ))}-->
-<!--                    </Form.Control>-->
-
                     <div class="form-group mb-2">
                         <label>Dátum</label><span class="text-danger"> *</span>
                         <input type="date" class="form-control" rows="3" v-model="date" placeholder="Enter the date"/>

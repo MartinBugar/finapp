@@ -5,7 +5,8 @@
                 <div class="d-flex justify-content-between pb-2 mb-2">
                     <h5 class="card-title">Upravit data</h5>
                     <div>
-                        <router-link :to="{name: 'expenses'}" class="btn btn-success buttonEditPost">Go Back</router-link>
+                        <router-link :to="{name: 'expenses'}" class="btn btn-success buttonEditPost">Go Back
+                        </router-link>
                     </div>
                 </div>
 
@@ -42,6 +43,15 @@
                         <input type="date" class="form-control" rows="3" v-model="date" placeholder="Enter the date"/>
                     </div>
 
+                    <div class="form-group mb-2 selection">
+                        <label>Type</label><span class="text-danger"> *</span>
+                        <select class="form-select" v-model="this.typeId" placeholder="Select the type">
+                            <option v-for="(expensesType, key) in filteredAndSortedExpensesTypes(this.expensesTypes)"
+                                    :value="expensesType.id"> {{ expensesType.type }}
+                            </option>
+                        </select>
+                    </div>
+
                     <div class="form-gorup mb-2">
                         <label>PDF Dokument</label><span class="text-danger"> *</span>
                         <input type="file" class="form-control mb-2" v-on:change="onChange">
@@ -68,35 +78,74 @@ export default {
             id: '',
             name: '',
             description: '',
+            expensesType: [],
             value: '',
             type: '',
+            typeId: '',
             date: '',
+            userId: '',
             strSuccess: '',
             strError: '',
             pdf: '',
             pdfName: '',
             url: '/pdf/',
+            expensesTypes: [],
+
         }
     },
 
     beforeCreate() {
         this.$axios.get('/sanctum/csrf-cookie').then(response => {
+            this.$axios.get('/api/expensestypes')
+                .then(response => {
+                    this.expensesTypes = response.data;
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+        });
+
+
+    },
+    created() {
+
+        this.$axios.get('/sanctum/csrf-cookie').then(response => {
             this.$axios.get(`/api/posts/edit/${this.$route.params.id}`)
                 .then(response => {
-                    console.log(response)
+
                     this.name = response.data['name'];
                     this.description = response.data['description'];
                     this.value = response.data['value'];
+                    this.typeId = response.data['typeID'];
+                    this.type = response.data['type'];
+
+                    this.expensesType = this.expensesTypes.filter(item => {
+                        return response.data['typeID'] === item.id;
+                    });
+
                     this.date = response.data['date'];
                     this.pdf = response.data['pdf'];
                     this.pdfName = response.data['pdfName'];
+
                 })
                 .catch(function (error) {
                     console.log(error);
                 });
         })
+
+
+        if (window.Laravel.user) {
+            this.userId = window.Laravel.user.id;
+        }
+
+
     },
     methods: {
+        filteredAndSortedExpensesTypes(expensestypes) {
+            return expensestypes.filter(expens => {
+                return expens.userID === this.userId;
+            })
+        },
         onChange(e) {
             this.pdf = e.target.files[0];
             this.pdfName = e.target.files[0].name;
@@ -146,7 +195,10 @@ export default {
                 formData.append('name', this.name);
                 formData.append('description', this.description);
                 formData.append('value', this.value);
-                formData.append('type', this.type);
+                formData.append('typeID', this.typeId);
+                formData.append('type', this.expensesTypes.filter(item => {
+                    return (this.typeId === item.id)
+                }).map(a => a.type));
                 formData.append('date', this.date);
                 formData.append('pdf', this.pdf);
                 formData.append('pdfName', this.pdfName);

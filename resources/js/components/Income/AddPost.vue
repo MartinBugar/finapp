@@ -49,7 +49,6 @@
                             <option v-for="(expensesType, key) in filteredAndSortedExpensesTypes(this.expensesTypes)"
                                     :value="expensesType"> {{ expensesType.type }}
                             </option>
-
                         </select>
                     </div>
 
@@ -107,15 +106,6 @@ export default {
         });
     },
     methods: {
-        getType(typeId) {
-            return this.expensesTypes.forEach(expensType => {
-                if (expensType.id === typeId) {
-                    this.type = expensType.type;
-                    console.log(this.type)
-                    return this.type;
-                }
-            })
-        },
         filteredAndSortedExpensesTypes(expensestypes) {
             return expensestypes.filter(expens => {
                 return expens.userID === this.userId;
