@@ -13,6 +13,7 @@ class Expenses extends Model
         'name',
         'description',
         'type',
+        'typeID',
         'value',
         'date',
         'userID'

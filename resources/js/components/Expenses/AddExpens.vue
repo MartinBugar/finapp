@@ -40,8 +40,10 @@
 
                     <div class="form-group mb-2 selection">
                         <label>Type</label><span class="text-danger"> *</span>
-                        <select class="form-select" v-model="type"  placeholder="Select the type">
-                            <option v-for="(expensesType, key) in filteredAndSortedExpensesTypes(this.expensesTypes)" :value="expensesType.type" > {{ expensesType.type}}</option>
+                        <select class="form-select" v-model="this.expensesType" placeholder="Select the type">
+                            <option v-for="(expensesType, key) in filteredAndSortedExpensesTypes(this.expensesTypes)"
+                                    :value="expensesType"> {{ expensesType.type }}
+                            </option>
                         </select>
                     </div>
 
@@ -71,6 +73,7 @@ export default {
             strError: '',
             userId: '',
             expensesTypes: [],
+            expensesType: [],
         }
     },
     created() {
@@ -108,7 +111,10 @@ export default {
                 formData.append('name', this.name);
                 formData.append('description', this.description);
                 formData.append('value', this.value);
-                formData.append('type', this.type);
+
+                formData.append('typeID', this.expensesType.id);
+                formData.append('type', this.expensesType.type);
+
                 formData.append('date', this.date);
                 formData.append('userID', this.userId);
 

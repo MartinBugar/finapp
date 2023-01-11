@@ -108,7 +108,6 @@ export default {
 
     },
     created() {
-
         this.$axios.get('/sanctum/csrf-cookie').then(response => {
             this.$axios.get(`/api/posts/edit/${this.$route.params.id}`)
                 .then(response => {
@@ -118,7 +117,6 @@ export default {
                     this.value = response.data['value'];
                     this.typeId = response.data['typeID'];
                     this.type = response.data['type'];
-
                     this.expensesType = this.expensesTypes.filter(item => {
                         return response.data['typeID'] === item.id;
                     });
@@ -202,6 +200,7 @@ export default {
 
                 formData.append('date', this.date);
                 formData.append('file', this.pdf);
+
                 if (this.pdf) {
                     formData.append('pdfName',this.pdfName);
                 }

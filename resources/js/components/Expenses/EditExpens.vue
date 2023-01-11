@@ -40,8 +40,10 @@
 
                     <div class="form-group mb-2 selection">
                         <label>Type</label><span class="text-danger"> *</span>
-                        <select class="form-select" v-model="type"  placeholder="Select the type">
-                            <option v-for="(expensesType, key) in filteredAndSortedExpensesTypes(this.expensesTypes)" :value="expensesType.type" > {{ expensesType.type}}</option>
+                        <select class="form-select" v-model="this.typeId" placeholder="Select the type">
+                            <option v-for="(expensesType, key) in filteredAndSortedExpensesTypes(this.expensesTypes)"
+                                    :value="expensesType.id"> {{ expensesType.type }}
+                            </option>
                         </select>
                     </div>
 
@@ -67,11 +69,13 @@ export default {
             value: '',
             userId: '',
             type: '',
+            typeId: '',
             date: '',
             strSuccess: '',
             strError: '',
             imgPreview: null,
             expensesTypes:[],
+            expensesType:[],
         }
     },
     beforeCreate() {
@@ -81,7 +85,14 @@ export default {
                     this.name = response.data['name'];
                     this.description = response.data['description'];
                     this.value = response.data['value'];
+
+                    this.typeId = response.data['typeID'];
                     this.type = response.data['type'];
+                    this.expensesType = this.expensesTypes.filter(item => {
+                        return response.data['typeID'] === item.id;
+                    });
+
+
                     this.date = response.data['date'];
                 })
                 .catch(function (error) {
@@ -123,7 +134,11 @@ export default {
                 formData.append('name', this.name);
                 formData.append('description', this.description);
                 formData.append('value', this.value);
-                formData.append('type', this.type);
+                formData.append('typeID', this.typeId);
+                formData.append('type', this.expensesTypes.filter(item => {
+                    return (this.typeId === item.id)
+                }).map(a => a.type));
+
                 formData.append('date', this.date);
 
                 this.$axios.post(`/api/expenses/update/${this.$route.params.id}`, formData, config)

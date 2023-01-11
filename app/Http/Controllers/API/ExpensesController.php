@@ -26,6 +26,7 @@ class ExpensesController extends Controller
             'description' => 'required',
             'value' => 'required',
             'type' => 'required',
+            'typeID' => 'required',
             'userID',
             'date',
         ]);
@@ -53,6 +54,7 @@ class ExpensesController extends Controller
             'description' => 'required',
             'value' => 'required',
             'type' => 'required',
+            'typeID' => 'required',
             'userID',
             'date',
         ]);
