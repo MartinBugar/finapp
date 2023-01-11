@@ -59,7 +59,7 @@
 
                     <div class="form-group mb-2">
                         <label>Dokument PDF: </label>
-                        <a href="#" v-if="pdf" @click="downloadWithAxios(this.pdf, this.pdfName)">{{ pdfName }}</a>
+                        <a href="#" @click="downloadWithAxios(this.pdf, this.pdfName)">{{ pdfName }}</a>
                     </div>
 
                     <button type="submit" class="btn btn-primary mt-4 mb-4"> Update Post</button>
@@ -196,11 +196,13 @@ export default {
                 formData.append('description', this.description);
                 formData.append('value', this.value);
                 formData.append('typeID', this.typeId);
+
                 formData.append('type', this.expensesTypes.filter(item => {
                     return (this.typeId === item.id)
                 }).map(a => a.type));
+
                 formData.append('date', this.date);
-                formData.append('pdf', this.pdf);
+                formData.append('file', this.pdf);
                 formData.append('pdfName', this.pdfName);
 
                 this.$axios.post(`/api/posts/update/${this.$route.params.id}`, formData, config)
