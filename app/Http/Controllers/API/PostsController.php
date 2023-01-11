@@ -86,7 +86,9 @@ class PostsController extends Controller
     public function delete($id)
     {
         $post = Posts::find($id);
-        unlink('pdf/'.$post->pdf);
+        if ($post->pdf) {
+            unlink('pdf/' . $post->pdf);
+        }
         $post->delete();
         return response()->json(['success'=> 'Post deleted successfully']);
 
