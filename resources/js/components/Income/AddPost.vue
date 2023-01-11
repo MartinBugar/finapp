@@ -114,7 +114,6 @@ export default {
         onChange(e) {
             this.pdf = e.target.files[0];
             this.pdfName = e.target.files[0].name;
-            console.log(this.pdfName);
             let reader = new FileReader();
             reader.addEventListener("load", function () {
                 this.pdfPreview = reader.result;

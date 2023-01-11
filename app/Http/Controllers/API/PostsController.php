@@ -61,14 +61,14 @@ class PostsController extends Controller
             'typeID' => 'required',
             'date',
             'userID',
-            'pdf',
+            'file',
             'pdfName',
         ]);
 
         $input = $request->all();
 
         $pdfNameOfTheSource = NULL;
-        if ($pdf = $request->file('pdf')) {
+        if ($pdf = $request->file('file')) {
             $destinationPath = 'pdf/';
             $pdfNameOfTheSource = date('YmdHis') . "." . $pdf->getClientOriginalExtension();
             $pdf->move($destinationPath, $pdfNameOfTheSource);

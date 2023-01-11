@@ -148,8 +148,7 @@ export default {
         },
         onChange(e) {
             this.pdf = e.target.files[0];
-            this.pdfName = e.target.files[0].name;
-            console.log(this.pdfName);
+                this.pdfName = e.target.files[0].name;
             let reader = new FileReader();
             reader.addEventListener("load", function () {
                 this.pdfPreview = reader.result;
@@ -203,7 +202,9 @@ export default {
 
                 formData.append('date', this.date);
                 formData.append('file', this.pdf);
-                formData.append('pdfName', this.pdfName);
+                if (this.pdf) {
+                    formData.append('pdfName',this.pdfName);
+                }
 
                 this.$axios.post(`/api/posts/update/${this.$route.params.id}`, formData, config)
                     .then(response => {
@@ -215,7 +216,7 @@ export default {
                         existingObj.strError = error.response.data.message;
                     });
             });
-        }
+        },
 
     },
     beforeRouteEnter(to, from, next) {
