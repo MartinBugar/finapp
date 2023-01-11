@@ -1,5 +1,5 @@
 <template>
-        <div class="container">
+        <div class="container card mainCardPosts">
             <div class="card cardPost">
                 <div class="card-body">
                     <div class="d-flex justify-content-between pb-2 mb-2">
@@ -50,8 +50,9 @@
                             <th>Názov</th>
                             <th>Dátum</th>
                             <th>Popis</th>
-                            <th>Suma</th>
                             <th class="text-center">Pdf</th>
+                            <th>Typ</th>
+                            <th>Suma</th>
                             <th class="text-center" width="200">Actions</th>
                         </tr>
                         </thead>
@@ -62,12 +63,13 @@
                             <td>{{ post.name }}</td>
                             <td>{{ formatDate(post.date) }}</td>
                             <td>{{ post.description }}</td>
-                            <td>{{ post.value }} €</td>
                             <td class="text-center">
                                 <a href="#" v-if="post.pdf" @click="downloadWithAxios(post)">{{ post.pdfName }}</a>
                             </td>
+                            <td>{{ post.type }}</td>
+                            <td>{{ post.value }} €</td>
 
-                            <td class="text-center buttons" v-if="userID === post.userID">
+                            <td class="text-center buttons" v-if="userId === post.userID">
 
                                 <router-link :to="{name:'editpost', params: {id:post.id}}"
                                              class="btn btn-sm btn-warning">
@@ -82,26 +84,58 @@
                 </div>
             </div>
 
+            <div class="row">
+                <div class="col-lg-3">
+                    <ul class="list-group mt-4 summary">
+                        <li class="list-group-item"
+                            v-for="(exptype, key) in filteredAndSortedExpensesTypes(this.expensesTypes)"
+                            :value="exptype.type">
+                            {{ exptype.type }}: <strong> {{ sumOfPostsPerMonthPerType(this.month, exptype.type) }}
+                            € </strong>
+                        </li>
+
+                        <li v-if="this.filteredAndSortedExpensesTypes(this.expensesTypes).length > 0" class="list-group-item expensesSum">Prijmy spolu : <strong> {{ sumOfPostsPerMonth(this.month, this.year) }}
+                            € </strong>
+                        </li>
+                    </ul>
+                </div>
+
+                <div  v-if="this.filteredAndSortedExpensesTypes(this.expensesTypes).length > 0" class="col-lg-9 mt-4 chart card">
+                    <Pie :data="populateChartData()" :options="this.chartOptions"/>
+                </div>
+
+            </div>
+
         </div>
 </template>
 
 <script>
-import Dates from "../Dates";
 import dates from "../Dates";
 import moment from 'moment'
+import {Pie} from "vue-chartjs";
+import {Chart as ChartJS, ArcElement, Tooltip, Legend} from 'chart.js'
+
+ChartJS.register(ArcElement, Tooltip, Legend)
 
 export default {
+    name: 'App',
+    components: {
+        Pie
+    },
     data() {
         return {
             posts: [],
+            chartOptions: '',
+            chartData: [],
             strSuccess: '',
             strError: '',
-            userID: '',
+            userId: '',
             userName: '',
             month: new Date(Date.now()).getMonth(),
             year: new Date(Date.now()).getFullYear(),
             url: 'pdf/',
             pdfName: '',
+            expensesTypes: [],
         }
     },
     created() {
@@ -114,12 +148,101 @@ export default {
                     console.log(error);
                 });
         });
+
+        this.$axios.get('/sanctum/csrf-cookie').then(response => {
+            this.$axios.get('/api/expensestypes')
+                .then(response => {
+                    this.expensesTypes = response.data;
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+        });
+
         if (window.Laravel.user) {
-            this.userID = window.Laravel.user.id;
+            this.userId = window.Laravel.user.id;
             this.userName = window.Laravel.user.name;
+        }
+
+        this.chartOptions = {
+            responsive: true,
+            maintainAspectRatio: false
         }
     },
     methods: {
+        populateChartData() {
+            let labels = []
+            let colors = []
+            let values = []
+            let filteredExpenses = this.filteredAndSortedExpensesTypes(this.expensesTypes);
+
+
+            filteredExpenses.forEach(item => {
+                colors.push('#' + (Math.random() * 0xFFFFFF << 0).toString(16))
+                labels.push(item.type)
+                values.push(this.sumOfPostsPerMonthPerType(this.month, item.type))
+            })
+
+            return this.chartData = {
+                labels: labels,
+                datasets: [
+                    {
+                        backgroundColor: colors,
+                        data: values,
+                    }
+                ]
+            }
+        },
+        sumOfPostsPerMonth(month, year) {
+            let sum = 0;
+            this.posts.forEach((post) => {
+                let date = new Date(post.date);
+                if (post.userID === this.userId) {
+                    if (month.toString() === date.getMonth().toString() && year.toString() === date.getFullYear().toString()) {
+                        sum = sum + post.value;
+                    }
+                }
+            });
+            return sum;
+        },
+        sumOfPostsPerMonthPerType(month, type) {
+            let sum = 0;
+            this.posts.forEach((post) => {
+                let date = new Date(post.date);
+                if (post.userID === this.userId) {
+                    if (month.toString() === date.getMonth().toString()) {
+                        if (post.type === type) {
+                            sum = sum + post.value;
+                        }
+                    }
+                }
+            });
+
+            return sum;
+        },
+        filteredAndSortedExpensesTypes(expensestypes) {
+            let both = [];
+            this.expensesTypes.forEach(expensType => {
+                this.posts.forEach(post => {
+                    if (post.type === expensType.type) {
+                        let date = new Date(post.date);
+                        if (date.getMonth().toString() === this.month.toString() && date.getFullYear().toString() === this.year.toString()) {
+                            both.push(expensType.type)
+                        }
+                    }
+                })
+            })
+
+            return expensestypes.filter(expensType => {
+                if (both.includes(expensType.type)) {
+                    if (expensType.userID === this.userId) {
+                        return true
+                    }
+
+                }
+            })
+
+        },
         downloadWithAxios(post) {
             axios({
                 method: 'get',
@@ -154,7 +277,7 @@ export default {
                 let postMonth = new Date(post.date);
                 if (postMonth.getFullYear().toString() === this.year.toString()) {
                     if (postMonth.getMonth().toString() === month.toString()) {
-                        return post.userID === this.userID;
+                        return post.userID === this.userId;
                     }
                 }
             })
@@ -207,6 +330,12 @@ export default {
 }
 
 .buttonNewPost {
+    border-radius: 18px;
+}
+
+.mainCardPosts {
+    margin-top: 10px;
+    background-color: #343434;
     border-radius: 18px;
 }
 
