@@ -94,7 +94,7 @@
                             € </strong>
                         </li>
 
-                        <li v-if="this.filteredAndSortedExpensesTypes(this.expensesTypes).length > 0" class="list-group-item expensesSum">Prijmy spolu : <strong> {{ sumOfPostsPerMonth(this.month, this.year) }}
+                        <li v-if="this.filteredAndSortedExpensesTypes(this.expensesTypes).length > 0" class="list-group-item postsSum">Prijmy spolu : <strong> {{ sumOfPostsPerMonth(this.month, this.year) }}
                             € </strong>
                         </li>
                     </ul>
@@ -319,7 +319,6 @@ export default {
     max-height: 10px;
 }
 
-
 .cardPost {
     margin-top: 30px;
     border-radius: 18px;
@@ -337,6 +336,11 @@ export default {
     margin-top: 10px;
     background-color: #343434;
     border-radius: 18px;
+}
+
+.postsSum {
+    color: #238500;
+    /*background-color: #0b5ed7;*/
 }
 
 
