@@ -57,9 +57,18 @@
                         <input type="file" class="form-control mb-2" v-on:change="onChange">
                     </div>
 
-                    <div class="form-group mb-2">
-                        <label>Dokument PDF: </label>
-                        <a href="#" @click="downloadWithAxios(this.pdf, this.pdfName)">{{ pdfName }}</a>
+                    <div class="row">
+                        <div class="col-lg-4">
+                            <div class="form-group mb-2">
+                                <label>Dokument PDF: </label>
+                                <a class="" href="#" @click="downloadWithAxios(this.pdf, this.pdfName)">{{
+                                        pdfName
+                                    }}</a>
+                            </div>
+                        </div>
+                        <div class="col-lg-2">
+                            <button type="button" class="btn btn-danger" @click="deletePdf()">delete pdf</button>
+                        </div>
                     </div>
 
                     <button type="submit" class="btn btn-primary mt-4 mb-4"> Update Post</button>
@@ -87,6 +96,8 @@ export default {
             strSuccess: '',
             strError: '',
             pdf: '',
+            pdfToDelete: '',
+            pdfNameToDelete: '',
             pdfName: '',
             url: '/pdf/',
             expensesTypes: [],
@@ -139,6 +150,27 @@ export default {
 
     },
     methods: {
+        deletePdf() {
+            if (confirm("Delete?")) {
+                this.pdfToDelete = this.pdf;
+                this.pdf = null;
+                this.pdfName = null;
+                console.log("pdfToDelete " + this.pdfToDelete)
+                console.log("pdf " + this.pdf)
+                console.log("pdfName " + this.pdfName)
+                let reader = new FileReader();
+                reader.addEventListener("load", function () {
+                    this.pdfPreview = reader.result;
+                }.bind(this), false);
+
+                if (this.pdf) {
+                    if (/\.(pdf)$/i.test(this.pdf.name)) {
+                        reader.readAsDataURL(this.pdf);
+                    }
+                }
+            }
+
+        },
         filteredAndSortedExpensesTypes(expensestypes) {
             return expensestypes.filter(expens => {
                 return expens.userID === this.userId;
@@ -146,7 +178,7 @@ export default {
         },
         onChange(e) {
             this.pdf = e.target.files[0];
-                this.pdfName = e.target.files[0].name;
+            this.pdfName = e.target.files[0].name;
             let reader = new FileReader();
             reader.addEventListener("load", function () {
                 this.pdfPreview = reader.result;
@@ -157,6 +189,10 @@ export default {
                     reader.readAsDataURL(this.pdf);
                 }
             }
+
+            console.log("pdfToDelete " + this.pdfToDelete)
+            console.log("pdf " + this.pdf)
+            console.log("pdfName " + this.pdfName)
         },
         downloadWithAxios(pdf, pdfName) {
             axios({
@@ -199,11 +235,13 @@ export default {
                 }).map(a => a.type));
 
                 formData.append('date', this.date);
-                formData.append('file', this.pdf);
-
+                formData.append('pdf', this.pdf)
+                formData.append('pdfToDelete', this.pdfToDelete)
                 if (this.pdf) {
-                    formData.append('pdfName',this.pdfName);
+                    formData.append('pdfName', this.pdfName);
                 }
+
+                this.pdfToDelete = null;
 
                 this.$axios.post(`/api/posts/update/${this.$route.params.id}`, formData, config)
                     .then(response => {
@@ -215,6 +253,8 @@ export default {
                         existingObj.strError = error.response.data.message;
                     });
             });
+
+
         },
 
     },

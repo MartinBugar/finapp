@@ -56,7 +56,7 @@
                         <label>Pdf dokument</label><span class="text-danger"> *</span>
                         <input type="file" class="form-control mb-2" v-on:change="onChange">
                         <div v-if="pdf">
-                            <label v-bind:src="pdfPreview" width="100" height="100"/>
+                            <label v-bind:src="pdfPreview" />
                         </div>
                     </div>
 
@@ -143,7 +143,7 @@ export default {
                 formData.append('type', this.expensesType.type);
                 formData.append('date', this.date);
                 formData.append('userID', this.userId);
-                formData.append('file', this.pdf);
+                formData.append('pdf', this.pdf);
                 formData.append('pdfName', this.pdfName);
 
 

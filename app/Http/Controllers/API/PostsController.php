@@ -4,6 +4,7 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use App\Models\Posts;
+use http\Message;
 use Illuminate\Http\Request;
 
 class PostsController extends Controller
@@ -24,14 +25,14 @@ class PostsController extends Controller
             'typeID' => 'required',
             'userID',
             'date',
-            'file',
+            'pdf',
             'pdfName',
         ]);
 
         $input = $request->all();
 
         $pdfName = NULL;
-        if ($pdf = $request->file('file')) {
+        if ($pdf = $request->file('pdf')) {
             $destinationPath = 'pdf/';
             $pdfName = date('YmdHis') . "." . $pdf->getClientOriginalExtension();
             $pdf->move($destinationPath, $pdfName);
@@ -40,7 +41,7 @@ class PostsController extends Controller
 
         Posts::create($input);
 
-        return response()->json(['success'=> 'Post created successfully']);
+        return response()->json(['success' => 'Post created successfully']);
 
     }
 
@@ -61,14 +62,15 @@ class PostsController extends Controller
             'typeID' => 'required',
             'date',
             'userID',
-            'file',
+            'pdf',
             'pdfName',
         ]);
+
 
         $input = $request->all();
 
         $pdfNameOfTheSource = NULL;
-        if ($pdf = $request->file('file')) {
+        if ($pdf = $request->file('pdf')) {
             $destinationPath = 'pdf/';
             $pdfNameOfTheSource = date('YmdHis') . "." . $pdf->getClientOriginalExtension();
             $pdf->move($destinationPath, $pdfNameOfTheSource);
@@ -76,21 +78,34 @@ class PostsController extends Controller
             if ($post->pdf) {
                 unlink('pdf/' . $post->pdf);
             }
+        } else {
+
+            $pdfToDelete = $request->file('pdfToDelete');
+            $input['pdf'] = null;
+            $input['pdfName'] = null;
+            if ($pdfToDelete) {
+                unlink('pdf/' . $request->file('pdfToDelete'));
+            }
         }
+
+
+
 
         $post->update($input);
 
-        return response()->json(['success'=> 'Post update successfully']);
+        return response()->json(['success' => 'Post update successfully']);
     }
 
     public function delete($id)
     {
         $post = Posts::find($id);
+
         if ($post->pdf) {
             unlink('pdf/' . $post->pdf);
         }
+
         $post->delete();
-        return response()->json(['success'=> 'Post deleted successfully']);
+        return response()->json(['success' => 'Post deleted successfully']);
 
     }
 }
