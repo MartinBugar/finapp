@@ -67,7 +67,7 @@
                             </div>
                         </div>
                         <div class="col-lg-2">
-                            <button type="button" class="btn btn-danger" @click="deletePdf()">delete pdf</button>
+                            <button type="button" class="btn btn-danger" v-if="isDeleteEnabled()" @click="deletePdf()">delete pdf</button>
                         </div>
                     </div>
 
@@ -150,12 +150,17 @@ export default {
 
     },
     methods: {
+        isDeleteEnabled(){
+            return this.pdf;
+        },
         deletePdf() {
             if (confirm("Delete?")) {
                 this.pdfToDelete = this.pdf;
+                this.pdfNameToDelete = this.pdfName;
                 this.pdf = null;
                 this.pdfName = null;
                 console.log("pdfToDelete " + this.pdfToDelete)
+                console.log("pdfNameToDelete " + this.pdfNameToDelete)
                 console.log("pdf " + this.pdf)
                 console.log("pdfName " + this.pdfName)
                 let reader = new FileReader();
@@ -191,6 +196,7 @@ export default {
             }
 
             console.log("pdfToDelete " + this.pdfToDelete)
+            console.log("pdfNameToDelete " + this.pdfNameToDelete)
             console.log("pdf " + this.pdf)
             console.log("pdfName " + this.pdfName)
         },
@@ -233,16 +239,18 @@ export default {
                 formData.append('type', this.expensesTypes.filter(item => {
                     return (this.typeId === item.id)
                 }).map(a => a.type));
-
                 formData.append('date', this.date);
+
                 formData.append('pdf', this.pdf)
                 formData.append('pdfToDelete', this.pdfToDelete)
+                formData.append('pdfNameToDelete', this.pdfNameToDelete)
 
                 if (this.pdf) {
                     formData.append('pdfName', this.pdfName);
                 }
 
                 this.pdfToDelete = null;
+                this.pdfNameToDelete = null;
 
                 this.$axios.post(`/api/posts/update/${this.$route.params.id}`, formData, config)
                     .then(response => {

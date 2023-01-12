@@ -81,13 +81,13 @@ class PostsController extends Controller
         } else {
 
             $pdfToDelete = $request->get('pdfToDelete');
+            $pdfNameToDelete = $request->get('pdfNameToDelete');
             $input['pdf'] = null;
             $input['pdfName'] = null;
-            if ($pdfToDelete) {
+            if ($pdfNameToDelete && $pdfToDelete) {
                 unlink('pdf/' . $request->get('pdfToDelete'));
             }
         }
-
 
         $post->update($input);
 
