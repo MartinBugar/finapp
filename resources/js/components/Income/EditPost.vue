@@ -237,6 +237,7 @@ export default {
                 formData.append('date', this.date);
                 formData.append('pdf', this.pdf)
                 formData.append('pdfToDelete', this.pdfToDelete)
+
                 if (this.pdf) {
                     formData.append('pdfName', this.pdfName);
                 }
