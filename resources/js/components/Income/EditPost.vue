@@ -67,7 +67,9 @@
                             </div>
                         </div>
                         <div class="col-lg-2">
-                            <button type="button" class="btn btn-danger" v-if="isDeleteEnabled()" @click="deletePdf()">delete pdf</button>
+                            <button type="button" class="btn btn-danger" v-if="isDeleteEnabled()" @click="deletePdf()">
+                                delete pdf
+                            </button>
                         </div>
                     </div>
 
@@ -85,6 +87,7 @@ export default {
     data() {
         return {
             id: '',
+            deleteFlag: false,
             name: '',
             description: '',
             expensesType: [],
@@ -150,19 +153,37 @@ export default {
 
     },
     methods: {
-        isDeleteEnabled(){
-            return this.pdf;
+        loadPdfFromAxiosDB() {
+            this.$axios.get('/sanctum/csrf-cookie').then(response => {
+                this.$axios.get(`/api/posts/edit/${this.$route.params.id}`)
+                    .then(response => {
+
+                            this.pdf = response.data['pdf'];
+                            this.pdfName = response.data['pdfName'];
+
+
+
+                    })
+                    .catch(function (error) {
+                        console.log(error);
+                    });
+            })
+        },
+        isDeleteEnabled() {
+            return this.pdf && this.pdfName;
         },
         deletePdf() {
             if (confirm("Delete?")) {
+                this.deleteFlag = false;
                 this.pdfToDelete = this.pdf;
                 this.pdfNameToDelete = this.pdfName;
                 this.pdf = null;
                 this.pdfName = null;
-                console.log("pdfToDelete " + this.pdfToDelete)
-                console.log("pdfNameToDelete " + this.pdfNameToDelete)
-                console.log("pdf " + this.pdf)
-                console.log("pdfName " + this.pdfName)
+                console.log("DELETE pdfToDelete " + this.pdfToDelete)
+                console.log("DELETE pdfNameToDelete " + this.pdfNameToDelete)
+                console.log("DELETE pdf " + this.pdf)
+                console.log("DELETE pdfName " + this.pdfName)
+                console.log(" DELETE FLAG " + this.deleteFlag)
                 let reader = new FileReader();
                 reader.addEventListener("load", function () {
                     this.pdfPreview = reader.result;
@@ -182,6 +203,7 @@ export default {
             })
         },
         onChange(e) {
+            this.deleteFlag = false;
             this.pdf = e.target.files[0];
             this.pdfName = e.target.files[0].name;
             let reader = new FileReader();
@@ -195,10 +217,11 @@ export default {
                 }
             }
 
-            console.log("pdfToDelete " + this.pdfToDelete)
-            console.log("pdfNameToDelete " + this.pdfNameToDelete)
-            console.log("pdf " + this.pdf)
-            console.log("pdfName " + this.pdfName)
+            console.log(" ONCHANGE pdfToDelete " + this.pdfToDelete)
+            console.log(" ONCHANGE pdfNameToDelete " + this.pdfNameToDelete)
+            console.log(" ONCHANGE pdf " + this.pdf)
+            console.log(" ONCHANGE pdfName " + this.pdfName)
+            console.log(" DELETE FLAG " + this.deleteFlag)
         },
         downloadWithAxios(pdf, pdfName) {
             axios({
@@ -249,8 +272,10 @@ export default {
                     formData.append('pdfName', this.pdfName);
                 }
 
+
                 this.pdfToDelete = null;
                 this.pdfNameToDelete = null;
+
 
                 this.$axios.post(`/api/posts/update/${this.$route.params.id}`, formData, config)
                     .then(response => {
@@ -262,6 +287,17 @@ export default {
                         existingObj.strError = error.response.data.message;
                     });
             });
+
+
+            console.log(" UPDATE pdfToDelete " + this.pdfToDelete)
+            console.log(" UPDATE pdfNameToDelete " + this.pdfNameToDelete)
+            console.log(" UPDATE pdf " + this.pdf)
+            console.log(" UPDATE pdfName " + this.pdfName)
+            console.log(" DELETE FLAG " + this.deleteFlag)
+
+
+            console.log("loadPdfFromAxiosDB")
+            this.loadPdfFromAxiosDB();
 
 
         },
