@@ -77,7 +77,6 @@ export default {
             description: '',
             value: '',
             date: '',
-            type: '',
             expensesType: [],
             pdf: '',
             strSuccess: '',
@@ -140,7 +139,6 @@ export default {
                 formData.append('description', this.description);
                 formData.append('value', this.value);
                 formData.append('typeID', this.expensesType.id);
-                // formData.append('type', this.expensesType.type);
                 formData.append('date', this.date);
                 formData.append('userID', this.userId);
                 formData.append('pdf', this.pdf);

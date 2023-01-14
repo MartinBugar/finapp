@@ -13,7 +13,6 @@ class Posts extends Model
         'name',
         'description',
         'value',
-        'type',
         'typeID',
         'date',
         'userID',
