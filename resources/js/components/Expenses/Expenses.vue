@@ -63,7 +63,7 @@
                         <td>{{ expens.name }}</td>
                         <td>{{ formatDate(expens.date) }}</td>
                         <td>{{ expens.description }}</td>
-                        <td>{{ expens.type }}</td>
+                        <td>{{ getTypeFromId(expens.typeID) }}</td>
                         <td>{{ expens.value }} €</td>
 
                         <td class="text-center buttons" v-if="userId === expens.userID">
@@ -89,7 +89,7 @@
                     <li class="list-group-item"
                         v-for="(exptype, key) in filteredAndSortedExpensesTypes(this.expensesTypes)"
                         :value="exptype.type">
-                        {{ exptype.type }}: <strong> {{ sumOfExpensesPerMonthPerType(this.month, exptype.type) }}
+                        {{ exptype.type }}: <strong> {{ sumOfExpensesPerMonthPerType(this.month, exptype.id) }}
                         € </strong>
                     </li>
 
@@ -133,6 +133,7 @@ export default {
             strSuccess: '',
             strError: '',
             userId: '',
+            type: '',
             userName: '',
             month: new Date(Date.now()).getMonth(),
             year: new Date(Date.now()).getFullYear(),
@@ -176,16 +177,25 @@ export default {
     },
 
     methods: {
+        getTypeFromId(typeId) {
+            this.expensesTypes.forEach(item => {
+                if (item.id === typeId) {
+                    this.type = item.type;
+
+                }
+            })
+            return this.type;
+        },
         populateChartData() {
             let labels = []
             let colors = []
             let values = []
-            let filteredExpenses = this.filteredAndSortedExpensesTypes(this.expensesTypes);
+            let filteredExpensesTypes = this.filteredAndSortedExpensesTypes(this.expensesTypes);
 
-            filteredExpenses.forEach(item => {
+            filteredExpensesTypes.forEach(item => {
                 colors.push('#' + (Math.random() * 0xFFFFFF << 0).toString(16))
                 labels.push(item.type)
-                values.push(this.sumOfExpensesPerMonthPerType(this.month, item.type))
+                values.push(this.sumOfExpensesPerMonthPerType(this.month, item.id))
             })
 
             return this.chartData = {
@@ -203,7 +213,7 @@ export default {
             let both = [];
             this.expensesTypes.forEach(expensType => {
                 this.expenses.forEach(expens => {
-                    if (expens.type === expensType.type) {
+                    if (expens.typeID === expensType.id) {
                         let date = new Date(expens.date);
                         if (date.getMonth().toString() === this.month.toString() && date.getFullYear().toString() === this.year.toString()) {
                             both.push(expensType.type)
@@ -222,13 +232,13 @@ export default {
             })
 
         },
-        sumOfExpensesPerMonthPerType(month, type) {
+        sumOfExpensesPerMonthPerType(month, typeID) {
             let sum = 0;
             this.expenses.forEach((expens) => {
                 let date = new Date(expens.date);
                 if (expens.userID === this.userId) {
                     if (month.toString() === date.getMonth().toString()) {
-                        if (expens.type === type) {
+                        if (expens.typeID === typeID) {
                             sum = sum + expens.value;
                         }
                     }

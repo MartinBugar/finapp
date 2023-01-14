@@ -5,7 +5,8 @@
                 <div class="d-flex justify-content-between pb-2 mb-2">
                     <h5 class="card-title">Update ExpensesType data</h5>
                     <div>
-                        <router-link :to="{name: 'expenses'}" class="btn btn-success buttonEditExpens">Go Back</router-link>
+                        <router-link :to="{name: 'expenses'}" class="btn btn-success buttonEditExpens">Go Back
+                        </router-link>
                     </div>
                 </div>
 
@@ -26,11 +27,11 @@
                         <input type="text" class="form-control" v-model="type" placeholder="Enter post name">
                     </div>
 
-<!--                    <div class="form-group mb-2">-->
-<!--                        <label>Description</label><span class="text-danger"> *</span>-->
-<!--                        <textarea class="form-control" rows="3" v-model="description"-->
-<!--                                  placeholder="Enter post description"></textarea>-->
-<!--                    </div>-->
+                    <!--                    <div class="form-group mb-2">-->
+                    <!--                        <label>Description</label><span class="text-danger"> *</span>-->
+                    <!--                        <textarea class="form-control" rows="3" v-model="description"-->
+                    <!--                                  placeholder="Enter post description"></textarea>-->
+                    <!--                    </div>-->
 
                     <button type="submit" class="btn btn-primary mt-4 mb-4"> Update Post</button>
                 </form>
@@ -74,9 +75,8 @@ export default {
                 }
 
                 const formData = new FormData();
-
-                // formData.append('description', this.description);
                 formData.append('type', this.type);
+
                 this.$axios.post(`/api/expensestypes/update/${this.$route.params.id}`, formData, config)
                     .then(response => {
                         existingObj.strError = "";
@@ -87,6 +87,7 @@ export default {
                         existingObj.strError = error.response.data.message;
                     });
             });
+
         }
 
     },

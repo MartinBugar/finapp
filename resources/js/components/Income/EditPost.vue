@@ -157,12 +157,8 @@ export default {
             this.$axios.get('/sanctum/csrf-cookie').then(response => {
                 this.$axios.get(`/api/posts/edit/${this.$route.params.id}`)
                     .then(response => {
-
-                            this.pdf = response.data['pdf'];
-                            this.pdfName = response.data['pdfName'];
-
-
-
+                        this.pdf = response.data['pdf'];
+                        this.pdfName = response.data['pdfName'];
                     })
                     .catch(function (error) {
                         console.log(error);
@@ -179,11 +175,7 @@ export default {
                 this.pdfNameToDelete = this.pdfName;
                 this.pdf = null;
                 this.pdfName = null;
-                console.log("DELETE pdfToDelete " + this.pdfToDelete)
-                console.log("DELETE pdfNameToDelete " + this.pdfNameToDelete)
-                console.log("DELETE pdf " + this.pdf)
-                console.log("DELETE pdfName " + this.pdfName)
-                console.log(" DELETE FLAG " + this.deleteFlag)
+
                 let reader = new FileReader();
                 reader.addEventListener("load", function () {
                     this.pdfPreview = reader.result;
@@ -217,11 +209,7 @@ export default {
                 }
             }
 
-            console.log(" ONCHANGE pdfToDelete " + this.pdfToDelete)
-            console.log(" ONCHANGE pdfNameToDelete " + this.pdfNameToDelete)
-            console.log(" ONCHANGE pdf " + this.pdf)
-            console.log(" ONCHANGE pdfName " + this.pdfName)
-            console.log(" DELETE FLAG " + this.deleteFlag)
+
         },
         downloadWithAxios(pdf, pdfName) {
             axios({
@@ -259,9 +247,10 @@ export default {
                 formData.append('value', this.value);
                 formData.append('typeID', this.typeId);
 
-                formData.append('type', this.expensesTypes.filter(item => {
-                    return (this.typeId === item.id)
-                }).map(a => a.type));
+                // formData.append('type', this.expensesTypes.filter(item => {
+                //     return (this.typeId === item.id)
+                // }).map(a => a.type));
+
                 formData.append('date', this.date);
 
                 formData.append('pdf', this.pdf)
@@ -287,14 +276,6 @@ export default {
                         existingObj.strError = error.response.data.message;
                     });
             });
-
-
-            console.log(" UPDATE pdfToDelete " + this.pdfToDelete)
-            console.log(" UPDATE pdfNameToDelete " + this.pdfNameToDelete)
-            console.log(" UPDATE pdf " + this.pdf)
-            console.log(" UPDATE pdfName " + this.pdfName)
-            console.log(" DELETE FLAG " + this.deleteFlag)
-
 
             console.log("loadPdfFromAxiosDB")
             this.loadPdfFromAxiosDB();

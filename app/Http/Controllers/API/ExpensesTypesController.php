@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
+use App\Models\Expenses;
 use App\Models\ExpensesTypes;
 use Illuminate\Http\Request;
 
@@ -49,7 +50,6 @@ class ExpensesTypesController extends Controller
 
         $input = $request->all();
         $expensType->update($input);
-
         return response()->json(['success'=> 'Expenses update successfully']);
     }
 

@@ -21,7 +21,7 @@ class PostsController extends Controller
             'name' => 'required',
             'description' => 'required',
             'value' => 'required',
-            'type' => 'required',
+            'type',
             'typeID' => 'required',
             'userID',
             'date',
@@ -58,7 +58,7 @@ class PostsController extends Controller
             'name' => 'required',
             'description' => 'required',
             'value' => 'required',
-            'type' => 'required',
+            'type',
             'typeID' => 'required',
             'date',
             'userID',
@@ -79,7 +79,6 @@ class PostsController extends Controller
                 unlink('pdf/' . $post->pdf);
             }
         } else {
-
             $pdfToDelete = $request->get('pdfToDelete');
             $pdfNameToDelete = $request->get('pdfNameToDelete');
             $input['pdf'] = null;
