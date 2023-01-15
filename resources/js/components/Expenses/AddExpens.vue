@@ -67,7 +67,6 @@ export default {
             name: '',
             description: '',
             value: '',
-            type: '',
             date: '',
             strSuccess: '',
             strError: '',
@@ -111,10 +110,7 @@ export default {
                 formData.append('name', this.name);
                 formData.append('description', this.description);
                 formData.append('value', this.value);
-
                 formData.append('typeID', this.expensesType.id);
-                formData.append('type', this.expensesType.type);
-
                 formData.append('date', this.date);
                 formData.append('userID', this.userId);
 

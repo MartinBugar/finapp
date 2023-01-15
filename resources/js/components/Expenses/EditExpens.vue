@@ -68,7 +68,6 @@ export default {
             description: '',
             value: '',
             userId: '',
-            type: '',
             typeId: '',
             date: '',
             strSuccess: '',
@@ -85,14 +84,10 @@ export default {
                     this.name = response.data['name'];
                     this.description = response.data['description'];
                     this.value = response.data['value'];
-
                     this.typeId = response.data['typeID'];
-                    this.type = response.data['type'];
                     this.expensesType = this.expensesTypes.filter(item => {
                         return response.data['typeID'] === item.id;
                     });
-
-
                     this.date = response.data['date'];
                 })
                 .catch(function (error) {
@@ -135,10 +130,6 @@ export default {
                 formData.append('description', this.description);
                 formData.append('value', this.value);
                 formData.append('typeID', this.typeId);
-                formData.append('type', this.expensesTypes.filter(item => {
-                    return (this.typeId === item.id)
-                }).map(a => a.type));
-
                 formData.append('date', this.date);
 
                 this.$axios.post(`/api/expenses/update/${this.$route.params.id}`, formData, config)
