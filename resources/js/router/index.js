@@ -13,6 +13,9 @@ import EditExpens from "../components/Expenses/EditExpens.vue";
 import ExpensesTypes from "../components/ExpensesTypes/ExpensesTypes.vue";
 import AddExpensType from "../components/ExpensesTypes/AddExpensType.vue";
 import EditExpensType from "../components/ExpensesTypes/EditExpensType.vue";
+import Loans from "../components/loans/Loans.vue";
+import AddLoan from "../components/loans/AddLoan.vue";
+import EditLoan from "../components/loans/EditLoan.vue";
 
 export const routes = [
     {
@@ -79,7 +82,22 @@ export const routes = [
         name: 'editexpensestypes',
         path: '/editexpensestypes/edit/:id',
         component: EditExpensType
-    }
+    },
+    {
+        name: 'loans',
+        path: '/loans',
+        component: Loans
+    },
+    {
+        name: 'addloan',
+        path: '/loans/add',
+        component: AddLoan
+    },
+    {
+        name: 'editloan',
+        path: '/loans/edit/:id',
+        component: EditLoan
+    },
 ];
 
 const router = createRouter({
