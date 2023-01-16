@@ -10,7 +10,25 @@
                     <router-link to="/dashboard" class="nav-item nav-link">Dashboard</router-link>
                     <router-link to="/posts" class="nav-item nav-link">Príjem</router-link>
                     <router-link to="/expenses" class="nav-item nav-link">Výdaje</router-link>
-                    <router-link to="/expensestypes" class="nav-item nav-link">typy</router-link>
+                    <router-link to="/expensestypes" class="nav-item nav-link">typy</router-link>1
+
+                    <div class="dropdown">
+                        <button
+                            class="btn btn-danger dropdown-toggle"
+                            type="button" id="dropdownMenuButton1"
+                            data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            Úver {{value}}
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1" role="menu">
+                            <li v-for="option in options" :key="option">
+                                <a class="dropdown-item dropdown-loans" @click="value = option" href="javascript:void(0)">{{option}}</a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item dropdown-loans-control" >Správa uverov</a>
+                            </li>
+                        </ul>
+                    </div>
 
                     <div class="logout">
                         <a class="nav-item nav-link" style="cursor: pointer;" @click="logout">Logout</a>
@@ -23,16 +41,25 @@
                     <router-link to="/register" class="nav-item nav-link">Register</router-link>
                 </div>
             </div>
+
         </nav>
         <router-view></router-view>
     </div>
 </template>
 <script>
+
+
+
 export default {
     name: "App",
+    components: {
+
+    },
     data() {
         return {
             isLoggedIn: false,
+            options: ['Auto', 'Hypoteka', 'Krsna'],
+            value: ''
         }
     },
     created() {
@@ -70,5 +97,18 @@ export default {
     width: 100%;
     height: 100vh;
     background-color: #b6b6b6;
+}
+
+.dropdown-loans-control {
+    background-color: #b40000;
+}
+
+.dropdown-loans-control:hover {
+    background-color: #238500;
+    cursor: pointer;
+}
+
+.dropdown-loans:hover {
+    background-color: #238500;
 }
 </style>
