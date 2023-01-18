@@ -344,13 +344,14 @@ export default {
     width: 600px;
 }
 
-.buttonNewPost {
+.mainCardPosts {
+    margin-top: 10px;
+    --bs-bg-opacity: 1;
+    background-color: rgba(var(--bs-dark-rgb), var(--bs-bg-opacity)) !important;
     border-radius: 18px;
 }
 
-.mainCardPosts {
-    margin-top: 10px;
-    background-color: #343434;
+.buttonNewPost {
     border-radius: 18px;
 }
 
@@ -358,6 +359,11 @@ export default {
     color: #238500;
     /*background-color: #0b5ed7;*/
 }
+
+
+element.style {
+}
+
 
 
 </style>

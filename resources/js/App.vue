@@ -99,7 +99,7 @@ export default {
 /*}*/
 
 .bg {
-    background: linear-gradient(150deg, #021596, #464646 60%);
+    background: linear-gradient(150deg, #b9b9b9, #464646 60%);
     width: 100%;
     height: 100vh;
 }
