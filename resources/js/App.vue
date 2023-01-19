@@ -29,7 +29,8 @@
                     <!--                    </div>-->
 
                     <div class="logout">
-                        <button class="nav-item nav-link btn btn-primary btn-sm logout-button button-radius" style="cursor: pointer;"
+                        <button class="nav-item nav-link btn btn-primary btn-sm logout-button button-radius"
+                                style="cursor: pointer;"
                                 @click="logout">Odhlásenie
                         </button>
                     </div>
@@ -37,8 +38,11 @@
                 </div>
                 <div class="navbar-nav" v-else>
                     <!--                    <router-link to="/" class="nav-item nav-link">Home</router-link>-->
-                    <router-link to="/login" class="nav-item nav-link btn btn-primary button-radius">Prihlasenie</router-link>
-                    <router-link to="/register" class="nav-item nav-link btn btn-primary register button-radius">Registracia</router-link>
+                    <router-link to="/login" class="nav-item nav-link btn btn-primary button-radius">Prihlasenie
+                    </router-link>
+                    <router-link to="/register" class="nav-item nav-link btn btn-primary register button-radius">
+                        Registracia
+                    </router-link>
                 </div>
             </div>
 
@@ -47,6 +51,32 @@
 
 
     </div>
+
+
+    <footer class="text-center text-white" style="background-color: #0a4275;">
+        <!-- Grid container -->
+        <div class="container p-4 pb-0">
+            <!-- Section: CTA -->
+            <section class="">
+                <p class="d-flex justify-content-center align-items-center">
+
+<!--                    <button type="button" class="btn btn-outline-light btn-rounded">-->
+<!--                        Register-->
+<!--                    </button>-->
+                </p>
+            </section>
+            <!-- Section: CTA -->
+        </div>
+        <!-- Grid container -->
+
+        <!-- Copyright -->
+        <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+            © 2020 Copyright:
+            <a class="text-white" href="https://mojefinancie.eu">mojefinancie.eu</a>
+        </div>
+        <!-- Copyright -->
+    </footer>
+
 </template>
 <script>
 
@@ -58,7 +88,8 @@ export default {
         return {
             isLoggedIn: false,
             options: ['Auto', 'Hypoteka', 'Krsna'],
-            value: ''
+            value: '',
+
         }
     },
     created() {
