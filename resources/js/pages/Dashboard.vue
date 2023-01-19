@@ -209,4 +209,10 @@ export default {
     border-radius: 18px;
 }
 
+/*.bg-main-page-top {*/
+/*    background: linear-gradient(90deg, #3A92C1 0%, #3A92C1 24%, #3A92C1 34%, #fff 100%);*/
+/*    width: 100%;*/
+/*    height: 400px;*/
+/*}*/
+
 </style>

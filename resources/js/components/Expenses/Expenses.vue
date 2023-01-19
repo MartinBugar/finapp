@@ -316,7 +316,7 @@ export default {
 }
 
 .cardExpenses {
-    margin-top: 10px;
+    margin-top: 30px;
     border-radius: 18px;
 }
 

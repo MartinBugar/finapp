@@ -7,36 +7,38 @@
                     <router-link to="/dashboard" class="nav-item nav-link">Dashboard</router-link>
                     <router-link to="/posts" class="nav-item nav-link">Príjem</router-link>
                     <router-link to="/expenses" class="nav-item nav-link">Výdaje</router-link>
-                    <router-link to="/expensestypes" class="nav-item nav-link">typy</router-link>
+                    <router-link to="/expensestypes" class="nav-item nav-link">Typy transakcií</router-link>
 
-<!--                    <div class="dropdown">-->
-<!--                        <button-->
-<!--                            class="btn btn-danger dropdown-toggle"-->
-<!--                            type="button" id="dropdownMenuButton1"-->
-<!--                            data-bs-toggle="dropdown"-->
-<!--                            aria-expanded="false">-->
-<!--                            Úver {{ value }}-->
-<!--                        </button>-->
-<!--                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1" role="menu">-->
-<!--                            <li v-for="option in options" :key="option">-->
-<!--                                <a class="dropdown-item dropdown-loans" @click="value = option"-->
-<!--                                   href="javascript:void(0)">{{ option }}</a>-->
-<!--                            </li>-->
-<!--                            <li>-->
-<!--                                <a class="dropdown-item dropdown-loans-control">Správa uverov</a>-->
-<!--                            </li>-->
-<!--                        </ul>-->
-<!--                    </div>-->
+                    <!--                    <div class="dropdown">-->
+                    <!--                        <button-->
+                    <!--                            class="btn btn-danger dropdown-toggle"-->
+                    <!--                            type="button" id="dropdownMenuButton1"-->
+                    <!--                            data-bs-toggle="dropdown"-->
+                    <!--                            aria-expanded="false">-->
+                    <!--                            Úver {{ value }}-->
+                    <!--                        </button>-->
+                    <!--                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1" role="menu">-->
+                    <!--                            <li v-for="option in options" :key="option">-->
+                    <!--                                <a class="dropdown-item dropdown-loans" @click="value = option"-->
+                    <!--                                   href="javascript:void(0)">{{ option }}</a>-->
+                    <!--                            </li>-->
+                    <!--                            <li>-->
+                    <!--                                <a class="dropdown-item dropdown-loans-control">Správa uverov</a>-->
+                    <!--                            </li>-->
+                    <!--                        </ul>-->
+                    <!--                    </div>-->
 
                     <div class="logout">
-                        <a class="nav-item nav-link" style="cursor: pointer;" @click="logout">Logout</a>
+                        <button class="nav-item nav-link btn btn-primary btn-sm logout-button button-radius" style="cursor: pointer;"
+                                @click="logout">Odhlásenie
+                        </button>
                     </div>
 
                 </div>
                 <div class="navbar-nav" v-else>
-                    <router-link to="/" class="nav-item nav-link">Home</router-link>
-                    <router-link to="/login" class="nav-item nav-link">Login</router-link>
-                    <router-link to="/register" class="nav-item nav-link">Register</router-link>
+                    <!--                    <router-link to="/" class="nav-item nav-link">Home</router-link>-->
+                    <router-link to="/login" class="nav-item nav-link btn btn-primary button-radius">Prihlasenie</router-link>
+                    <router-link to="/register" class="nav-item nav-link btn btn-primary register button-radius">Registracia</router-link>
                 </div>
             </div>
 
@@ -90,14 +92,8 @@ export default {
     padding-left: 50px;
 }
 
-/*.bg {*/
-/*    width: 100%;*/
-/*    height: 100vh;*/
-/*    background-color: #b6b6b6;*/
-/*}*/
-
 .bg {
-    background: linear-gradient(150deg, #b9b9b9, #464646 60%);
+    background: linear-gradient(90deg, #3A92C1 0%, #3A92C1 24%, #3A92C1 34%, #fff 100%);
     width: 100%;
     height: 100vh;
 }
@@ -115,5 +111,15 @@ export default {
     background-color: #238500;
 }
 
+.register {
+    margin-left: 15px;
+}
+
+.button-radius {
+    border-radius: 18px;
+    margin-top: 2px;
+    padding: 5px;
+    /*padding-top: 5px;*/
+}
 
 </style>
