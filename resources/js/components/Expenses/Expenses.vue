@@ -346,7 +346,8 @@ export default {
 
 .mainCardExpenses {
     margin-top: 10px;
-    background-color: #343434;
+    --bs-bg-opacity: 1;
+    background-color: rgba(var(--bs-dark-rgb), var(--bs-bg-opacity)) !important;
     border-radius: 18px;
 }
 

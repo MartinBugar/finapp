@@ -1,48 +1,54 @@
 <template>
-        <div class="container">
-            <h2>Dashboard panel uzivatela {{ name }} </h2>
-        </div>
+    <div class="container card mainCardDashboard">
+        <div class="card cardDashboard">
 
-        <div class="container mt-1">
-            <div class="form-group mb-2 selection">
-                <label>Rok</label><span class="text-danger"> *</span>
-                <select class="form-select" @change="onChange($event)" v-model="year">
-                    <option>2021</option>
-                    <option>2022</option>
-                    <option>2023</option>
-                </select>
+            <div class="container mt-2">
+                <h2>Dashboard panel uzivatela {{ name }} </h2>
             </div>
 
+            <div class="container mt-1">
+                <div class="form-group mb-2 selection">
+                    <label>Rok</label><span class="text-danger"> *</span>
+                    <select class="form-select" @change="onChange($event)" v-model="year">
+                        <option>2021</option>
+                        <option>2022</option>
+                        <option>2023</option>
+                    </select>
+                </div>
 
-            <table class="table table-hover table-sm table-bordered table-dark">
-                <thead class="bg-dark text-light">
-                <tr>
-                    <th width="100" class="text-center">Mesiac</th>
-                    <th class="text-center">Prijem</th>
-                    <th class="text-center">Vydaje</th>
-                    <th class="text-center">Zostatok</th>
 
-                </tr>
-                </thead>
-                <tbody>
+                <table class="table table-hover table-sm table-bordered table-dark">
+                    <thead class="bg-dark text-light">
+                    <tr>
+                        <th width="100" class="text-center">Mesiac</th>
+                        <th class="text-center">Prijem</th>
+                        <th class="text-center">Vydaje</th>
+                        <th class="text-center">Zostatok</th>
 
-                <tr class="" v-for="(date) in dates" :key="date.id">
-                    <td>{{ date.name }}</td>
-                    <td class="text-center">{{ sumOfPostsFromMonth(date.id) }} €</td>
-                    <td class="text-center">{{ sumOfExpensesFromMonth(date.id) }} €</td>
-                    <td class="text-center">{{ sumOfPostsFromMonth(date.id) - sumOfExpensesFromMonth(date.id) }} €</td>
-                </tr>
-                </tbody>
-            </table>
+                    </tr>
+                    </thead>
+                    <tbody>
 
-            <ul class="list-group">
-                <li class="list-group-item">Prijem za rok {{ year }} : <strong> {{ sumOfIncomPerYear(year) }}
-                    € </strong></li>
-                <li class="list-group-item">Vydaje za rok {{ year }} : <strong> {{ sumOfExpensesPerYear(year) }}
-                    € </strong></li>
-            </ul>
+                    <tr class="" v-for="(date) in dates" :key="date.id">
+                        <td>{{ date.name }}</td>
+                        <td class="text-center">{{ sumOfPostsFromMonth(date.id) }} €</td>
+                        <td class="text-center">{{ sumOfExpensesFromMonth(date.id) }} €</td>
+                        <td class="text-center">{{ sumOfPostsFromMonth(date.id) - sumOfExpensesFromMonth(date.id) }} €
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
 
+                <ul class="list-group mb-4">
+                    <li class="list-group-item">Prijem za rok {{ year }} : <strong> {{ sumOfIncomPerYear(year) }}
+                        € </strong></li>
+                    <li class="list-group-item">Vydaje za rok {{ year }} : <strong> {{ sumOfExpensesPerYear(year) }}
+                        € </strong></li>
+                </ul>
+
+            </div>
         </div>
+    </div>
 </template>
 
 <script>
@@ -189,5 +195,18 @@ export default {
 </script>
 
 <style>
+
+.mainCardDashboard {
+    margin-top: 10px;
+    --bs-bg-opacity: 1;
+    background-color: rgba(var(--bs-dark-rgb), var(--bs-bg-opacity)) !important;
+    border-radius: 18px;
+}
+
+.cardDashboard {
+    margin-top: 30px;
+    margin-bottom: 30px;
+    border-radius: 18px;
+}
 
 </style>

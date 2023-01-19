@@ -43,20 +43,30 @@
                         <input type="date" class="form-control" rows="3" v-model="date" placeholder="Enter the date"/>
                     </div>
 
-                    <div class="form-group mb-2 selection">
-                        <label>Type</label><span class="text-danger"> *</span>
-                        <select class="form-select" v-model="this.expensesType" placeholder="Select the type">
-                            <option v-for="(expensesType, key) in filteredAndSortedExpensesTypes(this.expensesTypes)"
-                                    :value="expensesType"> {{ expensesType.type }}
-                            </option>
-                        </select>
+                    <div class="row">
+                        <div class="col-lg-2">
+                            <label>Type</label><span class="text-danger"> *</span>
+                            <div class="form-group mb-2 selection">
+                                <select class="form-select" v-model="this.expensesType" placeholder="Select the type">
+                                    <option
+                                        v-for="(expensesType, key) in filteredAndSortedExpensesTypes(this.expensesTypes)"
+                                        :value="expensesType"> {{ expensesType.type }}
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-lg-2">
+                            <router-link :to="{name: 'addexpensestypes'}" class="btn btn-success button-add-type ">Create new type</router-link>
+                        </div>
+
                     </div>
+
 
                     <div class="form-gorup mb-2">
                         <label>Pdf dokument</label><span class="text-danger"> *</span>
                         <input type="file" class="form-control mb-2" v-on:change="onChange">
                         <div v-if="pdf">
-                            <label v-bind:src="pdfPreview" />
+                            <label v-bind:src="pdfPreview"/>
                         </div>
                     </div>
 
@@ -176,5 +186,9 @@ export default {
 
 .buttonAddPost {
     border-radius: 18px;
+}
+
+.button-add-type {
+    margin-top: 24px;
 }
 </style>

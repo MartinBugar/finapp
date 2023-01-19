@@ -43,13 +43,25 @@
                         <input type="date" class="form-control" rows="3" v-model="date" placeholder="Enter the date"/>
                     </div>
 
-                    <div class="form-group mb-2 selection">
-                        <label>Type</label><span class="text-danger"> *</span>
-                        <select class="form-select" v-model="this.typeId" placeholder="Select the type">
-                            <option v-for="(expensesType, key) in filteredAndSortedExpensesTypes(this.expensesTypes)"
-                                    :value="expensesType.id"> {{ expensesType.type }}
-                            </option>
-                        </select>
+                    <div class="row">
+                        <div class="col-lg-2">
+                            <label>Type</label><span class="text-danger"> *</span>
+                            <div class="form-group mb-2 selection">
+                                <select class="form-select" v-model="this.typeId" placeholder="Select the type">
+                                    <option
+                                        v-for="(expensesType, key) in filteredAndSortedExpensesTypes(this.expensesTypes)"
+                                        :value="expensesType.id"> {{ expensesType.type }}
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-2">
+                            <router-link :to="{name: 'addexpensestypes'}" class="btn btn-success button-add-type ">
+                                Create
+                                new type
+                            </router-link>
+                        </div>
                     </div>
 
                     <div class="form-gorup mb-2">

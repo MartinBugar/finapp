@@ -5,7 +5,7 @@
                 <div class="d-flex justify-content-between pb-2 mb-2">
                     <h5 class="card-title">Pridat novy type </h5>
                     <div>
-                        <router-link :to="{name: 'expenses'}" class="btn btn-success buttonAddExpense">Go Back</router-link>
+                        <router-link :to="{name: 'expensestypes'}" class="btn btn-success buttonAddExpense">Zoznam typov</router-link>
                     </div>
                 </div>
 

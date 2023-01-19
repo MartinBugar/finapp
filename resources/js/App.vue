@@ -1,36 +1,32 @@
 <template>
-    <div class="bg">
+    <div class="bg ">
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
             <div class="container">
                 <a class="navbar-brand" href="/">mojeFinancie</a>
-                <button class="navbar-toggler d-lg-none" type="button" data-bs-toggle="collapse"
-                        data-bs-target="#collapsibleNavId" aria-controls="collapsibleNavId"
-                        aria-expanded="false" aria-label="Toggle navigation"></button>
                 <div class="navbar-nav" v-if="isLoggedIn">
                     <router-link to="/dashboard" class="nav-item nav-link">Dashboard</router-link>
                     <router-link to="/posts" class="nav-item nav-link">Príjem</router-link>
                     <router-link to="/expenses" class="nav-item nav-link">Výdaje</router-link>
                     <router-link to="/expensestypes" class="nav-item nav-link">typy</router-link>
-                    1
 
-                    <div class="dropdown">
-                        <button
-                            class="btn btn-danger dropdown-toggle"
-                            type="button" id="dropdownMenuButton1"
-                            data-bs-toggle="dropdown"
-                            aria-expanded="false">
-                            Úver {{ value }}
-                        </button>
-                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1" role="menu">
-                            <li v-for="option in options" :key="option">
-                                <a class="dropdown-item dropdown-loans" @click="value = option"
-                                   href="javascript:void(0)">{{ option }}</a>
-                            </li>
-                            <li>
-                                <a class="dropdown-item dropdown-loans-control">Správa uverov</a>
-                            </li>
-                        </ul>
-                    </div>
+<!--                    <div class="dropdown">-->
+<!--                        <button-->
+<!--                            class="btn btn-danger dropdown-toggle"-->
+<!--                            type="button" id="dropdownMenuButton1"-->
+<!--                            data-bs-toggle="dropdown"-->
+<!--                            aria-expanded="false">-->
+<!--                            Úver {{ value }}-->
+<!--                        </button>-->
+<!--                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1" role="menu">-->
+<!--                            <li v-for="option in options" :key="option">-->
+<!--                                <a class="dropdown-item dropdown-loans" @click="value = option"-->
+<!--                                   href="javascript:void(0)">{{ option }}</a>-->
+<!--                            </li>-->
+<!--                            <li>-->
+<!--                                <a class="dropdown-item dropdown-loans-control">Správa uverov</a>-->
+<!--                            </li>-->
+<!--                        </ul>-->
+<!--                    </div>-->
 
                     <div class="logout">
                         <a class="nav-item nav-link" style="cursor: pointer;" @click="logout">Logout</a>
@@ -46,6 +42,8 @@
 
         </nav>
         <router-view></router-view>
+
+
     </div>
 </template>
 <script>
@@ -116,4 +114,6 @@ export default {
 .dropdown-loans:hover {
     background-color: #238500;
 }
+
+
 </style>
