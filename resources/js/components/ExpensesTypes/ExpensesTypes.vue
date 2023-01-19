@@ -3,7 +3,7 @@
         <div class="card cardExpenses">
             <div class="card-body">
                 <div class="d-flex justify-content-between pb-2 mb-2">
-                    <h3 class="card-title"><strong>Vsetky expenses types uzivatela : {{ userName }}</strong></h3>
+                    <h3 class="card-title"><strong>Vsetky typy transakcii uzivatela : {{ userName }}</strong></h3>
                     <div>
                         <button class="btn btn-success buttonNewExpense" type="button"
                                 @click="this.$router.push('/expensestypes/add')">
