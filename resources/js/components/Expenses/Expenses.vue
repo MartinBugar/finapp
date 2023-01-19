@@ -181,7 +181,6 @@ export default {
             this.expensesTypes.forEach(item => {
                 if (item.id === typeId) {
                     this.type = item.type;
-
                 }
             })
             return this.type;

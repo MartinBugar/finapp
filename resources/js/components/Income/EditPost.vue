@@ -230,7 +230,6 @@ export default {
                 responseType: 'arraybuffer'
             })
                 .then(response => {
-                    console.log(this.url + pdf)
                     this.forceFileDownload(response, pdfName)
                 })
                 .catch(() => console.log('error occured'))
@@ -289,7 +288,6 @@ export default {
                     });
             });
 
-            console.log("loadPdfFromAxiosDB")
             this.loadPdfFromAxiosDB();
 
 

@@ -226,7 +226,6 @@ export default {
                 let date = new Date(post.date);
                 if (post.userID === this.userId) {
                     if (month.toString() === date.getMonth().toString()) {
-                        console.log(typeID)
                         if (post.typeID === typeID) {
                             sum = sum + post.value;
                         }
@@ -277,7 +276,6 @@ export default {
             link.href = url
             link.setAttribute('download', post.pdfName)
             document.body.appendChild(link)
-            console.log(link)
             link.click()
         },
         formatDate(value) {

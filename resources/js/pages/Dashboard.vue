@@ -161,7 +161,6 @@ export default {
             let sum = 0;
             this.posts.forEach((value) => {
                 let date = new Date(value.date);
-                console.log(date.getFullYear(), this.year)
                 if (date.getFullYear().toString() === this.year.toString()) {
                     if (value.userID === this.userId && (date.getMonth() + 1) === date1) {
                         sum = sum + value.value;
@@ -181,7 +180,6 @@ export default {
             })
         },
         onChange(event) {
-            console.log(event.target.value)
             this.year = event.target.value;
         },
     },
