@@ -1,11 +1,11 @@
 export default [
     {
         id: 1,
-        name: 'Januar',
+        name: 'Január',
     },
     {
         id: 2,
-        name: 'Februar',
+        name: 'Február',
     },
     {
         id: 3,
@@ -13,19 +13,19 @@ export default [
     },
     {
         id: 4,
-        name: 'April',
+        name: 'Apríl',
     },
     {
         id: 5,
-        name: 'Maj',
+        name: 'Máj',
     },
     {
         id: 6,
-        name: 'Jun',
+        name: 'Jún',
     },
     {
         id: 7,
-        name: 'Jul',
+        name: 'Júl',
     },
     {
         id: 8,
@@ -37,7 +37,7 @@ export default [
     },
     {
         id: 10,
-        name: 'Oktober',
+        name: 'Október',
     },
     {
         id: 11,

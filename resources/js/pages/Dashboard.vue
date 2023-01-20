@@ -3,7 +3,7 @@
         <div class="card cardDashboard">
 
             <div class="container mt-2">
-                <h2>Dashboard panel uzivatela {{ name }} </h2>
+                <h2>Dashboard panel uživateľa {{ name }} </h2>
             </div>
 
             <div class="container mt-1">
@@ -40,9 +40,9 @@
                 </table>
 
                 <ul class="list-group mb-4">
-                    <li class="list-group-item">Prijem za rok {{ year }} : <strong> {{ sumOfIncomPerYear(year) }}
+                    <li class="list-group-item">Príjem za rok {{ year }} : <strong> {{ sumOfIncomPerYear(year) }}
                         € </strong></li>
-                    <li class="list-group-item">Vydaje za rok {{ year }} : <strong> {{ sumOfExpensesPerYear(year) }}
+                    <li class="list-group-item">Výdaje za rok {{ year }} : <strong> {{ sumOfExpensesPerYear(year) }}
                         € </strong></li>
                 </ul>
 
@@ -52,8 +52,7 @@
 </template>
 
 <script>
-import posts from "../components/Income/Posts.vue";
-import expenses from "../components/Expenses/Expenses.vue";
+
 import Dates from "../components/Dates";
 
 export default {
