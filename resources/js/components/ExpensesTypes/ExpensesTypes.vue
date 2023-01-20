@@ -4,11 +4,11 @@
             <div class="card cardExpensesTypes">
                 <div class="card-body">
                     <div class="d-flex justify-content-between pb-2 mb-2">
-                        <h3 class="card-title"><strong>Vsetky typy transakcii uzivatela : {{ userName }}</strong></h3>
+                        <h3 class="card-title"><strong>Všetky typy transakcií užívateľa {{ userName }}</strong></h3>
                         <div>
                             <button class="btn btn-success buttonNewExpense" type="button"
                                     @click="this.$router.push('/expensestypes/add')">
-                                Nový záznam
+                                Vytvoriť nový typ transakcie
                             </button>
                         </div>
                     </div>
@@ -19,7 +19,7 @@
                             <th width="50" class="text-center">#</th>
                             <th width="100" class="text-center">id</th>
                             <th width="100" class="text-center">userId</th>
-                            <th>Typ</th>
+                            <th>Typ transakcie</th>
                             <th class="text-center" width="200">Actions</th>
                         </tr>
                         </thead>
@@ -34,9 +34,10 @@
                             <td class="text-center buttons" v-if="userId === expensType.userID">
                                 <router-link :to="{name:'editexpensestypes', params: {id:expensType.id}}"
                                              class="btn btn-sm btn-warning">
-                                    Edit
+                                    Upraviť
                                 </router-link>
-                                <button class="btn btn-danger btn-sm m-1" @click="deleteExpensType(expensType)">Delete
+                                <button class="btn btn-danger btn-sm m-1" @click="deleteExpensType(expensType)">
+                                    Odstrániť
                                 </button>
                             </td>
                         </tr>
@@ -65,10 +66,22 @@ export default {
             year: new Date(Date.now()).getFullYear(),
             expensType: '',
             expenses: [],
+            posts: [],
             filteredExpenses: [],
+            filteredPosts: [],
         }
     },
     created() {
+        this.$axios.get('/sanctum/csrf-cookie').then(response => {
+            this.$axios.get('/api/posts')
+                .then(response => {
+                    this.posts = response.data;
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+        });
+
         this.$axios.get('/sanctum/csrf-cookie').then(response => {
             this.$axios.get('/api/expenses')
                 .then(response => {
@@ -116,11 +129,17 @@ export default {
                 let existingObj = this;
 
                 this.filteredExpenses = this.expenses.filter(expens => {
-                    return expens.userID === this.userId && expens.type === expensType.type;
+                    return expens.userID === this.userId && expens.typeID === expensType.id;
+                })
+
+                this.filteredPosts = this.posts.filter(post => {
+                    return post.userID === this.userId && post.typeID === expensType.id;
                 })
 
                 if (this.filteredExpenses.length > 0) {
                     alert("Cannot delete this type, because it is used by at least one Expens")
+                } else if (this.filteredPosts.length > 0) {
+                    alert("Cannot delete this type, because it is used by at least one Post")
                 } else if (confirm("Do you really want to delete this data?")) {
                     this.$axios.delete(`/api/expensestypes/delete/${expensType.id}`)
                         .then(response => {
@@ -128,7 +147,6 @@ export default {
                             this.expensesTypes.splice(i, 1);
                             existingObj.strError = "";
                             existingObj.strSuccess = response.data.success;
-
                         })
                         .catch(function (error) {
                             existingObj.strError = "";

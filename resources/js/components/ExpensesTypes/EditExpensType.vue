@@ -3,9 +3,10 @@
         <div class="card cardEditExpense">
             <div class="card-body">
                 <div class="d-flex justify-content-between pb-2 mb-2">
-                    <h5 class="card-title">Update ExpensesType data</h5>
+                    <h5 class="card-title">Upraviť názov typu transakcie</h5>
                     <div>
-                        <router-link :to="{name: 'expenses'}" class="btn btn-success buttonEditExpens">Go Back
+                        <router-link :to="{name: 'expensestypes'}" class="btn btn-success buttonEditExpens">Zoznam typov
+                            transakcií
                         </router-link>
                     </div>
                 </div>
@@ -23,7 +24,7 @@
 
                 <form @submit.prevent="updatePost" enctype="multipart/form-data">
                     <div class="form-group mb-2">
-                        <label>Type</label><span class="text-danger"> *</span>
+                        <label>Názov typu transakcie</label><span class="text-danger"> *</span>
                         <input type="text" class="form-control" v-model="type" placeholder="Enter post name">
                     </div>
 
@@ -33,7 +34,7 @@
                     <!--                                  placeholder="Enter post description"></textarea>-->
                     <!--                    </div>-->
 
-                    <button type="submit" class="btn btn-primary mt-4 mb-4"> Update Post</button>
+                    <button type="submit" class="btn btn-primary mt-4 mb-4"> Upraviť </button>
                 </form>
             </div>
         </div>
