@@ -3,12 +3,12 @@
         <div class="card cardExpenses">
             <div class="card-body">
                 <div class="d-flex justify-content-between pb-2 mb-2">
-                    <h3 class="card-title"><strong>Vsetky výdaje uzivatela : {{ userName }} za mesiac
+                    <h3 class="card-title"><strong>Všetky výdaje užívateľa {{ userName }} za mesiac
                         {{ dates().at(month).name }} {{ year }}</strong></h3>
                     <div>
                         <button class="btn btn-success buttonNewExpense" type="button"
                                 @click="this.$router.push('/expenses/add')">
-                            Nový záznam
+                            Vytvoriť nový výdaj
                         </button>
                     </div>
                 </div>
@@ -18,16 +18,16 @@
                         <div class="col-sm-12 col-md-6 col-lg-6">
                             <label>Mesiac</label><span class="text-danger"> </span>
                             <select class="form-select" v-model="month">
-                                <option value="0">Januar</option>
-                                <option value="1">Febrar</option>
+                                <option value="0">Január</option>
+                                <option value="1">Febrár</option>
                                 <option value="2">Marec</option>
-                                <option value="3">April</option>
-                                <option value="4">Maj</option>
-                                <option value="5">Jun</option>
-                                <option value="6">Jul</option>
+                                <option value="3">Apríl</option>
+                                <option value="4">Máj</option>
+                                <option value="5">Jún</option>
+                                <option value="6">Júl</option>
                                 <option value="7">August</option>
                                 <option value="8">September</option>
-                                <option value="9">Oktober</option>
+                                <option value="9">Október</option>
                                 <option value="10">November</option>
                                 <option value="11">December</option>
                             </select>
@@ -51,7 +51,7 @@
                         <th>Názov</th>
                         <th>Dátum</th>
                         <th>Popis</th>
-                        <th>Typ</th>
+                        <th>Typ transakcie</th>
                         <th>Suma</th>
                         <th class="text-center" width="200">Actions</th>
                     </tr>
@@ -69,9 +69,9 @@
                         <td class="text-center buttons" v-if="userId === expens.userID">
                             <router-link :to="{name:'editexpens', params: {id:expens.id}}"
                                          class="btn btn-sm btn-warning">
-                                Edit
+                                Upraviť
                             </router-link>
-                            <button class="btn btn-danger btn-sm m-1" @click="deletePost(expens.id)">Delete</button>
+                            <button class="btn btn-danger btn-sm m-1" @click="deletePost(expens.id)">Odstrániť</button>
                         </td>
                     </tr>
                     </tbody>

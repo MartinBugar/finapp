@@ -3,9 +3,9 @@
         <div class="card cardEditExpense">
             <div class="card-body">
                 <div class="d-flex justify-content-between pb-2 mb-2">
-                    <h5 class="card-title">Update Expenses data</h5>
+                    <h5 class="card-title">Upraviť záznam o výdaji</h5>
                     <div>
-                        <router-link :to="{name: 'posts'}" class="btn btn-success buttonEditExpens">Go Back
+                        <router-link :to="{name: 'posts'}" class="btn btn-success buttonEditExpens">Zoznam výdajov
                         </router-link>
                     </div>
                 </div>
@@ -23,23 +23,23 @@
 
                 <form @submit.prevent="updatePost" enctype="multipart/form-data">
                     <div class="form-group mb-2">
-                        <label>Name</label><span class="text-danger"> *</span>
+                        <label>Názov</label><span class="text-danger"> *</span>
                         <input type="text" class="form-control" v-model="name" placeholder="Enter post name">
                     </div>
 
                     <div class="form-group mb-2">
-                        <label>Description</label><span class="text-danger"> *</span>
+                        <label>Popis</label><span class="text-danger"> *</span>
                         <textarea class="form-control" rows="3" v-model="description"
                                   placeholder="Enter post description"></textarea>
                     </div>
 
                     <div class="form-group mb-2">
-                        <label>Value</label><span class="text-danger"> *</span>
+                        <label>Suma</label><span class="text-danger"> *</span>
                         <textarea class="form-control" rows="1" v-model="value" placeholder="Enter value"></textarea>
                     </div>
 
                     <div class="form-group mb-2 selection">
-                        <label>Type</label><span class="text-danger"> *</span>
+                        <label>Typ transakcie</label><span class="text-danger"> *</span>
                         <select class="form-select" v-model="this.typeId" placeholder="Select the type">
                             <option v-for="(expensesType, key) in filteredAndSortedExpensesTypes(this.expensesTypes)"
                                     :value="expensesType.id"> {{ expensesType.type }}
@@ -52,7 +52,7 @@
                         <input type="date" class="form-control" rows="3" v-model="date" placeholder="Enter the date"/>
                     </div>
 
-                    <button type="submit" class="btn btn-primary mt-4 mb-4"> Update Post</button>
+                    <button type="submit" class="btn btn-primary mt-4 mb-4"> Upraviť výdaj</button>
                 </form>
             </div>
         </div>
