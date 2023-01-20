@@ -3,9 +3,10 @@
         <div class="card cardEditPost">
             <div class="card-body">
                 <div class="d-flex justify-content-between pb-2 mb-2">
-                    <h5 class="card-title">Upravit data</h5>
+                    <h5 class="card-title">Upraviť záznam o príjme</h5>
                     <div>
-                        <router-link :to="{name: 'expenses'}" class="btn btn-success buttonEditPost">Go Back
+                        <router-link :to="{name: 'expenses'}" class="btn btn-success buttonEditPost">Zoznam záznamov o
+                            príjme
                         </router-link>
                     </div>
                 </div>
@@ -23,18 +24,18 @@
 
                 <form @submit.prevent="updatePost" enctype="multipart/form-data">
                     <div class="form-group mb-2">
-                        <label>Name</label><span class="text-danger"> *</span>
+                        <label>Názov</label><span class="text-danger"> *</span>
                         <input type="text" class="form-control" v-model="name" placeholder="Enter post name">
                     </div>
 
                     <div class="form-group mb-2">
-                        <label>Description</label><span class="text-danger"> *</span>
+                        <label>Popis</label><span class="text-danger"> *</span>
                         <textarea class="form-control" rows="3" v-model="description"
                                   placeholder="Enter post description"></textarea>
                     </div>
 
                     <div class="form-group mb-2">
-                        <label>Value</label><span class="text-danger"> *</span>
+                        <label>Suma</label><span class="text-danger"> *</span>
                         <textarea class="form-control" rows="1" v-model="value" placeholder="Enter value"></textarea>
                     </div>
 
@@ -45,7 +46,7 @@
 
                     <div class="row">
                         <div class="col-lg-2">
-                            <label>Type</label><span class="text-danger"> *</span>
+                            <label>Typ transakcie</label><span class="text-danger"> *</span>
                             <div class="form-group mb-2 selection">
                                 <select class="form-select" v-model="this.typeId" placeholder="Select the type">
                                     <option
@@ -56,10 +57,9 @@
                             </div>
                         </div>
 
-                        <div class="col-lg-2">
+                        <div class="col-lg-3">
                             <router-link :to="{name: 'addexpensestypes'}" class="btn btn-success button-add-type ">
-                                Create
-                                new type
+                                Vytvoriť nový typ transakcie
                             </router-link>
                         </div>
                     </div>
@@ -85,7 +85,7 @@
                         </div>
                     </div>
 
-                    <button type="submit" class="btn btn-primary mt-4 mb-4"> Update Post</button>
+                    <button type="submit" class="btn btn-primary mt-4 mb-4"> Upraviť</button>
 
                 </form>
 
