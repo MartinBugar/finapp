@@ -28,7 +28,7 @@
                     </div>
 
                     <div class="form-group mb-2">
-                        <label>Popis</label><span class="text-danger"> *</span>
+                        <label>Popis</label>
                         <textarea class="form-control" rows="3" v-model="description"
                                   placeholder="Enter post description"></textarea>
                     </div>
