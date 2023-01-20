@@ -37,14 +37,23 @@
                         <label>Suma</label><span class="text-danger"> *</span>
                         <textarea class="form-control" rows="1" v-model="value" placeholder="Enter value"></textarea>
                     </div>
-
-                    <div class="form-group mb-2 selection">
-                        <label>Typ transakcie</label><span class="text-danger"> *</span>
-                        <select class="form-select" v-model="this.typeId" placeholder="Select the type">
-                            <option v-for="(expensesType, key) in filteredAndSortedExpensesTypes(this.expensesTypes)"
-                                    :value="expensesType.id"> {{ expensesType.type }}
-                            </option>
-                        </select>
+                    <div class="row">
+                        <div class="col-lg-2">
+                            <label>Typ transakcie</label><span class="text-danger"> *</span>
+                            <div class="form-group mb-2 selection">
+                                <select class="form-select" v-model="this.typeId" placeholder="Select the type">
+                                    <option
+                                        v-for="(expensesType, key) in filteredAndSortedExpensesTypes(this.expensesTypes)"
+                                        :value="expensesType.id"> {{ expensesType.type }}
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-lg-3">
+                            <router-link :to="{name: 'addexpensestypes'}" class="btn btn-success button-add-type ">
+                                Vytvoriť nový typ transakcie
+                            </router-link>
+                        </div>
                     </div>
 
                     <div class="form-group mb-2">
@@ -73,8 +82,8 @@ export default {
             strSuccess: '',
             strError: '',
             imgPreview: null,
-            expensesTypes:[],
-            expensesType:[],
+            expensesTypes: [],
+            expensesType: [],
         }
     },
     beforeCreate() {

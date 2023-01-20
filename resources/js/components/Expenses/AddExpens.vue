@@ -5,7 +5,8 @@
                 <div class="d-flex justify-content-between pb-2 mb-2">
                     <h5 class="card-title">Vytvoriť nový výdaj </h5>
                     <div>
-                        <router-link :to="{name: 'expenses'}" class="btn btn-success buttonAddExpense">Zoznam výdajov</router-link>
+                        <router-link :to="{name: 'expenses'}" class="btn btn-success buttonAddExpense">Zoznam výdajov
+                        </router-link>
                     </div>
                 </div>
 
@@ -38,13 +39,24 @@
                                   placeholder="Enter the value"></textarea>
                     </div>
 
-                    <div class="form-group mb-2 selection">
-                        <label>Typ transakcie</label><span class="text-danger"> *</span>
-                        <select class="form-select" v-model="this.expensesType" placeholder="Select the type">
-                            <option v-for="(expensesType, key) in filteredAndSortedExpensesTypes(this.expensesTypes)"
-                                    :value="expensesType"> {{ expensesType.type }}
-                            </option>
-                        </select>
+                    <div class="row">
+                        <div class="col-lg-2">
+                            <label>Typ transakcie</label><span class="text-danger"> *</span>
+                            <div class="form-group mb-2 selection">
+                                <select class="form-select" v-model="this.expensesType" placeholder="Select the type">
+                                    <option
+                                        v-for="(expensesType, key) in filteredAndSortedExpensesTypes(this.expensesTypes)"
+                                        :value="expensesType"> {{ expensesType.type }}
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-3">
+                            <router-link :to="{name: 'addexpensestypes'}" class="btn btn-success button-add-type ">
+                                Vytvoriť nový typ transakcie
+                            </router-link>
+                        </div>
                     </div>
 
                     <div class="form-group mb-2">
