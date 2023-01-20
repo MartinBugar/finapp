@@ -23,7 +23,7 @@ class ExpensesController extends Controller
     {
         $request->validate([
             'name' => 'required',
-            'description' => 'required',
+            'description',
             'value' => 'required',
             'typeID' => 'required',
             'userID',
@@ -50,7 +50,7 @@ class ExpensesController extends Controller
         $expens = Expenses::find($id);
         $request->validate([
             'name' => 'required',
-            'description' => 'required',
+            'description',
             'value' => 'required',
             'typeID' => 'required',
             'userID',

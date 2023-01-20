@@ -19,7 +19,7 @@ return new class extends Migration
             $table->unsignedBigInteger('value');
             $table->string('name');
             $table->unsignedBigInteger('typeID');
-            $table->longText('description');
+            $table->longText('description')->nullable();
             $table->date('date');
             $table->timestamps();
             $table->string('pdf')->nullable();

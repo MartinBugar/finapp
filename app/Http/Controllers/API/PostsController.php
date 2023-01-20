@@ -19,7 +19,7 @@ class PostsController extends Controller
     {
         $request->validate([
             'name' => 'required',
-            'description' => 'required',
+            'description',
             'value' => 'required',
             'typeID' => 'required',
             'userID',
@@ -55,7 +55,7 @@ class PostsController extends Controller
         $post = Posts::find($id);
         $request->validate([
             'name' => 'required',
-            'description' => 'required',
+            'description',
             'value' => 'required',
             'typeID' => 'required',
             'date',

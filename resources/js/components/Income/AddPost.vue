@@ -27,14 +27,14 @@
                     </div>
 
                     <div class="form-group mb-2">
-                        <label>Popis</label><span class="text-danger"> *</span>
+                        <label>Popis</label>
                         <textarea class="form-control" rows="3" v-model="description"
                                   placeholder="Enter post description"></textarea>
                     </div>
 
                     <div class="form-group mb-2">
                         <label>Suma</label><span class="text-danger"> *</span>
-                        <textarea class="form-control" rows="3" v-model="value"
+                        <textarea class="form-control" rows="1" v-model="value"
                                   placeholder="Enter the value"></textarea>
                     </div>
 
@@ -65,7 +65,7 @@
 
 
                     <div class="form-gorup mb-2">
-                        <label>Pdf dokument</label><span class="text-danger"> *</span>
+                        <label>Pdf dokument</label>
                         <input type="file" class="form-control mb-2" v-on:change="onChange">
                         <div v-if="pdf">
                             <label v-bind:src="pdfPreview"/>

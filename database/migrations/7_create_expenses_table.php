@@ -18,8 +18,8 @@ return new class extends Migration
             $table->unsignedBigInteger('userID');
             $table->unsignedBigInteger('value');
             $table->string('name');
-            $table->longText('description');
-            $table->unsignedBigInteger('typeID')->nullable();
+            $table->longText('description')->nullable();
+            $table->unsignedBigInteger('typeID');
             $table->date('date');
             $table->timestamps();
             $table->foreign('userID')->references('id')->on('users');
