@@ -68,7 +68,7 @@
                             <a href="#" v-if="post.pdf" @click="downloadWithAxios(post)">{{ post.pdfName }}</a>
                         </td>
                         <td>{{ getTypeFromId(post.typeID) }}</td>
-                        <td>{{ post.value }} €</td>
+                        <td>{{ post.value.toFixed(2) }} €</td>
 
                         <td class="text-center buttons" v-if="userId === post.userID">
 
@@ -218,7 +218,7 @@ export default {
                     }
                 }
             });
-            return sum;
+            return sum.toFixed(2);
         },
         sumOfPostsPerMonthPerType(month, typeID) {
             let sum = 0;
@@ -233,7 +233,7 @@ export default {
                 }
             });
 
-            return sum;
+            return sum.toFixed(2);
         },
         filteredAndSortedExpensesTypes(expensestypes) {
             let both = [];

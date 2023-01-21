@@ -64,7 +64,7 @@
                         <td>{{ formatDate(expens.date) }}</td>
                         <td>{{ expens.description }}</td>
                         <td>{{ getTypeFromId(expens.typeID) }}</td>
-                        <td>{{ expens.value }} €</td>
+                        <td>{{ expens.value.toFixed(2) }} €</td>
 
                         <td class="text-center buttons" v-if="userId === expens.userID">
                             <router-link :to="{name:'editexpens', params: {id:expens.id}}"
@@ -244,7 +244,7 @@ export default {
                 }
             });
 
-            return sum;
+            return sum.toFixed(2);
         },
         sumOfExpensesPerMonth(month, year) {
             let sum = 0;
@@ -256,7 +256,7 @@ export default {
                     }
                 }
             });
-            return sum;
+            return sum.toFixed(2);
         },
         formatDate(value) {
             return moment(value).format('DD.MM.YYYY');

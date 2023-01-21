@@ -33,7 +33,8 @@
                         <td>{{ date.name }}</td>
                         <td class="text-center">{{ sumOfPostsFromMonth(date.id) }} €</td>
                         <td class="text-center">{{ sumOfExpensesFromMonth(date.id) }} €</td>
-                        <td class="text-center">{{ sumOfPostsFromMonth(date.id) - sumOfExpensesFromMonth(date.id) }} €
+                        <td class="text-center">
+                            {{ this.resultOfSum(sumOfPostsFromMonth(date.id), sumOfExpensesFromMonth(date.id)) }} €
                         </td>
                     </tr>
                     </tbody>
@@ -113,7 +114,7 @@ export default {
                     sum = sum + value.value;
                 }
             });
-            return sum;
+            return sum.toFixed(2);
         },
         sumOfIncomPerYear(year) {
             let sum = 0;
@@ -123,7 +124,7 @@ export default {
                     sum = sum + value.value;
                 }
             });
-            return sum;
+            return sum.toFixed(2);
         },
         sumOfExpenses() {
             let sum = 0;
@@ -142,7 +143,7 @@ export default {
                     sum = sum + value.value;
                 }
             });
-            return sum;
+            return sum.toFixed(2);
         },
         sumOfExpensesFromMonth(date1) {
             let sum = 0;
@@ -154,7 +155,12 @@ export default {
                     }
                 }
             });
-            return sum;
+            return sum.toFixed(2);
+        },
+
+        resultOfSum(post, expense) {
+            let sum = post - expense;
+            return sum.toFixed(2);
         },
         sumOfPostsFromMonth(date1) {
             let sum = 0;
@@ -166,7 +172,7 @@ export default {
                     }
                 }
             });
-            return sum;
+            return sum.toFixed(2);
         },
         filteredAndSortedPosts() {
             return this.posts.filter(post => {

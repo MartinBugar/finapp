@@ -1,15 +1,15 @@
 <template>
     <div class="container">
         <div class="row jutify-content-center">
-            <div class="col-md-8">
+            <div class="col-md-6" style="float:none; margin:auto;">
                 <div v-if="error !== null" class="alert alert-danger alert-dismissible fade show" role="alert">
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 
-                    <strong>{{error}}</strong>
+                    <strong>{{ error }}</strong>
                 </div>
 
                 <div class="card card-default cardRegister">
-                    <div class="card-header"><h5>Register New User</h5></div>
+                    <div class="card-header"><h5>Registrácia nového užívateľa</h5></div>
                     <div class="card-body">
                         <form>
 
@@ -17,7 +17,7 @@
                                 <label for="name" class="col-sm-4 col-form-label text-md-right">Name</label>
                                 <div class="col-md-8">
                                     <input id="name" type="text" class="form-control" v-model="name" required
-                                           autofocus autocomplete="off"  placeholder="Enter your name">
+                                           autofocus autocomplete="off" placeholder="Enter your name">
                                 </div>
                             </div>
 
@@ -50,7 +50,7 @@
                                 <div class="col-md-8 offset-md-4">
                                     <small class="text-muted">
                                         Have an account? Please
-                                        <router-link to="/login" >login</router-link>
+                                        <router-link to="/login">login</router-link>
                                     </small>
                                 </div>
                             </div>
@@ -66,29 +66,29 @@
 </template>
 
 <script>
-    export default {
-        data() {
-            return {
-                name: "",
-                email: "",
-                password: "",
-                error: null
-            }
-        },
+export default {
+    data() {
+        return {
+            name: "",
+            email: "",
+            password: "",
+            error: null
+        }
+    },
 
-        methods: {
-            handleSubmit(e) {
-                e.preventDefault()
-                if(this.password.length > 0) {
-                    this.$axios.get('/sanctum/csrf-cookie').then(response => {
-                        this.$axios.post('api/register', {
-                            name: this.name,
-                            email: this.email,
-                            password: this.password
-                        })
+    methods: {
+        handleSubmit(e) {
+            e.preventDefault()
+            if (this.password.length > 0) {
+                this.$axios.get('/sanctum/csrf-cookie').then(response => {
+                    this.$axios.post('api/register', {
+                        name: this.name,
+                        email: this.email,
+                        password: this.password
+                    })
                         .then(response => {
                             if (response.data.success) {
-                                 window.location.href = "/login"
+                                window.location.href = "/login"
                             } else {
                                 this.error = response.data.message
                             }
@@ -96,18 +96,18 @@
                         .catch(function (error) {
                             console.error(error);
                         });
-                    })
-                }
+                })
             }
-        },
-
-        beforeRouteEnter(to, from, next) {
-            if (window.Laravel.isLoggedin) {
-                return next('dashboard');
-            }
-            next();
         }
+    },
+
+    beforeRouteEnter(to, from, next) {
+        if (window.Laravel.isLoggedin) {
+            return next('dashboard');
+        }
+        next();
     }
+}
 </script>
 
 <style>

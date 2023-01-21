@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('loans', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('userID');
-            $table->unsignedBigInteger('value');
+            $table->unsignedDouble('value');
             $table->string('name');
             $table->longText('description');
             $table->unsignedBigInteger('typeID')->nullable();

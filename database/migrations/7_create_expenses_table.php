@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('expenses', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('userID');
-            $table->unsignedBigInteger('value');
+            $table->unsignedDouble('value');
             $table->string('name');
             $table->longText('description')->nullable();
             $table->unsignedBigInteger('typeID');
