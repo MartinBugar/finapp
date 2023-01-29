@@ -6,6 +6,9 @@
     <meta name="csrf-token" content="{{ csrf_token() }}"/>
     <title>{{env('APP_NAME')}}</title>
     <link href="{{ mix('css/app.css') }}" type="text/css" rel="stylesheet"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
 </head>
 <body>
     @if (Auth::check())

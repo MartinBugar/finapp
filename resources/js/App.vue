@@ -1,6 +1,6 @@
 <template>
-    <div class="bg ">
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="bg">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark main-nav">
             <div class="container">
                 <a class="navbar-brand" href="/">mojeFinancie</a>
                 <div class="navbar-nav" v-if="isLoggedIn">
@@ -49,33 +49,32 @@
         </nav>
         <router-view></router-view>
 
-
     </div>
 
 
-    <footer class="text-center text-white" style="background-color: #0a4275;">
-        <!-- Grid container -->
-        <div class="container p-4 pb-0">
-            <!-- Section: CTA -->
-            <section class="">
-                <p class="d-flex justify-content-center align-items-center">
+    <!--    <footer class="text-center text-white" style="background-color: #0a4275;">-->
+    <!--        &lt;!&ndash; Grid container &ndash;&gt;-->
+    <!--        <div class="container p-4 pb-0">-->
+    <!--            &lt;!&ndash; Section: CTA &ndash;&gt;-->
+    <!--            <section class="">-->
+    <!--                <p class="d-flex justify-content-center align-items-center">-->
 
-<!--                    <button type="button" class="btn btn-outline-light btn-rounded">-->
-<!--                        Register-->
-<!--                    </button>-->
-                </p>
-            </section>
-            <!-- Section: CTA -->
-        </div>
-        <!-- Grid container -->
+    <!--&lt;!&ndash;                    <button type="button" class="btn btn-outline-light btn-rounded">&ndash;&gt;-->
+    <!--&lt;!&ndash;                        Register&ndash;&gt;-->
+    <!--&lt;!&ndash;                    </button>&ndash;&gt;-->
+    <!--                </p>-->
+    <!--            </section>-->
+    <!--            &lt;!&ndash; Section: CTA &ndash;&gt;-->
+    <!--        </div>-->
+    <!--        &lt;!&ndash; Grid container &ndash;&gt;-->
 
-        <!-- Copyright -->
-        <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
-            © 2020 Copyright:
-            <a class="text-white" href="https://mojefinancie.eu">mojefinancie.eu</a>
-        </div>
-        <!-- Copyright -->
-    </footer>
+    <!--        &lt;!&ndash; Copyright &ndash;&gt;-->
+    <!--        <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">-->
+    <!--            © 2020 Copyright:-->
+    <!--            <a class="text-white" href="https://mojefinancie.eu">mojefinancie.eu</a>-->
+    <!--        </div>-->
+    <!--        &lt;!&ndash; Copyright &ndash;&gt;-->
+    <!--    </footer>-->
 
 
 </template>
@@ -120,14 +119,15 @@ export default {
 </script>
 
 <style>
-.logout {
-    padding-left: 50px;
-}
-
 .bg {
-    background: linear-gradient(90deg, #3A92C1 0%, #3A92C1 24%, #3A92C1 34%, #fff 100%);
+    background-color: var(--bg-secondary);
+    padding-top: 4vh;
     width: 100%;
     height: 100vh;
+}
+
+.logout {
+    padding-left: 50px;
 }
 
 .dropdown-loans-control {
@@ -153,5 +153,16 @@ export default {
     padding: 5px;
     /*padding-top: 5px;*/
 }
+
+.main-nav {
+
+    min-height: 60px;
+    width: 100vw;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 2;
+}
+
 
 </style>

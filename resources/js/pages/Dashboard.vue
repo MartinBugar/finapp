@@ -1,52 +1,54 @@
 <template>
-    <div class="container card mainCardDashboard">
-        <div class="card cardDashboard">
+    <div class="bg">
+        <div class="container card mainCardDashboard">
+            <div class="card cardDashboard">
 
-            <div class="container mt-2">
-                <h2>Dashboard panel uživateľa {{ name }} </h2>
-            </div>
-
-            <div class="container mt-1">
-                <div class="form-group mb-2 selection">
-                    <label>Rok</label><span class="text-danger"> *</span>
-                    <select class="form-select" @change="onChange($event)" v-model="year">
-                        <option>2021</option>
-                        <option>2022</option>
-                        <option>2023</option>
-                    </select>
+                <div class="container mt-2">
+                    <h2>Dashboard panel uživateľa {{ name }} </h2>
                 </div>
 
+                <div class="container mt-1">
+                    <div class="form-group mb-2 selection">
+                        <label>Rok</label><span class="text-danger"> *</span>
+                        <select class="form-select" @change="onChange($event)" v-model="year">
+                            <option>2021</option>
+                            <option>2022</option>
+                            <option>2023</option>
+                        </select>
+                    </div>
 
-                <table class="table table-hover table-sm table-bordered table-dark">
-                    <thead class="bg-dark text-light">
-                    <tr>
-                        <th width="100" class="text-center">Mesiac</th>
-                        <th class="text-center">Prijem</th>
-                        <th class="text-center">Vydaje</th>
-                        <th class="text-center">Zostatok</th>
 
-                    </tr>
-                    </thead>
-                    <tbody>
+                    <table class="table table-hover table-sm table-bordered table-dark">
+                        <thead class="bg-dark text-light">
+                        <tr>
+                            <th width="100" class="text-center">Mesiac</th>
+                            <th class="text-center">Prijem</th>
+                            <th class="text-center">Vydaje</th>
+                            <th class="text-center">Zostatok</th>
 
-                    <tr class="" v-for="(date) in dates" :key="date.id">
-                        <td>{{ date.name }}</td>
-                        <td class="text-center">{{ sumOfPostsFromMonth(date.id) }} €</td>
-                        <td class="text-center">{{ sumOfExpensesFromMonth(date.id) }} €</td>
-                        <td class="text-center">
-                            {{ this.resultOfSum(sumOfPostsFromMonth(date.id), sumOfExpensesFromMonth(date.id)) }} €
-                        </td>
-                    </tr>
-                    </tbody>
-                </table>
+                        </tr>
+                        </thead>
+                        <tbody>
 
-                <ul class="list-group mb-4">
-                    <li class="list-group-item">Príjem za rok {{ year }} : <strong> {{ sumOfIncomPerYear(year) }}
-                        € </strong></li>
-                    <li class="list-group-item">Výdaje za rok {{ year }} : <strong> {{ sumOfExpensesPerYear(year) }}
-                        € </strong></li>
-                </ul>
+                        <tr class="" v-for="(date) in dates" :key="date.id">
+                            <td>{{ date.name }}</td>
+                            <td class="text-center">{{ sumOfPostsFromMonth(date.id) }} €</td>
+                            <td class="text-center">{{ sumOfExpensesFromMonth(date.id) }} €</td>
+                            <td class="text-center">
+                                {{ this.resultOfSum(sumOfPostsFromMonth(date.id), sumOfExpensesFromMonth(date.id)) }} €
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
 
+                    <ul class="list-group mb-4">
+                        <li class="list-group-item">Príjem za rok {{ year }} : <strong> {{ sumOfIncomPerYear(year) }}
+                            € </strong></li>
+                        <li class="list-group-item">Výdaje za rok {{ year }} : <strong> {{ sumOfExpensesPerYear(year) }}
+                            € </strong></li>
+                    </ul>
+
+                </div>
             </div>
         </div>
     </div>

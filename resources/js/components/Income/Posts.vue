@@ -1,115 +1,117 @@
 <template>
-    <div class="container card mainCardPosts">
-        <div class="card cardPost">
-            <div class="card-body">
-                <div class="d-flex justify-content-between pb-2 mb-2">
-                    <h3 class="card-title"><strong>Príjem uživateľa {{ userName }} za mesiac
-                        {{ dates().at(month).name }} {{ year }}</strong></h3>
-                    <div>
-                        <button class="btn btn-success buttonNewPost" type="button"
-                                @click="this.$router.push('/posts/add')">Vytvoriť nový záznam o príjme
-                        </button>
-                    </div>
-                </div>
-
-                <div class="form-group mb-2 selection">
-                    <div class="row rowPost">
-                        <div class="col-sm-12 col-md-6 col-lg-6">
-                            <label>Mesiac</label><span class="text-danger"> </span>
-                            <select class="form-select" v-model="month">
-                                <option value="0">Január</option>
-                                <option value="1">Febrár</option>
-                                <option value="2">Marec</option>
-                                <option value="3">Apríl</option>
-                                <option value="4">Máj</option>
-                                <option value="5">Jún</option>
-                                <option value="6">Júl</option>
-                                <option value="7">August</option>
-                                <option value="8">September</option>
-                                <option value="9">Október</option>
-                                <option value="10">November</option>
-                                <option value="11">December</option>
-                            </select>
-                        </div>
-                        <div class="col-sm-12 col-md-6 col-lg-6">
-                            <label>Rok</label><span class="text-danger"> *</span>
-                            <select class="form-select" v-model="year">
-                                <option>2021</option>
-                                <option>2022</option>
-                                <option>2023</option>
-                            </select>
+    <div class="bg">
+        <div class="container card mainCardPosts">
+            <div class="card cardPost">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between pb-2 mb-2">
+                        <h3 class="card-title"><strong>Príjem uživateľa {{ userName }} za mesiac
+                            {{ dates().at(month).name }} {{ year }}</strong></h3>
+                        <div>
+                            <button class="btn btn-success buttonNewPost" type="button"
+                                    @click="this.$router.push('/posts/add')">Vytvoriť nový záznam o príjme
+                            </button>
                         </div>
                     </div>
+
+                    <div class="form-group mb-2 selection">
+                        <div class="row rowPost">
+                            <div class="col-sm-12 col-md-6 col-lg-6">
+                                <label>Mesiac</label><span class="text-danger"> </span>
+                                <select class="form-select" v-model="month">
+                                    <option value="0">Január</option>
+                                    <option value="1">Febrár</option>
+                                    <option value="2">Marec</option>
+                                    <option value="3">Apríl</option>
+                                    <option value="4">Máj</option>
+                                    <option value="5">Jún</option>
+                                    <option value="6">Júl</option>
+                                    <option value="7">August</option>
+                                    <option value="8">September</option>
+                                    <option value="9">Október</option>
+                                    <option value="10">November</option>
+                                    <option value="11">December</option>
+                                </select>
+                            </div>
+                            <div class="col-sm-12 col-md-6 col-lg-6">
+                                <label>Rok</label><span class="text-danger"> *</span>
+                                <select class="form-select" v-model="year">
+                                    <option>2021</option>
+                                    <option>2022</option>
+                                    <option>2023</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <table class="table table-hover table-sm table-bordered table-dark">
+                        <thead class="bg-dark text-light">
+                        <tr>
+                            <th width="50" class="text-center">#</th>
+                            <th width="100" class="text-center">User Id</th>
+                            <th>Názov</th>
+                            <th>Dátum</th>
+                            <th>Popis</th>
+                            <th class="text-center">Pdf</th>
+                            <th>Typ transakcie</th>
+                            <th>Suma</th>
+                            <th class="text-center" width="200">Actions</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr class="" v-for="(post, index) in filteredAndSortedForPost(posts, month)" :key="post.id">
+                            <td class="text-center">{{ index + 1 }}.</td>
+                            <td class="text-center">{{ post.userID }}.</td>
+                            <td>{{ post.name }}</td>
+                            <td>{{ formatDate(post.date) }}</td>
+                            <td>{{ post.description }}</td>
+                            <td class="text-center">
+                                <a href="#" v-if="post.pdf" @click="downloadWithAxios(post)">{{ post.pdfName }}</a>
+                            </td>
+                            <td>{{ getTypeFromId(post.typeID) }}</td>
+                            <td>{{ post.value.toFixed(2) }} €</td>
+
+                            <td class="text-center buttons" v-if="userId === post.userID">
+
+                                <router-link :to="{name:'editpost', params: {id:post.id}}"
+                                             class="btn btn-sm btn-warning">
+                                    Upraviť
+                                </router-link>
+                                <button class="btn btn-danger btn-sm m-1" @click="deletePost(post.id)">Odstrániť
+                                </button>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-3">
+                    <ul class="list-group mt-4 summary">
+                        <li class="list-group-item"
+                            v-for="(exptype, key) in filteredAndSortedExpensesTypes(this.expensesTypes)"
+                            :value="exptype.type">
+                            {{ exptype.type }}: <strong> {{ sumOfPostsPerMonthPerType(this.month, exptype.id) }}
+                            € </strong>
+                        </li>
+
+                        <li v-if="this.filteredAndSortedExpensesTypes(this.expensesTypes).length > 0"
+                            class="list-group-item postsSum">Prijmy spolu : <strong>
+                            {{ sumOfPostsPerMonth(this.month, this.year) }}
+                            € </strong>
+                        </li>
+                    </ul>
                 </div>
 
-
-                <table class="table table-hover table-sm table-bordered table-dark">
-                    <thead class="bg-dark text-light">
-                    <tr>
-                        <th width="50" class="text-center">#</th>
-                        <th width="100" class="text-center">User Id</th>
-                        <th>Názov</th>
-                        <th>Dátum</th>
-                        <th>Popis</th>
-                        <th class="text-center">Pdf</th>
-                        <th>Typ transakcie</th>
-                        <th>Suma</th>
-                        <th class="text-center" width="200">Actions</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr class="" v-for="(post, index) in filteredAndSortedForPost(posts, month)" :key="post.id">
-                        <td class="text-center">{{ index + 1 }}.</td>
-                        <td class="text-center">{{ post.userID }}.</td>
-                        <td>{{ post.name }}</td>
-                        <td>{{ formatDate(post.date) }}</td>
-                        <td>{{ post.description }}</td>
-                        <td class="text-center">
-                            <a href="#" v-if="post.pdf" @click="downloadWithAxios(post)">{{ post.pdfName }}</a>
-                        </td>
-                        <td>{{ getTypeFromId(post.typeID) }}</td>
-                        <td>{{ post.value.toFixed(2) }} €</td>
-
-                        <td class="text-center buttons" v-if="userId === post.userID">
-
-                            <router-link :to="{name:'editpost', params: {id:post.id}}"
-                                         class="btn btn-sm btn-warning">
-                                Upraviť
-                            </router-link>
-                            <button class="btn btn-danger btn-sm m-1" @click="deletePost(post.id)">Odstrániť</button>
-                        </td>
-                    </tr>
-                    </tbody>
-                </table>
+                <div v-if="this.filteredAndSortedExpensesTypes(this.expensesTypes).length > 0"
+                     class="col-lg-9 mt-4 chart card">
+                    <Pie :data="populateChartData()" :options="this.chartOptions"/>
+                </div>
 
             </div>
         </div>
-
-        <div class="row">
-            <div class="col-lg-3">
-                <ul class="list-group mt-4 summary">
-                    <li class="list-group-item"
-                        v-for="(exptype, key) in filteredAndSortedExpensesTypes(this.expensesTypes)"
-                        :value="exptype.type">
-                        {{ exptype.type }}: <strong> {{ sumOfPostsPerMonthPerType(this.month, exptype.id) }}
-                        € </strong>
-                    </li>
-
-                    <li v-if="this.filteredAndSortedExpensesTypes(this.expensesTypes).length > 0"
-                        class="list-group-item postsSum">Prijmy spolu : <strong>
-                        {{ sumOfPostsPerMonth(this.month, this.year) }}
-                        € </strong>
-                    </li>
-                </ul>
-            </div>
-
-            <div v-if="this.filteredAndSortedExpensesTypes(this.expensesTypes).length > 0"
-                 class="col-lg-9 mt-4 chart card">
-                <Pie :data="populateChartData()" :options="this.chartOptions"/>
-            </div>
-
-        </div>
-
     </div>
 </template>
 
@@ -354,14 +356,6 @@ export default {
 }
 
 .postsSum {
-    color: #238500;
-    /*background-color: #0b5ed7;*/
 }
-
-
-element.style {
-}
-
-
 
 </style>
