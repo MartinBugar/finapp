@@ -214,4 +214,10 @@ figure {
     font-family: "Bebas Neue";
     padding-top: 150px;
 }
+
+.header-list a {
+    font-size: 4rem;
+    text-decoration: none;
+    color:white;
+}
 </style>
