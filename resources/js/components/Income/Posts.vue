@@ -4,9 +4,7 @@
             <div class="card cardPost">
                 <div class="card-body">
                     <div class="d-flex justify-content-between pb-2 mb-2">
-                        <h3 class="card-title"><strong>Príjem uživateľa
-                            {{ userName }}
-                            za mesiac
+                        <h3 class="card-title"><strong>Príjem uživateľa {{ userName }} za mesiac
                             {{ dates().at(month).name }} {{ year }}</strong></h3>
                         <div>
                             <button class="btn btn-success buttonNewPost" type="button"
