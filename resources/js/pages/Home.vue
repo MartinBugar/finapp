@@ -16,10 +16,10 @@
                             <img class="image box" src="../../images/image1.jpg" alt=""/>
                         </figure>
                         <div class="content">
-                            <h2 class="header2">Majte svoje financie pod kontrolou</h2>
-                            <h3 class="header3">Celkový ročný prehľad</h3>
-                            <p class="paragraph">Tu bude nejaky text ktory potom este doplnim</p>
-                            <p class="paragraph">Toto je uplne iny text ktory tioez dopnim</p>
+                            <h2 class="header2">Spravte si prehľad svojich príjmov</h2>
+                            <h3 class="header3">Za daný mesiac</h3>
+                            <p class="paragraph">V tabuľke si môžete trackovať svoje príjmy</p>
+<!--                            <p class="paragraph">Toto je uplne iny text ktory tioez dopnim</p>-->
                         </div>
                     </article>
 
@@ -28,10 +28,10 @@
                             <img class="image box" src="./../../images/image2.jpg" alt=""/>
                         </figure>
                         <div class="content">
-                            <h2 class="header2">Toto je podnadpis 1</h2>
-                            <h3 class="header3">Toto bude podnapis 2</h3>
-                            <p class="paragraph">Tu bude nejaky text ktory potom este doplnim</p>
-                            <p class="paragraph">Toto je uplne iny text ktory tioez dopnim</p>
+                            <h2 class="header2">Spravte si prehľad svojich výdavkov</h2>
+                            <h3 class="header3">Za daný mesiac</h3>
+                            <p class="paragraph">V tabuľke si môžete trackovať svoje výdavky</p>
+<!--                            <p class="paragraph">Toto je uplne iny text ktory tioez dopnim</p>-->
                         </div>
                     </article>
 
@@ -40,10 +40,10 @@
                             <img class="image box" src="./../../images/image3.jpg" alt=""/>
                         </figure>
                         <div class="content">
-                            <h2 class="header2">Toto je podnadpis 1</h2>
-                            <h3 class="header3">Toto bude podnapis 2</h3>
-                            <p class="paragraph">Tu bude nejaky text ktory potom este doplnim</p>
-                            <p class="paragraph">Toto je uplne iny text ktory tioez dopnim</p>
+                            <h2 class="header2">Spravte si celkový prehľad svojich financií</h2>
+                            <h3 class="header3">Za daný rok</h3>
+                            <p class="paragraph">V tabuľke si môžete trackovať financie</p>
+<!--                            <p class="paragraph">Toto je uplne iny text ktory tioez dopnim</p>-->
                         </div>
                     </article>
                 </section>
@@ -212,12 +212,12 @@ figure {
 .header-list {
     color: white;
     font-family: "Bebas Neue";
-    padding-top: 130px;
+    padding-top: 120px;
 }
 
 .header-list a {
     font-size: 4rem;
     text-decoration: none;
-    color:white;
+    color: white;
 }
 </style>
