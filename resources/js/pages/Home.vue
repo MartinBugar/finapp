@@ -2,7 +2,7 @@
     <div class="all-home">
         <header class="home-header">
             <div class="container header-list ">
-                <h1><a href="#chart">Celkový prehľad</a></h1>
+                <h1><a href="#chart">Celkový prehľad financií</a></h1>
                 <h1><a href="#expenses">Správa výdajov</a></h1>
                 <h1><a href="#posts">Správa príjmov</a></h1>
 
@@ -16,8 +16,8 @@
                             <img class="image box" src="./../../images/image1.jpg" alt=""/>
                         </figure>
                         <div class="content">
-                            <h2 class="header2">Toto je podnadpis 1</h2>
-                            <h3 class="header3">Toto bude podnapis 2</h3>
+                            <h2 class="header2">Majte svoje financie pod kontrolou</h2>
+                            <h3 class="header3">Celkový ročný prehľad</h3>
                             <p class="paragraph">Tu bude nejaky text ktory potom este doplnim</p>
                             <p class="paragraph">Toto je uplne iny text ktory tioez dopnim</p>
                         </div>
