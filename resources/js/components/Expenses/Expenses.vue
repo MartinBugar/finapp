@@ -4,7 +4,9 @@
             <div class="card cardExpenses">
                 <div class="card-body">
                     <div class="d-flex justify-content-between pb-2 mb-2">
-                        <h3 class="card-title"><strong>Všetky výdaje užívateľa {{ userName }} za mesiac
+                        <h3 class="card-title"><strong>Všetky výdaje užívateľa
+                            {{ userName }}
+                            za mesiac
                             {{ dates().at(month).name }} {{ year }}</strong></h3>
                         <div>
                             <button class="btn btn-success buttonNewExpense" type="button"
@@ -48,7 +50,7 @@
                         <thead class="bg-dark text-light">
                         <tr>
                             <th width="50" class="text-center">#</th>
-                            <th width="100" class="text-center">User Id</th>
+                            <!--                            <th width="100" class="text-center">User Id</th>-->
                             <th>Názov</th>
                             <th>Dátum</th>
                             <th>Popis</th>
@@ -60,7 +62,7 @@
                         <tbody>
                         <tr class="" v-for="(expens, index) in filteredAndSorted(expenses, month)" :key="expens.id">
                             <td class="text-center">{{ index + 1 }}.</td>
-                            <td class="text-center">{{ expens.userID }}.</td>
+                            <!--                            <td class="text-center">{{ expens.userID }}.</td>-->
                             <td>{{ expens.name }}</td>
                             <td>{{ formatDate(expens.date) }}</td>
                             <td>{{ expens.description }}</td>

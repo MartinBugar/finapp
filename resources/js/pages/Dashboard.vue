@@ -4,7 +4,9 @@
             <div class="card cardDashboard">
 
                 <div class="container mt-2">
-                    <h2>Dashboard panel uživateľa {{ name }} </h2>
+                    <h2>Dashboard panel uživateľa
+                        {{ name }}
+                    </h2>
                 </div>
 
                 <div class="container mt-1">

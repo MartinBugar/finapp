@@ -2,18 +2,18 @@
     <div class="all-home">
         <header class="home-header">
             <div class="container header-list ">
-                <h1><a href="#chart">Celkový prehľad financií</a></h1>
-                <h1><a href="#expenses">Správa výdajov</a></h1>
-                <h1><a href="#posts">Správa príjmov</a></h1>
+                <h1><a href="#posts">Prehľad priíjmov</a></h1>
+                <h1><a href="#expenses">Prehľad výdajov</a></h1>
+                <h1><a href="#dashboard">Celkový prehľad financií</a></h1>
 
             </div>
         </header>
         <div class="home-page">
             <div class="container">
                 <section class="features">
-                    <article id="chart" class="feature">
+                    <article id="posts" class="feature">
                         <figure>
-                            <img class="image box" src="./../../images/image1.jpg" alt=""/>
+                            <img class="image box" src="../../images/image1.jpg" alt=""/>
                         </figure>
                         <div class="content">
                             <h2 class="header2">Majte svoje financie pod kontrolou</h2>
@@ -35,7 +35,7 @@
                         </div>
                     </article>
 
-                    <article id="posts" class="feature">
+                    <article id="dashboard" class="feature">
                         <figure>
                             <img class="image box" src="./../../images/image3.jpg" alt=""/>
                         </figure>
@@ -78,7 +78,7 @@ export default {
 
 :root {
     --bg-secondary: #021f2d;
-    --cl-accent: #FF00A3;
+    --cl-accent: #2071cc;
 }
 
 /*///////////////////////////*/
@@ -212,7 +212,7 @@ figure {
 .header-list {
     color: white;
     font-family: "Bebas Neue";
-    padding-top: 150px;
+    padding-top: 130px;
 }
 
 .header-list a {
