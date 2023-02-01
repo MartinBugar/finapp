@@ -10,7 +10,10 @@
                         <li class="list-group-item">Meno : <strong> {{ name }} </strong></li>
                         <li class="list-group-item">Email : <strong> {{ email }} </strong></li>
                     </ul>
-
+                    <router-link :to="{name:'edituserprofile', params: {id:this.userId}}"
+                                 class="btn btn-sm btn-warning">
+                        Upraviť
+                    </router-link>
                 </div>
             </div>
 
