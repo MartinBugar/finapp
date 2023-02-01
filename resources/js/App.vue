@@ -32,10 +32,25 @@
                     <!--                    </div>-->
 
                     <div class="logout">
-                        <button class="nav-item nav-link btn btn-primary btn-sm logout-button button-radius"
-                                style="cursor: pointer;"
-                                @click="logout">Odhlásenie
-                        </button>
+                        <!--                        <button class="nav-item nav-link btn btn-primary btn-sm logout-button button-radius"-->
+                        <!--                                style="cursor: pointer;"-->
+                        <!--                                @click="logout">Odhlásenie-->
+                        <!--                        </button>-->
+                        <div class="dropdown">
+                            <button
+                                class="nav-item nav-link btn btn-primary btn-sm logout-button button-radius dropdown-toggle"
+                                type="button" id="dropdownMenuButton1"
+                                data-bs-toggle="dropdown"
+                                aria-expanded="false">
+                                {{ this.name }}
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1" role="menu">
+                                <li v-for="option in userOptions" :key="option">
+                                    <a class="dropdown-item dropdown-loans" @click="onClick(option)"
+                                       href="javascript:void(0)">{{ option }}</a>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
 
                 </div>
@@ -89,9 +104,11 @@ export default {
     components: {},
     data() {
         return {
+            name: '',
             isLoggedIn: false,
             isLoggedInAsAdmin: false,
             options: ['Auto', 'Hypoteka', 'Krsna'],
+            userOptions: ['Profil', 'Odhlasiť'],
             value: '',
 
         }
@@ -102,14 +119,22 @@ export default {
     created() {
         if (window.Laravel.isLoggedin && window.Laravel.user.role === 'ADMIN') {
             this.isLoggedInAsAdmin = true
+            this.name = window.Laravel.user.name;
         }
         if (window.Laravel.isLoggedin) {
             this.isLoggedIn = true
+            this.name = window.Laravel.user.name;
         }
     },
     methods: {
-        logout(e) {
-            e.preventDefault()
+        onClick(option) {
+            if (option === 'Odhlasiť') {
+                this.logout();
+            }
+        },
+
+        logout() {
+            // e.preventDefault()
             this.$axios.get('/sanctum/csrf-cookie').then(response => {
                 this.$axios.post('/api/logout')
                     .then(response => {

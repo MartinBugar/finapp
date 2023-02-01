@@ -1,7 +1,7 @@
 <template>
     <div class="bg">
         <div class="container">
-            <h3> Vitajte {{ this.role }}</h3>
+            <h3 class="hello"> Vitaj {{ this.role }}</h3>
 
 
             <table class="table table-hover table-sm table-bordered table-dark">
@@ -19,7 +19,7 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr class="" v-for="(user, index) in this.users" :key="user.id">
+                <tr class="" v-for="(user, index) in this.sortedUsers()" :key="user.id">
                     <td class="text-center">{{ index + 1 }}.</td>
                     <!--                            <td class="text-center">{{ post.userID }}.</td>-->
                     <td>{{ user.id }}</td>
@@ -70,14 +70,18 @@ export default {
                 });
         });
 
-        if (window.Laravel.user) {
+        if (window.Laravel.isLoggedin && window.Laravel.user.role === 'ADMIN') {
             this.userId = window.Laravel.user.id;
             this.name = window.Laravel.user.name;
             this.email = window.Laravel.user.email;
             this.role = window.Laravel.user.role;
         }
     },
-    methods: {},
+    methods: {
+        sortedUsers() {
+            return this.users.sort((a, b) => a.id - b.id);
+        }
+    },
 
     beforeRouteEnter(to, from, next) {
         if (window.Laravel.isLoggedin && window.Laravel.user.role === 'ADMIN') {
@@ -102,6 +106,10 @@ export default {
     margin-top: 30px;
     margin-bottom: 30px;
     border-radius: 18px;
+}
+
+.hello {
+    color: white;
 }
 
 /*.bg-main-page-top {*/
