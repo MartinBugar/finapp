@@ -1,7 +1,14 @@
 <template>
     <div class="container">
-        <div class="card cardEditExpense">
+        <div class="card cardEditUserProfil">
             <div class="card-body">
+                <div class="d-flex justify-content-between pb-2 mb-2">
+                    <h3 class="nadpis">Upraviť data profilu</h3>
+                    <div>
+                        <router-link :to="{name: 'userprofile'}" class="btn btn-success buttonEditExpens">Späť na Profil
+                        </router-link>
+                    </div>
+                </div>
 
                 <div v-if="strSuccess" class="alert alert-success alert-dismissible fade show" role="alert">
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
@@ -107,12 +114,14 @@ export default {
 </script>
 
 <style>
-.cardEditExpense {
-    margin-top: 30px;
+
+
+.buttonEditExpens {
     border-radius: 18px;
 }
 
-.buttonEditExpens {
+.cardEditUserProfil {
+    margin-top: 40px;
     border-radius: 18px;
 }
 </style>

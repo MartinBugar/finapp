@@ -1,35 +1,45 @@
 <template>
-    <div class="bg">
-        <div class="container card mainCardUserProfile">
+    <div class="bg position-fixed">
+        <div class="container ">
             <div class="card cardUserProfile">
-                <div class="card-body">
-                    <h2>Profil užívateľa {{ name }}</h2>
+                <div class="row login-center">
+                    <div class="col-md-4">
+                        <div class="card-body">
+                            <h2 class="nadpis">Profil užívateľa {{ name }}</h2>
 
-                    <ul class="list-group mb-4">
-                        <li class="list-group-item">User id : <strong> {{ userId }} </strong></li>
-                        <li class="list-group-item">Meno : <strong> {{ name }} </strong></li>
-                        <li class="list-group-item">Email : <strong> {{ email }} </strong></li>
-                    </ul>
-                    <router-link :to="{name:'edituserprofile', params: {id:this.userId}}"
-                                 class="btn btn-sm btn-warning">
-                        Upraviť
-                    </router-link>
-                    <button class="btn btn-danger btn-sm m-1" @click="deleteUser(this.userId)">Odstrániť
-                    </button>
+                            <ul class="list-group mb-4">
+                                <li class="list-group-item">User id : <strong> {{ userId }} </strong></li>
+                                <li class="list-group-item">Meno : <strong> {{ name }} </strong></li>
+                                <li class="list-group-item">Email : <strong> {{ email }} </strong></li>
+                                <li class="list-group-item">Účet vytvorený : <strong> {{ formatDate(createdAt) }} </strong></li>
+                                <li class="list-group-item">Účet upravený : <strong> {{ formatDate(updatedAt) }} </strong></li>
+                            </ul>
+                            <router-link :to="{name:'edituserprofile', params: {id:this.userId}}"
+                                         class="btn btn-sm btn-warning">
+                                Upraviť
+                            </router-link>
+                            <button class="btn btn-danger btn-sm m-1" @click="deleteUser(this.userId)">Odstrániť
+                                užívateľský účet
+                            </button>
+                        </div>
+                    </div>
                 </div>
             </div>
-
         </div>
     </div>
 </template>
 
 <script>
+import moment from "moment/moment";
+
 export default {
     data() {
         return {
             name: '',
             email: '',
             userId: '',
+            createdAt: '',
+            updatedAt: '',
             users: [],
         }
     },
@@ -58,6 +68,8 @@ export default {
                     console.log(response.data)
                     this.name = response.data['name'];
                     this.email = response.data['email'];
+                    this.createdAt = response.data['created_at'];
+                    this.updatedAt = response.data['updated_at'];
 
                 })
                 .catch(function (error) {
@@ -67,6 +79,9 @@ export default {
 
     },
     methods: {
+        formatDate(value) {
+            return moment(value).format('DD.MM.YYYY');
+        },
         deleteUser(id) {
             this.$axios.get('/sanctum/csrf-cookie').then(response => {
                 let existingObj = this;
@@ -99,16 +114,13 @@ export default {
 </script>
 
 <style>
-.mainCardUserProfile {
-    margin-top: 10px;
-    --bs-bg-opacity: 1;
-    background-color: rgba(var(--bs-dark-rgb), var(--bs-bg-opacity)) !important;
-    border-radius: 18px;
-    padding-bottom: 20px;
-}
-
 .cardUserProfile {
     margin-top: 30px;
     border-radius: 18px;
+}
+
+.nadpis {
+    font-size: 2rem;
+    font-family: "Bebas Neue",serif;
 }
 </style>

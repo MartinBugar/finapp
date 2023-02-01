@@ -34,7 +34,7 @@
                     <!--                                  placeholder="Enter post description"></textarea>-->
                     <!--                    </div>-->
 
-                    <button type="submit" class="btn btn-primary mt-4 mb-4"> Upraviť </button>
+                    <button type="submit" class="btn btn-primary mt-4 mb-4"> Upraviť</button>
                 </form>
             </div>
         </div>
