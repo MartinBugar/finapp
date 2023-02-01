@@ -131,6 +131,10 @@ export default {
             if (option === 'Odhlasiť') {
                 this.logout();
             }
+
+            if (option === "Profil") {
+                window.location.href = "/userprofile";
+            }
         },
 
         logout() {

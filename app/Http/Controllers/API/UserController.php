@@ -62,7 +62,6 @@ class UserController extends Controller
 
     }
 
-
     public function logout()
     {
         try {
@@ -80,5 +79,42 @@ class UserController extends Controller
         ];
 
         return response()->json($response);
+    }
+
+    public function index()
+    {
+        $posts = User::all()->toArray();
+        return array_reverse($posts);
+    }
+
+    public function edit($id)
+    {
+        $post = User::find($id);
+        return response()->json($post);
+    }
+
+    public function update($id, Request $request)
+    {
+        $user = User::find($id);
+        $request->validate([
+            'name',
+
+        ]);
+
+
+        $input = $request->all();
+
+        $user->update($input);
+
+        return response()->json(['success' => 'User update successfully']);
+    }
+
+    public function delete($id)
+    {
+        $user = User::find($id);
+
+        $user->delete();
+        return response()->json(['success' => 'User deleted successfully']);
+
     }
 }

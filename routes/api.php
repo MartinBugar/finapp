@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\API\AdminController;
 use App\Http\Controllers\API\ExpensesController;
 use App\Http\Controllers\API\ExpensesTypesController;
 use App\Http\Controllers\API\LoansController;
@@ -24,13 +25,16 @@ use App\Http\Controllers\API\UserController;
 //     return $request->user();
 // });
 
-Route::post('adminlogin', [\App\Http\Controllers\API\AdminController::class, 'adminlogin']);
+Route::post('adminlogin', [AdminController::class, 'adminlogin']);
 Route::post('login', [UserController::class, 'login']);
 Route::post('register', [UserController::class, 'register']);
 Route::post('logout', [UserController::class, 'logout'])->middleware('auth:sanctum');
 
 Route::group(['prefix' => 'users','middleware' => 'auth:sanctum'], function() {
-    Route::get('/', [\App\Http\Controllers\API\AdminController::class,'index']);
+    Route::get('/', [AdminController::class,'index']);
+    Route::post('update/{id}', [UserController::class,'update']);
+    Route::get('edit/{id}', [UserController::class,'edit']);
+    Route::delete('delete/{id}', [UserController::class,'delete']);
 });
 
 Route::group(['prefix' => 'posts','middleware' => 'auth:sanctum'], function() {

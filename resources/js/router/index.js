@@ -18,12 +18,18 @@ import Loans from "../components/loans/Loans.vue";
 import AddLoan from "../components/loans/AddLoan.vue";
 import EditLoan from "../components/loans/EditLoan.vue";
 import AdminPanel from "../pages/AdminPanel.vue";
+import UserProfile from "../components/UserProfile/UserProfile.vue";
 
 export const routes = [
     {
         name: 'adminlogin',
         path: '/adminlogin',
         component: AdminLogin
+    },
+    {
+        name: 'userprofile',
+        path: '/userprofile',
+        component: UserProfile
     },
     {
         name: 'adminpanel',
