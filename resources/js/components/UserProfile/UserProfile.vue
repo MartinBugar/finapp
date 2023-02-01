@@ -6,9 +6,11 @@
                     <h2>Profil užívateľa {{ name }}</h2>
 
                     <ul class="list-group mb-4">
+                        <li class="list-group-item">User id : <strong> {{ userId }} </strong></li>
                         <li class="list-group-item">Meno : <strong> {{ name }} </strong></li>
                         <li class="list-group-item">Email : <strong> {{ email }} </strong></li>
                     </ul>
+
                 </div>
             </div>
 
@@ -20,12 +22,15 @@
 export default {
     data() {
         return {
-            id: '',
             name: '',
             email: '',
+            userId: '',
         }
     },
     beforeCreate() {
+
+    },
+    created() {
         if (window.Laravel.user) {
             this.userId = window.Laravel.user.id;
         }
@@ -42,9 +47,6 @@ export default {
                     console.log(error);
                 });
         })
-    },
-    created() {
-
 
     },
     methods: {},
