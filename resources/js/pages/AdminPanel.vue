@@ -1,12 +1,44 @@
 <template>
     <div class="bg">
-        <div class="container card mainCardDashboard">
-            <div class="card cardDashboard">
+        <div class="container">
+            <h3> Vitajte {{ this.role }}</h3>
 
 
-                <h1>{{ this.role }}</h1>
+            <table class="table table-hover table-sm table-bordered table-dark">
+                <thead class="bg-dark text-light">
+                <tr>
+                    <th width="50" class="text-center">#</th>
+                    <!--                            <th width="100" class="text-center">User Id</th>-->
+                    <th>user ID</th>
+                    <th>name</th>
+                    <th>email</th>
 
-            </div>
+                    <th>role</th>
+
+                    <!--                        <th class="text-center" width="200">Actions</th>-->
+                </tr>
+                </thead>
+                <tbody>
+                <tr class="" v-for="(user, index) in this.users" :key="user.id">
+                    <td class="text-center">{{ index + 1 }}.</td>
+                    <!--                            <td class="text-center">{{ post.userID }}.</td>-->
+                    <td>{{ user.id }}</td>
+                    <td>{{ user.name }}</td>
+                    <td>{{ user.email }}</td>
+                    <td>{{ user.role }}</td>
+
+
+                    <!--                            <router-link :to="{name:'editpost', params: {id:post.id}}"-->
+                    <!--                                         class="btn btn-sm btn-warning">-->
+                    <!--                                Upraviť-->
+                    <!--                            </router-link>-->
+                    <!--                            <button class="btn btn-danger btn-sm m-1" @click="deletePost(post.id)">Odstrániť-->
+                    <!--                            </button>-->
+
+                </tr>
+                </tbody>
+            </table>
+
         </div>
     </div>
 </template>
@@ -23,9 +55,21 @@ export default {
             name: null,
             role: null,
             email: null,
+            users: [],
         }
     },
     created() {
+        this.$axios.get('/sanctum/csrf-cookie').then(response => {
+            this.$axios.get('/api/users')
+                .then(response => {
+                    console.log(response.data)
+                    this.users = response.data;
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+        });
+
         if (window.Laravel.user) {
             this.userId = window.Laravel.user.id;
             this.name = window.Laravel.user.name;

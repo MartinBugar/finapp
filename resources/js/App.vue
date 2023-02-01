@@ -96,8 +96,11 @@ export default {
 
         }
     },
+    beforeCreate() {
+
+    },
     created() {
-        if (window.Laravel.isLoggedin && window.Laravel.user.role ==='ADMIN') {
+        if (window.Laravel.isLoggedin && window.Laravel.user.role === 'ADMIN') {
             this.isLoggedInAsAdmin = true
         }
         if (window.Laravel.isLoggedin) {

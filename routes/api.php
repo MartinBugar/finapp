@@ -29,6 +29,10 @@ Route::post('login', [UserController::class, 'login']);
 Route::post('register', [UserController::class, 'register']);
 Route::post('logout', [UserController::class, 'logout'])->middleware('auth:sanctum');
 
+Route::group(['prefix' => 'users','middleware' => 'auth:sanctum'], function() {
+    Route::get('/', [\App\Http\Controllers\API\AdminController::class,'index']);
+});
+
 Route::group(['prefix' => 'posts','middleware' => 'auth:sanctum'], function() {
     Route::get('/', [PostsController::class,'index']);
     Route::post('add', [PostsController::class,'add']);

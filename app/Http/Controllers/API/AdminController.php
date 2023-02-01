@@ -3,12 +3,20 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class AdminController extends Controller
 {
+
+    public function index()
+    {
+        $users = User::all()->toArray();
+        return array_reverse($users);
+    }
+
     public function adminlogin(Request $request)
     {
         $credentials = [
