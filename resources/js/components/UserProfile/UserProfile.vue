@@ -38,31 +38,6 @@ export default {
     },
     methods: {
 
-        updateUser(e) {
-            this.$axios.get('/sanctum/csrf-cookie').then(response => {
-                let existingObj = this;
-                const config = {
-                    headers: {
-                        'content-type': 'multipart/form-data'
-                    }
-                }
-
-                const formData = new FormData();
-                formData.append('name', this.name);
-
-
-                this.$axios.post(`/api/users/update/${1}`, formData, config)
-                    .then(response => {
-                        existingObj.strError = "";
-                        existingObj.strSuccess = response.data.success;
-                    })
-                    .catch(function (error) {
-                        existingObj.strSuccess = "";
-                        existingObj.strError = error.response.data.message;
-                    });
-            });
-        }
-
     },
     beforeRouteEnter(to, from, next) {
         if (!window.Laravel.isLoggedin) {
