@@ -14,6 +14,8 @@
                                  class="btn btn-sm btn-warning">
                         Upraviť
                     </router-link>
+                    <button class="btn btn-danger btn-sm m-1" @click="deleteUser(this.userId)">Odstrániť
+                    </button>
                 </div>
             </div>
 
@@ -28,6 +30,7 @@ export default {
             name: '',
             email: '',
             userId: '',
+            users: [],
         }
     },
     beforeCreate() {
@@ -37,6 +40,17 @@ export default {
         if (window.Laravel.user) {
             this.userId = window.Laravel.user.id;
         }
+
+        this.$axios.get('/sanctum/csrf-cookie').then(response => {
+            this.$axios.get('/api/users')
+                .then(response => {
+                    console.log(response.data)
+                    this.users = response.data;
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+        });
 
         this.$axios.get('/sanctum/csrf-cookie').then(response => {
             this.$axios.get(`/api/users/edit/${this.userId}`)
@@ -52,7 +66,28 @@ export default {
         })
 
     },
-    methods: {},
+    methods: {
+        deleteUser(id) {
+            this.$axios.get('/sanctum/csrf-cookie').then(response => {
+                let existingObj = this;
+
+                if (confirm("Do you really want to delete this data?")) {
+                    this.$axios.delete(`/api/users/delete/${id}`)
+                        .then(response => {
+                            let i = this.users.map(item => item.id).indexOf(id); // find index of your object
+                            this.users.splice(i, 1);
+                            existingObj.strError = "";
+                            existingObj.strSuccess = response.data.success;
+                            window.location.href = "/";
+                        })
+                        .catch(function (error) {
+                            existingObj.strError = "";
+                            existingObj.strSuccess = error.response.data.message;
+                        });
+                }
+            });
+        }
+    },
     beforeRouteEnter(to, from, next) {
         if (!window.Laravel.isLoggedin) {
             window.location.href = "/";

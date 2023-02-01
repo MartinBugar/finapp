@@ -112,7 +112,6 @@ class UserController extends Controller
     public function delete($id)
     {
         $user = User::find($id);
-
         $user->delete();
         return response()->json(['success' => 'User deleted successfully']);
 

@@ -22,8 +22,8 @@ return new class extends Migration
             $table->unsignedBigInteger('typeID');
             $table->date('date');
             $table->timestamps();
-            $table->foreign('userID')->references('id')->on('users');
-            $table->foreign('typeID')->references('id')->on('expenses_types');
+            $table->foreign('userID')->references('id')->on('users')->onDelete('cascade');;
+            $table->foreign('typeID')->references('id')->on('expenses_types')->onDelete('cascade');;
         });
     }
 
