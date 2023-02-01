@@ -3,6 +3,7 @@ import {createWebHistory, createRouter} from "vue-router";
 import Home from '../pages/Home';
 import Register from '../pages/Register';
 import Login from '../pages/Login';
+import AdminLogin from '../pages/AdminLogin.vue';
 import Dashboard from '../pages/Dashboard';
 import Posts from '../components/Income/Posts.vue';
 import EditPost from '../components/Income/EditPost.vue';
@@ -18,6 +19,11 @@ import AddLoan from "../components/loans/AddLoan.vue";
 import EditLoan from "../components/loans/EditLoan.vue";
 
 export const routes = [
+    {
+        name: 'adminlogin',
+        path: '/adminlogin',
+        component: AdminLogin
+    },
     {
         name: 'home',
         path: '/',

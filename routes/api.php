@@ -24,7 +24,7 @@ use App\Http\Controllers\API\UserController;
 //     return $request->user();
 // });
 
-
+Route::post('adminlogin', [\App\Http\Controllers\API\AdminController::class, 'adminlogin']);
 Route::post('login', [UserController::class, 'login']);
 Route::post('register', [UserController::class, 'register']);
 Route::post('logout', [UserController::class, 'logout'])->middleware('auth:sanctum');
