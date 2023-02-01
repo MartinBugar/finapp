@@ -75,6 +75,7 @@ export default {
             name: "",
             email: "",
             password: "",
+            role: '',
             error: null
         }
     },
@@ -87,7 +88,8 @@ export default {
                     this.$axios.post('api/register', {
                         name: this.name,
                         email: this.email,
-                        password: this.password
+                        password: this.password,
+                        role: 'USER'
                     })
                         .then(response => {
                             if (response.data.success) {

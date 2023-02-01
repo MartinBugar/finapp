@@ -19,7 +19,7 @@
                             <h2 class="header2">Spravte si prehľad svojich príjmov</h2>
                             <h3 class="header3">Za daný mesiac</h3>
                             <p class="paragraph">V tabuľke si môžete trackovať svoje príjmy</p>
-<!--                            <p class="paragraph">Toto je uplne iny text ktory tioez dopnim</p>-->
+                            <!--                            <p class="paragraph">Toto je uplne iny text ktory tioez dopnim</p>-->
                         </div>
                     </article>
 
@@ -31,7 +31,7 @@
                             <h2 class="header2">Spravte si prehľad svojich výdavkov</h2>
                             <h3 class="header3">Za daný mesiac</h3>
                             <p class="paragraph">V tabuľke si môžete trackovať svoje výdavky</p>
-<!--                            <p class="paragraph">Toto je uplne iny text ktory tioez dopnim</p>-->
+                            <!--                            <p class="paragraph">Toto je uplne iny text ktory tioez dopnim</p>-->
                         </div>
                     </article>
 
@@ -43,7 +43,7 @@
                             <h2 class="header2">Spravte si celkový prehľad svojich financií</h2>
                             <h3 class="header3">Za daný rok</h3>
                             <p class="paragraph">V tabuľke si môžete trackovať financie</p>
-<!--                            <p class="paragraph">Toto je uplne iny text ktory tioez dopnim</p>-->
+                            <!--                            <p class="paragraph">Toto je uplne iny text ktory tioez dopnim</p>-->
                         </div>
                     </article>
                 </section>
