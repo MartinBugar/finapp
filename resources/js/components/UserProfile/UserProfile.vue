@@ -1,7 +1,18 @@
 <template>
-    <div class="container">
-        <h1 class="aa">{{name}}</h1>
-        <h1 class="aa">{{email}}</h1>
+    <div class="bg">
+        <div class="container card mainCardUserProfile">
+            <div class="card cardUserProfile">
+                <div class="card-body">
+                    <h2>Profil užívateľa {{ name }}</h2>
+
+                    <ul class="list-group mb-4">
+                        <li class="list-group-item">Meno : <strong> {{ name }} </strong></li>
+                        <li class="list-group-item">Email : <strong> {{ email }} </strong></li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
     </div>
 </template>
 
@@ -11,7 +22,7 @@ export default {
         return {
             id: '',
             name: '',
-            email:'',
+            email: '',
         }
     },
     beforeCreate() {
@@ -36,9 +47,7 @@ export default {
 
 
     },
-    methods: {
-
-    },
+    methods: {},
     beforeRouteEnter(to, from, next) {
         if (!window.Laravel.isLoggedin) {
             window.location.href = "/";
@@ -50,17 +59,16 @@ export default {
 </script>
 
 <style>
-.cardEditExpense {
+.mainCardUserProfile {
+    margin-top: 10px;
+    --bs-bg-opacity: 1;
+    background-color: rgba(var(--bs-dark-rgb), var(--bs-bg-opacity)) !important;
+    border-radius: 18px;
+    padding-bottom: 20px;
+}
+
+.cardUserProfile {
     margin-top: 30px;
     border-radius: 18px;
-}
-
-.buttonEditExpens {
-    border-radius: 18px;
-}
-
-.aa {
-    margin-top: 50px;
-    color: white;
 }
 </style>
