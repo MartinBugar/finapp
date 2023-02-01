@@ -3,6 +3,9 @@
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark main-nav">
             <div class="container">
                 <a class="navbar-brand" href="/">mojeFinancie</a>
+                <div class="navbar-nav" v-if="isLoggedInAsAdmin">
+                    <router-link to="/adminpanel" class="nav-item nav-link">admin panel</router-link>
+                </div>
                 <div class="navbar-nav" v-if="isLoggedIn">
                     <router-link to="/dashboard" class="nav-item nav-link">Dashboard</router-link>
                     <router-link to="/posts" class="nav-item nav-link">Príjem</router-link>
@@ -87,12 +90,16 @@ export default {
     data() {
         return {
             isLoggedIn: false,
+            isLoggedInAsAdmin: false,
             options: ['Auto', 'Hypoteka', 'Krsna'],
             value: '',
 
         }
     },
     created() {
+        if (window.Laravel.isLoggedin && window.Laravel.user.role ==='ADMIN') {
+            this.isLoggedInAsAdmin = true
+        }
         if (window.Laravel.isLoggedin) {
             this.isLoggedIn = true
         }

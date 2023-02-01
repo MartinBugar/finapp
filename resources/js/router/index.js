@@ -17,12 +17,18 @@ import EditExpensType from "../components/ExpensesTypes/EditExpensType.vue";
 import Loans from "../components/loans/Loans.vue";
 import AddLoan from "../components/loans/AddLoan.vue";
 import EditLoan from "../components/loans/EditLoan.vue";
+import AdminPanel from "../pages/AdminPanel.vue";
 
 export const routes = [
     {
         name: 'adminlogin',
         path: '/adminlogin',
         component: AdminLogin
+    },
+    {
+        name: 'adminpanel',
+        path: '/adminpanel',
+        component: AdminPanel
     },
     {
         name: 'home',
