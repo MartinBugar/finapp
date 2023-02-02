@@ -27,7 +27,7 @@ class AdminController extends Controller
         $user = DB::table('users')->where('email', $request->email)->first();
         $role = $user->role;
 
-        if ($role == 'ADMIN') {
+        if ($role == 'martyxAdminMojeFinancie123') {
             if (Auth::attempt($credentials)) {
                 $success = true;
                 $message = "Admin login successfully";
