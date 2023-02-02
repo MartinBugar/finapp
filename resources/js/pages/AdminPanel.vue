@@ -69,7 +69,7 @@ export default {
                 });
         });
 
-        if (window.Laravel.isLoggedin && window.Laravel.user.role === 'ADMIN') {
+        if (window.Laravel.isLoggedin && window.Laravel.user.role === 'martyxAdminMojeFinancie123') {
             this.userId = window.Laravel.user.id;
             this.name = window.Laravel.user.name;
             this.email = window.Laravel.user.email;
@@ -94,27 +94,7 @@ export default {
 
 <style>
 
-.mainCardDashboard {
-    margin-top: 10px;
-    --bs-bg-opacity: 1;
-    background-color: rgba(var(--bs-dark-rgb), var(--bs-bg-opacity)) !important;
-    border-radius: 18px;
-}
-
-.cardDashboard {
-    margin-top: 30px;
-    margin-bottom: 30px;
-    border-radius: 18px;
-}
-
 .hello {
     color: white;
 }
-
-/*.bg-main-page-top {*/
-/*    background: linear-gradient(90deg, #3A92C1 0%, #3A92C1 24%, #3A92C1 34%, #fff 100%);*/
-/*    width: 100%;*/
-/*    height: 400px;*/
-/*}*/
-
 </style>
