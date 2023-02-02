@@ -11,8 +11,12 @@
                                 <li class="list-group-item">User id : <strong> {{ userId }} </strong></li>
                                 <li class="list-group-item">Meno : <strong> {{ name }} </strong></li>
                                 <li class="list-group-item">Email : <strong> {{ email }} </strong></li>
-                                <li class="list-group-item">Účet vytvorený : <strong> {{ formatDate(createdAt) }} </strong></li>
-                                <li class="list-group-item">Účet upravený : <strong> {{ formatDate(updatedAt) }} </strong></li>
+                                <li class="list-group-item">Účet vytvorený : <strong> {{
+                                        formatDate(createdAt)
+                                    }} </strong></li>
+                                <li class="list-group-item">Účet upravený : <strong> {{
+                                        formatDate(updatedAt)
+                                    }} </strong></li>
                             </ul>
                             <router-link :to="{name:'edituserprofile', params: {id:this.userId}}"
                                          class="btn btn-sm btn-warning">
@@ -44,39 +48,38 @@ export default {
         }
     },
     beforeCreate() {
-
+        //
     },
     created() {
-        if (window.Laravel.user) {
+        if (window.Laravel.user && window.Laravel.isLoggedin) {
             this.userId = window.Laravel.user.id;
+
+            this.$axios.get('/sanctum/csrf-cookie').then(response => {
+                this.$axios.get('/api/users')
+                    .then(response => {
+                        this.users = response.data;
+                    })
+                    .catch(function (error) {
+                        console.log(error);
+                    });
+            });
+
+            this.$axios.get('/sanctum/csrf-cookie').then(response => {
+                this.$axios.get(`/api/users/edit/${this.userId}`)
+                    .then(response => {
+                        this.name = response.data['name'];
+                        this.email = response.data['email'];
+                        this.createdAt = response.data['created_at'];
+                        this.updatedAt = response.data['updated_at'];
+
+                    })
+                    .catch(function (error) {
+                        console.log(error);
+                    });
+            });
+        } else {
+            window.location.href = "/";
         }
-
-        this.$axios.get('/sanctum/csrf-cookie').then(response => {
-            this.$axios.get('/api/users')
-                .then(response => {
-                    console.log(response.data)
-                    this.users = response.data;
-                })
-                .catch(function (error) {
-                    console.log(error);
-                });
-        });
-
-        this.$axios.get('/sanctum/csrf-cookie').then(response => {
-            this.$axios.get(`/api/users/edit/${this.userId}`)
-                .then(response => {
-                    console.log(response.data)
-                    this.name = response.data['name'];
-                    this.email = response.data['email'];
-                    this.createdAt = response.data['created_at'];
-                    this.updatedAt = response.data['updated_at'];
-
-                })
-                .catch(function (error) {
-                    console.log(error);
-                });
-        })
-
     },
     methods: {
         formatDate(value) {
@@ -103,11 +106,16 @@ export default {
             });
         }
     },
+
     beforeRouteEnter(to, from, next) {
-        if (!window.Laravel.isLoggedin) {
+
+
+        if (window.Laravel.isLoggedin) {
+            next();
+        } else {
             window.location.href = "/";
         }
-        next();
+
     }
 }
 
@@ -121,6 +129,6 @@ export default {
 
 .nadpis {
     font-size: 2rem;
-    font-family: "Bebas Neue",serif;
+    font-family: "Bebas Neue", serif;
 }
 </style>
