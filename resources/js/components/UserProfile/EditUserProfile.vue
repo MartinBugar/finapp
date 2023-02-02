@@ -20,7 +20,6 @@
                     <strong>{{ strError }}</strong>
                 </div>
 
-
                 <form @submit.prevent="updatePost" enctype="multipart/form-data">
                     <div class="form-group mb-2">
                         <label>Meno</label>
@@ -60,22 +59,22 @@ export default {
         })
     },
     created() {
-        if (window.Laravel.user) {
+        if (window.Laravel.user && window.Laravel.isLoggedin) {
             this.userId = window.Laravel.user.id;
+
+            this.$axios.get('/sanctum/csrf-cookie').then(response => {
+                this.$axios.get('/api/expensestypes')
+                    .then(response => {
+                        this.expensesTypes = response.data;
+                    })
+                    .catch(function (error) {
+                        console.log(error);
+                    });
+            });
         }
 
-        this.$axios.get('/sanctum/csrf-cookie').then(response => {
-            this.$axios.get('/api/expensestypes')
-                .then(response => {
-                    this.expensesTypes = response.data;
-                })
-                .catch(function (error) {
-                    console.log(error);
-                });
-        });
     },
     methods: {
-
         updatePost(e) {
             this.$axios.get('/sanctum/csrf-cookie').then(response => {
                 let existingObj = this;
@@ -100,14 +99,13 @@ export default {
             });
 
         }
-
-
     },
     beforeRouteEnter(to, from, next) {
-        if (!window.Laravel.isLoggedin) {
+        if (window.Laravel.isLoggedin) {
+            next();
+        } else {
             window.location.href = "/";
         }
-        next();
     }
 }
 

@@ -89,7 +89,7 @@ export default {
             this.$axios.get('/sanctum/csrf-cookie').then(response => {
                 let existingObj = this;
 
-                if (confirm("Do you really want to delete this data?")) {
+                if (confirm("Chcete skutočne odstániť Váš účet?")) {
                     this.$axios.delete(`/api/users/delete/${id}`)
                         .then(response => {
                             let i = this.users.map(item => item.id).indexOf(id); // find index of your object
@@ -108,14 +108,11 @@ export default {
     },
 
     beforeRouteEnter(to, from, next) {
-
-
         if (window.Laravel.isLoggedin) {
             next();
         } else {
             window.location.href = "/";
         }
-
     }
 }
 

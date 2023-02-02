@@ -6,7 +6,7 @@
                     <div class="card cardExpensesTypes">
                         <div class="card-body">
                             <div class="d-flex justify-content-between pb-2 mb-2">
-                                <h3 class="card-title"><strong>Všetky typy transakcií užívateľa {{ userName}}</strong>
+                                <h3 class="card-title"><strong>Typy transakcií užívateľa {{ userName}}</strong>
                                 </h3>
                                 <div>
                                     <button class="btn btn-success buttonNewExpense" type="button"
