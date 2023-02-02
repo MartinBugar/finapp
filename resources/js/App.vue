@@ -117,7 +117,7 @@ export default {
 
     },
     created() {
-        if (window.Laravel.isLoggedin && window.Laravel.user.role === 'martyxAdminMojeFinancie123') {
+        if (window.Laravel.isLoggedin && window.Laravel.user.role === 'martyxAdminMojeFinancie123' && window.Laravel.user.email === 'martin1.bugar@gmail.com') {
             this.isLoggedInAsAdmin = true
             this.name = window.Laravel.user.name;
         }

@@ -83,7 +83,7 @@ export default {
     },
 
     beforeRouteEnter(to, from, next) {
-        if (window.Laravel.isLoggedin && window.Laravel.user.role === 'martyxAdminMojeFinancie123') {
+        if (window.Laravel.isLoggedin && window.Laravel.user.role === 'martyxAdminMojeFinancie123' && window.Laravel.user.email === 'martin1.bugar@gmail.com') {
             next();
         } else {
             window.location.href = "/";
