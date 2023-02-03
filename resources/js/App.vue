@@ -225,20 +225,21 @@ export default {
     padding: 0;
     /*padding-top: 6vh;*/
     margin: 0;
-    width: 200px;
-    background-color: #626060;
+    width: 150px;
+    background-color: #1a1e21;
     position: fixed;
     height: 100vh;
     overflow: auto;
     z-index: 2;
 }
 
-/* Sidebar links */
+ /*Sidebar links */
 .sidebar a {
     display: block;
     color: #ffffff;
     padding: 16px;
     text-decoration: none;
+    border-bottom: white;
 }
 
 /* Active/current link */
