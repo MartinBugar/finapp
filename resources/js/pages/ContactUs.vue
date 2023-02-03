@@ -3,13 +3,13 @@
         <div class="container">
 
             <form ref="form" @submit.prevent="sendEmail">
-                <label>Name</label>
+                <label>Meno</label>
                 <input type="text" name="user_name">
                 <label>Email</label>
                 <input type="email" name="user_email">
-                <label>Message</label>
+                <label>Správa</label>
                 <textarea name="message"></textarea>
-                <input type="submit" value="Send">
+                <input type="submit" value="Odoslať">
             </form>
 
         </div>
@@ -18,6 +18,7 @@
 
 <script>
 import emailjs from 'emailjs-com';
+
 export default {
     name: 'ContactUs',
     data() {
@@ -32,14 +33,14 @@ export default {
         //config: https://dashboard.emailjs.com/admin
         sendEmail(e) {
             try {
-                emailjs.sendForm('service_ulrki3m', 'template_do3j4ii', e.target,'sZtoDVKcdOx0Q-ksX')
-                    .then(function(response) {
+                emailjs.sendForm('service_ulrki3m', 'template_do3j4ii', e.target, 'sZtoDVKcdOx0Q-ksX')
+                    .then(function (response) {
                         console.log('SUCCESS!', response.status, response.text);
-                    }, function(error) {
+                    }, function (error) {
                         console.log('FAILED...', error);
                     });
 
-            } catch(error) {
+            } catch (error) {
                 console.log({error})
             }
             // Reset form field
@@ -53,13 +54,15 @@ export default {
 </script>
 
 <style scoped>
-* {box-sizing: border-box;}
+* {
+    box-sizing: border-box;
+}
 
 .container {
     display: block;
-    margin:auto;
+    margin: auto;
     text-align: center;
-    border-radius: 5px;
+    border-radius: 18px;
     background-color: #f2f2f2;
     padding: 20px;
     width: 50%;
