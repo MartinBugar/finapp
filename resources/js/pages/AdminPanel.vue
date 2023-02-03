@@ -1,17 +1,41 @@
 <template>
+    <div class="container">
+        <h3 class="hello"> Vitaj {{ this.role }}</h3>
 
-    <!-- The sidebar -->
-    <div class="sidebar">
-        <a class="admin-dashboard" href="#home">Home</a>
-        <router-link to="/allusers">Dashboard</router-link>
-        <a href="#contact">Contact</a>
-        <a href="#about">About</a>
-    </div>
+        <table class="table table-hover table-sm table-bordered table-dark">
+            <thead class="bg-dark text-light">
+            <tr>
+                <th width="50" class="text-center">#</th>
+                <!--                            <th width="100" class="text-center">User Id</th>-->
+                <th>user ID</th>
+                <th>name</th>
+                <th>email</th>
+                <th>role</th>
+
+                <!--                        <th class="text-center" width="200">Actions</th>-->
+            </tr>
+            </thead>
+            <tbody>
+            <tr class="" v-for="(user, index) in this.sortedUsers()" :key="user.id">
+                <td class="text-center">{{ index + 1 }}.</td>
+                <!--                            <td class="text-center">{{ post.userID }}.</td>-->
+                <td>{{ user.id }}</td>
+                <td>{{ user.name }}</td>
+                <td>{{ user.email }}</td>
+                <td>{{ user.role }}</td>
 
 
-    <!-- Page content -->
-    <div class="content">
-        <router-view></router-view>
+                <!--                            <router-link :to="{name:'editpost', params: {id:post.id}}"-->
+                <!--                                         class="btn btn-sm btn-warning">-->
+                <!--                                Upraviť-->
+                <!--                            </router-link>-->
+                <!--                            <button class="btn btn-danger btn-sm m-1" @click="deletePost(post.id)">Odstrániť-->
+                <!--                            </button>-->
+
+            </tr>
+            </tbody>
+        </table>
+
     </div>
 
 </template>
@@ -19,7 +43,7 @@
 <script>
 
 export default {
-    name: "Dashboard",
+    name: "AllUsers",
     computed: {},
     data() {
         return {
@@ -66,6 +90,13 @@ export default {
 </script>
 
 <style scoped>
+.container {
+    margin-top: 4vh;
+}
+
+.hello {
+    color: white;
+}
 
 /* The side navigation menu */
 .sidebar {

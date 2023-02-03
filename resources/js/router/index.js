@@ -21,14 +21,9 @@ import AdminPanel from "../pages/AdminPanel.vue";
 import UserProfile from "../components/UserProfile/UserProfile.vue";
 import EditUserProfile from "../components/UserProfile/EditUserProfile.vue";
 import ContactUs from "../pages/ContactUs.vue";
-import AllUsers from "../pages/AllUsers.vue";
+
 
 export const routes = [
-    {
-        name: 'allusers',
-        path: '/allusers',
-        component: AllUsers
-    },
     {
         name: 'contactus',
         path: '/contactus',

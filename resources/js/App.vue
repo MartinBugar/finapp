@@ -1,6 +1,9 @@
 <template>
     <div class="bg-app">
         <div class="sidebar" v-if="isSideBarVisible()">
+            <div class="navbar-nav admin-side" v-if="isLoggedInAsAdmin">
+                <router-link to="/adminpanel" class="nav-item nav-link">admin panel</router-link>
+            </div>
             <router-link to="/dashboard" class="nav-item nav-link">Dashboard</router-link>
             <router-link to="/posts" class="nav-item nav-link">Príjem</router-link>
             <router-link to="/expenses" class="nav-item nav-link">Výdaje</router-link>
@@ -10,15 +13,10 @@
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark main-nav">
             <div class="container">
                 <a class="navbar-brand" href="/">mojeFinancie</a>
-                <div class="navbar-nav" v-if="isLoggedInAsAdmin">
-                    <router-link to="/adminpanel" class="nav-item nav-link">admin panel</router-link>
-                </div>
-                <div class="navbar-nav">
-                    <router-link to="/contactus" class="nav-item nav-link">Kontakt</router-link>
-                </div>
+
                 <div class="navbar-nav" v-if="isLoggedIn">
 
-
+                    <router-link to="/contactus" class="nav-item nav-link">Kontakt</router-link>
                     <!--                    <div class="dropdown">-->
                     <!--                        <button-->
                     <!--                            class="btn btn-danger dropdown-toggle"-->
@@ -175,6 +173,9 @@ export default {
 
 <style scoped>
 
+.admin-side {
+    margin-bottom: 40px;
+}
 .bg-app {
     background-color: var(--bg-secondary);
     padding-top: 6vh;
