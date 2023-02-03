@@ -179,7 +179,6 @@ export default {
 .bg-expenses-types {
     background-color: var(--bg-secondary);
     padding-top: 4vh;
-    margin-top: 6vh;
     width: 100%;
     height: 100vh;
 }
