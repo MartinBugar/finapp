@@ -1,5 +1,5 @@
 <template>
-    <div class="bg position-fixed">
+    <div class="bg">
         <div class="container ">
             <div class="card cardUserProfile">
                 <div class="row login-center">
