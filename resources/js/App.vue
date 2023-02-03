@@ -6,6 +6,9 @@
                 <div class="navbar-nav" v-if="isLoggedInAsAdmin">
                     <router-link to="/adminpanel" class="nav-item nav-link">admin panel</router-link>
                 </div>
+                <div class="navbar-nav">
+                    <router-link to="/contactus" class="nav-item nav-link">Kontakt</router-link>
+                </div>
                 <div class="navbar-nav" v-if="isLoggedIn">
                     <router-link to="/dashboard" class="nav-item nav-link">Dashboard</router-link>
                     <router-link to="/posts" class="nav-item nav-link">Príjem</router-link>

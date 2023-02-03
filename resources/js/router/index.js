@@ -20,8 +20,14 @@ import EditLoan from "../components/loans/EditLoan.vue";
 import AdminPanel from "../pages/AdminPanel.vue";
 import UserProfile from "../components/UserProfile/UserProfile.vue";
 import EditUserProfile from "../components/UserProfile/EditUserProfile.vue";
+import ContactUs from "../pages/ContactUs.vue";
 
 export const routes = [
+    {
+        name: 'contactus',
+        path: '/contactus',
+        component: ContactUs
+    },
     {
         name: 'adminlogin',
         path: '/adminlogin',
