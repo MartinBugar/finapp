@@ -15,9 +15,10 @@
                 <a class="navbar-brand" href="/">mojeFinancie</a>
 
                 <div class="navbar-nav" v-if="isLoggedIn">
+                    <router-link to="/aboutus" class="nav-item nav-link">O nás</router-link>
+                    <router-link to="/contactus" class="nav-item nav-link contactus">Kontakt</router-link>
 
-                    <router-link to="/contactus" class="nav-item nav-link">Kontakt</router-link>
-                    <!--                    <div class="dropdown">-->
+                    <!--                   <div class="dropdown">-->
                     <!--                        <button-->
                     <!--                            class="btn btn-danger dropdown-toggle"-->
                     <!--                            type="button" id="dropdownMenuButton1"-->
@@ -61,6 +62,10 @@
                 </div>
                 <div class="navbar-nav" v-else>
                     <!--                    <router-link to="/" class="nav-item nav-link">Home</router-link>-->
+
+                    <router-link to="/aboutus" class="nav-item nav-link">O nás</router-link>
+                    <router-link to="/contactus" class="nav-item nav-link contactus">Kontakt</router-link>
+
                     <router-link to="/login" class="nav-item nav-link btn btn-primary button-radius">Prihlasenie
                     </router-link>
                     <router-link to="/register" class="nav-item nav-link btn btn-primary register button-radius">
@@ -173,9 +178,14 @@ export default {
 
 <style scoped>
 
+.contactus {
+    margin-right: 30px;
+}
+
 .admin-side {
     margin-bottom: 40px;
 }
+
 .bg-app {
     background-color: var(--bg-secondary);
     padding-top: 6vh;
@@ -233,7 +243,7 @@ export default {
     z-index: 2;
 }
 
- /*Sidebar links */
+/*Sidebar links */
 .sidebar a {
     display: block;
     color: #ffffff;
