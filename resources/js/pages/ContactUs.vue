@@ -28,10 +28,10 @@ export default {
         }
     },
     methods: {
+
+        //config: https://dashboard.emailjs.com/admin
         sendEmail(e) {
-            console.log("aaaaaaaaaaaaa")
             try {
-                console.log("aaaaaaaaaaaaa")
                 emailjs.sendForm('service_ulrki3m', 'template_do3j4ii', e.target,'sZtoDVKcdOx0Q-ksX')
                     .then(function(response) {
                         console.log('SUCCESS!', response.status, response.text);
@@ -41,13 +41,13 @@ export default {
 
             } catch(error) {
                 console.log({error})
-                console.log("aaaaaaaaaaaaa")
             }
             // Reset form field
             this.name = ''
             this.email = ''
             this.message = ''
         },
+
     }
 }
 </script>
