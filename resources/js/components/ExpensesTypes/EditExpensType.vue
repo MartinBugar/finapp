@@ -1,4 +1,5 @@
 <template>
+    <div class="bg-edit-expens-type">
     <div class="container">
         <div class="card cardEditExpense">
             <div class="card-body">
@@ -37,6 +38,7 @@
                     <button type="submit" class="btn btn-primary mt-4 mb-4"> Upraviť</button>
                 </form>
             </div>
+        </div>
         </div>
     </div>
 </template>
@@ -103,6 +105,14 @@ export default {
 </script>
 
 <style>
+
+.bg-edit-expens-type {
+    background-color: var(--bg-secondary);
+    padding-top: 4vh;
+    margin-top: 6vh;
+    width: 100%;
+    height: 100vh;
+}
 .cardEditExpense {
     margin-top: 30px;
     border-radius: 18px;

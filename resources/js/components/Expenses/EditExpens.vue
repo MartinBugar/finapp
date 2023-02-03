@@ -1,68 +1,72 @@
 <template>
-    <div class="container">
-        <div class="card cardEditExpense">
-            <div class="card-body">
-                <div class="d-flex justify-content-between pb-2 mb-2">
-                    <h5 class="card-title">Upraviť záznam o výdaji</h5>
-                    <div>
-                        <router-link :to="{name: 'posts'}" class="btn btn-success buttonEditExpens">Zoznam výdajov
-                        </router-link>
-                    </div>
-                </div>
-
-                <div v-if="strSuccess" class="alert alert-success alert-dismissible fade show" role="alert">
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                    <strong>{{ strSuccess }}</strong>
-                </div>
-
-                <div v-if="strError" class="alert alert-danger alert-dismissible fade show" role="alert">
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                    <strong>{{ strError }}</strong>
-                </div>
-
-
-                <form @submit.prevent="updatePost" enctype="multipart/form-data">
-                    <div class="form-group mb-2">
-                        <label>Názov</label><span class="text-danger"> *</span>
-                        <input type="text" class="form-control" v-model="name" placeholder="Enter post name">
-                    </div>
-
-                    <div class="form-group mb-2">
-                        <label>Popis</label>
-                        <textarea class="form-control" rows="3" v-model="description"
-                                  placeholder="Enter post description"></textarea>
-                    </div>
-
-                    <div class="form-group mb-2">
-                        <label>Suma</label><span class="text-danger"> *</span>
-                        <textarea class="form-control" rows="1" v-model="value" placeholder="Enter value"></textarea>
-                    </div>
-                    <div class="row">
-                        <div class="col-lg-2">
-                            <label>Typ transakcie</label><span class="text-danger"> *</span>
-                            <div class="form-group mb-2 selection">
-                                <select class="form-select" v-model="this.typeId" placeholder="Select the type">
-                                    <option
-                                        v-for="(expensesType, key) in filteredAndSortedExpensesTypes(this.expensesTypes)"
-                                        :value="expensesType.id"> {{ expensesType.type }}
-                                    </option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-lg-3">
-                            <router-link :to="{name: 'addexpensestypes'}" class="btn btn-success button-add-type ">
-                                Vytvoriť nový typ transakcie
+    <div class="bg-editexpens">
+        <div class="container">
+            <div class="card cardEditExpense">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between pb-2 mb-2">
+                        <h5 class="card-title">Upraviť záznam o výdaji</h5>
+                        <div>
+                            <router-link :to="{name: 'posts'}" class="btn btn-success buttonEditExpens">Zoznam výdajov
                             </router-link>
                         </div>
                     </div>
 
-                    <div class="form-group mb-2">
-                        <label>Dátum</label><span class="text-danger"> *</span>
-                        <input type="date" class="form-control" rows="3" v-model="date" placeholder="Enter the date"/>
+                    <div v-if="strSuccess" class="alert alert-success alert-dismissible fade show" role="alert">
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        <strong>{{ strSuccess }}</strong>
                     </div>
 
-                    <button type="submit" class="btn btn-primary mt-4 mb-4"> Upraviť výdaj</button>
-                </form>
+                    <div v-if="strError" class="alert alert-danger alert-dismissible fade show" role="alert">
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        <strong>{{ strError }}</strong>
+                    </div>
+
+
+                    <form @submit.prevent="updatePost" enctype="multipart/form-data">
+                        <div class="form-group mb-2">
+                            <label>Názov</label><span class="text-danger"> *</span>
+                            <input type="text" class="form-control" v-model="name" placeholder="Enter post name">
+                        </div>
+
+                        <div class="form-group mb-2">
+                            <label>Popis</label>
+                            <textarea class="form-control" rows="3" v-model="description"
+                                      placeholder="Enter post description"></textarea>
+                        </div>
+
+                        <div class="form-group mb-2">
+                            <label>Suma</label><span class="text-danger"> *</span>
+                            <textarea class="form-control" rows="1" v-model="value"
+                                      placeholder="Enter value"></textarea>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-2">
+                                <label>Typ transakcie</label><span class="text-danger"> *</span>
+                                <div class="form-group mb-2 selection">
+                                    <select class="form-select" v-model="this.typeId" placeholder="Select the type">
+                                        <option
+                                            v-for="(expensesType, key) in filteredAndSortedExpensesTypes(this.expensesTypes)"
+                                            :value="expensesType.id"> {{ expensesType.type }}
+                                        </option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <router-link :to="{name: 'addexpensestypes'}" class="btn btn-success button-add-type ">
+                                    Vytvoriť nový typ transakcie
+                                </router-link>
+                            </div>
+                        </div>
+
+                        <div class="form-group mb-2">
+                            <label>Dátum</label><span class="text-danger"> *</span>
+                            <input type="date" class="form-control" rows="3" v-model="date"
+                                   placeholder="Enter the date"/>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary mt-4 mb-4"> Upraviť výdaj</button>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
@@ -165,6 +169,14 @@ export default {
 </script>
 
 <style>
+.bg-editexpens {
+    background-color: var(--bg-secondary);
+    padding-top: 4vh;
+    margin-top: 6vh;
+    width: 100%;
+    height: 100vh;
+}
+
 .cardEditExpense {
     margin-top: 30px;
     border-radius: 18px;

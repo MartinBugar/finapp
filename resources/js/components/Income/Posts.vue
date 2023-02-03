@@ -1,5 +1,5 @@
 <template>
-    <div class="bg">
+    <div class="bg-posts">
         <div class="container card mainCardPosts">
             <div class="card cardPost">
                 <div class="card-body">
@@ -48,7 +48,7 @@
                         <thead class="bg-dark text-light">
                         <tr>
                             <th width="50" class="text-center">#</th>
-<!--                            <th width="100" class="text-center">User Id</th>-->
+                            <!--                            <th width="100" class="text-center">User Id</th>-->
                             <th>Názov</th>
                             <th>Dátum</th>
                             <th>Popis</th>
@@ -61,7 +61,7 @@
                         <tbody>
                         <tr class="" v-for="(post, index) in filteredAndSortedForPost(posts, month)" :key="post.id">
                             <td class="text-center">{{ index + 1 }}.</td>
-<!--                            <td class="text-center">{{ post.userID }}.</td>-->
+                            <!--                            <td class="text-center">{{ post.userID }}.</td>-->
                             <td>{{ post.name }}</td>
                             <td>{{ formatDate(post.date) }}</td>
                             <td>{{ post.description }}</td>
@@ -357,6 +357,14 @@ export default {
 
 .postsSum {
     color: #06b614;
+}
+
+.bg-posts {
+    background-color: var(--bg-secondary);
+    padding-top: 4vh;
+    margin-top: 6vh;
+    width: 100%;
+    height: 100vh;
 }
 
 </style>

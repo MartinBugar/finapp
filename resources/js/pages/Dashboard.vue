@@ -1,5 +1,5 @@
 <template>
-    <div class="bg">
+    <div class="bg-dashboard">
         <div class="container card mainCardDashboard">
             <div class="card cardDashboard">
 
@@ -214,10 +214,12 @@ export default {
     border-radius: 18px;
 }
 
-/*.bg-main-page-top {*/
-/*    background: linear-gradient(90deg, #3A92C1 0%, #3A92C1 24%, #3A92C1 34%, #fff 100%);*/
-/*    width: 100%;*/
-/*    height: 400px;*/
-/*}*/
+.bg-dashboard {
+    background-color: var(--bg-secondary);
+    padding-top: 4vh;
+    margin-top: 6vh;
+    width: 100%;
+    height: 100vh;
+}
 
 </style>

@@ -1,7 +1,6 @@
 <template>
-    <div class="bg">
-        <div class="container">
-
+    <div class="bg-contact-form">
+        <div class="container contact-form">
             <form ref="form" @submit.prevent="sendEmail">
                 <label>Meno</label>
                 <input type="text" name="user_name">
@@ -54,13 +53,20 @@ export default {
 </script>
 
 <style scoped>
+.bg-contact-form {
+    background-color: var(--bg-secondary);
+    padding-top: 4vh;
+    margin-top: 6vh;
+    width: 100%;
+    height: 100vh;
+}
+
 * {
     box-sizing: border-box;
 }
 
 .container {
     display: block;
-    margin: auto;
     text-align: center;
     border-radius: 18px;
     background-color: #f2f2f2;

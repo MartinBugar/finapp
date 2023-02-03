@@ -1,5 +1,5 @@
 <template>
-    <div class="bg">
+    <div class="bg-expenses">
         <div class="container card mainCardExpenses">
             <div class="card cardExpenses">
                 <div class="card-body">
@@ -356,6 +356,14 @@ export default {
     --bs-bg-opacity: 1;
     background-color: rgba(var(--bs-dark-rgb), var(--bs-bg-opacity)) !important;
     border-radius: 18px;
+}
+
+.bg-expenses {
+    background-color: var(--bg-secondary);
+    padding-top: 4vh;
+    margin-top: 6vh;
+    width: 100%;
+    height: 100vh;
 }
 
 </style>

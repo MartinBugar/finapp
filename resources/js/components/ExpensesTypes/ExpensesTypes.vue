@@ -1,12 +1,12 @@
 <template>
-    <div class="bg">
+    <div class="bg-expenses-types">
         <div class="container">
             <div class="row jutify-content-center">
                 <div class="col-md-7" style="float:none; margin:auto;">
                     <div class="card cardExpensesTypes">
                         <div class="card-body">
                             <div class="d-flex justify-content-between pb-2 mb-2">
-                                <h3 class="card-title"><strong>Typy transakcií užívateľa {{ userName}}</strong>
+                                <h3 class="card-title"><strong>Typy transakcií užívateľa {{ userName }}</strong>
                                 </h3>
                                 <div>
                                     <button class="btn btn-success buttonNewExpense" type="button"
@@ -175,6 +175,15 @@ export default {
 </script>
 
 <style>
+
+.bg-expenses-types {
+    background-color: var(--bg-secondary);
+    padding-top: 4vh;
+    margin-top: 6vh;
+    width: 100%;
+    height: 100vh;
+}
+
 .buttons {
     max-height: 10px;
 }

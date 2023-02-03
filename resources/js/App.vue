@@ -1,76 +1,79 @@
 <template>
-    <div class="bg">
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark main-nav">
-            <div class="container">
-                <a class="navbar-brand" href="/">mojeFinancie</a>
-                <div class="navbar-nav" v-if="isLoggedInAsAdmin">
-                    <router-link to="/adminpanel" class="nav-item nav-link">admin panel</router-link>
-                </div>
-                <div class="navbar-nav">
-                    <router-link to="/contactus" class="nav-item nav-link">Kontakt</router-link>
-                </div>
-                <div class="navbar-nav" v-if="isLoggedIn">
-                    <router-link to="/dashboard" class="nav-item nav-link">Dashboard</router-link>
-                    <router-link to="/posts" class="nav-item nav-link">Príjem</router-link>
-                    <router-link to="/expenses" class="nav-item nav-link">Výdaje</router-link>
-                    <router-link to="/expensestypes" class="nav-item nav-link">Typy transakcií</router-link>
-
-                    <!--                    <div class="dropdown">-->
-                    <!--                        <button-->
-                    <!--                            class="btn btn-danger dropdown-toggle"-->
-                    <!--                            type="button" id="dropdownMenuButton1"-->
-                    <!--                            data-bs-toggle="dropdown"-->
-                    <!--                            aria-expanded="false">-->
-                    <!--                            Úver {{ value }}-->
-                    <!--                        </button>-->
-                    <!--                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1" role="menu">-->
-                    <!--                            <li v-for="option in options" :key="option">-->
-                    <!--                                <a class="dropdown-item dropdown-loans" @click="value = option"-->
-                    <!--                                   href="javascript:void(0)">{{ option }}</a>-->
-                    <!--                            </li>-->
-                    <!--                            <li>-->
-                    <!--                                <a class="dropdown-item dropdown-loans-control">Správa uverov</a>-->
-                    <!--                            </li>-->
-                    <!--                        </ul>-->
-                    <!--                    </div>-->
-
-                    <div class="logout">
-                        <!--                        <button class="nav-item nav-link btn btn-primary btn-sm logout-button button-radius"-->
-                        <!--                                style="cursor: pointer;"-->
-                        <!--                                @click="logout">Odhlásenie-->
-                        <!--                        </button>-->
-                        <div class="dropdown">
-                            <button
-                                class="nav-item nav-link btn btn-primary btn-sm logout-button button-radius dropdown-toggle"
-                                type="button" id="dropdownMenuButton1"
-                                data-bs-toggle="dropdown"
-                                aria-expanded="false">
-                                {{ this.name }}
-                            </button>
-                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1" role="menu">
-                                <li v-for="option in userOptions" :key="option">
-                                    <a class="dropdown-item dropdown-loans" @click="onClick(option)"
-                                       href="javascript:void(0)">{{ option }}</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-
-                </div>
-                <div class="navbar-nav" v-else>
-                    <!--                    <router-link to="/" class="nav-item nav-link">Home</router-link>-->
-                    <router-link to="/login" class="nav-item nav-link btn btn-primary button-radius">Prihlasenie
-                    </router-link>
-                    <router-link to="/register" class="nav-item nav-link btn btn-primary register button-radius">
-                        Registracia
-                    </router-link>
-                </div>
-            </div>
-
-        </nav>
-        <router-view></router-view>
-
+    <div class="sidebar" v-if="isSideBarVisible()">
+        <router-link to="/dashboard" class="nav-item nav-link">Dashboard</router-link>
+        <router-link to="/posts" class="nav-item nav-link">Príjem</router-link>
+        <router-link to="/expenses" class="nav-item nav-link">Výdaje</router-link>
+        <router-link to="/expensestypes" class="nav-item nav-link">Typy transakcií</router-link>
     </div>
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark main-nav">
+        <div class="container">
+            <a class="navbar-brand" href="/">mojeFinancie</a>
+            <div class="navbar-nav" v-if="isLoggedInAsAdmin">
+                <router-link to="/adminpanel" class="nav-item nav-link">admin panel</router-link>
+            </div>
+            <div class="navbar-nav">
+                <router-link to="/contactus" class="nav-item nav-link">Kontakt</router-link>
+            </div>
+            <div class="navbar-nav" v-if="isLoggedIn">
+
+
+                <!--                    <div class="dropdown">-->
+                <!--                        <button-->
+                <!--                            class="btn btn-danger dropdown-toggle"-->
+                <!--                            type="button" id="dropdownMenuButton1"-->
+                <!--                            data-bs-toggle="dropdown"-->
+                <!--                            aria-expanded="false">-->
+                <!--                            Úver {{ value }}-->
+                <!--                        </button>-->
+                <!--                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1" role="menu">-->
+                <!--                            <li v-for="option in options" :key="option">-->
+                <!--                                <a class="dropdown-item dropdown-loans" @click="value = option"-->
+                <!--                                   href="javascript:void(0)">{{ option }}</a>-->
+                <!--                            </li>-->
+                <!--                            <li>-->
+                <!--                                <a class="dropdown-item dropdown-loans-control">Správa uverov</a>-->
+                <!--                            </li>-->
+                <!--                        </ul>-->
+                <!--                    </div>-->
+
+                <div class="logout">
+                    <!--                        <button class="nav-item nav-link btn btn-primary btn-sm logout-button button-radius"-->
+                    <!--                                style="cursor: pointer;"-->
+                    <!--                                @click="logout">Odhlásenie-->
+                    <!--                        </button>-->
+                    <div class="dropdown">
+                        <button
+                            class="nav-item nav-link btn btn-primary btn-sm logout-button button-radius dropdown-toggle"
+                            type="button" id="dropdownMenuButton1"
+                            data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            {{ this.name }}
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1" role="menu">
+                            <li v-for="option in userOptions" :key="option">
+                                <a class="dropdown-item dropdown-loans" @click="onClick(option)"
+                                   href="javascript:void(0)">{{ option }}</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+            <div class="navbar-nav" v-else>
+                <!--                    <router-link to="/" class="nav-item nav-link">Home</router-link>-->
+                <router-link to="/login" class="nav-item nav-link btn btn-primary button-radius">Prihlasenie
+                </router-link>
+                <router-link to="/register" class="nav-item nav-link btn btn-primary register button-radius">
+                    Registracia
+                </router-link>
+            </div>
+        </div>
+
+    </nav>
+
+
+    <router-view></router-view>
 
 
     <!--    <footer class="text-center text-white" style="background-color: #0a4275;">-->
@@ -130,6 +133,15 @@ export default {
         }
     },
     methods: {
+
+        isSideBarVisible() {
+
+            if (this.isLoggedIn) {
+                return true;
+            } else {
+                return false;
+            }
+        },
         onClick(option) {
             if (option === 'Odhlasiť') {
                 this.logout();
@@ -160,10 +172,11 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .bg {
     background-color: var(--bg-secondary);
-    padding-top: 4vh;
+    /*padding-top: 4vh;*/
+    margin-top: 6vh;
     width: 100%;
     height: 100vh;
 }
@@ -197,13 +210,78 @@ export default {
 }
 
 .main-nav {
-
     min-height: 60px;
+    max-height: 60px;
     width: 100vw;
     position: fixed;
     top: 0;
     left: 0;
     z-index: 2;
+}
+
+.sidebar {
+    padding: 0;
+    padding-top: 6vh;
+    margin: 0;
+    width: 200px;
+    background-color: #626060;
+    position: fixed;
+    height: 100vh;
+    overflow: auto;
+    z-index: 2;
+}
+
+/* Sidebar links */
+.sidebar a {
+    display: block;
+    color: #ffffff;
+    padding: 16px;
+    text-decoration: none;
+}
+
+/* Active/current link */
+.sidebar a.admin-dashboard {
+    background-color: #8f8f8f;
+    color: white;
+}
+
+/* Links on mouse-over */
+.sidebar a:hover:not(.active) {
+    background-color: #555;
+    color: white;
+}
+
+/* Page content. The value of the margin-left property should match the value of the sidebar's width property */
+div.content {
+    margin-left: 200px;
+    padding: 1px 16px;
+    padding-top: 6vh;
+    height: 100vh;
+}
+
+/* On screens that are less than 700px wide, make the sidebar into a topbar */
+@media screen and (max-width: 700px) {
+    .sidebar {
+        width: 100%;
+        height: auto;
+        position: relative;
+    }
+
+    .sidebar a {
+        float: left;
+    }
+
+    div.content {
+        margin-left: 0;
+    }
+}
+
+/* On screens that are less than 400px, display the bar vertically, instead of horizontally */
+@media screen and (max-width: 400px) {
+    .sidebar a {
+        text-align: center;
+        float: none;
+    }
 }
 
 
