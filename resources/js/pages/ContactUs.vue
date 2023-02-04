@@ -7,7 +7,7 @@
                     <p class="text">
                         Ak máte nejaké otázky <br>
                         alebo dotazy, prípadne <br>
-                        návrhy na zlepšenie <br>
+                        návrhy na zlepšenie, <br>
                         neváhajte nás kontaktovať.
                     </p>
                 </div>
