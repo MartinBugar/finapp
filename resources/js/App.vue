@@ -5,7 +5,7 @@
             <div class="navbar-nav admin-side" v-if="isLoggedInAsAdmin">
                 <router-link to="/adminpanel" class="nav-item nav-link">admin panel</router-link>
             </div>
-            <router-link to="/dashboard" class="nav-item nav-link">Dashboard</router-link>
+            <router-link  to="/dashboard" class="nav-item nav-link">Dashboard</router-link>
             <router-link to="/posts" class="nav-item nav-link">Príjem</router-link>
             <router-link to="/expenses" class="nav-item nav-link">Výdaje</router-link>
             <router-link to="/expensestypes" class="nav-item nav-link">Typy transakcií</router-link>
@@ -233,6 +233,10 @@ export default {
     z-index: 2;
 }
 
+.router-link-exact-active{
+    background: #07a2b4;
+}
+
 .sidebar {
     padding: 0;
     /*padding-top: 6vh;*/
@@ -255,14 +259,14 @@ export default {
 }
 
 /* Active/current link */
-.sidebar a.admin-dashboard {
-    background-color: #8f8f8f;
+.sidebar router-link.active {
+    background-color: #0ce6ff;
     color: white;
 }
 
 /* Links on mouse-over */
 .sidebar a:hover:not(.active) {
-    background-color: #555;
+    background-color: #0ce6ff;
     color: white;
 }
 
