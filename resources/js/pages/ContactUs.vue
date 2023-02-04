@@ -1,16 +1,28 @@
 <template>
     <div class="bg-contact-form">
-        <div class="container contact-form">
-            <form ref="form" @submit.prevent="sendEmail">
-                <label>Meno</label>
-                <input type="text" name="user_name">
-                <label>Email</label>
-                <input type="email" name="user_email">
-                <label>Správa</label>
-                <textarea name="message"></textarea>
-                <input type="submit" value="Odoslať">
-            </form>
+        <div class="container">
 
+            <div class="row">
+                <div class="col-lg-4">
+                    <p class="text">
+                        Ak máte nejaké otázky <br>
+                        alebo dotazy, prípadne <br>
+                        návrhy na zlepšenie <br>
+                        neváhajte nás kontaktovať.
+                    </p>
+                </div>
+                <div class="col-lg-8">
+                    <form ref="form" @submit.prevent="sendEmail">
+                        <label>Vaše meno</label>
+                        <input type="text" name="user_name">
+                        <label>Váš email</label>
+                        <input type="email" name="user_email">
+                        <label>Správa pre nás</label>
+                        <textarea name="message"></textarea>
+                        <input type="submit" value="Odoslať">
+                    </form>
+                </div>
+            </div>
         </div>
     </div>
 </template>
@@ -53,6 +65,13 @@ export default {
 </script>
 
 <style scoped>
+
+.text {
+    margin-top: 40px;
+    font-family: "Bebas Neue", serif;
+    font-size: 2.5rem;
+}
+
 .bg-contact-form {
     background-color: var(--bg-secondary);
     padding-top: 4vh;
@@ -70,7 +89,7 @@ export default {
     border-radius: 18px;
     background-color: #f2f2f2;
     padding: 20px;
-    width: 50%;
+    /*width: 50%;*/
 }
 
 label {
@@ -90,10 +109,10 @@ input[type=text], [type=email], textarea {
 
 input[type=submit] {
     background-color: #4CAF50;
+    border-radius: 18px;
     color: white;
     padding: 12px 20px;
     border: none;
-    border-radius: 4px;
     cursor: pointer;
 }
 
