@@ -1,41 +1,42 @@
 <template>
-    <div class="container">
-        <h3 class="hello"> Vitaj {{ this.role }}</h3>
+    <div class="bg-admin-panel">
+        <div class="container">
+            <h3 class="hello"> Vitaj {{ this.role }}</h3>
 
-        <table class="table table-hover table-sm table-bordered table-dark">
-            <thead class="bg-dark text-light">
-            <tr>
-                <th width="50" class="text-center">#</th>
-                <!--                            <th width="100" class="text-center">User Id</th>-->
-                <th>user ID</th>
-                <th>name</th>
-                <th>email</th>
-                <th>role</th>
+            <table class="table table-hover table-sm table-bordered table-dark">
+                <thead class="bg-dark text-light">
+                <tr>
+                    <th width="50" class="text-center">#</th>
+                    <!--                            <th width="100" class="text-center">User Id</th>-->
+                    <th>user ID</th>
+                    <th>name</th>
+                    <th>email</th>
+                    <th>role</th>
 
-                <!--                        <th class="text-center" width="200">Actions</th>-->
-            </tr>
-            </thead>
-            <tbody>
-            <tr class="" v-for="(user, index) in this.sortedUsers()" :key="user.id">
-                <td class="text-center">{{ index + 1 }}.</td>
-                <!--                            <td class="text-center">{{ post.userID }}.</td>-->
-                <td>{{ user.id }}</td>
-                <td>{{ user.name }}</td>
-                <td>{{ user.email }}</td>
-                <td>{{ user.role }}</td>
+                    <!--                        <th class="text-center" width="200">Actions</th>-->
+                </tr>
+                </thead>
+                <tbody>
+                <tr class="" v-for="(user, index) in this.sortedUsers()" :key="user.id">
+                    <td class="text-center">{{ index + 1 }}.</td>
+                    <!--                            <td class="text-center">{{ post.userID }}.</td>-->
+                    <td>{{ user.id }}</td>
+                    <td>{{ user.name }}</td>
+                    <td>{{ user.email }}</td>
+                    <td>{{ user.role }}</td>
 
 
-                <!--                            <router-link :to="{name:'editpost', params: {id:post.id}}"-->
-                <!--                                         class="btn btn-sm btn-warning">-->
-                <!--                                Upraviť-->
-                <!--                            </router-link>-->
-                <!--                            <button class="btn btn-danger btn-sm m-1" @click="deletePost(post.id)">Odstrániť-->
-                <!--                            </button>-->
+                    <!--                            <router-link :to="{name:'editpost', params: {id:post.id}}"-->
+                    <!--                                         class="btn btn-sm btn-warning">-->
+                    <!--                                Upraviť-->
+                    <!--                            </router-link>-->
+                    <!--                            <button class="btn btn-danger btn-sm m-1" @click="deletePost(post.id)">Odstrániť-->
+                    <!--                            </button>-->
 
-            </tr>
-            </tbody>
-        </table>
-
+                </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
 
 </template>
@@ -90,6 +91,14 @@ export default {
 </script>
 
 <style scoped>
+
+.bg-admin-panel {
+    background-color: var(--bg-secondary);
+    padding-top: 4vh;
+    width: 100%;
+    height: 100vh;
+}
+
 .container {
     margin-top: 4vh;
 }

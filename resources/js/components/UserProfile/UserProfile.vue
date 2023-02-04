@@ -1,5 +1,5 @@
 <template>
-    <div class="bg">
+    <div class="bg-userprofile">
         <div class="container ">
             <div class="card cardUserProfile">
                 <div class="row login-center">
@@ -119,6 +119,14 @@ export default {
 </script>
 
 <style>
+
+.bg-userprofile {
+    background-color: var(--bg-secondary);
+    padding-top: 4vh;
+    width: 100%;
+    height: 100vh;
+}
+
 .cardUserProfile {
     margin-top: 30px;
     border-radius: 18px;
