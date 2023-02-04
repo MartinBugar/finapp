@@ -1,5 +1,6 @@
 <template>
     <div class="bg-app">
+
         <div class="sidebar" v-if="isSideBarVisible()">
             <div class="navbar-nav admin-side" v-if="isLoggedInAsAdmin">
                 <router-link to="/adminpanel" class="nav-item nav-link">admin panel</router-link>
@@ -80,29 +81,30 @@
         <router-view></router-view>
 
 
-        <!--    <footer class="text-center text-white" style="background-color: #0a4275;">-->
-        <!--        &lt;!&ndash; Grid container &ndash;&gt;-->
-        <!--        <div class="container p-4 pb-0">-->
-        <!--            &lt;!&ndash; Section: CTA &ndash;&gt;-->
-        <!--            <section class="">-->
-        <!--                <p class="d-flex justify-content-center align-items-center">-->
+        <footer class="text-center text-white footer">
+            <!-- Grid container -->
+            <div class="container p-4 pb-0">
+                <!-- Section: CTA -->
+                <section class="">
+                    <p class="d-flex justify-content-center align-items-center">
 
-        <!--&lt;!&ndash;                    <button type="button" class="btn btn-outline-light btn-rounded">&ndash;&gt;-->
-        <!--&lt;!&ndash;                        Register&ndash;&gt;-->
-        <!--&lt;!&ndash;                    </button>&ndash;&gt;-->
-        <!--                </p>-->
-        <!--            </section>-->
-        <!--            &lt;!&ndash; Section: CTA &ndash;&gt;-->
-        <!--        </div>-->
-        <!--        &lt;!&ndash; Grid container &ndash;&gt;-->
+                        <!--                    <button type="button" class="btn btn-outline-light btn-rounded">-->
+                        <!--                        Register-->
+                        <!--                    </button>-->
+                    </p>
+                </section>
+                <!-- Section: CTA -->
+            </div>
+            <!-- Grid container -->
 
-        <!--        &lt;!&ndash; Copyright &ndash;&gt;-->
-        <!--        <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">-->
-        <!--            © 2020 Copyright:-->
-        <!--            <a class="text-white" href="https://mojefinancie.eu">mojefinancie.eu</a>-->
-        <!--        </div>-->
-        <!--        &lt;!&ndash; Copyright &ndash;&gt;-->
-        <!--    </footer>-->
+            <!-- Copyright -->
+            <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+                © 2022 Copyright:
+                <a class="text-white" href="https://mojefinancie.eu">mojefinancie.eu</a>
+            </div>
+            <!-- Copyright -->
+        </footer>
+
 
     </div>
 </template>
@@ -295,6 +297,12 @@ div.content {
         text-align: center;
         float: none;
     }
+}
+
+footer {
+    background-color: #0a4275;
+    position: relative;
+    z-index: 2;
 }
 
 

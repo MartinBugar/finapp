@@ -220,4 +220,5 @@ figure {
     text-decoration: none;
     color: white;
 }
+
 </style>
