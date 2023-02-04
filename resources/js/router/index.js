@@ -21,9 +21,15 @@ import AdminPanel from "../pages/AdminPanel.vue";
 import UserProfile from "../components/UserProfile/UserProfile.vue";
 import EditUserProfile from "../components/UserProfile/EditUserProfile.vue";
 import ContactUs from "../pages/ContactUs.vue";
+import AboutUs from "../pages/AboutUs.vue";
 
 
 export const routes = [
+    {
+        name: 'aboutus',
+        path: '/aboutus',
+        component: AboutUs
+    },
     {
         name: 'contactus',
         path: '/contactus',
