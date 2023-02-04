@@ -2,7 +2,7 @@
     <div class="bg-app">
 
         <div class="sidebar" v-if="isSideBarVisible()">
-            <div class="navbar-nav admin-side" v-if="isLoggedInAsAdmin">
+            <div class="admin-panel" v-if="isLoggedInAsAdmin">
                 <router-link to="/adminpanel" class="nav-item nav-link">admin panel</router-link>
             </div>
             <router-link  to="/dashboard" class="nav-item nav-link">Dashboard</router-link>
@@ -180,13 +180,14 @@ export default {
 
 <style scoped>
 
+.admin-panel {
+    margin-bottom: 40px;
+}
+
 .contactus {
     margin-right: 30px;
 }
 
-.admin-side {
-    margin-bottom: 40px;
-}
 
 .bg-app {
     background-color: var(--bg-secondary);
@@ -233,10 +234,6 @@ export default {
     z-index: 2;
 }
 
-.router-link-exact-active{
-    background: #07a2b4;
-}
-
 .sidebar {
     padding: 0;
     /*padding-top: 6vh;*/
@@ -253,21 +250,23 @@ export default {
 .sidebar a {
     display: block;
     color: #ffffff;
-    padding: 16px;
+    /*padding: 16px;*/
+    margin: 10px;
     text-decoration: none;
     border-bottom: white;
 }
 
-/* Active/current link */
-.sidebar router-link.active {
-    background-color: #0ce6ff;
-    color: white;
+
+.router-link-exact-active{
+    background: #07a2b4;
+    border-radius: 10px;
 }
 
 /* Links on mouse-over */
 .sidebar a:hover:not(.active) {
     background-color: #0ce6ff;
     color: white;
+    border-radius: 10px;
 }
 
 /* Page content. The value of the margin-left property should match the value of the sidebar's width property */
