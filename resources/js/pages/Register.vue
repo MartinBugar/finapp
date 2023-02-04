@@ -1,5 +1,5 @@
 <template>
-    <div class="bg">
+    <div class="bg-register">
         <div class="container">
             <div class="row jutify-content-center">
                 <div class="col-md-6" style="float:none; margin:auto;">
@@ -119,5 +119,12 @@ export default {
 .cardRegister {
     margin-top: 30px;
     border-radius: 18px;
+}
+
+.bg-register {
+    background-color: var(--bg-secondary);
+    padding-top: 4vh;
+    width: 100%;
+    height: 100vh;
 }
 </style>

@@ -5,7 +5,7 @@
             <div class="admin-panel" v-if="isLoggedInAsAdmin">
                 <router-link to="/adminpanel" class="nav-item nav-link">admin panel</router-link>
             </div>
-            <router-link  to="/dashboard" class="nav-item nav-link">Dashboard</router-link>
+            <router-link to="/dashboard" class="nav-item nav-link">Dashboard</router-link>
             <router-link to="/posts" class="nav-item nav-link">Príjem</router-link>
             <router-link to="/expenses" class="nav-item nav-link">Výdaje</router-link>
             <router-link to="/expensestypes" class="nav-item nav-link">Typy transakcií</router-link>
@@ -67,10 +67,10 @@
                     <router-link to="/aboutus" class="nav-item nav-link">O nás</router-link>
                     <router-link to="/contactus" class="nav-item nav-link contactus">Kontakt</router-link>
 
-                    <router-link to="/login" class="nav-item nav-link btn btn-primary button-radius">Prihlasenie
+                    <router-link to="/login" class="nav-item nav-link btn btn-primary button-radius">Prihlásenie
                     </router-link>
                     <router-link to="/register" class="nav-item nav-link btn btn-primary register button-radius">
-                        Registracia
+                        Registrácia
                     </router-link>
                 </div>
             </div>
@@ -257,7 +257,7 @@ export default {
 }
 
 
-.router-link-exact-active{
+.router-link-exact-active {
     background: #07a2b4;
     border-radius: 10px;
 }
