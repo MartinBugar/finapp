@@ -6,6 +6,7 @@ use App\Http\Controllers\API\ExpensesTypesController;
 use App\Http\Controllers\API\LoansController;
 use App\Http\Controllers\API\PostsController;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\API\UserController;
@@ -24,6 +25,9 @@ use App\Http\Controllers\API\UserController;
 // Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 //     return $request->user();
 // });
+
+
+Auth::routes(['verify' => true]);
 
 Route::post('adminlogin', [AdminController::class, 'adminlogin']);
 Route::post('login', [UserController::class, 'login']);

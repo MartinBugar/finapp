@@ -46,16 +46,11 @@ class UserController extends Controller
 //            $user->password = Hash::make($request->password);
 //            $user->save();
 
-            $user = User::create([
+            event(new Registered(User::create([
                 'name' => $request['name'],
                 'email' => $request['email'],
                 'role' => $request['role'],
-                'password' => Hash::make($request['password'])
-            ]);
-
-            event(new Registered($user));
-            $user->save();
-
+                'password' => Hash::make($request['password'])])));
 
             $success = true;
             $message = "User register successfully";
