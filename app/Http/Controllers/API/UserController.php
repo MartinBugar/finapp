@@ -4,6 +4,7 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -18,7 +19,7 @@ class UserController extends Controller
             'password' => $request->password
         ];
 
-        if(Auth::attempt($credentials)) {
+        if (Auth::attempt($credentials)) {
             $success = true;
             $message = "User login successfully";
         } else {
@@ -38,12 +39,23 @@ class UserController extends Controller
     public function register(Request $request)
     {
         try {
-            $user = new User();
-            $user->name = $request->name;
-            $user->email = $request->email;
-            $user->role = $request->role;
-            $user->password = Hash::make($request->password);
+//            $user = new User();
+//            $user->name = $request->name;
+//            $user->email = $request->email;
+//            $user->role = $request->role;
+//            $user->password = Hash::make($request->password);
+//            $user->save();
+
+            $user = User::create([
+                'name' => $request['name'],
+                'email' => $request['email'],
+                'role' => $request['role'],
+                'password' => Hash::make($request['password'])
+            ]);
+
+            event(new Registered($user));
             $user->save();
+
 
             $success = true;
             $message = "User register successfully";
