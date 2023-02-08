@@ -12,27 +12,40 @@ use Illuminate\Support\Facades\Session;
 
 class UserController extends Controller
 {
+
+
     public function login(Request $request)
     {
-        $credentials = [
-            'email' => $request->email,
-            'password' => $request->password
-        ];
 
-        if (Auth::attempt($credentials)) {
-            $success = true;
-            $message = "User login successfully";
+        $user = User::where('email', $request['email'])->where('email_verified_at', '<>', NULL)->first();
+
+        if (!$user) {
+            return [
+                "response" => 'Email is not verified',
+                "content" => ''
+            ];
         } else {
-            $success = false;
-            $message = "Unautorised";
+            $credentials = [
+                'email' => $request->email,
+                'password' => $request->password
+            ];
+
+            if (Auth::attempt($credentials)) {
+                $success = true;
+                $message = "User login successfully";
+            } else {
+                $success = false;
+                $message = "Unautorised";
+            }
+
+            $response = [
+                'success' => $success,
+                'message' => $message
+            ];
+
+            return response()->json($response);
         }
 
-        $response = [
-            'success' => $success,
-            'message' => $message
-        ];
-
-        return response()->json($response);
     }
 
 
