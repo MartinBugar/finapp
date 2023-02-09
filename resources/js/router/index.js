@@ -1,9 +1,9 @@
 import {createWebHistory, createRouter} from "vue-router";
 
 import Home from '../pages/Home';
-import Register from '../pages/Register';
-import Login from '../pages/Login';
-import AdminLogin from '../pages/AdminLogin.vue';
+import Register from '../pages/Auth/Register.vue';
+import Login from '../pages/Auth/Login.vue';
+import AdminLogin from '../pages/Auth/AdminLogin.vue';
 import Dashboard from '../pages/Dashboard';
 import Posts from '../components/Income/Posts.vue';
 import EditPost from '../components/Income/EditPost.vue';
@@ -23,6 +23,7 @@ import EditUserProfile from "../components/UserProfile/EditUserProfile.vue";
 import ContactUs from "../pages/ContactUs.vue";
 import AboutUs from "../pages/AboutUs.vue";
 import VerifyEmail from "../pages/Auth/VerifyEmail.vue";
+import CheckYourEmail from "../pages/Auth/CheckYourEmail.vue";
 
 
 export const routes = [
@@ -145,6 +146,11 @@ export const routes = [
         name: 'verifyemail',
         path: '/verify-email',
         component: VerifyEmail
+    },
+    {
+        name: 'CheckYourEmail',
+        path: '/checkEmail',
+        component: CheckYourEmail
     },
 ];
 
