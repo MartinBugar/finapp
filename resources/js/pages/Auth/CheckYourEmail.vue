@@ -2,7 +2,7 @@
     <div class="bg-contact-form">
         <div class="container">
 
-            <p class="text">
+            <p class="text-check-mail">
                 Na Email Vam bol zaslaný odkaz na verifikáciu registrácie.
                 Po verifikovaní registrácie sa môžete prihlásiť.
             </p>
@@ -37,10 +37,10 @@ export default {
 </script>
 
 <style scoped>
-.text {
+.text-check-mail {
     margin-top: 40px;
     font-family: "Bebas Neue", serif;
-    font-size: 2.5rem;
+    font-size: 1.5rem;
 }
 
 .bg-contact-form {

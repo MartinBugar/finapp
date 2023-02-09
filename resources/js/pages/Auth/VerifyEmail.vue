@@ -2,8 +2,9 @@
     <div class="bg-contact-form">
         <div class="container">
 
-            <p class="text">
-             EMAIL VERIFIKOVANY
+            <p class="text-email-verify">
+                Váš email bol úspešne verifikovaný.
+                Teraz sa môžete prihlásiť.
             </p>
 
             <router-link :to="{name: 'login'}" class="btn btn-success button-add-type ">
@@ -40,10 +41,10 @@ export default {
 </script>
 
 <style scoped>
-.text {
+.text-email-verify {
     margin-top: 40px;
     font-family: "Bebas Neue", serif;
-    font-size: 2.5rem;
+    font-size: 1.5rem;
 }
 
 .bg-contact-form {

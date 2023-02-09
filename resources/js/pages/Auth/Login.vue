@@ -6,15 +6,16 @@
                     <div class="card card-default cardLogin">
                         <div class="card-header"><h5>Prihlásenie</h5></div>
                         <div class="card-body">
-                            <div v-if="errorMessage !== null" class="alert alert-danger alert-dismissible fade show"
+                            <div v-if="errorMessage !== null"
+                                 class="alert alert-danger alert-dismissible fade show align-items-center"
                                  role="alert">
 
                                 <button type="button" class="btn-close" data-bs-dismiss="alert"
                                         aria-label="Close"></button>
-                                {{ this.errorMessage }}
+                                <strong>{{ this.errorMessage }}</strong>
                                 <button v-if="errorMessage === 'Email nie je verifikovaný'" type="button"
-                                        class="btn btn-primary"
-                                        aria-label="Resend email" @click="resendEmail()">Resend Email
+                                        class="btn btn-primary btn-resend"
+                                        aria-label="Resend email" @click="resendEmail()">Znova zaslať verifikačný email
                                 </button>
                             </div>
                             <form>
@@ -36,7 +37,7 @@
                                 <div class="form-group row mt-1 mb-0">
                                     <div class="col-md-8 offset-md-4">
                                         <button type="submit" class="btn btn-success" @click="handleSubmit">
-                                            Login
+                                            Prihlásiť
                                         </button>
                                     </div>
                                 </div>
@@ -137,4 +138,7 @@ export default {
     height: 100vh;
 }
 
+.btn-resend {
+    margin-left: 15px;
+}
 </style>
