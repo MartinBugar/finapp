@@ -32,6 +32,7 @@
         "vue": "^3.2.33",
         "vue-chartjs": "^5.1.0",
         "vue-google-charts": "^1.1.0",
-        "vue-router": "^4.0.13"
+        "vue-router": "^4.0.13",
+        "vuex": "^4.0.2"
     }
 }

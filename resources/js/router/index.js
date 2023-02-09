@@ -22,6 +22,7 @@ import UserProfile from "../components/UserProfile/UserProfile.vue";
 import EditUserProfile from "../components/UserProfile/EditUserProfile.vue";
 import ContactUs from "../pages/ContactUs.vue";
 import AboutUs from "../pages/AboutUs.vue";
+import VerifyEmail from "../pages/Auth/VerifyEmail.vue";
 
 
 export const routes = [
@@ -139,6 +140,11 @@ export const routes = [
         name: 'editloan',
         path: '/loans/edit/:id',
         component: EditLoan
+    },
+    {
+        name: 'verifyemail',
+        path: '/verify-email',
+        component: VerifyEmail
     },
 ];
 
