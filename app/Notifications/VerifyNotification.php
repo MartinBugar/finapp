@@ -52,9 +52,9 @@ class VerifyNotification extends Notification
         }
 
         return (new MailMessage)
-            ->line('THE VERIFY EMAIL')
-            ->action('Verify Email', $url)
-            ->line('Thank you for using our application!');
+            ->subject('Potvrdenie registrácie')
+            ->line('Kliknite na tlačidlo pre overenie emailovej adresy.')
+            ->action('Overenie emailovej adresy', $url);
     }
 
     /**
