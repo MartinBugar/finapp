@@ -40,15 +40,20 @@ class VerifyNotification extends Notification
      */
     public function toMail($notifiable)
     {
-
-        $params = [
+        $params =  [
             'id' => $notifiable->getKey(),
-            'hash' => sha1($notifiable->getEmailForVerfication())
+            'hash' => sha1($notifiable->getEmailForVerification()),
         ];
+
+        $url = env('FRONT_APP') . '/verify-email?';
+
+        foreach ($params as $key => $param) {
+            $url .= "{$key}={$param}&";
+        }
 
         return (new MailMessage)
             ->line('THE VERIFY EMAIL')
-            ->action('Verify Email', url('/'))
+            ->action('Verify Email', $url)
             ->line('Thank you for using our application!');
     }
 
