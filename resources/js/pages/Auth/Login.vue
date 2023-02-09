@@ -3,14 +3,20 @@
         <div class="container">
             <div class="row jutify-content-center login-center">
                 <div class="col-md-6" style="float:none; margin:auto;">
-                    <div v-if="error !== null" class="alert alert-danger alert-dismissible fade show" role="alert">
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                        <strong>{{ error }}</strong>
-                    </div>
-
                     <div class="card card-default cardLogin">
                         <div class="card-header"><h5>Prihlásenie</h5></div>
                         <div class="card-body">
+                            <div v-if="errorMessage !== null" class="alert alert-danger alert-dismissible fade show"
+                                 role="alert">
+
+                                <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                        aria-label="Close"></button>
+                                {{ this.errorMessage }}
+                                <button v-if="errorMessage === 'Email nie je verifikovaný'" type="button"
+                                        class="btn btn-primary"
+                                        aria-label="Resend email" @click="resendEmail()">Resend Email
+                                </button>
+                            </div>
                             <form>
                                 <div class="form-group row">
                                     <label for="email" class="col-sm-4 col-form-label text-md-right">E-Mail </label>
@@ -61,11 +67,31 @@ export default {
         return {
             email: "",
             password: "",
-            error: null
+            error: null,
+            errorMessage: null
         }
     },
 
     methods: {
+
+        resendEmail() {
+            console.log(this.email)
+            this.$axios.post('email/verification-notification', {
+                email: this.email,
+                password: this.password
+            })
+                .then(response => {
+                    if (response.data.success) {
+                        // this.$router.go('/login')
+                    } else {
+                        this.errorMessage = response.data.message
+                    }
+                })
+                .catch(function (error) {
+                    console.error(error);
+                });
+        },
+
         handleSubmit(e) {
             e.preventDefault()
             if (this.password.length > 0) {
@@ -78,7 +104,7 @@ export default {
                             if (response.data.success) {
                                 this.$router.go('/login')
                             } else {
-                                this.error = response.data.message
+                                this.errorMessage = response.data.message
                             }
                         })
                         .catch(function (error) {

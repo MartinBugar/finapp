@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Auth\VerificationController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,4 +16,6 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('{any}', function () {
     return view('app');
-})->where('any','.*');
+})->where('any', '.*');
+
+Route::post('/email/verification-notification', [VerificationController::class, 'resendVerificationEmail']);

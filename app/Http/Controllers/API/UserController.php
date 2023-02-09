@@ -21,7 +21,7 @@ class UserController extends Controller
 
         if (!$user) {
             return [
-                "response" => 'Email is not verified',
+                "message" => 'Email nie je verifikovaný',
                 "content" => ''
             ];
         } else {
@@ -32,10 +32,10 @@ class UserController extends Controller
 
             if (Auth::attempt($credentials)) {
                 $success = true;
-                $message = "User login successfully";
+                $message = "Prihlásenie bolo úspešné";
             } else {
                 $success = false;
-                $message = "Unautorised";
+                $message = "Zlý email alebo heslo";
             }
 
             $response = [
