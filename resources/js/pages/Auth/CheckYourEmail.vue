@@ -3,10 +3,9 @@
         <div class="container">
 
             <p class="text">
-             CHECK YOUR EMAIL
+                Na Email Vam bol zaslaný odkaz na verifikáciu registrácie.
+                Po verifikovaní registrácie sa môžete prihlásiť.
             </p>
-
-
         </div>
     </div>
 </template>
