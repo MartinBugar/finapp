@@ -341,6 +341,7 @@ export default {
 }
 
 .chart {
+    margin-left: 90px;
     width: 400px;
     border-radius: 18px;
     margin-bottom: 30px;

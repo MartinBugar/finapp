@@ -1,7 +1,7 @@
 <template>
     <div class="bg-addposts">
-        <div class="container">
-            <div class="card cardAddPost">
+        <div class="container cardAddPost">
+            <div class="card ">
                 <div class="card-body">
                     <div class="d-flex justify-content-between pb-2 mb-2">
                         <h5 class="card-title">Vytvoriť nový záznam o príjme</h5>
@@ -186,10 +186,10 @@ export default {
 
 </script>
 
-<style>
+<style scoped>
 .cardAddPost {
+    max-width: var(--max-width);
     margin-top: 30px;
-    border-radius: 18px;
 }
 
 .buttonAddPost {
@@ -203,7 +203,10 @@ export default {
 .bg-addposts {
     background-color: var(--bg-secondary);
     padding-top: 4vh;
-    width: 100%;
     height: 100vh;
+}
+
+.card {
+    border-radius: 18px;
 }
 </style>

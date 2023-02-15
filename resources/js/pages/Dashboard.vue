@@ -201,24 +201,26 @@ export default {
 
 <style>
 
-.mainCardDashboard {
-    margin-top: 10px;
-    --bs-bg-opacity: 1;
-    background-color: rgba(var(--bs-dark-rgb), var(--bs-bg-opacity)) !important;
-    border-radius: 18px;
-}
+    .mainCardDashboard {
+        max-width: var(--max-width);
+        margin-top: 10px;
+        --bs-bg-opacity: 1;
+        background-color: rgba(var(--bs-dark-rgb), var(--bs-bg-opacity)) !important;
+        border-radius: 18px;
+    }
 
-.cardDashboard {
-    margin-top: 30px;
-    margin-bottom: 30px;
-    border-radius: 18px;
-}
+    .cardDashboard {
+        margin-top: 30px;
+        margin-bottom: 30px;
+        border-radius: 18px;
+    }
 
-.bg-dashboard {
-    background-color: var(--bg-secondary);
-    padding-top: 4vh;
-    width: 100%;
-    height: 100vh;
-}
+    .bg-dashboard {
+        background-color: var(--bg-secondary);
+        padding-top: 4vh;
+        width: 100%;
+        height: 100vh;
+
+    }
 
 </style>

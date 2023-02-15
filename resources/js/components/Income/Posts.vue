@@ -345,6 +345,7 @@ export default {
 }
 
 .mainCardPosts {
+    max-width: var(--max-width);
     margin-top: 10px;
     --bs-bg-opacity: 1;
     background-color: rgba(var(--bs-dark-rgb), var(--bs-bg-opacity)) !important;
