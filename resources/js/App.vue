@@ -2,13 +2,16 @@
     <div class="bg-app">
 
         <div class="sidebar" v-if="isSideBarVisible()">
-            <div class="admin-panel" v-if="isLoggedInAsAdmin">
-                <router-link to="/adminpanel" class="nav-item nav-link">admin panel</router-link>
+            <div class="custom-margin">
+                <div class="admin-panel" v-if="isLoggedInAsAdmin">
+                    <router-link to="/adminpanel" class="nav-item nav-link">admin panel</router-link>
+                </div>
+                <router-link to="/dashboard" class="nav-item nav-link">Dashboard</router-link>
+                <router-link to="/posts" class="nav-item nav-link">Príjem</router-link>
+                <router-link to="/expenses" class="nav-item nav-link">Výdaje</router-link>
+                <router-link to="/expensestypes" class="nav-item nav-link">Typy transakcií</router-link>
             </div>
-            <router-link to="/dashboard" class="nav-item nav-link">Dashboard</router-link>
-            <router-link to="/posts" class="nav-item nav-link">Príjem</router-link>
-            <router-link to="/expenses" class="nav-item nav-link">Výdaje</router-link>
-            <router-link to="/expensestypes" class="nav-item nav-link">Typy transakcií</router-link>
+
         </div>
 
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark main-nav">
@@ -249,9 +252,9 @@ export default {
 /*Sidebar links */
 .sidebar a {
     display: block;
+    margin-top: 5px;
+    padding-left: 15px;
     color: #ffffff;
-    /*padding: 16px;*/
-    margin: 10px;
     text-decoration: none;
     border-bottom: white;
 }
@@ -259,12 +262,14 @@ export default {
 
 .router-link-exact-active {
     background: #07a2b4;
+    padding-left: 15px;
     border-radius: 10px;
 }
 
 /* Links on mouse-over */
 .sidebar a:hover:not(.active) {
     background-color: #0ce6ff;
+    padding-left: 15px;
     color: white;
     border-radius: 10px;
 }
@@ -308,5 +313,8 @@ footer {
     z-index: 2;
 }
 
+.custom-margin {
+    padding-top: 50px;
+}
 
 </style>
