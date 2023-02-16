@@ -1,6 +1,5 @@
 <template>
     <div class="bg-app">
-
         <div class="sidebar" v-if="isSideBarVisible()">
             <div class="custom-margin">
                 <div class="admin-panel" v-if="isLoggedInAsAdmin">
@@ -11,10 +10,9 @@
                 <router-link to="/expenses" class="nav-item nav-link">Výdaje</router-link>
                 <router-link to="/expensestypes" class="nav-item nav-link">Typy transakcií</router-link>
             </div>
-
         </div>
 
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark main-nav">
+        <nav class="navbar navbar-expand  navbar-dark bg-dark main-nav">
             <div class="container">
                 <a class="navbar-brand" href="/">mojeFinancie</a>
 
@@ -291,6 +289,24 @@ div.content {
 
     .sidebar a {
         float: left;
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+
+    .router-link-exact-active {
+        background: #07a2b4;
+        padding-left: 15px;
+        padding-right: 15px;
+        border-radius: 10px;
+    }
+
+    /* Links on mouse-over */
+    .sidebar a:hover:not(.active) {
+        background-color: #0ce6ff;
+        padding-left: 15px;
+        padding-right: 15px;
+        color: white;
+        border-radius: 10px;
     }
 
     div.content {
@@ -301,6 +317,7 @@ div.content {
 /* On screens that are less than 400px, display the bar vertically, instead of horizontally */
 @media screen and (max-width: 400px) {
     .sidebar a {
+        margin: 39px;
         text-align: center;
         float: none;
     }
