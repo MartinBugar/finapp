@@ -334,7 +334,7 @@ export default {
 
 @media screen and (min-width: 1630px) {
     .mainCardPosts {
-        max-width: 950px;
+        max-width: 1200px;
         margin-top: 10px;
         --bs-bg-opacity: 1;
         background-color: rgba(var(--bs-dark-rgb), var(--bs-bg-opacity)) !important;
