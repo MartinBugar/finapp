@@ -255,6 +255,7 @@ export default {
     color: #ffffff;
     text-decoration: none;
     border-bottom: white;
+    margin-top: 15px;
 }
 
 
@@ -280,7 +281,7 @@ div.content {
 }
 
 /* On screens that are less than 700px wide, make the sidebar into a topbar */
-@media screen and (max-width: 700px) {
+@media screen and (max-width: 1127px) {
     .sidebar {
         width: 100%;
         height: auto;

@@ -330,7 +330,59 @@ export default {
 
 </script>
 
-<style>
+<style scoped>
+
+@media screen and (min-width: 1630px) {
+    .mainCardPosts {
+        max-width: 950px;
+        margin-top: 10px;
+        --bs-bg-opacity: 1;
+        background-color: rgba(var(--bs-dark-rgb), var(--bs-bg-opacity)) !important;
+        border-radius: 18px;
+    }
+}
+
+
+@media screen and (max-width: 1630px) {
+    .mainCardPosts {
+        max-width: 950px;
+        margin-top: 10px;
+        --bs-bg-opacity: 1;
+        background-color: rgba(var(--bs-dark-rgb), var(--bs-bg-opacity)) !important;
+        border-radius: 18px;
+    }
+}
+
+@media screen and (max-width: 1530px) {
+    .mainCardPosts {
+        max-width: 900px;
+        margin-top: 10px;
+        --bs-bg-opacity: 1;
+        background-color: rgba(var(--bs-dark-rgb), var(--bs-bg-opacity)) !important;
+        border-radius: 18px;
+    }
+}
+@media screen and (max-width: 1430px) {
+    .mainCardPosts {
+        max-width: 850px;
+        margin-top: 10px;
+        --bs-bg-opacity: 1;
+        background-color: rgba(var(--bs-dark-rgb), var(--bs-bg-opacity)) !important;
+        border-radius: 18px;
+    }
+}
+
+
+@media screen and (max-width: 1330px) {
+    .mainCardPosts {
+        max-width: 800px;
+        margin-top: 10px;
+        --bs-bg-opacity: 1;
+        background-color: rgba(var(--bs-dark-rgb), var(--bs-bg-opacity)) !important;
+        border-radius: 18px;
+    }
+}
+
 .buttons {
     max-height: 10px;
 }
@@ -342,14 +394,6 @@ export default {
 
 .rowPost {
     width: 600px;
-}
-
-.mainCardPosts {
-    max-width: var(--max-width);
-    margin-top: 10px;
-    --bs-bg-opacity: 1;
-    background-color: rgba(var(--bs-dark-rgb), var(--bs-bg-opacity)) !important;
-    border-radius: 18px;
 }
 
 .buttonNewPost {
