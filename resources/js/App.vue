@@ -252,7 +252,7 @@ export default {
 /*Sidebar links */
 .sidebar a {
     display: block;
-    margin-top: 5px;
+    margin-top: 10px;
     padding-left: 15px;
     color: #ffffff;
     text-decoration: none;
@@ -277,8 +277,7 @@ export default {
 /* Page content. The value of the margin-left property should match the value of the sidebar's width property */
 div.content {
     margin-left: 200px;
-    padding: 1px 16px;
-    padding-top: 6vh;
+    padding: 6vh 16px 1px;
     height: 100vh;
 }
 
