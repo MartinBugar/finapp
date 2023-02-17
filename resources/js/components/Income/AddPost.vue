@@ -197,7 +197,7 @@ export default {
 }
 
 .button-add-type {
-    margin-top: 23px;
+    margin-top: 50px;
 }
 
 .bg-addposts {

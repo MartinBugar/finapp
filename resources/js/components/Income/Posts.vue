@@ -13,9 +13,9 @@
                         </div>
                     </div>
 
-                    <div class="form-group mb-2 selection">
-                        <div class="row rowPost">
-                            <div class="col-sm-12 col-md-6 col-lg-6">
+                    <div class="form-group mb-2">
+                        <div class="row">
+                            <div class="col ">
                                 <label>Mesiac</label><span class="text-danger"> </span>
                                 <select class="form-select" v-model="month">
                                     <option value="0">Január</option>
@@ -32,7 +32,7 @@
                                     <option value="11">December</option>
                                 </select>
                             </div>
-                            <div class="col-sm-12 col-md-6 col-lg-6">
+                            <div class="col">
                                 <label>Rok</label><span class="text-danger"> *</span>
                                 <select class="form-select" v-model="year">
                                     <option>2021</option>
@@ -88,7 +88,7 @@
             </div>
 
             <div class="row">
-                <div class="col-lg-3">
+                <div class="col-lg-5">
                     <ul class="list-group mt-4 summary">
                         <li class="list-group-item"
                             v-for="(exptype, key) in filteredAndSortedExpensesTypes(this.expensesTypes)"
@@ -106,7 +106,7 @@
                 </div>
 
                 <div v-if="this.filteredAndSortedExpensesTypes(this.expensesTypes).length > 0"
-                     class="col-lg-9 mt-4 chart card">
+                     class="col-lg-7 mt-4 chart card">
                     <Pie :data="populateChartData()" :options="this.chartOptions"/>
                 </div>
 
@@ -392,9 +392,6 @@ export default {
     border-radius: 18px;
 }
 
-.rowPost {
-    width: 600px;
-}
 
 .buttonNewPost {
     border-radius: 18px;

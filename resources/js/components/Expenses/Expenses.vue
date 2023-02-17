@@ -18,7 +18,7 @@
 
                     <div class="form-group mb-2 selection">
                         <div class="row rowEdit">
-                            <div class="col-sm-12 col-md-6 col-lg-6">
+                            <div class="col-sm">
                                 <label>Mesiac</label><span class="text-danger"> </span>
                                 <select class="form-select" v-model="month">
                                     <option value="0">Január</option>
@@ -35,7 +35,7 @@
                                     <option value="11">December</option>
                                 </select>
                             </div>
-                            <div class="col-sm-12 col-md-6 col-lg-6">
+                            <div class="col-sm">
                                 <label>Rok</label><span class="text-danger"> *</span>
                                 <select class="form-select" v-model="year">
                                     <option>2021</option>
@@ -331,17 +331,11 @@ export default {
     border-radius: 18px;
 }
 
-.rowEdit {
-    width: 600px;
-}
-
 .summary {
-    width: 300px;
     border-radius: 18px;
 }
 
 .chart {
-    margin-left: 90px;
     width: 400px;
     border-radius: 18px;
     margin-bottom: 30px;

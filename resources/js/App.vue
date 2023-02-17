@@ -235,6 +235,8 @@ export default {
     z-index: 2;
 }
 
+/*SIDE BAR*/
+
 .sidebar {
     padding: 0;
     /*padding-top: 6vh;*/
@@ -250,16 +252,14 @@ export default {
 /*Sidebar links */
 .sidebar a {
     display: block;
-    margin-top: 10px;
     margin-left: 5px;
     margin-right: 5px;
     padding-left: 15px;
     color: #ffffff;
     text-decoration: none;
     border-bottom: white;
-    margin-top: 15px;
+    margin-bottom: 15px;
 }
-
 
 .router-link-exact-active {
     background: #07a2b4;
@@ -271,12 +271,12 @@ export default {
 
 /* Links on mouse-over */
 .sidebar a:hover:not(.active) {
+    border-radius: 10px;
     background-color: #0ce6ff;
     margin-left: 5px;
     margin-right: 5px;
     padding-left: 15px;
     color: white;
-    border-radius: 10px;
 }
 
 /* Page content. The value of the margin-left property should match the value of the sidebar's width property */

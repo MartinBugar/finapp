@@ -42,7 +42,7 @@
                                       placeholder="Enter the value"></textarea>
                         </div>
 
-                        <div class="row">
+                        <div class="row ">
                             <div class="col-lg-2">
                                 <label>Typ transakcie</label><span class="text-danger"> *</span>
                                 <div class="form-group mb-2 selection">
@@ -56,8 +56,8 @@
                                 </div>
                             </div>
 
-                            <div class="col-lg-3">
-                                <router-link :to="{name: 'addexpensestypes'}" class="btn btn-success button-add-type ">
+                            <div class="col-lg-3 ">
+                                <router-link :to="{name: 'addexpensestypes'}" class="btn btn-success ">
                                     Vytvoriť nový typ transakcie
                                 </router-link>
                             </div>
@@ -167,7 +167,6 @@ export default {
 .selection {
     max-width: 200px;
 }
-
 .cardAddExpens {
     margin-top: 30px;
     border-radius: 18px;

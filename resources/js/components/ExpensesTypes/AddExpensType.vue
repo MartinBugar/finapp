@@ -108,9 +108,6 @@ export default {
     width: 100%;
     height: 100vh;
 }
-.selection {
-    max-width: 200px;
-}
 
 .cardAddExpens {
     margin-top: 30px;
