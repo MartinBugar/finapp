@@ -1,9 +1,8 @@
 <template>
     <div class="bg-userprofile">
-        <div class="container ">
-            <div class="card cardUserProfile">
+        <div class="container card cardUserProfile">
                 <div class="row login-center">
-                    <div class="col-md-4">
+                    <div class="col-md-8">
                         <div class="card-body">
                             <h2 class="nadpis">Profil užívateľa {{ name }}</h2>
 
@@ -30,7 +29,6 @@
                 </div>
             </div>
         </div>
-    </div>
 </template>
 
 <script>
@@ -118,7 +116,7 @@ export default {
 
 </script>
 
-<style>
+<style scoped>
 
 .bg-userprofile {
     background-color: var(--bg-secondary);
@@ -127,9 +125,44 @@ export default {
     height: 100vh;
 }
 
-.cardUserProfile {
-    margin-top: 30px;
-    border-radius: 18px;
+@media screen and (min-width: 1630px) {
+    .cardUserProfile {
+        max-width: var(--max-width-1);
+        margin-top: 10px;
+        border-radius: 18px;
+    }
+}
+
+@media screen and (max-width: 1630px) {
+    .cardUserProfile {
+        max-width: var(--max-width-2);
+        margin-top: 10px;
+        border-radius: 18px;
+    }
+}
+
+@media screen and (max-width: 1530px) {
+    .cardUserProfile {
+        max-width: var(--max-width-3);
+        margin-top: 10px;
+        border-radius: 18px;
+    }
+}
+
+@media screen and (max-width: 1430px) {
+    .cardUserProfile {
+        max-width: var(--max-width-4);
+        margin-top: 10px;
+        border-radius: 18px;
+    }
+}
+
+@media screen and (max-width: 1330px) {
+    .cardUserProfile {
+        max-width: var(--max-width-5);
+        margin-top: 10px;
+        border-radius: 18px;
+    }
 }
 
 .nadpis {

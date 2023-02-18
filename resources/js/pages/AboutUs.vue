@@ -1,6 +1,6 @@
 <template>
     <div class="bg-contact-form">
-        <div class="container">
+        <div class="container card-aboutus">
             <p class="aboutus">
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
                 labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
@@ -44,15 +44,49 @@ export default {
 
 <style scoped>
 
+@media screen and (min-width: 1630px) {
+    .card-aboutus {
+        max-width: var(--max-width-1);
+        margin-top: 10px;
+        border-radius: 18px;
+    }
+}
+
+@media screen and (max-width: 1630px) {
+    .card-aboutus {
+        max-width: var(--max-width-2);
+        margin-top: 10px;
+        border-radius: 18px;
+    }
+}
+
+@media screen and (max-width: 1530px) {
+    .card-aboutus {
+        max-width: var(--max-width-3);
+        margin-top: 10px;
+        border-radius: 18px;
+    }
+}
+
+@media screen and (max-width: 1430px) {
+    .card-aboutus {
+        max-width: var(--max-width-4);
+        margin-top: 10px;
+        border-radius: 18px;
+    }
+}
+
+@media screen and (max-width: 1330px) {
+    .card-aboutus {
+        max-width: var(--max-width-5);
+        margin-top: 10px;
+        border-radius: 18px;
+    }
+}
+
 
 .aboutus {
     font-size: 1.3rem;
-}
-
-.text-about {
-    margin-top: 40px;
-    font-family: "Bebas Neue", serif;
-    font-size: 1.5rem;
 }
 
 .bg-contact-form {
