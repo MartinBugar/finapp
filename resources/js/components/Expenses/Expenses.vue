@@ -317,7 +317,58 @@ export default {
 
 </script>
 
-<style>
+<style scoped>
+
+@media screen and (min-width: 1630px) {
+    .mainCardExpenses {
+        max-width: 1200px;
+        margin-top: 10px;
+        --bs-bg-opacity: 1;
+        background-color: rgba(var(--bs-dark-rgb), var(--bs-bg-opacity)) !important;
+        border-radius: 18px;
+    }
+}
+
+@media screen and (max-width: 1630px) {
+    .mainCardExpenses {
+        max-width: 950px;
+        margin-top: 10px;
+        --bs-bg-opacity: 1;
+        background-color: rgba(var(--bs-dark-rgb), var(--bs-bg-opacity)) !important;
+        border-radius: 18px;
+    }
+}
+
+@media screen and (max-width: 1530px) {
+    .mainCardExpenses {
+        max-width: 900px;
+        margin-top: 10px;
+        --bs-bg-opacity: 1;
+        background-color: rgba(var(--bs-dark-rgb), var(--bs-bg-opacity)) !important;
+        border-radius: 18px;
+    }
+}
+
+@media screen and (max-width: 1430px) {
+    .mainCardExpenses {
+        max-width: 850px;
+        margin-top: 10px;
+        --bs-bg-opacity: 1;
+        background-color: rgba(var(--bs-dark-rgb), var(--bs-bg-opacity)) !important;
+        border-radius: 18px;
+    }
+}
+
+@media screen and (max-width: 1330px) {
+    .mainCardExpenses {
+        max-width: 800px;
+        margin-top: 10px;
+        --bs-bg-opacity: 1;
+        background-color: rgba(var(--bs-dark-rgb), var(--bs-bg-opacity)) !important;
+        border-radius: 18px;
+    }
+}
+
 .buttons {
     max-height: 10px;
 }
@@ -344,13 +395,6 @@ export default {
 .expensesSum {
     color: #b40000;
     /*background-color: #0b5ed7;*/
-}
-
-.mainCardExpenses {
-    margin-top: 10px;
-    --bs-bg-opacity: 1;
-    background-color: rgba(var(--bs-dark-rgb), var(--bs-bg-opacity)) !important;
-    border-radius: 18px;
 }
 
 .bg-expenses {
