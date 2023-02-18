@@ -203,7 +203,7 @@ export default {
 
 @media screen and (min-width: 1630px) {
     .mainCardDashboard {
-        max-width: 1200px;
+        max-width: var(--max-width-1);
         margin-top: 10px;
         --bs-bg-opacity: 1;
         background-color: rgba(var(--bs-dark-rgb), var(--bs-bg-opacity)) !important;
@@ -213,7 +213,7 @@ export default {
 
 @media screen and (max-width: 1630px) {
     .mainCardDashboard {
-        max-width: 950px;
+        max-width: var(--max-width-2);
         margin-top: 10px;
         --bs-bg-opacity: 1;
         background-color: rgba(var(--bs-dark-rgb), var(--bs-bg-opacity)) !important;
@@ -223,7 +223,7 @@ export default {
 
 @media screen and (max-width: 1530px) {
     .mainCardDashboard {
-        max-width: 900px;
+        max-width: var(--max-width-3);
         margin-top: 10px;
         --bs-bg-opacity: 1;
         background-color: rgba(var(--bs-dark-rgb), var(--bs-bg-opacity)) !important;
@@ -233,7 +233,7 @@ export default {
 
 @media screen and (max-width: 1430px) {
     .mainCardDashboard {
-        max-width: 850px;
+        max-width: var(--max-width-4);
         margin-top: 10px;
         --bs-bg-opacity: 1;
         background-color: rgba(var(--bs-dark-rgb), var(--bs-bg-opacity)) !important;
@@ -243,7 +243,7 @@ export default {
 
 @media screen and (max-width: 1330px) {
     .mainCardDashboard {
-        max-width: 800px;
+        max-width: var(--max-width-5);
         margin-top: 10px;
         --bs-bg-opacity: 1;
         background-color: rgba(var(--bs-dark-rgb), var(--bs-bg-opacity)) !important;

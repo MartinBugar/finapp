@@ -79,7 +79,11 @@ export default {
 :root {
     --bg-secondary: #021f2d;
     --cl-accent: #2071cc;
-    --max-width: 1000px;
+    --max-width-1: 1200px;
+    --max-width-2: 950px;
+    --max-width-3: 900px;
+    --max-width-4: 850px;
+    --max-width-5: 800px;
 }
 
 /*///////////////////////////*/
