@@ -1,7 +1,6 @@
 <template>
     <div class="bg-add-expenstype">
-        <div class="container">
-            <div class="card cardAddExpens">
+        <div class="container card cardAddExpensType">
                 <div class="card-body">
                     <div class="d-flex justify-content-between pb-2 mb-2">
                         <h5 class="card-title">Pridať nový typ transakcie </h5>
@@ -41,7 +40,6 @@
                 </div>
             </div>
         </div>
-    </div>
 </template>
 
 <script>
@@ -109,9 +107,44 @@ export default {
     height: 100vh;
 }
 
-.cardAddExpens {
-    margin-top: 30px;
-    border-radius: 18px;
+@media screen and (min-width: 1630px) {
+    .cardAddExpensType {
+        max-width: var(--max-width-1);
+        margin-top: 10px;
+        border-radius: 18px;
+    }
+}
+
+@media screen and (max-width: 1630px) {
+    .cardAddExpensType {
+        max-width: var(--max-width-2);
+        margin-top: 10px;
+        border-radius: 18px;
+    }
+}
+
+@media screen and (max-width: 1530px) {
+    .cardAddExpensType {
+        max-width: var(--max-width-3);
+        margin-top: 10px;
+        border-radius: 18px;
+    }
+}
+
+@media screen and (max-width: 1430px) {
+    .cardAddExpensType {
+        max-width: var(--max-width-4);
+        margin-top: 10px;
+        border-radius: 18px;
+    }
+}
+
+@media screen and (max-width: 1330px) {
+    .cardAddExpensType {
+        max-width: var(--max-width-5);
+        margin-top: 10px;
+        border-radius: 18px;
+    }
 }
 
 .buttonAddExpense {

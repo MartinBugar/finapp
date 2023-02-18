@@ -1,10 +1,9 @@
 <template>
     <div class="bg-contact-form">
-        <div class="container">
-
+        <div class="container contact-form-card">
             <div class="row">
                 <div class="col-lg-4">
-                    <p class="text">
+                    <p class="text-contact">
                         Ak máte nejaké otázky <br>
                         alebo dotazy, prípadne <br>
                         návrhy na zlepšenie, <br>
@@ -66,10 +65,50 @@ export default {
 
 <style scoped>
 
-.text {
+@media screen and (min-width: 1630px) {
+    .contact-form-card {
+        max-width: var(--max-width-1);
+        margin-top: 10px;
+        border-radius: 18px;
+    }
+}
+
+@media screen and (max-width: 1630px) {
+    .contact-form-card {
+        max-width: var(--max-width-2);
+        margin-top: 10px;
+        border-radius: 18px;
+    }
+}
+
+@media screen and (max-width: 1530px) {
+    .contact-form-card {
+        max-width: var(--max-width-3);
+        margin-top: 10px;
+        border-radius: 18px;
+    }
+}
+
+@media screen and (max-width: 1430px) {
+    .contact-form-card {
+        max-width: var(--max-width-4);
+        margin-top: 10px;
+        border-radius: 18px;
+    }
+}
+
+@media screen and (max-width: 1330px) {
+    .contact-form-card {
+        max-width: var(--max-width-5);
+        margin-top: 10px;
+        border-radius: 18px;
+    }
+}
+
+.text-contact {
     margin-top: 40px;
     font-family: "Bebas Neue", serif;
-    font-size: 2.5rem;
+    font-size: 1.3rem;
 }
 
 .bg-contact-form {

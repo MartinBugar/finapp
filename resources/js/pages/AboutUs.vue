@@ -49,10 +49,10 @@ export default {
     font-size: 1.3rem;
 }
 
-.text {
+.text-about {
     margin-top: 40px;
     font-family: "Bebas Neue", serif;
-    font-size: 2.5rem;
+    font-size: 1.5rem;
 }
 
 .bg-contact-form {
