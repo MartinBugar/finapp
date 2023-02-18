@@ -180,7 +180,7 @@ export default {
     background-color: var(--bg-secondary);
     padding-top: 4vh;
     width: 100%;
-    height: 100vh;
+    height: var(--bg-vh);
 }
 
 .buttons {

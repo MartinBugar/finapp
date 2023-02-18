@@ -84,6 +84,10 @@ export default {
     --max-width-3: 900px;
     --max-width-4: 850px;
     --max-width-5: 800px;
+
+    --bg-vh: --bg-ee + --bg-aa;
+    --bg-ee: 100vh;
+    --bg-aa: 400px;
 }
 
 /*///////////////////////////*/

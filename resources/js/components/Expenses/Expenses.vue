@@ -88,7 +88,7 @@
             </div>
 
             <div class="row">
-                <div class="col-lg-3">
+                <div class="col-lg-5">
                     <ul class="list-group mt-4 summary">
                         <li class="list-group-item"
                             v-for="(exptype, key) in filteredAndSortedExpensesTypes(this.expensesTypes)"
@@ -106,7 +106,7 @@
                 </div>
 
                 <div v-if="this.filteredAndSortedExpensesTypes(this.expensesTypes).length > 0"
-                     class="col-lg-9 mt-4 chart card">
+                     class="col-lg-7 mt-4 chart card">
                     <Pie :data="populateChartData()" :options="this.chartOptions"/>
                 </div>
 
@@ -394,14 +394,13 @@ export default {
 
 .expensesSum {
     color: #b40000;
-    /*background-color: #0b5ed7;*/
 }
 
 .bg-expenses {
     background-color: var(--bg-secondary);
     padding-top: 4vh;
     width: 100%;
-    height: 100vh;
+    height: var(--bg-vh);
 }
 
 </style>

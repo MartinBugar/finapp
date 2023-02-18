@@ -396,6 +396,12 @@ export default {
     border-radius: 18px;
 }
 
+.chart {
+    width: 400px;
+    border-radius: 18px;
+    margin-bottom: 30px;
+}
+
 .postsSum {
     color: #06b614;
 }
@@ -404,7 +410,7 @@ export default {
     background-color: var(--bg-secondary);
     padding-top: 4vh;
     width: 100%;
-    height: 100vh;
+    height: var(--bg-vh);
 }
 
 </style>
