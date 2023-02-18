@@ -302,12 +302,8 @@ div.content {
 
     .router-link-exact-active {
         background: #07a2b4;
-        margin-left: 5px;
-        margin-right: 5px;
-        padding-left: 15px;
         padding-right: 15px;
-        border-radius: 10px;
-
+        border-radius: 10px
     }
 
     /* Links on mouse-over */

@@ -199,28 +199,69 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 
+@media screen and (min-width: 1630px) {
     .mainCardDashboard {
-        max-width: var(--max-width);
+        max-width: 1200px;
         margin-top: 10px;
         --bs-bg-opacity: 1;
         background-color: rgba(var(--bs-dark-rgb), var(--bs-bg-opacity)) !important;
         border-radius: 18px;
     }
+}
 
-    .cardDashboard {
-        margin-top: 30px;
-        margin-bottom: 30px;
+@media screen and (max-width: 1630px) {
+    .mainCardDashboard {
+        max-width: 950px;
+        margin-top: 10px;
+        --bs-bg-opacity: 1;
+        background-color: rgba(var(--bs-dark-rgb), var(--bs-bg-opacity)) !important;
         border-radius: 18px;
     }
+}
 
-    .bg-dashboard {
-        background-color: var(--bg-secondary);
-        padding-top: 4vh;
-        width: 100%;
-        height: 100vh;
-
+@media screen and (max-width: 1530px) {
+    .mainCardDashboard {
+        max-width: 900px;
+        margin-top: 10px;
+        --bs-bg-opacity: 1;
+        background-color: rgba(var(--bs-dark-rgb), var(--bs-bg-opacity)) !important;
+        border-radius: 18px;
     }
+}
+
+@media screen and (max-width: 1430px) {
+    .mainCardDashboard {
+        max-width: 850px;
+        margin-top: 10px;
+        --bs-bg-opacity: 1;
+        background-color: rgba(var(--bs-dark-rgb), var(--bs-bg-opacity)) !important;
+        border-radius: 18px;
+    }
+}
+
+@media screen and (max-width: 1330px) {
+    .mainCardDashboard {
+        max-width: 800px;
+        margin-top: 10px;
+        --bs-bg-opacity: 1;
+        background-color: rgba(var(--bs-dark-rgb), var(--bs-bg-opacity)) !important;
+        border-radius: 18px;
+    }
+}
+
+.cardDashboard {
+    margin-top: 30px;
+    margin-bottom: 30px;
+    border-radius: 18px;
+}
+
+.bg-dashboard {
+    background-color: var(--bg-secondary);
+    padding-top: 4vh;
+    width: 100%;
+    height: 100vh;
+}
 
 </style>

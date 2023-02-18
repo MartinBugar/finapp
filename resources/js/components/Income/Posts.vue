@@ -342,7 +342,6 @@ export default {
     }
 }
 
-
 @media screen and (max-width: 1630px) {
     .mainCardPosts {
         max-width: 950px;
