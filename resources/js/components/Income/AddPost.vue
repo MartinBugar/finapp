@@ -61,7 +61,7 @@
                                 </div>
                             </div>
                             <div class="col-lg-3">
-                                <router-link :to="{name: 'addexpensestypes'}" class="btn btn-success button-add-type ">
+                                <router-link :to="{name: 'addexpensestypes'}" class="btn btn-success ">
                                     Vytvoriť nový typ transakcie
                                 </router-link>
                             </div>
@@ -187,9 +187,45 @@ export default {
 </script>
 
 <style scoped>
-.cardAddPost {
-    max-width: var(--max-width);
-    margin-top: 30px;
+
+@media screen and (min-width: 1630px) {
+    .cardAddPost {
+        max-width: var(--max-width-1);
+        margin-top: 10px;
+        border-radius: 18px;
+    }
+}
+
+@media screen and (max-width: 1630px) {
+    .cardAddPost {
+        max-width: var(--max-width-2);
+        margin-top: 10px;
+        border-radius: 18px;
+    }
+}
+
+@media screen and (max-width: 1530px) {
+    .cardAddPost {
+        max-width: var(--max-width-3);
+        margin-top: 10px;
+        border-radius: 18px;
+    }
+}
+
+@media screen and (max-width: 1430px) {
+    .cardAddPost {
+        max-width: var(--max-width-4);
+        margin-top: 10px;
+        border-radius: 18px;
+    }
+}
+
+@media screen and (max-width: 1330px) {
+    .cardAddPost {
+        max-width: var(--max-width-5);
+        margin-top: 10px;
+        border-radius: 18px;
+    }
 }
 
 .buttonAddPost {

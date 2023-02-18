@@ -202,14 +202,6 @@ export default {
     height: 100vh;
 }
 
-/*.selection {
-    max-width: 200px;
-}
-.cardAddExpens {
-    margin-top: 30px;
-    border-radius: 18px;
-}*/
-
 .buttonAddExpense {
     border-radius: 18px;
 }
