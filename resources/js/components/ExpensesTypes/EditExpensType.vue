@@ -1,7 +1,6 @@
 <template>
     <div class="bg-edit-expens-type">
-    <div class="container">
-        <div class="card cardEditExpense">
+        <div class="container card cardEditExpenseType">
             <div class="card-body">
                 <div class="d-flex justify-content-between pb-2 mb-2">
                     <h5 class="card-title">Upraviť názov typu transakcie</h5>
@@ -38,7 +37,6 @@
                     <button type="submit" class="btn btn-primary mt-4 mb-4"> Upraviť</button>
                 </form>
             </div>
-        </div>
         </div>
     </div>
 </template>
@@ -112,9 +110,45 @@ export default {
     width: 100%;
     height: 100vh;
 }
-.cardEditExpense {
-    margin-top: 30px;
-    border-radius: 18px;
+
+@media screen and (min-width: 1630px) {
+    .cardEditExpenseType {
+        max-width: var(--max-width-1);
+        margin-top: 10px;
+        border-radius: 18px;
+    }
+}
+
+@media screen and (max-width: 1630px) {
+    .cardEditExpenseType {
+        max-width: var(--max-width-2);
+        margin-top: 10px;
+        border-radius: 18px;
+    }
+}
+
+@media screen and (max-width: 1530px) {
+    .cardEditExpenseType {
+        max-width: var(--max-width-3);
+        margin-top: 10px;
+        border-radius: 18px;
+    }
+}
+
+@media screen and (max-width: 1430px) {
+    .cardEditExpenseType {
+        max-width: var(--max-width-4);
+        margin-top: 10px;
+        border-radius: 18px;
+    }
+}
+
+@media screen and (max-width: 1330px) {
+    .cardEditExpenseType {
+        max-width: var(--max-width-5);
+        margin-top: 10px;
+        border-radius: 18px;
+    }
 }
 
 .buttonEditExpens {
