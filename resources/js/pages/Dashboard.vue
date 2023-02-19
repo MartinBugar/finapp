@@ -261,7 +261,7 @@ export default {
     background-color: var(--bg-secondary);
     padding-top: 4vh;
     width: 100%;
-    min-height: 110vh;
+    min-height: var(--bg-min-height);
 }
 
 </style>
