@@ -1,7 +1,6 @@
 <template>
     <div class="bg-editexpens">
-        <div class="container">
-            <div class="card cardEditExpense">
+        <div class="container card cardEditExpense">
                 <div class="card-body">
                     <div class="d-flex justify-content-between pb-2 mb-2">
                         <h5 class="card-title">Upraviť záznam o výdaji</h5>
@@ -69,7 +68,6 @@
                 </div>
             </div>
         </div>
-    </div>
 </template>
 
 <script>
@@ -176,9 +174,44 @@ export default {
     height: 100vh;
 }
 
-.cardEditExpense {
-    margin-top: 30px;
-    border-radius: 18px;
+@media screen and (min-width: 1630px) {
+    .cardEditExpense {
+        max-width: var(--max-width-1);
+        margin-top: 10px;
+        border-radius: 18px;
+    }
+}
+
+@media screen and (max-width: 1630px) {
+    .cardEditExpense {
+        max-width: var(--max-width-2);
+        margin-top: 10px;
+        border-radius: 18px;
+    }
+}
+
+@media screen and (max-width: 1530px) {
+    .cardEditExpense {
+        max-width: var(--max-width-3);
+        margin-top: 10px;
+        border-radius: 18px;
+    }
+}
+
+@media screen and (max-width: 1430px) {
+    .cardEditExpense {
+        max-width: var(--max-width-4);
+        margin-top: 10px;
+        border-radius: 18px;
+    }
+}
+
+@media screen and (max-width: 1330px) {
+    .cardEditExpense {
+        max-width: var(--max-width-5);
+        margin-top: 10px;
+        border-radius: 18px;
+    }
 }
 
 .buttonEditExpens {
