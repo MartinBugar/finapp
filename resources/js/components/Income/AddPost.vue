@@ -220,7 +220,7 @@ export default {
     }
 }
 
-@media screen and (max-width: 1330px) {
+@media screen and (max-width: 1270px) {
     .cardAddPost {
         max-width: var(--max-width-5);
         margin-top: 10px;
