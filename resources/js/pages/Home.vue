@@ -74,19 +74,8 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 
-:root {
-    --bg-secondary: #021f2d;
-    --cl-accent: #2071cc;
-    --max-width-1: 1200px;
-    --max-width-2: 950px;
-    --max-width-3: 900px;
-    --max-width-4: 850px;
-    --max-width-5: 800px;
-
-    --bg-min-height: 110vh;
-}
 
 /*///////////////////////////*/
 figure {
