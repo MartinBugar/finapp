@@ -334,6 +334,8 @@ div.content {
 footer {
     background-color: #0a4275;
     position: relative;
+    bottom: 0;
+    left: 0;
     z-index: 2;
 }
 

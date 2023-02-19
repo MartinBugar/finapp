@@ -1,6 +1,6 @@
 <template>
     <div class="bg-expenses-types">
-        <div class="container">
+        <div class="container aaa">
             <div class="row jutify-content-center">
                 <div class="col-md-7" style="float:none; margin:auto;">
                     <div class="card cardExpensesTypes">
@@ -180,7 +180,7 @@ export default {
     background-color: var(--bg-secondary);
     padding-top: 4vh;
     width: 100%;
-    height: var(--bg-vh);
+    min-height: 110vh;
 }
 
 .buttons {

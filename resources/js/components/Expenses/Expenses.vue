@@ -400,7 +400,7 @@ export default {
     background-color: var(--bg-secondary);
     padding-top: 4vh;
     width: 100%;
-    height: var(--bg-vh);
+    min-height: 110vh;
 }
 
 </style>
