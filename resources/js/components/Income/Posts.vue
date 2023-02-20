@@ -88,7 +88,7 @@
             </div>
 
             <div class="row">
-                <div class="col-lg-5">
+                <div class="col-lg-">
                     <ul class="list-group mt-4 summary">
                         <li class="list-group-item"
                             v-for="(exptype, key) in filteredAndSortedExpensesTypes(this.expensesTypes)"

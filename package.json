@@ -30,6 +30,7 @@
         "chart.js": "^4.1.2",
         "emailjs-com": "^3.2.0",
         "moment": "^2.29.4",
+        "sunrise-sunset-js": "^2.2.1",
         "vue": "^3.2.33",
         "vue-chartjs": "^5.1.0",
         "vue-google-charts": "^1.1.0",

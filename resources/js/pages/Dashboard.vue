@@ -7,47 +7,69 @@
                     <h2>Dashboard panel uživateľa {{ name }}</h2>
                 </div>
 
-                <div class="container mt-1">
-                    <div class="form-group mb-2 selection">
-                        <label>Rok</label><span class="text-danger"> *</span>
-                        <select class="form-select" @change="onChange($event)" v-model="year">
-                            <option>2021</option>
-                            <option>2022</option>
-                            <option>2023</option>
-                        </select>
+                <div class="row">
+                    <div class="col-8">
+
+                        <div class="container mt-1">
+                            <div class="form-group mb-2 selection">
+                                <label>Rok</label><span class="text-danger"> *</span>
+                                <select class="form-select" @change="onChange($event)" v-model="year">
+                                    <option>2021</option>
+                                    <option>2022</option>
+                                    <option>2023</option>
+                                </select>
+                            </div>
+
+
+                            <table class="table table-hover table-sm table-bordered table-dark">
+                                <thead class="bg-dark text-light">
+                                <tr>
+                                    <th width="100" class="text-center">Mesiac</th>
+                                    <th class="text-center">Prijem</th>
+                                    <th class="text-center">Vydaje</th>
+                                    <th class="text-center">Zostatok</th>
+
+                                </tr>
+                                </thead>
+                                <tbody>
+
+                                <tr class="" v-for="(date) in dates" :key="date.id">
+                                    <td>{{ date.name }}</td>
+                                    <td class="text-center">{{ sumOfPostsFromMonth(date.id) }} €</td>
+                                    <td class="text-center">{{ sumOfExpensesFromMonth(date.id) }} €</td>
+                                    <td class="text-center">
+                                        {{
+                                            this.resultOfSum(sumOfPostsFromMonth(date.id), sumOfExpensesFromMonth(date.id))
+                                        }} €
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+
+                            <ul class="list-group mb-4">
+                                <li class="list-group-item">Príjem za rok {{ year }} : <strong>
+                                    {{ sumOfIncomPerYear(year) }}
+                                    € </strong></li>
+                                <li class="list-group-item">Výdaje za rok {{ year }} : <strong>
+                                    {{ sumOfExpensesPerYear(year) }}
+                                    € </strong></li>
+                            </ul>
+
+                        </div>
                     </div>
 
-
-                    <table class="table table-hover table-sm table-bordered table-dark">
-                        <thead class="bg-dark text-light">
-                        <tr>
-                            <th width="100" class="text-center">Mesiac</th>
-                            <th class="text-center">Prijem</th>
-                            <th class="text-center">Vydaje</th>
-                            <th class="text-center">Zostatok</th>
-
-                        </tr>
-                        </thead>
-                        <tbody>
-
-                        <tr class="" v-for="(date) in dates" :key="date.id">
-                            <td>{{ date.name }}</td>
-                            <td class="text-center">{{ sumOfPostsFromMonth(date.id) }} €</td>
-                            <td class="text-center">{{ sumOfExpensesFromMonth(date.id) }} €</td>
-                            <td class="text-center">
-                                {{ this.resultOfSum(sumOfPostsFromMonth(date.id), sumOfExpensesFromMonth(date.id)) }} €
-                            </td>
-                        </tr>
-                        </tbody>
-                    </table>
-
-                    <ul class="list-group mb-4">
-                        <li class="list-group-item">Príjem za rok {{ year }} : <strong> {{ sumOfIncomPerYear(year) }}
-                            € </strong></li>
-                        <li class="list-group-item">Výdaje za rok {{ year }} : <strong> {{ sumOfExpensesPerYear(year) }}
-                            € </strong></li>
-                    </ul>
-
+                    <div class="col-3">
+                        <ul class="list-group mt-4">
+                            <li class="list-group-item">Východ Slnka o <strong>
+                                {{ getMySunrise().getHours() }}:{{ getMySunrise().getMinutes() }}</strong>
+                                <b-icon-sunrise class="icon"/>
+                            </li>
+                            <li class="list-group-item">Západ Slnka  o <strong>
+                                {{ getMySunset().getHours() - 2 }}:{{ getMySunset().getMinutes() }}</strong>
+                                <b-icon-sunset class="icon"/>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
@@ -57,6 +79,7 @@
 <script>
 
 import Dates from "../components/Dates";
+import {getSunrise, getSunset} from 'sunrise-sunset-js';
 
 export default {
     name: "Dashboard",
@@ -71,7 +94,18 @@ export default {
             months: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
             dates: Dates,
             year: new Date().getFullYear(),
+            today: new Date(),
+            sunset: '',
+            xlatitude: null,
+            xlongitude: null,
         }
+    },
+    beforeCreate() {
+        navigator.geolocation.getCurrentPosition(function (position) {
+            this.xlatitude = position.coords.latitude;
+            this.xlongitude = position.coords.longitude;
+        });
+
     },
     created() {
         this.$axios.get('/sanctum/csrf-cookie').then(response => {
@@ -101,6 +135,12 @@ export default {
         }
     },
     methods: {
+        getMySunrise() {
+            return getSunrise(this.xlatitude, this.xlongitude);
+        },
+        getMySunset() {
+            return getSunset(this.xlatitude, this.xlongitude, this.today);
+        },
         getMonthFromDate(date) {
             let newDate = new Date(date);
             return newDate.getMonth();
@@ -262,6 +302,10 @@ export default {
     padding-top: 4vh;
     width: 100%;
     min-height: var(--bg-min-height);
+}
+
+.icon {
+    margin-left: 10px;
 }
 
 </style>
