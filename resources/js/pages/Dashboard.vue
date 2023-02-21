@@ -20,7 +20,6 @@
                                 </select>
                             </div>
 
-
                             <table class="table table-hover table-sm table-bordered table-dark">
                                 <thead class="bg-dark text-light">
                                 <tr>
@@ -36,7 +35,7 @@
                                 <tr class="" v-for="(date) in dates" :key="date.id">
                                     <td>{{ date.name }}</td>
                                     <td class="text-center incomeSum">{{ sumOfPostsFromMonth(date.id) }} €</td>
-                                    <td :style="{ color: 'red'}" class="text-center expensesSum">
+                                    <td class="text-center expensesSum">
                                         {{ sumOfExpensesFromMonth(date.id) }} €
                                     </td>
                                     <td class="text-center">
@@ -338,7 +337,7 @@ export default {
 }
 
 .expensesSum {
-    color: #b40000;
+    color: red;
 }
 
 </style>
