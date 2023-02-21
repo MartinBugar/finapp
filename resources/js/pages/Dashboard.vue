@@ -25,8 +25,8 @@
                                 <thead class="bg-dark text-light">
                                 <tr>
                                     <th width="100" class="text-center">Mesiac</th>
-                                    <th class="text-center incomeSum">Príjem</th>
-                                    <th class="text-center expensesSum">Výdaje</th>
+                                    <th class="text-center">Príjem</th>
+                                    <th class="text-center">Výdaje</th>
                                     <th class="text-center">Zostatok</th>
 
                                 </tr>
@@ -36,10 +36,12 @@
                                 <tr class="" v-for="(date) in dates" :key="date.id">
                                     <td>{{ date.name }}</td>
                                     <td class="text-center incomeSum">{{ sumOfPostsFromMonth(date.id) }} €</td>
-                                    <td class="text-center expensesSum">{{ sumOfExpensesFromMonth(date.id) }} €</td>
+                                    <td :style="{ color: 'red'}" class="text-center expensesSum">
+                                        {{ sumOfExpensesFromMonth(date.id) }} €
+                                    </td>
                                     <td class="text-center">
                                         <div
-                                            :style="{ color: this.resultOfSum(sumOfPostsFromMonth(date.id), sumOfExpensesFromMonth(date.id)) >= 0 ? 'green' : 'red' }">
+                                            :style="{ color: this.resultOfSum(sumOfPostsFromMonth(date.id), sumOfExpensesFromMonth(date.id)) >= 0 ? '#06b614' : 'red' }">
                                             {{
                                                 this.resultOfSum(sumOfPostsFromMonth(date.id), sumOfExpensesFromMonth(date.id))
                                             }} €
@@ -50,10 +52,10 @@
                             </table>
 
                             <ul class="list-group mb-4">
-                                <li class="list-group-item incomeSum">Príjem za rok {{ year }} : <strong>
+                                <li class="list-group-item incomeSum"><strong>Príjem za rok {{ year }} :
                                     {{ sumOfIncomPerYear(year) }}
                                     € </strong></li>
-                                <li class="list-group-item expensesSum">Výdaje za rok {{ year }} : <strong>
+                                <li class="list-group-item expensesSum"><strong>Výdaje za rok {{ year }} :
                                     {{ sumOfExpensesPerYear(year) }}
                                     € </strong></li>
                             </ul>
