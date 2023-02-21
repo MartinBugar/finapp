@@ -61,11 +61,11 @@
                     <div class="col-3">
                         <ul class="list-group mt-4">
                             <li class="list-group-item">Východ Slnka o <strong>
-                                {{ getMySunrise().getHours() }}:{{ getMySunrise().getMinutes() }}</strong>
+                                {{ getMySunrise().getHours()- 1 }}:{{ getMySunrise().getMinutes() + 38 }}</strong>
                                 <b-icon-sunrise class="icon"/>
                             </li>
                             <li class="list-group-item">Západ Slnka  o <strong>
-                                {{ getMySunset().getHours() - 2 }}:{{ getMySunset().getMinutes() }}</strong>
+                                {{ getMySunset().getHours() - 2 }}:{{ getMySunset().getMinutes() + 6 }}</strong>
                                 <b-icon-sunset class="icon"/>
                             </li>
                         </ul>
