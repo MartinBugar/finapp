@@ -66,17 +66,17 @@
                         <ul class="list-group mt-4">
                             <li class="list-group-item">Východ Slnka o <strong>
                                 {{
-                                    getSunriseWithLocation(location.coords.latitude, location.coords.longitude).getHours()
+                                    getSunriseWithLocation(getLatitude(), getLongitude()).getHours()
                                 }}:{{
-                                    getSunriseWithLocation(location.coords.latitude, location.coords.longitude).getMinutes()
+                                    getSunriseWithLocation(getLatitude(), getLongitude()).getMinutes()
                                 }}</strong>
                                 <b-icon-sunrise class="icon"/>
                             </li>
                             <li class="list-group-item">Západ Slnka o <strong>
                                 {{
-                                    getSunsetWithLocation(location.coords.latitude, location.coords.longitude).getHours()
+                                    getSunsetWithLocation(getLatitude(), getLongitude()).getHours()
                                 }}:{{
-                                    getSunsetWithLocation(location.coords.latitude, location.coords.longitude).getMinutes()
+                                    getSunsetWithLocation(getLatitude(), getLongitude()).getMinutes()
                                 }}</strong>
                                 <b-icon-sunset class="icon"/>
                             </li>
@@ -159,6 +159,20 @@ export default {
         }
     },
     methods: {
+        getLatitude() {
+            if (this.gettingLocation) {
+                return location.coords.latitude;
+            } else {
+                return 48.163895213959286;
+            }
+        },
+        getLongitude() {
+            if (this.gettingLocation) {
+                return location.coords.longitude;
+            } else {
+                return 17.120373485390648;
+            }
+        },
         getSunriseWithLocation(latitude, longitude) {
             return getSunrise(latitude, longitude);
         },
