@@ -1,7 +1,7 @@
 <template>
     <div class="bg-admin-panel">
         <div class="container">
-            <h3 class="hello"> Vitaj {{ this.role }}</h3>
+            <h3 class="hello"> Vitaj MARTIN</h3>
 
             <table class="table table-hover table-sm table-bordered table-dark">
                 <thead class="bg-dark text-light">
