@@ -1,9 +1,9 @@
 <template>
     <div class="bg-userprofile">
         <div class="container card cardUserProfile">
+            <h2 class="nadpis">Profil užívateľa {{ name }}</h2>
             <div class="row login-center">
-                <h2 class="nadpis">Profil užívateľa {{ name }}</h2>
-                <div class="col-md-8">
+                <div class="col-9">
                     <div class="card-body">
                         <ul class="list-group mb-4">
                             <li class="list-group-item">User id : <strong> {{ userId }} </strong></li>
@@ -26,9 +26,11 @@
                     </div>
                 </div>
 
-                <div class="col-md-4 profile-photo">
-                    <img class="image box" src="../../../images/profile.jpg" alt=""/>
-                </div>
+<!--                <div class="col-6 profile-photo">-->
+<!--                    <div class="card-body">-->
+<!--                        <img class="image box" src="../../../images/profile.jpg" alt=""/>-->
+<!--                    </div>-->
+<!--                </div>-->
 
             </div>
         </div>
