@@ -61,11 +61,11 @@
                     <div class="col-3">
                         <ul class="list-group mt-4">
                             <li class="list-group-item">Východ Slnka o <strong>
-                                {{ getMySunrise().getHours()- 1 }}:{{ getMySunrise().getMinutes() + 38 }}</strong>
+                                {{ getMySunrise().getHours() }}:{{ getMySunrise().getMinutes()  }}</strong>
                                 <b-icon-sunrise class="icon"/>
                             </li>
                             <li class="list-group-item">Západ Slnka  o <strong>
-                                {{ getMySunset().getHours() - 2 }}:{{ getMySunset().getMinutes() + 6 }}</strong>
+                                {{ getMySunset().getHours() }}:{{ getMySunset().getMinutes()  }}</strong>
                                 <b-icon-sunset class="icon"/>
                             </li>
                         </ul>
@@ -100,13 +100,6 @@ export default {
             xlongitude: null,
         }
     },
-    beforeCreate() {
-        navigator.geolocation.getCurrentPosition(function (position) {
-            this.xlatitude = position.coords.latitude;
-            this.xlongitude = position.coords.longitude;
-        });
-
-    },
     created() {
         this.$axios.get('/sanctum/csrf-cookie').then(response => {
             this.$axios.get('/api/posts')
@@ -136,10 +129,10 @@ export default {
     },
     methods: {
         getMySunrise() {
-            return getSunrise(this.xlatitude, this.xlongitude);
+            return getSunrise(48.16319919272486, 17.119200435589807);
         },
         getMySunset() {
-            return getSunset(this.xlatitude, this.xlongitude, this.today);
+            return getSunset(48.16319919272486, 17.119200435589807);
         },
         getMonthFromDate(date) {
             let newDate = new Date(date);
