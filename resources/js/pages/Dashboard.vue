@@ -25,8 +25,8 @@
                                 <thead class="bg-dark text-light">
                                 <tr>
                                     <th width="100" class="text-center">Mesiac</th>
-                                    <th class="text-center">Prijem</th>
-                                    <th class="text-center">Vydaje</th>
+                                    <th class="text-center incomeSum">Príjem</th>
+                                    <th class="text-center expensesSum">Výdaje</th>
                                     <th class="text-center">Zostatok</th>
 
                                 </tr>
@@ -35,22 +35,25 @@
 
                                 <tr class="" v-for="(date) in dates" :key="date.id">
                                     <td>{{ date.name }}</td>
-                                    <td class="text-center">{{ sumOfPostsFromMonth(date.id) }} €</td>
-                                    <td class="text-center">{{ sumOfExpensesFromMonth(date.id) }} €</td>
+                                    <td class="text-center incomeSum">{{ sumOfPostsFromMonth(date.id) }} €</td>
+                                    <td class="text-center expensesSum">{{ sumOfExpensesFromMonth(date.id) }} €</td>
                                     <td class="text-center">
-                                        {{
-                                            this.resultOfSum(sumOfPostsFromMonth(date.id), sumOfExpensesFromMonth(date.id))
-                                        }} €
+                                        <div
+                                            :style="{ color: this.resultOfSum(sumOfPostsFromMonth(date.id), sumOfExpensesFromMonth(date.id)) >= 0 ? 'green' : 'red' }">
+                                            {{
+                                                this.resultOfSum(sumOfPostsFromMonth(date.id), sumOfExpensesFromMonth(date.id))
+                                            }} €
+                                        </div>
                                     </td>
                                 </tr>
                                 </tbody>
                             </table>
 
                             <ul class="list-group mb-4">
-                                <li class="list-group-item">Príjem za rok {{ year }} : <strong>
+                                <li class="list-group-item incomeSum">Príjem za rok {{ year }} : <strong>
                                     {{ sumOfIncomPerYear(year) }}
                                     € </strong></li>
-                                <li class="list-group-item">Výdaje za rok {{ year }} : <strong>
+                                <li class="list-group-item expensesSum">Výdaje za rok {{ year }} : <strong>
                                     {{ sumOfExpensesPerYear(year) }}
                                     € </strong></li>
                             </ul>
@@ -326,6 +329,14 @@ export default {
 
 .icon {
     margin-left: 10px;
+}
+
+.incomeSum {
+    color: #06b614;
+}
+
+.expensesSum {
+    color: #b40000;
 }
 
 </style>
