@@ -61,11 +61,19 @@
                     <div class="col-3">
                         <ul class="list-group mt-4">
                             <li class="list-group-item">Východ Slnka o <strong>
-                                {{ getMySunrise().getHours() }}:{{ getMySunrise().getMinutes()  }}</strong>
+                                {{
+                                    getSunriseWithLocation(location.coords.latitude, location.coords.longitude).getHours()
+                                }}:{{
+                                    getSunriseWithLocation(location.coords.latitude, location.coords.longitude).getMinutes()
+                                }}</strong>
                                 <b-icon-sunrise class="icon"/>
                             </li>
-                            <li class="list-group-item">Západ Slnka  o <strong>
-                                {{ getMySunset().getHours() }}:{{ getMySunset().getMinutes()  }}</strong>
+                            <li class="list-group-item">Západ Slnka o <strong>
+                                {{
+                                    getSunsetWithLocation(location.coords.latitude, location.coords.longitude).getHours()
+                                }}:{{
+                                    getSunsetWithLocation(location.coords.latitude, location.coords.longitude).getMinutes()
+                                }}</strong>
                                 <b-icon-sunset class="icon"/>
                             </li>
                         </ul>
@@ -98,9 +106,28 @@ export default {
             sunset: '',
             xlatitude: null,
             xlongitude: null,
+            location: null,
+            gettingLocation: false,
+            errorStr: null
         }
     },
     created() {
+        //do we support geolocation
+        if (!("geolocation" in navigator)) {
+            this.errorStr = 'Geolocation is not available.';
+            return;
+        }
+
+        this.gettingLocation = true;
+        // get position
+        navigator.geolocation.getCurrentPosition(pos => {
+            this.gettingLocation = false;
+            this.location = pos;
+        }, err => {
+            this.gettingLocation = false;
+            this.errorStr = err.message;
+        })
+
         this.$axios.get('/sanctum/csrf-cookie').then(response => {
             this.$axios.get('/api/posts')
                 .then(response => {
@@ -128,11 +155,11 @@ export default {
         }
     },
     methods: {
-        getMySunrise() {
-            return getSunrise(48.16319919272486, 17.119200435589807);
+        getSunriseWithLocation(latitude, longitude) {
+            return getSunrise(latitude, longitude);
         },
-        getMySunset() {
-            return getSunset(48.16319919272486, 17.119200435589807);
+        getSunsetWithLocation(latitude, longitude) {
+            return getSunset(latitude, longitude);
         },
         getMonthFromDate(date) {
             let newDate = new Date(date);
