@@ -64,22 +64,7 @@
 
                     <div class="col-3">
                         <ul class="list-group mt-4">
-                            <li class="list-group-item">Východ Slnka o <strong>
-                                {{
-                                    getSunriseWithLocation(getLatitude(), getLongitude()).getHours()
-                                }}:{{
-                                    getSunriseWithLocation(getLatitude(), getLongitude()).getMinutes()
-                                }}</strong>
-                                <b-icon-sunrise class="icon"/>
-                            </li>
-                            <li class="list-group-item">Západ Slnka o <strong>
-                                {{
-                                    getSunsetWithLocation(getLatitude(), getLongitude()).getHours()
-                                }}:{{
-                                    getSunsetWithLocation(getLatitude(), getLongitude()).getMinutes()
-                                }}</strong>
-                                <b-icon-sunset class="icon"/>
-                            </li>
+
                         </ul>
                     </div>
                 </div>
@@ -107,31 +92,9 @@ export default {
             dates: Dates,
             year: new Date().getFullYear(),
             today: new Date(),
-            sunset: '',
-            xlatitude: null,
-            xlongitude: null,
-            location: null,
-            gettingLocation: false,
-            errorStr: null
         }
     },
     created() {
-        //do we support geolocation
-        if (!("geolocation" in navigator)) {
-            this.errorStr = 'Geolocation is not available.';
-            return;
-        }
-
-        this.gettingLocation = true;
-        // get position
-        navigator.geolocation.getCurrentPosition(pos => {
-            this.gettingLocation = false;
-            this.location = pos;
-        }, err => {
-            this.gettingLocation = false;
-            this.errorStr = err.message;
-        })
-
         this.$axios.get('/sanctum/csrf-cookie').then(response => {
             this.$axios.get('/api/posts')
                 .then(response => {
@@ -159,26 +122,6 @@ export default {
         }
     },
     methods: {
-        getLatitude() {
-            if (this.gettingLocation) {
-                return location.coords.latitude;
-            } else {
-                return 48.163895213959286;
-            }
-        },
-        getLongitude() {
-            if (this.gettingLocation) {
-                return location.coords.longitude;
-            } else {
-                return 17.120373485390648;
-            }
-        },
-        getSunriseWithLocation(latitude, longitude) {
-            return getSunrise(latitude, longitude);
-        },
-        getSunsetWithLocation(latitude, longitude) {
-            return getSunset(latitude, longitude);
-        },
         getMonthFromDate(date) {
             let newDate = new Date(date);
             return newDate.getMonth();
