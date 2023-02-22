@@ -286,9 +286,6 @@ export default {
     min-height: var(--bg-min-height);
 }
 
-.icon {
-    margin-left: 10px;
-}
 
 .incomeSum {
     color: #06b614;

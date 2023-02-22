@@ -6,7 +6,7 @@
                     <h2>admin panel</h2>
                 </div>
 
-                <div class="row">
+                <div class="row row-custom">
                     <div class="col-8">
 
                         <table class="table table-hover table-sm table-bordered table-dark">
@@ -230,6 +230,16 @@ export default {
 
 .container {
     margin-top: 4vh;
+}
+
+.row-custom {
+    margin-bottom: 30px;
+    margin-left :10px;
+    margin-right :10px;
+}
+
+.icon {
+    margin-left: 10px;
 }
 
 </style>
