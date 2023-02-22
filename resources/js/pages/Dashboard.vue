@@ -7,68 +7,69 @@
                     <h2>Dashboard panel uživateľa {{ name }}</h2>
                 </div>
 
-                <div class="row">
-                    <div class="col-8">
+                <!--                <div class="row">-->
+                <!--                    <div class="col-8">-->
 
-                        <div class="container mt-1">
-                            <div class="form-group mb-2 selection">
-                                <label>Rok</label><span class="text-danger"> *</span>
-                                <select class="form-select" @change="onChange($event)" v-model="year">
-                                    <option>2021</option>
-                                    <option>2022</option>
-                                    <option>2023</option>
-                                </select>
-                            </div>
-
-                            <table class="table table-hover table-sm table-bordered table-dark">
-                                <thead class="bg-dark text-light">
-                                <tr>
-                                    <th width="100" class="text-center">Mesiac</th>
-                                    <th class="text-center">Príjem</th>
-                                    <th class="text-center">Výdaje</th>
-                                    <th class="text-center">Zostatok</th>
-
-                                </tr>
-                                </thead>
-                                <tbody>
-
-                                <tr class="" v-for="(date) in dates" :key="date.id">
-                                    <td>{{ date.name }}</td>
-                                    <td class="text-center incomeSum">{{ sumOfPostsFromMonth(date.id) }} €</td>
-                                    <td class="text-center expensesSum">
-                                        {{ sumOfExpensesFromMonth(date.id) }} €
-                                    </td>
-                                    <td class="text-center">
-                                        <div
-                                            :style="{ color: this.resultOfSum(sumOfPostsFromMonth(date.id), sumOfExpensesFromMonth(date.id)) >= 0 ? '#06b614' : 'red' }">
-                                            {{
-                                                this.resultOfSum(sumOfPostsFromMonth(date.id), sumOfExpensesFromMonth(date.id))
-                                            }} €
-                                        </div>
-                                    </td>
-                                </tr>
-                                </tbody>
-                            </table>
-
-                            <ul class="list-group mb-4">
-                                <li class="list-group-item incomeSum"><strong>Príjem za rok {{ year }} :
-                                    {{ sumOfIncomPerYear(year) }}
-                                    € </strong></li>
-                                <li class="list-group-item expensesSum"><strong>Výdaje za rok {{ year }} :
-                                    {{ sumOfExpensesPerYear(year) }}
-                                    € </strong></li>
-                            </ul>
-
-                        </div>
+                <div class="container mt-1">
+                    <div class="form-group mb-2 selection">
+                        <label>Rok</label><span class="text-danger"> *</span>
+                        <select class="form-select" @change="onChange($event)" v-model="year">
+                            <option>2021</option>
+                            <option>2022</option>
+                            <option>2023</option>
+                        </select>
                     </div>
 
-                    <div class="col-3">
-                        <ul class="list-group mt-4">
+                    <table class="table table-hover table-sm table-bordered table-dark">
+                        <thead class="bg-dark text-light">
+                        <tr>
+                            <th width="100" class="text-center">Mesiac</th>
+                            <th class="text-center">Príjem</th>
+                            <th class="text-center">Výdaje</th>
+                            <th class="text-center">Zostatok</th>
 
-                        </ul>
-                    </div>
+                        </tr>
+                        </thead>
+                        <tbody>
+
+                        <tr class="" v-for="(date) in dates" :key="date.id">
+                            <td>{{ date.name }}</td>
+                            <td class="text-center incomeSum">{{ sumOfPostsFromMonth(date.id) }} €</td>
+                            <td class="text-center expensesSum">
+                                {{ sumOfExpensesFromMonth(date.id) }} €
+                            </td>
+                            <td class="text-center">
+                                <div
+                                    :style="{ color: this.resultOfSum(sumOfPostsFromMonth(date.id), sumOfExpensesFromMonth(date.id)) >= 0 ? '#06b614' : 'red' }">
+                                    {{
+                                        this.resultOfSum(sumOfPostsFromMonth(date.id), sumOfExpensesFromMonth(date.id))
+                                    }} €
+                                </div>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+
+                    <ul class="list-group mb-4">
+                        <li class="list-group-item incomeSum"><strong>Príjem za rok {{ year }} :
+                            {{ sumOfIncomPerYear(year) }}
+                            € </strong></li>
+                        <li class="list-group-item expensesSum"><strong>Výdaje za rok {{ year }} :
+                            {{ sumOfExpensesPerYear(year) }}
+                            € </strong></li>
+                    </ul>
+
                 </div>
             </div>
+
+            <!--                    <div class="col-3">-->
+            <!--                        <ul class="list-group mt-4">-->
+
+            <!--                        </ul>-->
+            <!--                    </div>-->
+
+            <!--                </div>-->
+            <!--            </div>-->
         </div>
     </div>
 </template>
