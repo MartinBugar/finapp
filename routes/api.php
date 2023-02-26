@@ -3,6 +3,7 @@
 use App\Http\Controllers\API\AdminController;
 use App\Http\Controllers\API\ExpensesController;
 use App\Http\Controllers\API\ExpensesTypesController;
+use App\Http\Controllers\API\LoanDetailController;
 use App\Http\Controllers\API\LoansController;
 use App\Http\Controllers\API\PostsController;
 use Illuminate\Http\Request;
@@ -77,4 +78,12 @@ Route::group(['prefix' => 'loans', 'middleware' => 'auth:sanctum'], function () 
     Route::post('update/{id}', [LoansController::class, 'update']);
     Route::get('edit/{id}', [LoansController::class, 'edit']);
     Route::delete('delete/{id}', [LoansController::class, 'delete']);
+});
+
+Route::group(['prefix' => 'loans/loanDetail', 'middleware' => 'auth:sanctum'], function () {
+    Route::get('/', [LoanDetailController::class, 'index']);
+    Route::post('add', [LoanDetailController::class, 'add']);
+    Route::post('update/{id}', [LoanDetailController::class, 'update']);
+    Route::get('edit/{id}', [LoanDetailController::class, 'edit']);
+    Route::delete('delete/{id}', [LoanDetailController::class, 'delete']);
 });

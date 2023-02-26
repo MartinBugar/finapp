@@ -16,7 +16,9 @@ import AddExpensType from "../components/ExpensesTypes/AddExpensType.vue";
 import EditExpensType from "../components/ExpensesTypes/EditExpensType.vue";
 import Loans from "../components/loans/Loans.vue";
 import AddLoan from "../components/loans/AddLoan.vue";
-import LoanDetail from "../components/loans/LoanDetail.vue";
+import EditLoanDetail from "../components/loans/LoanDetail/EditLoanDetail.vue";
+import AddLoanDetail from "../components/loans/LoanDetail/AddLoanDetail.vue";
+import LoanDetail from "../components/loans/LoanDetail/LoanDetail.vue";
 import EditLoan from "../components/loans/EditLoan.vue";
 import AdminPanel from "../pages/AdminPanel.vue";
 import UserProfile from "../components/UserProfile/UserProfile.vue";
@@ -155,8 +157,18 @@ export const routes = [
     },
     {
         name: 'loanDetail',
-        path: '/loans/detail/:id',
+        path: '/loans/loanDetail/:id',
         component: LoanDetail
+    },
+    {
+        name: 'addloanDetail',
+        path: '/loans/loanDetail/add',
+        component: AddLoanDetail
+    },
+    {
+        name: 'editloanDetail',
+        path: '/loans/loanDetail/edit/:id',
+        component: EditLoanDetail
     },
 ];
 
