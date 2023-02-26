@@ -124,7 +124,7 @@ export default {
 
     created() {
         this.$axios.get('/sanctum/csrf-cookie').then(response => {
-            this.$axios.get(`/api/loans/loanDetail`)
+            this.$axios.get(`/api/loans/loanDetail/${this.$route.params.id}`)
                 .then(response => {
                     this.loanDetails = response.data;
                 })

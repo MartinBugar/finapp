@@ -81,7 +81,7 @@ Route::group(['prefix' => 'loans', 'middleware' => 'auth:sanctum'], function () 
 });
 
 Route::group(['prefix' => 'loans/loanDetail', 'middleware' => 'auth:sanctum'], function () {
-    Route::get('/', [LoanDetailController::class, 'index']);
+    Route::get('/{id}', [LoanDetailController::class, 'index']);
     Route::post('add', [LoanDetailController::class, 'add']);
     Route::post('update/{id}', [LoanDetailController::class, 'update']);
     Route::get('edit/{id}', [LoanDetailController::class, 'edit']);

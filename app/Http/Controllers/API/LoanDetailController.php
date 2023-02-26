@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API;
 use App\Http\Controllers\Controller;
 use App\Models\LoanDetail;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class LoanDetailController extends Controller
 {
@@ -13,10 +14,10 @@ class LoanDetailController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($id)
     {
-        $loans = LoanDetail::all()->toArray();
-        return array_reverse($loans);
+        $loans = DB::table('loan_details')->where('loanID',$id)->select('*')->get();
+        return $loans;
     }
 
     public function add(Request $request)
