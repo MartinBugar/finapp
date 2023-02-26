@@ -4,9 +4,8 @@
             <div class="card cardExpenses">
                 <div class="card-body">
                     <div class="d-flex justify-content-between pb-2 mb-2">
-                        <h3 class="card-title"><strong>Všetky výdaje užívateľa
-                            za mesiac
-                            {{ dates().at(month).name }} {{ year }}</strong></h3>
+                        <h3 class="card-title"><strong>Všetky splátky úveru za rok
+                            {{ year }}</strong></h3>
                         <div>
                             <button class="btn btn-success buttonNewExpense" type="button"
                                     @click="this.$router.push(`/loans/loanDetail/${this.loanID}/add`)">
@@ -17,24 +16,7 @@
 
                     <div class="form-group mb-2">
                         <div class="row">
-                            <div class="col">
-                                <label>Mesiac</label><span class="text-danger"> </span>
-                                <select class="form-select" v-model="month">
-                                    <option value="0">Január</option>
-                                    <option value="1">Febrár</option>
-                                    <option value="2">Marec</option>
-                                    <option value="3">Apríl</option>
-                                    <option value="4">Máj</option>
-                                    <option value="5">Jún</option>
-                                    <option value="6">Júl</option>
-                                    <option value="7">August</option>
-                                    <option value="8">September</option>
-                                    <option value="9">Október</option>
-                                    <option value="10">November</option>
-                                    <option value="11">December</option>
-                                </select>
-                            </div>
-                            <div class="col">
+                            <div class="col-3">
                                 <label>Rok</label><span class="text-danger"> *</span>
                                 <select class="form-select" v-model="year">
                                     <option>2021</option>
@@ -49,7 +31,6 @@
                         <thead class="bg-dark text-light">
                         <tr>
                             <th width="50" class="text-center">#</th>
-                            <!--                            <th width="100" class="text-center">User Id</th>-->
                             <th>Názov</th>
                             <th>Dátum</th>
                             <th>Popis</th>
@@ -59,10 +40,9 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr class="" v-for="(loanDetail, index) in filteredAndSorted(loanDetails, month)"
+                        <tr class="" v-for="(loanDetail, index) in filteredAndSorted(loanDetails)"
                             :key="loanDetail.id">
                             <td class="text-center">{{ index + 1 }}.</td>
-                            <!--                            <td class="text-center">{{ expens.userID }}.</td>-->
                             <td>{{ loanDetail.name }}</td>
                             <td>{{ formatDate(loanDetail.date) }}</td>
                             <td>{{ loanDetail.description }}</td>
@@ -74,7 +54,7 @@
                                              class="btn btn-sm btn-warning">
                                     Upraviť
                                 </router-link>
-                                <button class="btn btn-danger btn-sm m-1" @click="deletePost(loanDetail.id)">Odstrániť
+                                <button class="btn btn-danger btn-sm m-1" @click="deleteLoanDetail(loanDetail.id)">Odstrániť
                                 </button>
                             </td>
                         </tr>
@@ -94,8 +74,6 @@ import moment, {months} from "moment/moment";
 
 import {Chart as ChartJS, ArcElement, Tooltip, Legend} from 'chart.js'
 import {Pie} from 'vue-chartjs'
-import router from "../../../router";
-import {useLink as $router} from "vue-router";
 
 ChartJS.register(ArcElement, Tooltip, Legend)
 
@@ -169,29 +147,6 @@ export default {
             return this.type;
         },
 
-        filteredAndSortedExpensesTypes(expensestypes) {
-            let both = [];
-            this.expensesTypes.forEach(expensType => {
-                this.expenses.forEach(expens => {
-                    if (expens.typeID === expensType.id) {
-                        let date = new Date(expens.date);
-                        if (date.getMonth().toString() === this.month.toString() && date.getFullYear().toString() === this.year.toString()) {
-                            both.push(expensType.type)
-                        }
-                    }
-                })
-            })
-
-            return expensestypes.filter(expensType => {
-                if (both.includes(expensType.type)) {
-                    if (expensType.userID === this.userId) {
-                        return true
-                    }
-
-                }
-            })
-
-        },
         sumOfExpensesPerMonthPerType(month, typeID) {
             let sum = 0;
             this.expenses.forEach((expens) => {
@@ -225,29 +180,26 @@ export default {
         dates() {
             return dates
         },
-        filteredAndSorted(loanDetails, month) {
+        filteredAndSorted(loanDetails) {
             let sortedByDateLoanDetails = loanDetails.sort((a, b) => new Date(a.date) - new Date(b.date));
             return sortedByDateLoanDetails.filter(detail => {
                 let expensDate = new Date(detail.date);
                 if (expensDate.getFullYear().toString() === this.year.toString()) {
-                    if (expensDate.getMonth().toString() === month.toString()) {
-                        if (detail.userID === this.userId) {
-                            return true;
-                        }
-
+                    if (detail.userID === this.userId) {
+                        return true;
                     }
                 }
             })
         },
-        deletePost(id) {
+        deleteLoanDetail(id) {
             this.$axios.get('/sanctum/csrf-cookie').then(response => {
                 let existingObj = this;
 
-                if (confirm("Do you really want to delete this data?")) {
-                    this.$axios.delete(`/api/expenses/delete/${id}`)
+                if (confirm("Naozaj chcete odstrániť túto splátku?")) {
+                    this.$axios.delete(`/api/loans/loanDetail/delete/${id}`)
                         .then(response => {
-                            let i = this.expenses.map(item => item.id).indexOf(id); // find index of your object
-                            this.expenses.splice(i, 1);
+                            let i = this.loanDetails.map(item => item.id).indexOf(id); // find index of your object
+                            this.loanDetails.splice(i, 1);
                             existingObj.strError = "";
                             existingObj.strSuccess = response.data.success;
 
