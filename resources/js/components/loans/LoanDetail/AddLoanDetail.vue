@@ -3,11 +3,12 @@
         <div class="container card cardAddLoan">
             <div class="card-body">
                 <div class="d-flex justify-content-between pb-2 mb-2">
-                    <h5 class="card-title">Vytvoriť novú splátku </h5>
+                    <h5 class="card-title">Vytvoriť novú splátku {{this.loanID}} </h5>
                     <div>
-                        <router-link :to="{name: 'loans',}" class="btn btn-success buttonAddLoan">Zoznam
-                            úverov
-                        </router-link>
+                        <button class="btn btn-success buttonNewExpense" type="button"
+                                @click="this.$router.push(`/loans/loanDetail/${this.loanID}`)">
+                            Späť na prehľad
+                        </button>
                     </div>
                 </div>
 
@@ -79,6 +80,7 @@
 export default {
     data() {
         return {
+            loanID: '',
             name: '',
             description: '',
             value: '',
@@ -94,6 +96,8 @@ export default {
         if (window.Laravel.user) {
             this.userId = window.Laravel.user.id;
         }
+
+        this.loanID = this.$route.params.id;
 
         this.$axios.get('/sanctum/csrf-cookie').then(response => {
             this.$axios.get('/api/expensestypes')
@@ -123,14 +127,16 @@ export default {
                 const formData = new FormData();
 
                 formData.append('name', this.name);
+                formData.append('loanID', this.loanID);
                 formData.append('description', this.description);
                 formData.append('value', this.value);
                 formData.append('typeID', this.expensesType.id);
+
                 formData.append('date', this.date);
                 formData.append('userID', this.userId);
 
 
-                this.$axios.post('/api/loans/add', formData, config)
+                this.$axios.post('/api/loans/loanDetail/add', formData, config)
                     .then(response => {
                         existingObj.strError = "";
                         existingObj.strSuccess = response.data.success;

@@ -5,13 +5,12 @@
                 <div class="card-body">
                     <div class="d-flex justify-content-between pb-2 mb-2">
                         <h3 class="card-title"><strong>Všetky výdaje užívateľa
-                            {{ this.loanID }}
                             za mesiac
                             {{ dates().at(month).name }} {{ year }}</strong></h3>
                         <div>
                             <button class="btn btn-success buttonNewExpense" type="button"
                                     @click="this.$router.push(`/loans/loanDetail/${this.loanID}/add`)">
-                                splatka
+                                Pridať splátku
                             </button>
                         </div>
                     </div>

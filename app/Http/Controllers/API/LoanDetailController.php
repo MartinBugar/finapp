@@ -27,6 +27,7 @@ class LoanDetailController extends Controller
             'description',
             'value' => 'required',
             'typeID' => 'required',
+            'loanID' => 'required',
             'userID',
             'date',
         ]);

@@ -13,6 +13,7 @@ class LoanDetail extends Model
         'name',
         'description',
         'typeID',
+        'loanID',
         'value',
         'date',
         'userID'
