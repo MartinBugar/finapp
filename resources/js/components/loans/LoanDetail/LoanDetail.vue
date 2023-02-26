@@ -5,13 +5,13 @@
                 <div class="card-body">
                     <div class="d-flex justify-content-between pb-2 mb-2">
                         <h3 class="card-title"><strong>Všetky výdaje užívateľa
-                            {{ userName }}
+                            {{ this.loanID }}
                             za mesiac
                             {{ dates().at(month).name }} {{ year }}</strong></h3>
                         <div>
                             <button class="btn btn-success buttonNewExpense" type="button"
-                                    @click="this.$router.push('/loanDetail/add')">
-                                Vytvoriť nový výdaj
+                                    @click="this.$router.push(`/loans/loanDetail/${this.loanID}/add`)">
+                                splatka
                             </button>
                         </div>
                     </div>
@@ -60,7 +60,8 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr class="" v-for="(loanDetail, index) in filteredAndSorted(loanDetails, month)" :key="loanDetail.id">
+                        <tr class="" v-for="(loanDetail, index) in filteredAndSorted(loanDetails, month)"
+                            :key="loanDetail.id">
                             <td class="text-center">{{ index + 1 }}.</td>
                             <!--                            <td class="text-center">{{ expens.userID }}.</td>-->
                             <td>{{ loanDetail.name }}</td>
@@ -94,6 +95,8 @@ import moment, {months} from "moment/moment";
 
 import {Chart as ChartJS, ArcElement, Tooltip, Legend} from 'chart.js'
 import {Pie} from 'vue-chartjs'
+import router from "../../../router";
+import {useLink as $router} from "vue-router";
 
 ChartJS.register(ArcElement, Tooltip, Legend)
 
@@ -104,6 +107,7 @@ export default {
     },
     data() {
         return {
+            loanID: '',
             chartData: [],
             expensesChartLables: [],
             chartOptions: '',
@@ -126,6 +130,7 @@ export default {
         this.$axios.get('/sanctum/csrf-cookie').then(response => {
             this.$axios.get(`/api/loans/loanDetail/${this.$route.params.id}`)
                 .then(response => {
+                    this.loanID = this.$route.params.id;
                     this.loanDetails = response.data;
                 })
                 .catch(function (error) {

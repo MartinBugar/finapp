@@ -162,7 +162,7 @@ export const routes = [
     },
     {
         name: 'addloanDetail',
-        path: '/loans/loanDetail/add',
+        path: '/loans/loanDetail/:id/add',
         component: AddLoanDetail
     },
     {

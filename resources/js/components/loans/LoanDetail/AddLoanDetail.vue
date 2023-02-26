@@ -3,9 +3,9 @@
         <div class="container card cardAddLoan">
             <div class="card-body">
                 <div class="d-flex justify-content-between pb-2 mb-2">
-                    <h5 class="card-title">Vytvoriť nový úver </h5>
+                    <h5 class="card-title">Vytvoriť novú splátku </h5>
                     <div>
-                        <router-link :to="{name: 'loans'}" class="btn btn-success buttonAddLoan">Zoznam
+                        <router-link :to="{name: 'loans',}" class="btn btn-success buttonAddLoan">Zoznam
                             úverov
                         </router-link>
                     </div>
