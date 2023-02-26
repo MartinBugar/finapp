@@ -50,7 +50,7 @@
                             <td>{{ loanDetail.value.toFixed(2) }} €</td>
 
                             <td class="text-center buttons" v-if="userId === loanDetail.userID">
-                                <router-link :to="{name:'editexpens', params: {id:loanDetail.id}}"
+                                <router-link :to="{name:'editloanDetail', params: {loanID:this.loanID, loanDetailId:loanDetail.id}}"
                                              class="btn btn-sm btn-warning">
                                     Upraviť
                                 </router-link>
