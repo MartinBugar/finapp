@@ -233,20 +233,6 @@ export default {
     border-radius: 18px;
 }
 
-.summary {
-    border-radius: 18px;
-}
-
-.chart {
-    width: 400px;
-    border-radius: 18px;
-    margin-bottom: 30px;
-}
-
-.expensesSum {
-    color: #b40000;
-}
-
 .bg-loans {
     background-color: var(--bg-secondary);
     padding-top: 4vh;
