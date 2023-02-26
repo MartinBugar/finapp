@@ -24,7 +24,7 @@
                             <th>Popis</th>
                             <th>Typ transakcie</th>
                             <th>Suma</th>
-                            <th class="text-center" width="200">Actions</th>
+                            <th class="text-center" width="300">Actions</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -38,11 +38,16 @@
                             <td>{{ loan.value.toFixed(2) }} €</td>
 
                             <td class="text-center buttons" v-if="userId === loan.userID">
+                                <router-link :to="{name:'loanDetail', params: {id:loan.id}}"
+                                             class="btn btn-sm btn-primary action-buttons">
+                                    Detail
+                                </router-link>
                                 <router-link :to="{name:'editloan', params: {id:loan.id}}"
-                                             class="btn btn-sm btn-warning">
+                                             class="btn btn-sm btn-warning action-buttons">
                                     Upraviť
                                 </router-link>
-                                <button class="btn btn-danger btn-sm m-1" @click="deleteLoan(loan.id)">Odstrániť
+                                <button class="btn btn-danger btn-sm action-buttons" @click="deleteLoan(loan.id)">
+                                    Odstrániť
                                 </button>
                             </td>
                         </tr>
@@ -247,6 +252,11 @@ export default {
     padding-top: 4vh;
     width: 100%;
     min-height: var(--bg-min-height);
+}
+
+.action-buttons {
+    margin-left: 4px;
+    margin-right: 4px;
 }
 
 </style>

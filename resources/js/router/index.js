@@ -16,6 +16,7 @@ import AddExpensType from "../components/ExpensesTypes/AddExpensType.vue";
 import EditExpensType from "../components/ExpensesTypes/EditExpensType.vue";
 import Loans from "../components/loans/Loans.vue";
 import AddLoan from "../components/loans/AddLoan.vue";
+import LoanDetail from "../components/loans/LoanDetail.vue";
 import EditLoan from "../components/loans/EditLoan.vue";
 import AdminPanel from "../pages/AdminPanel.vue";
 import UserProfile from "../components/UserProfile/UserProfile.vue";
@@ -128,6 +129,16 @@ export const routes = [
         component: EditExpensType
     },
     {
+        name: 'verifyemail',
+        path: '/verify-email',
+        component: VerifyEmail
+    },
+    {
+        name: 'CheckYourEmail',
+        path: '/checkEmail',
+        component: CheckYourEmail
+    },
+    {
         name: 'loans',
         path: '/loans',
         component: Loans
@@ -143,14 +154,9 @@ export const routes = [
         component: EditLoan
     },
     {
-        name: 'verifyemail',
-        path: '/verify-email',
-        component: VerifyEmail
-    },
-    {
-        name: 'CheckYourEmail',
-        path: '/checkEmail',
-        component: CheckYourEmail
+        name: 'loanDetail',
+        path: '/loans/detail/:id',
+        component: LoanDetail
     },
 ];
 
