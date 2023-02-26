@@ -5,7 +5,7 @@
                 <div class="d-flex justify-content-between pb-2 mb-2">
                     <h5 class="card-title">Upraviť úver </h5>
                     <div>
-                        <router-link :to="{name:'loanDetail', params: {id:this.loanID}}" class="btn btn-sm btn-warning">
+                        <router-link :to="{name:'loanDetail', params: {id:this.$route.params.loanID}}" class="btn btn-sm btn-warning">
                             Späť
                         </router-link>
                     </div>
@@ -144,12 +144,13 @@ export default {
                 formData.append('typeID', this.typeId);
                 formData.append('date', this.date);
 
-                this.$axios.post(`/api/loans/update/${this.$route.params.id}`, formData, config)
+                this.$axios.post(`/api/loans/loanDetail/update/${this.$route.params.loanDetailId}`, formData, config)
                     .then(response => {
                         existingObj.strError = "";
                         existingObj.strSuccess = response.data.success;
                     })
                     .catch(function (error) {
+
                         existingObj.strSuccess = "";
                         existingObj.strError = error.response.data.message;
                     });
