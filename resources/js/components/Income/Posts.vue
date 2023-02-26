@@ -88,7 +88,7 @@
             </div>
 
             <div class="row">
-                <div class="col-lg-">
+                <div class="col-7">
                     <ul class="list-group mt-4 summary">
                         <li class="list-group-item"
                             v-for="(exptype, key) in filteredAndSortedExpensesTypes(this.expensesTypes)"
@@ -106,7 +106,7 @@
                 </div>
 
                 <div v-if="this.filteredAndSortedExpensesTypes(this.expensesTypes).length > 0"
-                     class="col-lg-7 mt-4 chart card">
+                     class="col-7 mt-4 chart card">
                     <Pie :data="populateChartData()" :options="this.chartOptions"/>
                 </div>
 
