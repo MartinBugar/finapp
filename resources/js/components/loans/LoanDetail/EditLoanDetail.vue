@@ -1,11 +1,12 @@
 <template>
-    <div class="bg-editloan">
-        <div class="container card cardEditLoan">
+    <div class="bg-edit-loan-detail">
+        <div class="container card cardEditLoanDetail">
             <div class="card-body">
                 <div class="d-flex justify-content-between pb-2 mb-2">
-                    <h5 class="card-title">Upraviť úver</h5>
+                    <h5 class="card-title">Upraviť úver </h5>
                     <div>
-                        <router-link :to="{name: 'loans'}" class="btn btn-success buttonEditLoan">Zoznam úverov
+                        <router-link :to="{name:'loanDetail', params: {id:this.loanID}}" class="btn btn-sm btn-warning">
+                            Späť
                         </router-link>
                     </div>
                 </div>
@@ -73,6 +74,7 @@
 export default {
     data() {
         return {
+            loanID: '',
             id: '',
             name: '',
             description: '',
@@ -90,6 +92,7 @@ export default {
         this.$axios.get('/sanctum/csrf-cookie').then(response => {
             this.$axios.get(`/api/loans/loanDetail/edit/${this.$route.params.loanDetailId}`)
                 .then(response => {
+                    this.loanID = this.$route.params.loanID;
                     this.name = response.data['name'];
                     this.description = response.data['description'];
                     this.value = response.data['value'];
@@ -166,7 +169,7 @@ export default {
 
 <style scoped>
 
-.bg-editloan {
+.bg-edit-loan-detail {
     background-color: var(--bg-secondary);
     padding-top: 4vh;
     width: 100%;
@@ -174,7 +177,7 @@ export default {
 }
 
 @media screen and (min-width: 1630px) {
-    .cardEditLoan {
+    .cardEditLoanDetail {
         max-width: var(--max-width-1);
         margin-top: 10px;
         border-radius: 18px;
@@ -182,7 +185,7 @@ export default {
 }
 
 @media screen and (max-width: 1630px) {
-    .cardEditLoan {
+    .cardEditLoanDetail {
         max-width: var(--max-width-2);
         margin-top: 10px;
         border-radius: 18px;
@@ -190,7 +193,7 @@ export default {
 }
 
 @media screen and (max-width: 1530px) {
-    .cardEditLoan {
+    .cardEditLoanDetail {
         max-width: var(--max-width-3);
         margin-top: 10px;
         border-radius: 18px;
@@ -198,7 +201,7 @@ export default {
 }
 
 @media screen and (max-width: 1430px) {
-    .cardEditLoan {
+    .cardEditLoanDetail {
         max-width: var(--max-width-4);
         margin-top: 10px;
         border-radius: 18px;
@@ -206,7 +209,7 @@ export default {
 }
 
 @media screen and (max-width: 1270px) {
-    .cardEditLoan {
+    .cardEditLoanDetail {
         max-width: var(--max-width-5);
         margin-top: 10px;
         border-radius: 18px;

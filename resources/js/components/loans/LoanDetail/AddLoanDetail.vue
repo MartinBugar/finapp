@@ -3,7 +3,7 @@
         <div class="container card cardAddLoan">
             <div class="card-body">
                 <div class="d-flex justify-content-between pb-2 mb-2">
-                    <h5 class="card-title">Vytvoriť novú splátku {{this.loanID}} </h5>
+                    <h5 class="card-title">Vytvoriť novú splátku {{ this.loanID }} </h5>
                     <div>
                         <button class="btn btn-success buttonNewExpense" type="button"
                                 @click="this.$router.push(`/loans/loanDetail/${this.loanID}`)">
@@ -68,7 +68,7 @@
                                placeholder="Enter the date"/>
                     </div>
 
-                    <button type="submit" class="btn btn-primary mt-4 mb-4"> Vytvoriť úver</button>
+                    <button type="submit" class="btn btn-primary mt-4 mb-4"> Pridať splátku</button>
 
                 </form>
             </div>
