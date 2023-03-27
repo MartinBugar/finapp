@@ -61,11 +61,19 @@
                         </div>
                     </div>
 
-                    <div class="col-4">
-                        <ul class="list-group mt-4">
-                           <strong> Východ Slnka je dnes o {{ getSunrise().getHours() }} : {{ getSunrise().getMinutes() }}</strong>
-                           <strong> Západ Slnka je dnes o {{ getSunSet().getHours() }} : {{ getSunSet().getMinutes() }}</strong>
+                    <div class="col-4 ">
 
+                        <ul class="list-group mt-4 right-sidebox ">
+                            <li class="list-group-item"><strong> Východ Slnka je dnes o {{
+                                    getSunrise().getHours()
+                                }}:{{ getSunrise().getMinutes() }}</strong></li>
+                            <li class="list-group-item "><strong> Západ Slnka je dnes o {{
+                                    getSunSet().getHours()
+                                }}:{{ getSunSet().getMinutes() }}</strong></li>
+                        </ul>
+
+                        <ul class="list-group mt-4 right-sidebox ">
+                            <li class="list-group-item">Aktualna inflacia na slovensku <strong>{{ getLastChartData() }}%</strong></li>
                         </ul>
                     </div>
 
@@ -100,6 +108,7 @@ import {
 } from 'chart.js'
 
 import {Line, Pie} from 'vue-chartjs'
+import ChartData from "../components/ChartData";
 
 ChartJS.register(
     CategoryScale,
@@ -140,10 +149,10 @@ export default {
             labels: ChartLabelsMonths,
             datasets: [
                 {
-                    label: 'Vývoj inflácie na Slovensku od roku 2010 v %',
+                    label: 'Vývoj inflácie na Slovensku v %',
                     backgroundColor: '#f80000',
                     data: ChartValues
-                }
+                },
             ]
         }
 
@@ -179,6 +188,13 @@ export default {
         }
     },
     methods: {
+        getLastChartData() {
+            let indexOfLastChild = ChartData.length - 1;
+            return ChartData.at(indexOfLastChild).toFixed(2);
+        },
+        ChartData() {
+            return ChartData
+        },
         getSunrise() {
             return getSunrise(48.149482, 17.120598, this.today)
         },
@@ -356,6 +372,10 @@ export default {
 
 .expensesSum {
     color: red;
+}
+
+.right-sidebox {
+    padding-right: 10px;
 }
 
 </style>
