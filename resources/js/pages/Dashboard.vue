@@ -73,7 +73,7 @@
                         </ul>
 
                         <ul class="list-group mt-4 right-sidebox ">
-                            <li class="list-group-item">Aktualna inflacia na slovensku <strong>{{ getLastChartData() }}%</strong></li>
+                            <li class="list-group-item">Aktuálna inflácia na Slovensku : <strong>{{ getLastChartData() }}%</strong></li>
                         </ul>
                     </div>
 
@@ -376,6 +376,10 @@ export default {
 
 .right-sidebox {
     padding-right: 10px;
+}
+
+.selection {
+    max-width: 200px;
 }
 
 </style>
