@@ -1,5 +1,5 @@
 <template>
-    <div class="bg-contact-form">
+    <div class="bg-app">
         <div class="container contact-form-card">
             <div class="row">
                 <div class="col-lg-4">
@@ -18,7 +18,12 @@
                         <input type="email" name="user_email">
                         <label>Správa pre nás</label>
                         <textarea name="message"></textarea>
+                        <div class="">
+                            <label>Potvrdte ze nie ste robot </label>
+                            <input type="checkbox" v-model="notARobot">
+                        </div>
                         <input type="submit" value="Odoslať">
+
                     </form>
                 </div>
             </div>
@@ -35,28 +40,36 @@ export default {
         return {
             name: '',
             email: '',
-            message: ''
+            message: '',
+            notARobot: false,
         }
     },
     methods: {
 
         //config: https://dashboard.emailjs.com/admin
         sendEmail(e) {
-            try {
-                emailjs.sendForm('service_ulrki3m', 'template_do3j4ii', e.target, 'sZtoDVKcdOx0Q-ksX')
-                    .then(function (response) {
-                        console.log('SUCCESS!', response.status, response.text);
-                    }, function (error) {
-                        console.log('FAILED...', error);
-                    });
+            if (this.notARobot === null || this.notARobot === false) {
+                alert("Prosim potvrdte ze nie ste robot")
+            } else {
+                try {
+                    emailjs.sendForm('service_ulrki3m', 'template_do3j4ii', e.target, 'sZtoDVKcdOx0Q-ksX')
+                        .then(function (response) {
+                            console.log('SUCCESS!', response.status, response.text);
+                        }, function (error) {
+                            console.log('FAILED...', error);
+                        });
 
-            } catch (error) {
-                console.log({error})
+                } catch (error) {
+                    console.log({error})
+                }
+                // Reset form field
+                this.name = ''
+                this.email = ''
+                this.message = ''
+
             }
-            // Reset form field
-            this.name = ''
-            this.email = ''
-            this.message = ''
+
+
         },
 
     }

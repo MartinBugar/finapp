@@ -1,5 +1,5 @@
 <template>
-    <div class="bg-dashboard">
+    <div class="bg-dashboard pb-4">
         <div class="container card mainCardDashboard">
             <div class="card cardDashboard">
 
@@ -7,83 +7,122 @@
                     <h2>Dashboard panel uživateľa {{ name }}</h2>
                 </div>
 
-                <!--                <div class="row">-->
-                <!--                    <div class="col-8">-->
+                <div class="row">
+                    <div class="col-8">
 
-                <div class="container mt-1">
-                    <div class="form-group mb-2 selection">
-                        <label>Rok</label><span class="text-danger"> *</span>
-                        <select class="form-select" @change="onChange($event)" v-model="year">
-                            <option>2021</option>
-                            <option>2022</option>
-                            <option>2023</option>
-                        </select>
+                        <div class="container mt-1">
+                            <div class="form-group mb-2 selection">
+                                <label>Rok</label><span class="text-danger"> *</span>
+                                <select class="form-select" @change="onChange($event)" v-model="year">
+                                    <option>2021</option>
+                                    <option>2022</option>
+                                    <option>2023</option>
+                                </select>
+                            </div>
+
+                            <table class="table table-hover table-sm table-bordered table-dark">
+                                <thead class="bg-dark text-light">
+                                <tr>
+                                    <th width="100" class="text-center">Mesiac</th>
+                                    <th class="text-center">Príjem</th>
+                                    <th class="text-center">Výdaje</th>
+                                    <th class="text-center">Zostatok</th>
+
+                                </tr>
+                                </thead>
+                                <tbody>
+
+                                <tr class="" v-for="(date) in dates" :key="date.id">
+                                    <td>{{ date.name }}</td>
+                                    <td class="text-center incomeSum">{{ sumOfPostsFromMonth(date.id) }} €</td>
+                                    <td class="text-center expensesSum">
+                                        {{ sumOfExpensesFromMonth(date.id) }} €
+                                    </td>
+                                    <td class="text-center">
+                                        <div
+                                            :style="{ color: this.resultOfSum(sumOfPostsFromMonth(date.id), sumOfExpensesFromMonth(date.id)) >= 0 ? '#06b614' : 'red' }">
+                                            {{
+                                                this.resultOfSum(sumOfPostsFromMonth(date.id), sumOfExpensesFromMonth(date.id))
+                                            }} €
+                                        </div>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+
+                            <ul class="list-group mb-4">
+                                <li class="list-group-item incomeSum"><strong>Príjem za rok {{ year }} :
+                                    {{ sumOfIncomPerYear(year) }}
+                                    € </strong></li>
+                                <li class="list-group-item expensesSum"><strong>Výdaje za rok {{ year }} :
+                                    {{ sumOfExpensesPerYear(year) }}
+                                    € </strong></li>
+                            </ul>
+
+                        </div>
                     </div>
 
-                    <table class="table table-hover table-sm table-bordered table-dark">
-                        <thead class="bg-dark text-light">
-                        <tr>
-                            <th width="100" class="text-center">Mesiac</th>
-                            <th class="text-center">Príjem</th>
-                            <th class="text-center">Výdaje</th>
-                            <th class="text-center">Zostatok</th>
+                    <div class="col-3">
+                        <ul class="list-group mt-4">
+                            AA
 
-                        </tr>
-                        </thead>
-                        <tbody>
-
-                        <tr class="" v-for="(date) in dates" :key="date.id">
-                            <td>{{ date.name }}</td>
-                            <td class="text-center incomeSum">{{ sumOfPostsFromMonth(date.id) }} €</td>
-                            <td class="text-center expensesSum">
-                                {{ sumOfExpensesFromMonth(date.id) }} €
-                            </td>
-                            <td class="text-center">
-                                <div
-                                    :style="{ color: this.resultOfSum(sumOfPostsFromMonth(date.id), sumOfExpensesFromMonth(date.id)) >= 0 ? '#06b614' : 'red' }">
-                                    {{
-                                        this.resultOfSum(sumOfPostsFromMonth(date.id), sumOfExpensesFromMonth(date.id))
-                                    }} €
-                                </div>
-                            </td>
-                        </tr>
-                        </tbody>
-                    </table>
-
-                    <ul class="list-group mb-4">
-                        <li class="list-group-item incomeSum"><strong>Príjem za rok {{ year }} :
-                            {{ sumOfIncomPerYear(year) }}
-                            € </strong></li>
-                        <li class="list-group-item expensesSum"><strong>Výdaje za rok {{ year }} :
-                            {{ sumOfExpensesPerYear(year) }}
-                            € </strong></li>
-                    </ul>
+                        </ul>
+                    </div>
 
                 </div>
             </div>
 
-            <!--                    <div class="col-3">-->
-            <!--                        <ul class="list-group mt-4">-->
+            <div class=" mt-4 mb-4 chart-inflation card">
+                <Line :data="this.chartData" :options="this.chartOptions" :height="300"/>
+            </div>
 
-            <!--                        </ul>-->
-            <!--                    </div>-->
-
-            <!--                </div>-->
-            <!--            </div>-->
         </div>
+
+
     </div>
 </template>
 
 <script>
 
 import Dates from "../components/Dates";
+import ChartLabelsMonths from "../components/ChartLabelsMonths";
+import ChartValues from "../components/ChartData";
 import {getSunrise, getSunset} from 'sunrise-sunset-js';
+import {
+    Chart as ChartJS,
+    CategoryScale,
+    LinearScale,
+    PointElement,
+    LineElement,
+    Title,
+    Tooltip,
+    Legend
+} from 'chart.js'
+
+import {Line, Pie} from 'vue-chartjs'
+
+ChartJS.register(
+    CategoryScale,
+    LinearScale,
+    PointElement,
+    LineElement,
+    Title,
+    Tooltip,
+    Legend
+)
 
 export default {
     name: "Dashboard",
+    components: {
+        Line,
+    },
     computed: {},
     data() {
         return {
+            chartData: [],
+            expensesChartLables: [],
+            chartOptions: '',
+
             userId: null,
             name: null,
             email: null,
@@ -91,11 +130,28 @@ export default {
             expenses: [],
             months: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
             dates: Dates,
+            chartLabels: ChartLabelsMonths,
             year: new Date().getFullYear(),
             today: new Date(),
         }
     },
     created() {
+        this.chartData = {
+            labels: ChartLabelsMonths,
+            datasets: [
+                {
+                    label: 'Vývoj inflácie na Slovensku v %',
+                    backgroundColor: '#f80000',
+                    data: ChartValues
+                }
+            ]
+        }
+
+        this.chartOptions = {
+            responsive: false,
+            maintainAspectRatio: false
+        }
+
         this.$axios.get('/sanctum/csrf-cookie').then(response => {
             this.$axios.get('/api/posts')
                 .then(response => {

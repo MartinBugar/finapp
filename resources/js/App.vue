@@ -8,7 +8,7 @@
                 <router-link to="/dashboard" class="nav-item nav-link">Dashboard</router-link>
                 <router-link to="/posts" class="nav-item nav-link">Príjem</router-link>
                 <router-link to="/expenses" class="nav-item nav-link">Výdaje</router-link>
-                <router-link to="/loans" class="nav-item nav-link">Úvery</router-link>
+<!--                <router-link to="/loans" class="nav-item nav-link">Úvery</router-link>-->
                 <router-link to="/expensestypes" class="nav-item nav-link">Typy transakcií</router-link>
             </div>
         </div>
