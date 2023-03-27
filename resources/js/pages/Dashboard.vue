@@ -64,12 +64,9 @@
                     <div class="col-4 ">
 
                         <ul class="list-group mt-4 right-sidebox ">
-                            <li class="list-group-item"><strong> Východ Slnka je dnes o {{
-                                    getSunrise().getHours()
-                                }}:{{ getSunrise().getMinutes() }}</strong></li>
-                            <li class="list-group-item "><strong> Západ Slnka je dnes o {{
-                                    getSunSet().getHours()
-                                }}:{{ getSunSet().getMinutes() }}</strong></li>
+                            <font-awesome-icon :icon="['fas', 'sunrise']" />
+                            <li class="list-group-item"><strong> Východ Slnka je dnes o {{getSunrise().getHours()}}:{{ getSunrise().getMinutes() }} <b-icon-sunrise class="icon"/></strong> </li>
+                            <li class="list-group-item "><strong> Západ Slnka je dnes o {{getSunSet().getHours()}}:{{ getSunSet().getMinutes() }} <b-icon-sunset class="icon"/></strong></li>
                         </ul>
 
                         <ul class="list-group mt-4 right-sidebox ">
