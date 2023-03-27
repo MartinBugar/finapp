@@ -77,7 +77,7 @@
                 </div>
             </div>
 
-            <div class=" mt-4 mb-4 chart-inflation card">
+            <div class=" mt-4 mb-4 chart-inflation card chart">
                 <Line :data="this.chartData" :options="this.chartOptions" :height="300"/>
             </div>
 
@@ -378,6 +378,10 @@ export default {
 
 .selection {
     max-width: 200px;
+}
+
+.chart {
+    border-radius: 18px;
 }
 
 </style>
