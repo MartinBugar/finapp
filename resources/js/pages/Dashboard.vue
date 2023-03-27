@@ -148,7 +148,7 @@ export default {
         }
 
         this.chartOptions = {
-            responsive: false,
+            responsive: true,
             maintainAspectRatio: false
         }
 
