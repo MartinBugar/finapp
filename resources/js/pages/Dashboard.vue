@@ -9,7 +9,6 @@
 
                 <div class="row">
                     <div class="col-8">
-
                         <div class="container mt-1">
                             <div class="form-group mb-2 selection">
                                 <label>Rok</label><span class="text-danger"> *</span>
@@ -62,9 +61,10 @@
                         </div>
                     </div>
 
-                    <div class="col-3">
+                    <div class="col-4">
                         <ul class="list-group mt-4">
-                            AA
+                           <strong> Východ Slnka je dnes o {{ getSunrise().getHours() }} : {{ getSunrise().getMinutes() }}</strong>
+                           <strong> Západ Slnka je dnes o {{ getSunSet().getHours() }} : {{ getSunSet().getMinutes() }}</strong>
 
                         </ul>
                     </div>
@@ -140,7 +140,7 @@ export default {
             labels: ChartLabelsMonths,
             datasets: [
                 {
-                    label: 'Vývoj inflácie na Slovensku v %',
+                    label: 'Vývoj inflácie na Slovensku od roku 2010 v %',
                     backgroundColor: '#f80000',
                     data: ChartValues
                 }
@@ -179,6 +179,13 @@ export default {
         }
     },
     methods: {
+        getSunrise() {
+            return getSunrise(48.149482, 17.120598, this.today)
+        },
+
+        getSunSet() {
+            return getSunset(48.149482, 17.120598, this.today)
+        },
         getMonthFromDate(date) {
             let newDate = new Date(date);
             return newDate.getMonth();
