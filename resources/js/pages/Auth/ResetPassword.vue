@@ -14,8 +14,17 @@
                                 <button type="button" class="btn-close" data-bs-dismiss="alert"
                                         aria-label="Close"></button>
                                 <strong> Zadane hesla sa nezhoduju</strong>
-
                             </div>
+
+                            <div v-if="this.LoginVisible"
+                                 class="alert alert-success alert-dismissible fade show align-items-center"
+                                 role="alert">
+
+                                <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                        aria-label="Close"></button>
+                                <strong>Vaše heslo bolo zmenené, teraz sa môžete prihlásiť.</strong>
+                            </div>
+
                             <form @submit.prevent="handleResetPassword">
 
                                 <div class="form-group row">
@@ -41,7 +50,7 @@
 
                                 <div class="row mt-3">
 
-                                    <div class="col-4 form-group">
+                                    <div v-if="!this.LoginVisible" class="col-4 form-group">
                                         <button type="submit" class="btn btn-success">
                                             Reset password
                                         </button>
