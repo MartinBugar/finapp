@@ -232,9 +232,6 @@ export default {
     border-radius: 18px;
 }
 
-.button-add-type {
-    margin-top: 50px;
-}
 
 .bg-addposts {
     background-color: var(--bg-secondary);
