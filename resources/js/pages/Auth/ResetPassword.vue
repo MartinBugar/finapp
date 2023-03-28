@@ -39,11 +39,18 @@
                                     </div>
                                 </div>
 
-                                <div class="form-group row mt-1 mb-0">
-                                    <div class="col-md-8 offset-md-4">
-                                        <button type="submit" class="btn btn-success mt-3">
+                                <div class="row mt-3">
+
+                                    <div class="col-4 form-group">
+                                        <button type="submit" class="btn btn-success">
                                             Reset password
                                         </button>
+                                    </div>
+
+                                    <div v-if="this.LoginVisible" class="col-3">
+                                        <router-link :to="{name: 'login'}" class="btn btn-success ">
+                                            Prihlásenie
+                                        </router-link>
                                     </div>
                                 </div>
 
@@ -65,6 +72,7 @@ export default {
             password: '',
             password_confirmation: '',
             different_passwords: false,
+            LoginVisible: true,
 
             data: {
                 token: '',
@@ -88,7 +96,8 @@ export default {
                 this.$axios.post('/reset-password', this.data)
                     .then(response => {
                         if (response.status === 200) {
-                            window.location.href = "/login"
+                            this.LoginVisible = true;
+                            // window.location.href = "/login"
                         } else {
                             this.errorMessage = response.data.message
                         }
