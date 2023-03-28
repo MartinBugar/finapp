@@ -72,7 +72,7 @@ export default {
             password: '',
             password_confirmation: '',
             different_passwords: false,
-            LoginVisible: true,
+            LoginVisible: false,
 
             data: {
                 token: '',
