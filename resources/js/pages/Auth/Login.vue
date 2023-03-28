@@ -51,6 +51,13 @@
                                     </div>
                                 </div>
 
+                                <div class="row mt-1">
+                                    <div class="col-md-8 offset-md-4">
+                                        <small class="text-muted">
+                                            <router-link to="/forgot-password">Zabudnute heslo?</router-link>
+                                        </small>
+                                    </div>
+                                </div>
 
                             </form>
                         </div>
