@@ -20,6 +20,10 @@ Route::get('{any}', function () {
     return view('app');
 })->where('any', '.*');
 
+Route::get('/reset-password/{token}', function (string $token) {
+    return view('app');
+})->middleware('guest')->name('password.reset');
+
 Route::post('/email/verification-notification', [VerificationController::class, 'resendVerificationEmail']);
 
 // SENDING RESET EMAIL LINK
