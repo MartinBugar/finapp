@@ -28,6 +28,7 @@ import AboutUs from "../pages/AboutUs.vue";
 import VerifyEmail from "../pages/Auth/VerifyEmail.vue";
 import CheckYourEmail from "../pages/Auth/CheckYourEmail.vue";
 import ForgotPassword from "../pages/Auth/ForgotPassword.vue";
+import ResetPassword from "../pages/Auth/ResetPassword.vue";
 
 export const routes = [
     {
@@ -174,6 +175,11 @@ export const routes = [
         name: 'editloanDetail',
         path: '/loans/loanDetail/:loanID/edit/:loanDetailId',
         component: EditLoanDetail
+    },
+    {
+        name: 'ResetPassword',
+        path: '/reset-password/:token',
+        component: ResetPassword
     },
 ];
 
