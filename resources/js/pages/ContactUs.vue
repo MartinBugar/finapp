@@ -121,14 +121,7 @@ export default {
 .text-contact {
     margin-top: 40px;
     font-family: "Bebas Neue", serif;
-    font-size: 1.3rem;
-}
-
-.bg-contact-form {
-    background-color: var(--bg-secondary);
-    padding-top: 4vh;
-    width: 100%;
-    height: 100vh;
+    font-size: 1.5rem;
 }
 
 * {
