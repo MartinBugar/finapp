@@ -18,11 +18,11 @@
                         <input type="email" name="user_email">
                         <label>Správa pre nás</label>
                         <textarea name="message"></textarea>
-                        <div class="">
+                        <div class="robot">
                             <label>Potvrdte ze nie ste robot </label>
-                            <input type="checkbox" v-model="notARobot">
+                            <input class="checkbox" type="checkbox" v-model="notARobot">
                         </div>
-                        <input type="submit" value="Odoslať">
+                        <input class="mt-3" type="submit" value="Odoslať">
 
                     </form>
                 </div>
@@ -168,7 +168,18 @@ input[type=submit] {
     cursor: pointer;
 }
 
+.robot {
+    display: flex;
+    justify-content: center;
+}
+
 input[type=submit]:hover {
     background-color: #45a049;
 }
+
+.checkbox {
+    margin-left: 10px;
+}
+
+
 </style>
