@@ -64,6 +64,13 @@
                     <div class="col-4 ">
 
                         <ul class="list-group mt-4 right-sidebox ">
+<!--                            <li class="list-group-item">{{new Date(Date.now()).getMonth()}} </li>-->
+<!--                            <li class="list-group-item">{{new Date(Date.now()).getDay()}} </li>-->
+                            <li class="list-group-item">Dnes je <strong> {{new Date(Date.now()).getDay()}}.{{new Date(Date.now()).getMonth()}}.{{new Date(Date.now()).getFullYear()}} </strong> a meniny má <strong> Ignác</strong> </li>
+                            <li class="list-group-item ">Zajtra má meniny<strong> Roberto</strong></li>
+                        </ul>
+
+                        <ul class="list-group mt-2 right-sidebox ">
                             <li class="list-group-item"><strong> Východ Slnka je dnes o {{getSunrise().getHours()}}:{{ getSunrise().getMinutes() }} <b-icon-sunrise class="icon"/></strong> </li>
                             <li class="list-group-item "><strong> Západ Slnka je dnes o {{getSunSet().getHours()}}:{{ getSunSet().getMinutes() }} <b-icon-sunset class="icon"/></strong></li>
                         </ul>
