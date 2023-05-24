@@ -64,19 +64,34 @@
                     <div class="col-4 ">
 
                         <ul class="list-group mt-4 right-sidebox ">
-<!--                            <li class="list-group-item">{{new Date(Date.now()).getMonth()}} </li>-->
-<!--                            <li class="list-group-item">{{new Date(Date.now()).getDay()}} </li>-->
-                            <li class="list-group-item">Dnes je <strong> {{new Date(Date.now()).getDay()}}.{{new Date(Date.now()).getMonth()}}.{{new Date(Date.now()).getFullYear()}} </strong> a meniny má <strong> Ignác</strong> </li>
-                            <li class="list-group-item ">Zajtra má meniny<strong> Roberto</strong></li>
+                            <!--                            <li class="list-group-item">{{new Date(Date.now()).getMonth()}} </li>-->
+                            <!--                            <li class="list-group-item">{{new Date(Date.now()).getDay()}} </li>-->
+                            <li class="list-group-item">Dnes je <strong>
+                                {{ new Date().getDate() }}.{{ new Date().getMonth() + 1 }}.{{
+                                    new Date().getFullYear()
+                                }} </strong>
+                                a meniny má <strong>
+                                    {{ getNamesDayToday(new Date().getMonth() + 1, new Date().getDate()) }}</strong>
+                            </li>
+                            <li class="list-group-item ">Zajtra má meniny <strong>
+                                {{ getNamesDayTomorow(new Date().getMonth() + 1, new Date().getDate()) }}</strong></li>
                         </ul>
 
                         <ul class="list-group mt-2 right-sidebox ">
-                            <li class="list-group-item"><strong> Východ Slnka je dnes o {{getSunrise().getHours()}}:{{ getSunrise().getMinutes() }} <b-icon-sunrise class="icon"/></strong> </li>
-                            <li class="list-group-item "><strong> Západ Slnka je dnes o {{getSunSet().getHours()}}:{{ getSunSet().getMinutes() }} <b-icon-sunset class="icon"/></strong></li>
+                            <li class="list-group-item"><strong> Východ Slnka je dnes o
+                                {{ getMySunriseHours() }}:{{ getMySunriseMinutes() }}
+                                <b-icon-sunrise class="icon"/>
+                            </strong></li>
+                            <li class="list-group-item "><strong> Západ Slnka je dnes o
+                                {{ getSunSet().getHours() }}:{{ getSunSet().getMinutes() }}
+                                <b-icon-sunset class="icon"/>
+                            </strong></li>
                         </ul>
 
                         <ul class="list-group mt-4 right-sidebox ">
-                            <li class="list-group-item">Aktuálna inflácia na Slovensku : <strong>{{ getLastChartData() }}%</strong></li>
+                            <li class="list-group-item">Aktuálna inflácia na Slovensku : <strong>{{
+                                    getLastChartData()
+                                }}%</strong></li>
                         </ul>
 
                     </div>
@@ -113,6 +128,7 @@ import {
 
 import {Line, Pie} from 'vue-chartjs'
 import ChartData from "../components/ChartData";
+import CalendarNames from "../components/CalendarNames";
 
 ChartJS.register(
     CategoryScale,
@@ -192,12 +208,53 @@ export default {
         }
     },
     methods: {
+        getNamesDayToday(month, day) {
+            let currentDay = day - 1;
+            let currentCalendarMonth = CalendarNames.filter(month => {
+                return month === month;
+            });
+
+            let allNames = [];
+            currentCalendarMonth.map(a => {
+                allNames = a.names
+            });
+
+            return allNames.at(currentDay);
+        },
+
+        getNamesDayTomorow(month, day) {
+            let currentDay = day;
+            let currentCalendarMonth = CalendarNames.filter(month => {
+                return month === month;
+            });
+
+            let allNames = [];
+            currentCalendarMonth.map(a => {
+                allNames = a.names
+            });
+
+            return allNames.at(currentDay);
+        },
         getLastChartData() {
             let indexOfLastChild = ChartData.length - 1;
             return ChartData.at(indexOfLastChild).toFixed(2);
         },
         ChartData() {
             return ChartData
+        },
+        getMySunriseMinutes() {
+            if (this.getSunrise().getMinutes() < 10) {
+                return "0" + this.getSunrise().getMinutes();
+            } else {
+                return this.getSunrise().getMinutes();
+            }
+        },
+        getMySunriseHours() {
+            if (this.getSunrise().getHours() < 10) {
+                return "0" + this.getSunrise().getHours();
+            } else {
+                return this.getSunrise().getHours();
+            }
         },
         getSunrise() {
             return getSunrise(48.149482, 17.120598, this.today)
